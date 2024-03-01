@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://weilycoder.github.io/post/int128/</loc>
+    <lastmod>2024-03-01T23:19:16+08:00</lastmod>
+  </url><url>
     <loc>https://weilycoder.github.io/</loc>
-    <lastmod>2024-03-01T22:20:46+08:00</lastmod>
+    <lastmod>2024-03-01T23:19:16+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/post/</loc>
+    <lastmod>2024-03-01T23:19:16+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/post/sqrt-decomposition/</loc>
     <lastmod>2024-03-01T22:20:46+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/post/meet-in-middle/</loc>

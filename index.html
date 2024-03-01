@@ -64,6 +64,40 @@
     <div class="posts">
 <article class="post">
   <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/int128/">__int128的使用</a>
+  </h1>
+  <time datetime="2024-03-01T23:19:16&#43;0800" class="post-date">Fri, Mar 1, 2024</time>
+  简介 __int128 是一种占用 $128$ 字节的整数存储类型， 并不在 C/C++ 标准中，而是 64bit gcc 支持的内建类型，并且被大部分 OJ 支持。
+__int128 存储范围 顾名思义，__int128 存储一个 $128$ 位的有符号整数，因此范围是 $[-2^{127},2^{127})$；当然可以使用 __int128 unsigned，范围变为 $[0,2^{128})$。
+用十进制表达，__int128 的存储范围是 $$-170141183460469231731687303715884105728\sim170141183460469231731687303715884105727;$$
+__int128 unsigned 的存储范围是 $$0\sim 340282366920938463463374607431768211455.$$
+__int128 的使用场景 在比赛中，有时会遇到 long long 也存不下的数据，但我们又懒得写高精度。这时我们可以尝试使用 __int128。__int128 支持包括加减乘除在内的大部分内置运算。
+注意：__int128 大约存储十进制数 $38$ 位。
+__int128 的输入输出 实际上，由于 __int128 并不在 C/C++ 标准中，C/C++ 常见的输入输出函数都不能给 __int128 使用。
+我们可以直接套快读快写模板：
+void print(__int128 x) { if (x &lt; 0) putchar(&#39;-&#39;), print(-x); else if (x &lt; 10) putchar(x ^ &#39;0&#39;); else print(x / 10), print(x % 10); } __int128 scan() { char c = getchar(); int sign = 1; for (; c &lt; &#39;0&#39; || c &gt; &#39;9&#39;; c = getchar()) if (c == &#39;-&#39;) sign *= -1; __int128 x = 0; for (; c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;; c = getchar()) x = x * 10 + (c ^ &#39;0&#39;); return x * sign; } 或者优雅一些，使用结构体+重载运算符模拟输入输出流：
+  
+  <div class="read-more-link">
+    <a href="/post/int128/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/sqrt-decomposition/">数论分块</a>
+  </h1>
+  <time datetime="2024-03-01T22:20:46&#43;0800" class="post-date">Fri, Mar 1, 2024</time>
+  引入 数论分块可以快速计算一些含有除法向下取整的和式，即形如 $\sum_{i=1}^{n}f(i)g\big(\big\lfloor\dfrac{n}{i}\big\rfloor\big)$ 的和式。
+它主要利用了富比尼定理（Fubini&rsquo;s theorem）。在一般求和中，富比尼定理往往呈现为更换计数顺序，即交换两个求和号。
+证明过程 略。具体见 OI-WIKI。
+结论 对于常数 $n$ 使式子 $$\Big\lfloor\dfrac{n}{i}\Big\rfloor=\Big\lfloor\dfrac{n}{j}\Big\rfloor$$
+成立的满足 $i\le j\le n$ 的 $j$ 的值为 $\bigg\lfloor\dfrac{n}{\lfloor\frac{n}{i}\rfloor}\bigg\rfloor$。即值 $\left\lfloor\dfrac ni\right\rfloor$ 所在的块的右端点为 $\left\lfloor\dfrac n{\lfloor\frac ni\rfloor}\right\rfloor$。
+例题 CQOI2007 余数求和 求 $$G(n,k)=\sum_{i=1}^{n}k\bmod i.$$
+思路 注意到 $k\bmod i=k-\Big\lfloor\dfrac{k}{i}\Big\rfloor\times i$，于是有 $$\sum_{i=1}^{n}k\bmod i=nk-\sum_{i=1}^{n}i\times\Big\lfloor\dfrac{k}{i}\Big\rfloor.$$
+考虑使用数论分块。
+#include &lt;iostream&gt; using namespace std; int main() { long long n, k; cin &gt;&gt; n &gt;&gt; k; long long res = n * k; for (long long l = 1, r; l &lt;= n; ++l) { if (k / l) r = min(k / (k / l), n); else r = n; res -= ((k / l) * (l + r) * (r - l + 1) &gt;&gt; 1); l = r; } cout &lt;&lt; res &lt;&lt; endl; return 0; } 
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="https://weilycoder.github.io/post/meet-in-middle/">Meet-in-the-middle</a>
   </h1>
   <time datetime="2024-02-29T23:52:56&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
