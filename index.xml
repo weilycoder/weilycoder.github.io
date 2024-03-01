@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My Blog Site</title>
+    <link>https://weilycoder.github.io/</link>
+    <description>Recent content on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 29 Feb 2024 23:52:56 +0800</lastBuildDate>
+    <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Meet-in-the-middle</title>
+      <link>https://weilycoder.github.io/post/meet-in-middle/</link>
+      <pubDate>Thu, 29 Feb 2024 23:52:56 +0800</pubDate>
+      <guid>https://weilycoder.github.io/post/meet-in-middle/</guid>
+      <description>引入 在做题时，我们有时会遇到这样的情景：$N$ 的范围在 $30\sim 46$ 左右，题目似乎也没有巧妙的多项式解法，但暴力 DFS（$O(2^N)$）肯定会炸。这时，折半搜索可以将复杂度降到 $O(2^{N/2})$ 左右。&#xA;例题 CEOI2015 Day2 世界冰球锦标赛 题意简述 在给定的 $N$ 个数 $A_1,A_2,\dots,A_N$ 中选任意个，使总和小于 $M$，求方案总数。$1\le N\le40,1\le M\le10^{18},1\le A_i\le10^{16}.$&#xA;思路 题目没有巧妙的多项式做法，我们只好暴搜，复杂度 $O(2^N)$。但是，考虑到 $N$ 最大为 $40$，显然不能轻易通过。实际上，即使加上大量玄学剪枝，也不可能通过数据范围内的任意数据。&#xA;考虑使用折半搜索，我们在先在前 $1\sim\lfloor N/2\rfloor$ 个数中搜索，将每种方案的和记录，最后排序（记为数列 $P$）。接着，我们在后 $\lfloor N/2\rfloor+1\sim N$ 个数中搜索，对于每一种方案（和记为 $ans$），我们在 $P$ 中搜索有多少数小于 $m-ans$（二分搜索），并累加入答案。总复杂度 $O(2^{N/2}\times N)$，可以通过。&#xA;#include &amp;lt;algorithm&amp;gt; #include &amp;lt;iostream&amp;gt; using namespace std; int n; long long m, ans = 0; long long arr[48]; long long res[2097152], cnt = 0; void dfs(int now, int n, long long cost) { if (cost &amp;gt; m) return ; if (now == n) { res[cnt++] = cost; return ; } dfs(now + 1, n, cost); dfs(now + 1, n, cost + arr[now]); } void dfs2(int now, int n, long long cost) { if (cost &amp;gt; m) return ; if (now == n) { ans += upper_bound(res, res + cnt, m - cost) - res; return ; } dfs2(now + 1, n, cost); dfs2(now + 1, n, cost + arr[now]); } int main() { cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m; for (int i = 0; i &amp;lt; n; ++i) cin &amp;gt;&amp;gt; arr[i]; int mid = n &amp;gt;&amp;gt; 1; dfs(0, mid, 0); sort(res, res + cnt); dfs2(mid, n, 0); cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl; return 0; } 练习 USACO09NOV Lights G 显然每个点最多操作一次，故枚举每个点是否操作即可，考虑范围较大，使用折半搜索思想，利用 unordered_map 统计。</description>
+    </item>
+    <item>
+      <title>Paste</title>
+      <link>https://weilycoder.github.io/post/paste/</link>
+      <pubDate>Thu, 29 Feb 2024 23:52:56 +0800</pubDate>
+      <guid>https://weilycoder.github.io/post/paste/</guid>
+      <description>剪贴板 可能贴一些板子&#xA;矩阵快速幂求（2 阶）线性递推数列的第 n 项 #include &amp;lt;iostream&amp;gt; using namespace std; const long long p = 1e9 + 7; struct vec { long long a, b; }; struct mat { long long a, b, c, d; }; mat operator*(const mat &amp;amp;x, const mat &amp;amp;y) { return { (x.a * y.a + x.b * y.c)%p, (x.a * y.b + x.b * y.d)%p, (x.c * y.a + x.d * y.c)%p, (x.c * y.</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>https://weilycoder.github.io/about/</link>
+      <pubDate>Thu, 29 Feb 2024 23:52:32 +0800</pubDate>
+      <guid>https://weilycoder.github.io/about/</guid>
+      <description>关于本人 本人目前是一名中学生，正在为 OI 竞赛做准备。&#xA;关于网站 网站主要用于发布我的博客，因为我有将做的题目或接触的算法写博客发布的喜好 其实是我们 N 老师逼的。最近洛谷的博客区被取消，迁移到了文章区，因此改在 Hugo 上编写博客，在 github 上部署。</description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>https://weilycoder.github.io/post/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://weilycoder.github.io/post/test/</guid>
+      <description>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
+    </item>
+  </channel>
+</rss>

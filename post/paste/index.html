@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Paste &middot; My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Paste</h1>
+  <time datetime=2024-02-29T23:52:56&#43;0800 class="post-date">Thu, Feb 29, 2024</time>
+  <h1 id="剪贴板">剪贴板</h1>
+<p>可能贴一些板子</p>
+<h3 id="矩阵快速幂求2-阶线性递推数列的第-n-项">矩阵快速幂求（2 阶）线性递推数列的第 n 项</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">vec</span> { <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a, b; };
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">mat</span> { <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a, b, c, d; };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mat <span style="color:#66d9ef">operator</span><span style="color:#f92672">*</span>(<span style="color:#66d9ef">const</span> mat <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">const</span> mat <span style="color:#f92672">&amp;</span>y) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        (x.a <span style="color:#f92672">*</span> y.a <span style="color:#f92672">+</span> x.b <span style="color:#f92672">*</span> y.c)<span style="color:#f92672">%</span>p, (x.a <span style="color:#f92672">*</span> y.b <span style="color:#f92672">+</span> x.b <span style="color:#f92672">*</span> y.d)<span style="color:#f92672">%</span>p,
+</span></span><span style="display:flex;"><span>        (x.c <span style="color:#f92672">*</span> y.a <span style="color:#f92672">+</span> x.d <span style="color:#f92672">*</span> y.c)<span style="color:#f92672">%</span>p, (x.c <span style="color:#f92672">*</span> y.b <span style="color:#f92672">+</span> x.d <span style="color:#f92672">*</span> y.d)<span style="color:#f92672">%</span>p
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vec <span style="color:#66d9ef">operator</span><span style="color:#f92672">*</span>(<span style="color:#66d9ef">const</span> vec <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">const</span> mat <span style="color:#f92672">&amp;</span>y) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> {(x.a <span style="color:#f92672">*</span> y.a <span style="color:#f92672">+</span> x.b <span style="color:#f92672">*</span> y.b)<span style="color:#f92672">%</span>p, (x.a <span style="color:#f92672">*</span> y.c <span style="color:#f92672">+</span> x.b <span style="color:#f92672">*</span> y.d)<span style="color:#f92672">%</span>p};
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mat <span style="color:#a6e22e">qp</span>(mat a, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> b) {
+</span></span><span style="display:flex;"><span>	mat res <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// 单位矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (; b; b <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (b <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) res <span style="color:#f92672">=</span> res <span style="color:#f92672">*</span> a;
+</span></span><span style="display:flex;"><span>		a <span style="color:#f92672">=</span> a <span style="color:#f92672">*</span> a;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">solve</span>(<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> n) {
+</span></span><span style="display:flex;"><span>	vec res <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>};
+</span></span><span style="display:flex;"><span>	mat M <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// 斐波那契数列
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> (res <span style="color:#f92672">*</span> qp(M, n)).a;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> solve(n) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="火车头">火车头</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC target(&#34;avx&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;Ofast&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;inline&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fgcse&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fgcse-lm&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fipa-sra&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-ftree-pre&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-ftree-vrp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fpeephole2&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-ffast-math&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fsched-spec&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;unroll-loops&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-falign-jumps&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-falign-loops&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-falign-labels&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fdevirtualize&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fcaller-saves&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fcrossjumping&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fthread-jumps&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-funroll-loops&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fwhole-program&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-freorder-blocks&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fschedule-insns&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;inline-functions&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-ftree-tail-merge&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fschedule-insns2&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fstrict-aliasing&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fstrict-overflow&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-falign-functions&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fcse-skip-blocks&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fcse-follow-jumps&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fsched-interblock&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fpartial-inlining&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;no-stack-protector&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-freorder-functions&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-findirect-inlining&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fhoist-adjacent-loads&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-frerun-cse-after-loop&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;inline-small-functions&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-finline-small-functions&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-ftree-switch-conversion&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-foptimize-sibling-calls&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fexpensive-optimizations&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-funsafe-loop-optimizations&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;inline-functions-called-once&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma GCC optimize(&#34;-fdelete-null-pointer-checks&#34;)
+</span></span></span></code></pre></div>
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

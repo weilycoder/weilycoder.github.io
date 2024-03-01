@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="https://weilycoder.github.io/index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="posts">
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/meet-in-middle/">Meet-in-the-middle</a>
+  </h1>
+  <time datetime="2024-02-29T23:52:56&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
+  引入 在做题时，我们有时会遇到这样的情景：$N$ 的范围在 $30\sim 46$ 左右，题目似乎也没有巧妙的多项式解法，但暴力 DFS（$O(2^N)$）肯定会炸。这时，折半搜索可以将复杂度降到 $O(2^{N/2})$ 左右。
+例题 CEOI2015 Day2 世界冰球锦标赛 题意简述 在给定的 $N$ 个数 $A_1,A_2,\dots,A_N$ 中选任意个，使总和小于 $M$，求方案总数。$1\le N\le40,1\le M\le10^{18},1\le A_i\le10^{16}.$
+思路 题目没有巧妙的多项式做法，我们只好暴搜，复杂度 $O(2^N)$。但是，考虑到 $N$ 最大为 $40$，显然不能轻易通过。实际上，即使加上大量玄学剪枝，也不可能通过数据范围内的任意数据。
+考虑使用折半搜索，我们在先在前 $1\sim\lfloor N/2\rfloor$ 个数中搜索，将每种方案的和记录，最后排序（记为数列 $P$）。接着，我们在后 $\lfloor N/2\rfloor+1\sim N$ 个数中搜索，对于每一种方案（和记为 $ans$），我们在 $P$ 中搜索有多少数小于 $m-ans$（二分搜索），并累加入答案。总复杂度 $O(2^{N/2}\times N)$，可以通过。
+#include &lt;algorithm&gt; #include &lt;iostream&gt; using namespace std; int n; long long m, ans = 0; long long arr[48]; long long res[2097152], cnt = 0; void dfs(int now, int n, long long cost) { if (cost &gt; m) return ; if (now == n) { res[cnt++] = cost; return ; } dfs(now + 1, n, cost); dfs(now + 1, n, cost + arr[now]); } void dfs2(int now, int n, long long cost) { if (cost &gt; m) return ; if (now == n) { ans += upper_bound(res, res + cnt, m - cost) - res; return ; } dfs2(now + 1, n, cost); dfs2(now + 1, n, cost + arr[now]); } int main() { cin &gt;&gt; n &gt;&gt; m; for (int i = 0; i &lt; n; ++i) cin &gt;&gt; arr[i]; int mid = n &gt;&gt; 1; dfs(0, mid, 0); sort(res, res + cnt); dfs2(mid, n, 0); cout &lt;&lt; ans &lt;&lt; endl; return 0; } 练习 USACO09NOV Lights G 显然每个点最多操作一次，故枚举每个点是否操作即可，考虑范围较大，使用折半搜索思想，利用 unordered_map 统计。
+  
+  <div class="read-more-link">
+    <a href="/post/meet-in-middle/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/paste/">Paste</a>
+  </h1>
+  <time datetime="2024-02-29T23:52:56&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
+  剪贴板 可能贴一些板子
+矩阵快速幂求（2 阶）线性递推数列的第 n 项 #include &lt;iostream&gt; using namespace std; const long long p = 1e9 + 7; struct vec { long long a, b; }; struct mat { long long a, b, c, d; }; mat operator*(const mat &amp;x, const mat &amp;y) { return { (x.a * y.a + x.b * y.c)%p, (x.a * y.b + x.b * y.d)%p, (x.c * y.a + x.d * y.c)%p, (x.c * y.
+  
+  <div class="read-more-link">
+    <a href="/post/paste/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/about/">About</a>
+  </h1>
+  <time datetime="2024-02-29T23:52:32&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
+  关于本人 本人目前是一名中学生，正在为 OI 竞赛做准备。
+关于网站 网站主要用于发布我的博客，因为我有将做的题目或接触的算法写博客发布的喜好 其实是我们 N 老师逼的。最近洛谷的博客区被取消，迁移到了文章区，因此改在 Hugo 上编写博客，在 github 上部署。
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/test/">Test</a>
+  </h1>
+  <time datetime="0001-01-01T00:00:00Z" class="post-date">Mon, Jan 1, 0001</time>
+  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+  
+</article>
+</div>
+    </main>
+
+    
+      
+    
+  </body>
+</html>
