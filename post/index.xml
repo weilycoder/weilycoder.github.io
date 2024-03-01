@@ -22,12 +22,5 @@
       <guid>https://weilycoder.github.io/post/paste/</guid>
       <description>剪贴板 可能贴一些板子&#xA;矩阵快速幂求（2 阶）线性递推数列的第 n 项 #include &amp;lt;iostream&amp;gt; using namespace std; const long long p = 1e9 + 7; struct vec { long long a, b; }; struct mat { long long a, b, c, d; }; mat operator*(const mat &amp;amp;x, const mat &amp;amp;y) { return { (x.a * y.a + x.b * y.c)%p, (x.a * y.b + x.b * y.d)%p, (x.c * y.a + x.d * y.c)%p, (x.c * y.</description>
     </item>
-    <item>
-      <title>Test</title>
-      <link>https://weilycoder.github.io/post/test/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://weilycoder.github.io/post/test/</guid>
-      <description>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
-    </item>
   </channel>
 </rss>
