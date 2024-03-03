@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>模拟退火算法（SA）简介 &middot; My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>模拟退火算法（SA）简介</h1>
+  <time datetime=2024-03-03T20:38:35&#43;0800 class="post-date">Sun, Mar 3, 2024</time>
+  <h1 id="简介">简介</h1>
+<p>模拟退火算法是利用随机化求函数最大值的算法。</p>
+<h1 id="过程">过程</h1>
+<p><strong>一句话解释</strong>：若新状态的解更优就更新答案，否则以一定概率接受。这可以避免程序陷入局部最优无法离开。</p>
+<p>具体来说，步骤如下（计算 $g(x)$ 最大值）：</p>
+<ol>
+<li>选定一个初始值 $fa$；</li>
+<li>根据温度 $T$ 在 $fa$ 附近选取一个值 $ch$；</li>
+<li>比较 $g(fa)$ 和 $g(ch)$：
+<ul>
+<li>若 $g(ch)&gt;g(fa)$，令 $fa\gets ch;$</li>
+<li>若不然，记 $\Delta E=g(fa)-g(ch)$，则有 $e^{\frac{-\Delta E}{T}}$ 的概率令 $fa\gets ch.$ 这里 $e$ 是自然对数的底。</li>
+</ul>
+</li>
+<li>降低温度。</li>
+<li>重复 2~4 步，直到温度接近零。</li>
+</ol>
+<p>一般维护计算过程中出现过的所有值的最大值。</p>
+<p>若时间充足，可以考虑多次计算。</p>
+<h1 id="例题">例题</h1>
+<h2 id="计算函数最大值">计算函数最大值</h2>
+<p>求 $f(x)=\cos(3x+5)-x^2+6x+2$ 的最大值。</p>
+<p><img src="/post/f.jpg" alt="函数图像"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">double</span> x) { <span style="color:#66d9ef">return</span> cos(<span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>) <span style="color:#f92672">-</span> x <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mt19937 mt;
+</span></span><span style="display:flex;"><span>random_device rd;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> T0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span>, T1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.00001</span>, delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.9999</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">random</span>() { <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)(mt()) <span style="color:#f92672">/</span> <span style="color:#ae81ff">0xffffffffLL</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">sa</span>(<span style="color:#66d9ef">double</span> st) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">double</span> t <span style="color:#f92672">=</span> T0;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">double</span> best <span style="color:#f92672">=</span> st, best_val <span style="color:#f92672">=</span> f(best);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (t <span style="color:#f92672">&gt;</span> T1) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> f(st);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">double</span> now <span style="color:#f92672">=</span> st <span style="color:#f92672">+</span> (<span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> random()) <span style="color:#f92672">*</span> t;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">double</span> ch <span style="color:#f92672">=</span> f(now);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (ch <span style="color:#f92672">&gt;</span> best_val) best <span style="color:#f92672">=</span> now, best_val <span style="color:#f92672">=</span> ch;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (ch <span style="color:#f92672">&gt;</span> fa <span style="color:#f92672">||</span> random() <span style="color:#f92672">&gt;=</span> exp((ch <span style="color:#f92672">-</span> fa) <span style="color:#f92672">/</span> t)) st <span style="color:#f92672">=</span> now;
+</span></span><span style="display:flex;"><span>		t <span style="color:#f92672">*=</span> delta;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> best;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	mt.seed(rd());
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">double</span> res <span style="color:#f92672">=</span> sa(<span style="color:#ae81ff">0.0</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> ((<span style="color:#66d9ef">double</span>)clock() <span style="color:#f92672">/</span> CLOCKS_PER_SEC <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.2</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">double</span> now <span style="color:#f92672">=</span> sa(res);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (f(now) <span style="color:#f92672">&gt;</span> f(res)) res <span style="color:#f92672">=</span> now;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> fixed <span style="color:#f92672">&lt;&lt;</span> setprecision(<span style="color:#ae81ff">8</span>) <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> f(res) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这段代码输出计算的最大值后 $8$ 位。经验证，计算结果精确到小数点后 $7$ 位，准确来说，只有约 $\pm 10^{-8}$ 的误差。</p>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

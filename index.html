@@ -64,6 +64,23 @@
     <div class="posts">
 <article class="post">
   <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/sa/">模拟退火算法（SA）简介</a>
+  </h1>
+  <time datetime="2024-03-03T20:38:35&#43;0800" class="post-date">Sun, Mar 3, 2024</time>
+  简介 模拟退火算法是利用随机化求函数最大值的算法。
+过程 一句话解释：若新状态的解更优就更新答案，否则以一定概率接受。这可以避免程序陷入局部最优无法离开。
+具体来说，步骤如下（计算 $g(x)$ 最大值）：
+选定一个初始值 $fa$； 根据温度 $T$ 在 $fa$ 附近选取一个值 $ch$； 比较 $g(fa)$ 和 $g(ch)$： 若 $g(ch)&gt;g(fa)$，令 $fa\gets ch;$ 若不然，记 $\Delta E=g(fa)-g(ch)$，则有 $e^{\frac{-\Delta E}{T}}$ 的概率令 $fa\gets ch.$ 这里 $e$ 是自然对数的底。 降低温度。 重复 2~4 步，直到温度接近零。 一般维护计算过程中出现过的所有值的最大值。
+若时间充足，可以考虑多次计算。
+例题 计算函数最大值 求 $f(x)=\cos(3x+5)-x^2+6x+2$ 的最大值。
+#include &lt;bits/stdc++.h&gt; using namespace std; inline double f(double x) { return cos(3 * x + 5) - x * x + 6 * x + 2; } mt19937 mt; random_device rd; const double T0 = 2.
+  
+  <div class="read-more-link">
+    <a href="/post/sa/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="https://weilycoder.github.io/post/int128/">__int128的使用</a>
   </h1>
   <time datetime="2024-03-01T23:19:16&#43;0800" class="post-date">Fri, Mar 1, 2024</time>
@@ -113,14 +130,14 @@ void print(__int128 x) { if (x &lt; 0) putchar(&#39;-&#39;), print(-x); else if 
   
 </article><article class="post">
   <h1 class="post-title">
-    <a href="https://weilycoder.github.io/post/paste/">Paste</a>
+    <a href="https://weilycoder.github.io/paste/">Paste</a>
   </h1>
   <time datetime="2024-02-29T23:52:56&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
   剪贴板 可能贴一些板子
 矩阵快速幂求（2 阶）线性递推数列的第 n 项 #include &lt;iostream&gt; using namespace std; const long long p = 1e9 + 7; struct vec { long long a, b; }; struct mat { long long a, b, c, d; }; mat operator*(const mat &amp;x, const mat &amp;y) { return { (x.a * y.a + x.b * y.c)%p, (x.a * y.b + x.b * y.d)%p, (x.c * y.a + x.d * y.c)%p, (x.c * y.
   
   <div class="read-more-link">
-    <a href="/post/paste/">Read More…</a>
+    <a href="/paste/">Read More…</a>
   </div>
   
 </article><article class="post">
