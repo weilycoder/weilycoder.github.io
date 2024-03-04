@@ -30,6 +30,13 @@
       <description>引入 数论分块可以快速计算一些含有除法向下取整的和式，即形如 $\sum_{i=1}^{n}f(i)g\big(\big\lfloor\dfrac{n}{i}\big\rfloor\big)$ 的和式。&#xA;它主要利用了富比尼定理（Fubini&amp;rsquo;s theorem）。在一般求和中，富比尼定理往往呈现为更换计数顺序，即交换两个求和号。&#xA;证明过程 略。具体见 OI-WIKI。&#xA;结论 对于常数 $n$ 使式子 $$\Big\lfloor\dfrac{n}{i}\Big\rfloor=\Big\lfloor\dfrac{n}{j}\Big\rfloor$$&#xA;成立的满足 $i\le j\le n$ 的 $j$ 的值为 $\bigg\lfloor\dfrac{n}{\lfloor\frac{n}{i}\rfloor}\bigg\rfloor$。即值 $\left\lfloor\dfrac ni\right\rfloor$ 所在的块的右端点为 $\left\lfloor\dfrac n{\lfloor\frac ni\rfloor}\right\rfloor$。&#xA;例题 CQOI2007 余数求和 求 $$G(n,k)=\sum_{i=1}^{n}k\bmod i.$$&#xA;思路 注意到 $k\bmod i=k-\Big\lfloor\dfrac{k}{i}\Big\rfloor\times i$，于是有 $$\sum_{i=1}^{n}k\bmod i=nk-\sum_{i=1}^{n}i\times\Big\lfloor\dfrac{k}{i}\Big\rfloor.$$&#xA;考虑使用数论分块。&#xA;#include &amp;lt;iostream&amp;gt; using namespace std; int main() { long long n, k; cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; k; long long res = n * k; for (long long l = 1, r; l &amp;lt;= n; ++l) { if (k / l) r = min(k / (k / l), n); else r = n; res -= ((k / l) * (l + r) * (r - l + 1) &amp;gt;&amp;gt; 1); l = r; } cout &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl; return 0; } </description>
     </item>
     <item>
+      <title>Brainfuck</title>
+      <link>https://weilycoder.github.io/post/brainfuck/</link>
+      <pubDate>Fri, 01 Mar 2024 12:43:49 +0800</pubDate>
+      <guid>https://weilycoder.github.io/post/brainfuck/</guid>
+      <description>Brainfuck Brainfuck 是最著名的“深奥编程语言（esoteric programming languages）”之一，启发了其他语言的开发。&#xA;语言概述 Brainfuck 对一段存储单元操作，每个存储单元最初设置为零。有一个指针，最初指向第零个存储单元。命令包括：&#xA;命令 解释 等效 C 语句 &amp;gt; 将指针右移 ptr++; &amp;lt; 将指针左移 ptr--; + 增加指针指向的值 *ptr++; - 减小指针指向的值 *ptr--; . 输出指针指向的值 putchar(*ptr); , 读入一个字符并存入指针指向的值 *ptr = getchar(); [ 若指针指向零，跳转至匹配的 ] while (*ptr) { ] 若指针指向非零，跳转至匹配的 [ } 所有 &amp;gt;&amp;lt;+-.,[] 外的字符应被视为注释而被忽略。&#xA;通常，Brainfuck 编译器提供“循环内存”并使用一个字节（unsigned char）存储每个单元。&#xA;在以上设定下，最短（目前已知）的 Hello, World! 程序如下：&#xA;+[--&amp;gt;-[&amp;gt;&amp;gt;+&amp;gt;-----&amp;lt;&amp;lt;]&amp;lt;--&amp;lt;---]&amp;gt;-.&amp;gt;&amp;gt;&amp;gt;+.&amp;gt;&amp;gt;..+++[.&amp;gt;]&amp;lt;&amp;lt;&amp;lt;&amp;lt;.+++.------.&amp;lt;&amp;lt;-.&amp;gt;&amp;gt;&amp;gt;&amp;gt;+. C解释器 程序忽略多余的 ] 并在末尾补充缺失的 ]。&#xA;#include &amp;lt;stdio.h&amp;gt; #define N 1048576 unsigned char tape[N]; int p, tp, st[N]; struct node { char c; int num; } opt[N]; int main(int argc, char* argv[]) { FILE* f; if (argc !</description>
+    </item>
+    <item>
       <title>Meet-in-the-middle</title>
       <link>https://weilycoder.github.io/post/meet-in-middle/</link>
       <pubDate>Thu, 29 Feb 2024 23:52:56 +0800</pubDate>

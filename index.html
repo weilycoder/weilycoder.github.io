@@ -115,6 +115,23 @@ void print(__int128 x) { if (x &lt; 0) putchar(&#39;-&#39;), print(-x); else if 
   
 </article><article class="post">
   <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/brainfuck/">Brainfuck</a>
+  </h1>
+  <time datetime="2024-03-01T12:43:49&#43;0800" class="post-date">Fri, Mar 1, 2024</time>
+  Brainfuck Brainfuck 是最著名的“深奥编程语言（esoteric programming languages）”之一，启发了其他语言的开发。
+语言概述 Brainfuck 对一段存储单元操作，每个存储单元最初设置为零。有一个指针，最初指向第零个存储单元。命令包括：
+命令 解释 等效 C 语句 &gt; 将指针右移 ptr++; &lt; 将指针左移 ptr--; + 增加指针指向的值 *ptr++; - 减小指针指向的值 *ptr--; . 输出指针指向的值 putchar(*ptr); , 读入一个字符并存入指针指向的值 *ptr = getchar(); [ 若指针指向零，跳转至匹配的 ] while (*ptr) { ] 若指针指向非零，跳转至匹配的 [ } 所有 &gt;&lt;+-.,[] 外的字符应被视为注释而被忽略。
+通常，Brainfuck 编译器提供“循环内存”并使用一个字节（unsigned char）存储每个单元。
+在以上设定下，最短（目前已知）的 Hello, World! 程序如下：
++[--&gt;-[&gt;&gt;+&gt;-----&lt;&lt;]&lt;--&lt;---]&gt;-.&gt;&gt;&gt;+.&gt;&gt;..+++[.&gt;]&lt;&lt;&lt;&lt;.+++.------.&lt;&lt;-.&gt;&gt;&gt;&gt;+. C解释器 程序忽略多余的 ] 并在末尾补充缺失的 ]。
+#include &lt;stdio.h&gt; #define N 1048576 unsigned char tape[N]; int p, tp, st[N]; struct node { char c; int num; } opt[N]; int main(int argc, char* argv[]) { FILE* f; if (argc !
+  
+  <div class="read-more-link">
+    <a href="/post/brainfuck/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="https://weilycoder.github.io/post/meet-in-middle/">Meet-in-the-middle</a>
   </h1>
   <time datetime="2024-02-29T23:52:56&#43;0800" class="post-date">Thu, Feb 29, 2024</time>
