@@ -64,6 +64,29 @@
     <div class="posts">
 <article class="post">
   <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/linear-recurrence/">关于线性递推数列的计算加速</a>
+  </h1>
+  <time datetime="2024-03-04T22:38:59&#43;0800" class="post-date">Mon, Mar 4, 2024</time>
+  考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^2\log n)$ 做法。
+一阶线性递推式 形如 $$f_n=kf_{n-1}-b$$ 的式子叫做一阶线性递推式。
+根据高中数学知识，我们可以求出它的通项公式。
+常用的方法是“不动点”法。
+“不动点”法 对于一个用递推式表示的数列 $$f_n=g(f_{n-1}),$$ 方程 $$x=g(x)$$ 的根叫做数列的“不动点”。一般来说，在数列的递推式两侧同时减去“不动点”，可以构造出比较特殊的结构。
+“不动点”法求一阶线性递推式的通项公式 例：汉诺塔问题的伪 $O(1)$ 解法 众所周知，汉诺塔问题的递推式是 $f_n=2f_{n-1}+1(n&gt;1)$，其中 $f_1=1$。一般递推求解是 $O(n)$ 的。下面我们求它的通项式：
+解方程 $x=2x+1$，得 $x=-1$，在递推式两侧同时减去 $-1$，得 $f_n+1=2f_{n-1}+2=2(f_{n-1}+1)$。即： $$\dfrac{f_n+1}{f_{n-1}+1}=2.$$
+故 $f_i+1$ 是一个公比为 $2$ 的等比数列，其中 $f_1=1$，故该等比数列的首项 $f_1+1=2$，通项公式为 $f_n+1=2^{n}$，即： $$f_n=2^n-1.$$
+在 $n&lt;64$ 时，可以使用位移操作 $O(1)$ 计算；$n\geq64$ 时，一般使用快速幂 $O(\log n)$ 计算.
+任意一阶线性递推式的通项式 求数列 $f_0=a,f_n=kf_{n-1}+b$ 的通项式即可： $$f_n=\Big(a+\dfrac{b}{k-1}\Big)k^{n}-\dfrac{b}{k-1};$$
+特别地，$k=1$ 时，显然有 $f_n=a+nb.$
+其他一阶递推式 “不动点”法还可以求数列 $f_n=\dfrac{af_{n-1}+b}{cf_{n-1}+d}$ 的通项式，这里不进行深入研究。
+二阶线性递推式 通项式计算 例：斐波那契数列通项式求解 众所周知，斐波那契数列定义为：$f_0=0,f_1=1,f_{n}=f_{n-1}+f_{n-2}(n&gt;1).$ 我们设 $\dfrac{f_n-bf_{n-1}}{f_{n-1}-bf_{n-2}}=a$，则 $f_n=(a+b)f_{n-1}+abf_{n-2}$，对比系数，$a+b=1,ab=-1$。显然 $a,b$ 是方程 $x^2-x-1=0$ 的根，解得 $x_1=\dfrac{1+\sqrt{5}}{2},x_2=\dfrac{1-\sqrt{5}}{2}$。则 ${f_n-x_1f_{n-1}}$ 是公比为 $b$ 的等比数列，$f_{n+1}-x_1f_{n}=(f_1+x_1f_0)\times x_2^n$；同理，$f_{n+1}-x_2f_{n}=(f_1+x_2f_0)\times x_1^n$。消元得 $f_n=\dfrac{(f_1+x_2f_0)x_1^n+(f_1+x_1f_0)x_2^n}{x_1-x_2}=\dfrac{(\frac{1+\sqrt{5}}{2})^n+(\frac{1-\sqrt{5}}{2})^n}{\sqrt{5}}=\Bigg[\dfrac{(\frac{1+\sqrt{5}}{2})^n}{\sqrt{5}}\Bigg]$，这里中括号表示四舍五入（可以实现为加 $0.
+  
+  <div class="read-more-link">
+    <a href="/post/linear-recurrence/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="https://weilycoder.github.io/post/sa/">模拟退火算法（SA）简介</a>
   </h1>
   <time datetime="2024-03-03T20:38:35&#43;0800" class="post-date">Sun, Mar 3, 2024</time>
@@ -96,6 +119,19 @@ void print(__int128 x) { if (x &lt; 0) putchar(&#39;-&#39;), print(-x); else if 
   
   <div class="read-more-link">
     <a href="/post/int128/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://weilycoder.github.io/post/lca/">最近公共祖先（LCA）</a>
+  </h1>
+  <time datetime="2024-03-01T22:42:08&#43;0800" class="post-date">Fri, Mar 1, 2024</time>
+  模板题目 给定一棵有根多叉树，求指定两点 $x,y$ 的最近公共祖先 $\operatorname{LCA}(x,y)$。 树的节点数有 $N$ 个，$M$ 次询问。 $1\leq N,M\leq 5\times10^5.$
+朴素做法 常见的朴素算法有两种，单次询问复杂度均为 $O(N)$。
+向上标记法 从 $x$ 向上移动到根节点，标记经过的节点； 从 $y$ 向上移动到根节点，路径中第一个被标记的节点即为 $\operatorname{LCA}(x,y)$。 // 70pts #include &lt;iostream&gt; #include &lt;vector&gt; using namespace std; int n, m, s; int deep[500050], vis[500050]; vector&lt;int&gt; node[500050]; void build(int now, int fa, int dpth) { deep[now] = dpth; for (int&amp; ch: node[now]) { if (ch == fa) swap(node[now][0], ch); else build(ch, now, dpth + 1); } } void mark(int x, int mk) { vis[x] = mk; if (!
+  
+  <div class="read-more-link">
+    <a href="/post/lca/">Read More…</a>
   </div>
   
 </article><article class="post">
