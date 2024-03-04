@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>关于线性递推数列的计算加速 &middot; My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://localhost:1313/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://localhost:1313/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>关于线性递推数列的计算加速</h1>
+  <time datetime=2024-03-04T22:38:59&#43;0800 class="post-date">Mon, Mar 4, 2024</time>
+  <p>考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^2\log n)$ 做法。</p>
+<h1 id="一阶线性递推式">一阶线性递推式</h1>
+<p>形如
+$$f_n=kf_{n-1}-b$$
+的式子叫做一阶线性递推式。</p>
+<p>根据高中数学知识，我们可以求出它的通项公式。</p>
+<p>常用的方法是“不动点”法。</p>
+<h2 id="不动点法">“不动点”法</h2>
+<p>对于一个用递推式表示的数列
+$$f_n=g(f_{n-1}),$$
+方程
+$$x=g(x)$$
+的根叫做数列的“不动点”。一般来说，在数列的递推式两侧同时减去“不动点”，可以构造出比较特殊的结构。</p>
+<h2 id="不动点法求一阶线性递推式的通项公式">“不动点”法求一阶线性递推式的通项公式</h2>
+<h3 id="例汉诺塔问题的伪-o1-解法">例：汉诺塔问题的伪 $O(1)$ 解法</h3>
+<p>众所周知，汉诺塔问题的递推式是 $f_n=2f_{n-1}+1(n&gt;1)$，其中 $f_1=1$。一般递推求解是 $O(n)$ 的。下面我们求它的通项式：</p>
+<p>解方程 $x=2x+1$，得 $x=-1$，在递推式两侧同时减去 $-1$，得 $f_n+1=2f_{n-1}+2=2(f_{n-1}+1)$。即：
+$$\dfrac{f_n+1}{f_{n-1}+1}=2.$$</p>
+<p>故 $f_i+1$ 是一个公比为 $2$ 的等比数列，其中 $f_1=1$，故该等比数列的首项 $f_1+1=2$，通项公式为 $f_n+1=2^{n}$，即：
+$$f_n=2^n-1.$$</p>
+<p>在 $n&lt;64$ 时，可以使用位移操作 $O(1)$ 计算；$n\geq64$ 时，一般使用快速幂 $O(\log n)$ 计算.</p>
+<h3 id="任意一阶线性递推式的通项式">任意一阶线性递推式的通项式</h3>
+<p>求数列 $f_0=a,f_n=kf_{n-1}+b$ 的通项式即可：
+$$f_n=\Big(a+\dfrac{b}{k-1}\Big)k^{n}-\dfrac{b}{k-1};$$</p>
+<p>特别地，$k=1$ 时，显然有 $f_n=a+nb.$</p>
+<h1 id="其他一阶递推式">其他一阶递推式</h1>
+<p>“不动点”法还可以求数列 $f_n=\dfrac{af_{n-1}+b}{cf_{n-1}+d}$ 的通项式，这里不进行深入研究。</p>
+<h1 id="二阶线性递推式">二阶线性递推式</h1>
+<h2 id="通项式计算">通项式计算</h2>
+<h3 id="例斐波那契数列通项式求解">例：斐波那契数列通项式求解</h3>
+<p>众所周知，斐波那契数列定义为：$f_0=0,f_1=1,f_{n}=f_{n-1}+f_{n-2}(n&gt;1).$ 我们设 $\dfrac{f_n-bf_{n-1}}{f_{n-1}-bf_{n-2}}=a$，则 $f_n=(a+b)f_{n-1}+abf_{n-2}$，对比系数，$a+b=1,ab=-1$。显然 $a,b$ 是方程 $x^2-x-1=0$ 的根，解得 $x_1=\dfrac{1+\sqrt{5}}{2},x_2=\dfrac{1-\sqrt{5}}{2}$。则 ${f_n-x_1f_{n-1}}$ 是公比为 $b$ 的等比数列，$f_{n+1}-x_1f_{n}=(f_1+x_1f_0)\times x_2^n$；同理，$f_{n+1}-x_2f_{n}=(f_1+x_2f_0)\times x_1^n$。消元得 $f_n=\dfrac{(f_1+x_2f_0)x_1^n+(f_1+x_1f_0)x_2^n}{x_1-x_2}=\dfrac{(\frac{1+\sqrt{5}}{2})^n+(\frac{1-\sqrt{5}}{2})^n}{\sqrt{5}}=\Bigg[\dfrac{(\frac{1+\sqrt{5}}{2})^n}{\sqrt{5}}\Bigg]$，这里中括号表示四舍五入（可以实现为加 $0.5$ 后向下取整）。</p>
+<p>这样的式子可以使用 <code>double</code> 配合快速幂求解；若担心精度问题，可以考虑实现实数类：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">real</span> { <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a, b; };
+</span></span><span style="display:flex;"><span>real <span style="color:#66d9ef">operator</span><span style="color:#f92672">*</span>(<span style="color:#66d9ef">const</span> real <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">const</span> real <span style="color:#f92672">&amp;</span>y) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> {(x.a <span style="color:#f92672">*</span> y.a <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> x.b <span style="color:#f92672">*</span> y.b)<span style="color:#f92672">%</span>p, (x.b <span style="color:#f92672">*</span> y.a <span style="color:#f92672">+</span> x.a <span style="color:#f92672">*</span> y.b)<span style="color:#f92672">%</span>p};
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>另外，若模数特殊，可以考虑使用二次剩余。</p>
+<p>时间复杂度均为 $O(\log n).$</p>
+<h2 id="矩阵加速">矩阵加速</h2>
+<p>注意到：
+$$
+\begin{bmatrix}F_{n-1} &amp; F_{n} \cr\end{bmatrix} = \begin{bmatrix}F_{n-2} &amp; F_{n-1} \cr\end{bmatrix} \begin{bmatrix}0 &amp; 1 \cr 1 &amp; 1 \cr\end{bmatrix}.
+$$</p>
+<p>记 $P = \begin{bmatrix}0 &amp; 1 \cr 1 &amp; 1 \cr\end{bmatrix}$，则有
+$$
+\begin{bmatrix}F_n &amp; F_{n+1} \cr\end{bmatrix} = \begin{bmatrix}F_0 &amp; F_1 \cr\end{bmatrix} P^n.
+$$</p>
+<p>可以使用矩阵快速幂实现 $O(\log n)$ 求解。</p>
+<h1 id="k-阶线性递推式">$k$ 阶线性递推式</h1>
+<p>利用递推式推出对应矩阵即可，因为矩阵朴素乘法复杂度为 $O(k^2)$，故总复杂度为 $O(k^2\log n).$</p>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>
