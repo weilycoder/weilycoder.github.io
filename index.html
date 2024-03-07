@@ -117,7 +117,7 @@ sorted = False while (not sorted): sorted = True for i = 0 to N-2: if A[i+1] &lt
     <a href="https://weilycoder.github.io/post/linear-recurrence/">关于线性递推数列的计算加速</a>
   </h1>
   <time datetime="2024-03-04T22:38:59&#43;0800" class="post-date">Mon, Mar 4, 2024</time>
-  考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^2\log n)$ 做法。
+  考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^3\log n)$ 做法。
 一阶线性递推式 形如 $$f_n=kf_{n-1}-b$$ 的式子叫做一阶线性递推式。
 根据高中数学知识，我们可以求出它的通项公式。
 常用的方法是“不动点”法。

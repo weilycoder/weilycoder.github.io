@@ -63,7 +63,7 @@
     <div class="post">
   <h1>关于线性递推数列的计算加速</h1>
   <time datetime=2024-03-04T22:38:59&#43;0800 class="post-date">Mon, Mar 4, 2024</time>
-  <p>考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^2\log n)$ 做法。</p>
+  <p>考虑到本人水平限制，本文中，仅给出对于 $k$ 阶线性递推式，求第 $n$ 项的 $O(k^3\log n)$ 做法。</p>
 <h1 id="一阶线性递推式">一阶线性递推式</h1>
 <p>形如
 $$f_n=kf_{n-1}-b$$
@@ -102,6 +102,7 @@ $$f_n=\Big(a+\dfrac{b}{k-1}\Big)k^{n}-\dfrac{b}{k-1};$$</p>
 </span></span></code></pre></div><p>另外，若模数特殊，可以考虑使用二次剩余。</p>
 <p>时间复杂度均为 $O(\log n).$</p>
 <h2 id="矩阵加速">矩阵加速</h2>
+<p>另一种常见的方式是矩阵加速。</p>
 <p>注意到：
 $$
 \begin{bmatrix}F_{n-1} &amp; F_{n} \cr\end{bmatrix} = \begin{bmatrix}F_{n-2} &amp; F_{n-1} \cr\end{bmatrix} \begin{bmatrix}0 &amp; 1 \cr 1 &amp; 1 \cr\end{bmatrix}.
@@ -112,7 +113,8 @@ $$
 $$</p>
 <p>可以使用矩阵快速幂实现 $O(\log n)$ 求解。</p>
 <h1 id="k-阶线性递推式">$k$ 阶线性递推式</h1>
-<p>利用递推式推出对应矩阵即可，因为矩阵朴素乘法复杂度为 $O(k^2)$，故总复杂度为 $O(k^2\log n).$</p>
+<h2 id="矩阵加速-1">矩阵加速</h2>
+<p>利用递推式推出对应矩阵即可，因为矩阵朴素乘法复杂度为 $O(k^3)$，故总复杂度为 $O(k^3\log n).$</p>
 
 </div>
 
