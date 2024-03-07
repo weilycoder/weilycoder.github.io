@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>[NOIP2011 普及组] 瑞士轮 题解 &middot; My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>[NOIP2011 普及组] 瑞士轮 题解</h1>
+  <time datetime=2024-03-07T23:25:59&#43;0800 class="post-date">Thu, Mar 7, 2024</time>
+  <h4 id="一道基础排序题httpswwwluogucomcnproblemp1309"><a href="https://www.luogu.com.cn/problem/P1309">一道基础排序题</a>。</h4>
+<h2 id="题目描述">题目描述</h2>
+<p>$2 \times N$ 名编号为 $1\sim 2N$ 的选手共进行 $R$ 轮比赛。每轮比赛开始前，以及所有比赛结束后，都会按照总分从高到低对选手进行一次排名。选手的总分为第一轮开始前的初始分数加上已参加过的所有比赛的得分和。总分相同的，约定编号较小的选手排名靠前。</p>
+<p>每轮比赛的对阵安排与该轮比赛开始前的排名有关：第 $1$ 名和第 $2$ 名、第 $3$ 名和第 $4$ 名、$\cdots$、第 $2K-1$ 名和第 $2K$ 名、$\cdots$、第 $2N-1$ 名和第 $2N$ 名，各进行一场比赛。每场比赛胜者得 $1$ 分，负者得 $0$ 分。也就是说除了首轮以外，其它轮比赛的安排均不能事先确定，而是要取决于选手在之前比赛中的表现。</p>
+<p>现给定每个选手的初始分数及其实力值，试计算在 $R$ 轮比赛过后，排名第 $Q$ 的选手编号是多少。我们假设选手的实力值两两不同，且每场比赛中实力值较高的总能获胜。</p>
+<h2 id="数据范围">数据范围</h2>
+<p>$1\le N\le 10^5,1\le R\le 50,1\le Q\le 2N,0\le s_i\le10^8,1\le w_i\le 10^8$。</p>
+<h2 id="思路">思路</h2>
+<p>容易想到朴素算法，我们只需模拟 $R$ 次比赛，计算选手得分，排序即可，时间复杂度 $O(RN\log N)$。尽管看似很小，但时限只有 $0.5s$，出题人想卡掉还是很容易的。</p>
+<p>注意到：对于每轮比赛后，所有获胜的选手的排名相对不变，所有失败的选手排名也相对不变。对于这两个有序序列，使用归并排序中的 <code>merge</code> 操作即可。需要在最开始排序预处理，总时间复杂度 $O(N\log N+RN)$。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">102400</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, r, q;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">player</span> {
+</span></span><span style="display:flex;"><span>	pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> rk;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> en;
+</span></span><span style="display:flex;"><span>} arr[N <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>], winer[N], loser[N];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;</span>(<span style="color:#66d9ef">const</span> player <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> player <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> a.rk <span style="color:#f92672">&gt;</span> b.rk;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge</span>(player <span style="color:#f92672">*</span>a, player <span style="color:#f92672">*</span>b,
+</span></span><span style="display:flex;"><span>			size_t left1, size_t right1,
+</span></span><span style="display:flex;"><span>			size_t left2, size_t right2,
+</span></span><span style="display:flex;"><span>			player <span style="color:#f92672">*</span>tmp) {
+</span></span><span style="display:flex;"><span>	size_t i <span style="color:#f92672">=</span> left1, j <span style="color:#f92672">=</span> left2, k <span style="color:#f92672">=</span> left1;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> right1 <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> right2) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (b[j] <span style="color:#f92672">&lt;</span> a[i]) tmp[k<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> b[j<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span> tmp[k<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> a[i<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (; i <span style="color:#f92672">&lt;</span> right1; <span style="color:#f92672">++</span>i, <span style="color:#f92672">++</span>k) tmp[k] <span style="color:#f92672">=</span> a[i];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (; j <span style="color:#f92672">&lt;</span> right2; <span style="color:#f92672">++</span>j, <span style="color:#f92672">++</span>k) tmp[k] <span style="color:#f92672">=</span> b[j];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(player <span style="color:#f92672">*</span>a, size_t n) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> player tmp[N <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t seg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; seg <span style="color:#f92672">&lt;</span> n; seg <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (size_t left1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; left1 <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> seg; left1 <span style="color:#f92672">+=</span> (seg <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>			size_t right1 <span style="color:#f92672">=</span> left1 <span style="color:#f92672">+</span> seg;
+</span></span><span style="display:flex;"><span>			size_t left2 <span style="color:#f92672">=</span> right1;
+</span></span><span style="display:flex;"><span>			size_t right2 <span style="color:#f92672">=</span> min(left2 <span style="color:#f92672">+</span> seg, n);
+</span></span><span style="display:flex;"><span>			merge(a, a, left1, right1, left2, right2, tmp);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> (size_t t <span style="color:#f92672">=</span> left1; t <span style="color:#f92672">&lt;</span> right2; <span style="color:#f92672">++</span>t) a[t] <span style="color:#f92672">=</span> tmp[t];
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>	cin.tie(<span style="color:#ae81ff">0</span>); cout.tie(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> r <span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> arr[i].rk.first;
+</span></span><span style="display:flex;"><span>		arr[i].rk.second <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>i;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> arr[i].en;
+</span></span><span style="display:flex;"><span>	merge_sort(arr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> r; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>j) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (arr[j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>].en <span style="color:#f92672">&gt;</span> arr[(j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].en) {
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">++</span>arr[j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>].rk.first;
+</span></span><span style="display:flex;"><span>				winer[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> arr[j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>				loser[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> arr[(j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">++</span>arr[(j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].rk.first;
+</span></span><span style="display:flex;"><span>				winer[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> arr[(j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>				loser[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> arr[j <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		merge(winer, loser, <span style="color:#ae81ff">0</span>, n, <span style="color:#ae81ff">0</span>, n, arr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">-</span>arr[q].rk.second <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>另外，<code>algorithm</code> 中其实有专用的 <code>merge</code> 函数。其调用方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// https://zh.cppreference.com/w/cpp/algorithm/merge
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>merge(first1, last1, first2, last2, d_first);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">+ first1, last1 是待归并的第一个元素范围;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">+ first2, last2 是待归并的第二个元素范围;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">+ d_first 是目标范围，即存储结果的数组。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div>
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
