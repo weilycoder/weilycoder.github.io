@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://weilycoder.github.io/solutions/luogu_p4375/</loc>
-    <lastmod>2024-03-08T00:40:26+08:00</lastmod>
+    <loc>https://weilycoder.github.io/hack/</loc>
+    <lastmod>2024-03-08T23:16:37+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/</loc>
+    <lastmod>2024-03-08T23:16:37+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/hack/sort/</loc>
+    <lastmod>2024-03-08T23:14:01+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/solutions/luogu_p4375/</loc>
     <lastmod>2024-03-08T00:40:26+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/solutions/</loc>

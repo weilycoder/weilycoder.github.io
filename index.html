@@ -64,6 +64,23 @@
     <div class="posts">
 <article class="post">
   <h1 class="post-title">
+    <a href="https://weilycoder.github.io/hack/sort/">Hack STL sort</a>
+  </h1>
+  <time datetime="2024-03-08T23:14:01&#43;0800" class="post-date">Fri, Mar 8, 2024</time>
+  文章目的 尽管 C++ 的 STL 中包含许多功能，但不可否认的是其中有一部分实现得较为低效，本篇文章讨论了如何在大数据下折磨 std::sort。
+什么是 std::sort std::sort 是 &lt;algorithm&gt; 库中包含的不稳定排序1函数，C++ 规范要求其在 $O(N\log N)$ 的时间内完成排序，一般实现为内省排序2。
+如何 Hack 由于内省排序是快排与堆排的结合，这个问题就是如何卡掉快排和堆排。
+关于快排 快排时，先在数组中选择基准值，并以此将数组分成两个部分：前半部分大于基准，后半部分等于基准。此时，若基准值是数组中的最大值或最小值，快排将退化到 $O(N^2)$。
+因此，我们只需知道 STL 如何选择基准值。实际上，GCC 中 std::sort 的划分方式是 三数取中，即取首项、末项、中项的中位数作为基准。为此，我们构造区间最右端数值最大，首项与中项数值最小即可。
+关于堆排 堆排对乱序数组表现最差，只需在小区间构造乱序序列即可。
+实现 #include &lt;algorithm&gt; #include &lt;cstring&gt; #include &lt;iostream&gt; #include &lt;random&gt; using namespace std; #define N 100000000 mt19937 mt; struct save_index { int val; int index; save_index(int i = 0, int v = -1): val(v), index(i) {} void swap(save_index&amp; p) { val ^= p.
+  
+  <div class="read-more-link">
+    <a href="/hack/sort/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="https://weilycoder.github.io/solutions/luogu_p4375/">[USACO18OPEN] Out of Sorts G 题解</a>
   </h1>
   <time datetime="2024-03-08T00:40:26&#43;0800" class="post-date">Fri, Mar 8, 2024</time>

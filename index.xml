@@ -6,8 +6,15 @@
     <description>Recent content on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Mar 2024 00:40:26 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2024 23:14:01 +0800</lastBuildDate>
     <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack STL sort</title>
+      <link>https://weilycoder.github.io/hack/sort/</link>
+      <pubDate>Fri, 08 Mar 2024 23:14:01 +0800</pubDate>
+      <guid>https://weilycoder.github.io/hack/sort/</guid>
+      <description>文章目的 尽管 C++ 的 STL 中包含许多功能，但不可否认的是其中有一部分实现得较为低效，本篇文章讨论了如何在大数据下折磨 std::sort。&#xA;什么是 std::sort std::sort 是 &amp;lt;algorithm&amp;gt; 库中包含的不稳定排序1函数，C++ 规范要求其在 $O(N\log N)$ 的时间内完成排序，一般实现为内省排序2。&#xA;如何 Hack 由于内省排序是快排与堆排的结合，这个问题就是如何卡掉快排和堆排。&#xA;关于快排 快排时，先在数组中选择基准值，并以此将数组分成两个部分：前半部分大于基准，后半部分等于基准。此时，若基准值是数组中的最大值或最小值，快排将退化到 $O(N^2)$。&#xA;因此，我们只需知道 STL 如何选择基准值。实际上，GCC 中 std::sort 的划分方式是 三数取中，即取首项、末项、中项的中位数作为基准。为此，我们构造区间最右端数值最大，首项与中项数值最小即可。&#xA;关于堆排 堆排对乱序数组表现最差，只需在小区间构造乱序序列即可。&#xA;实现 #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;iostream&amp;gt; #include &amp;lt;random&amp;gt; using namespace std; #define N 100000000 mt19937 mt; struct save_index { int val; int index; save_index(int i = 0, int v = -1): val(v), index(i) {} void swap(save_index&amp;amp; p) { val ^= p.</description>
+    </item>
     <item>
       <title>[USACO18OPEN] Out of Sorts G 题解</title>
       <link>https://weilycoder.github.io/solutions/luogu_p4375/</link>

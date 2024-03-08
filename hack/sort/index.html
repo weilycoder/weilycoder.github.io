@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hack STL sort &middot; My Blog Site</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+    MathJax = {
+        tex: {
+            inlineMath: [
+                ['$', '$'],
+                ['\\(', '\\)']
+            ]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>My Blog Site</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Hack STL sort</h1>
+  <time datetime=2024-03-08T23:14:01&#43;0800 class="post-date">Fri, Mar 8, 2024</time>
+  <h1 id="文章目的">文章目的</h1>
+<p>尽管 <code>C++</code> 的 <code>STL</code> 中包含许多功能，但不可否认的是其中有一部分实现得较为低效，本篇文章讨论了如何在大数据下折磨 <code>std::sort</code>。</p>
+<h2 id="什么是-stdsort">什么是 <code>std::sort</code></h2>
+<p><code>std::sort</code> 是 <code>&lt;algorithm&gt;</code> 库中包含的不稳定排序<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>函数，<code>C++</code> 规范要求其在 $O(N\log N)$ 的时间内完成排序，一般实现为内省排序<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h2 id="如何-hack">如何 Hack</h2>
+<p>由于内省排序是快排与堆排的结合，这个问题就是如何卡掉快排和堆排。</p>
+<h3 id="关于快排">关于快排</h3>
+<p>快排时，先在数组中选择基准值，并以此将数组分成两个部分：前半部分大于基准，后半部分等于基准。此时，若基准值是数组中的最大值或最小值，快排将退化到 $O(N^2)$。</p>
+<p>因此，我们只需知道 <code>STL</code> 如何选择基准值。实际上，<code>GCC</code> 中 <code>std::sort</code> 的划分方式是 <em>三数取中</em>，即取首项、末项、中项的中位数作为基准。为此，我们构造区间最右端数值最大，首项与中项数值最小即可。</p>
+<h3 id="关于堆排">关于堆排</h3>
+<p>堆排对乱序数组表现最差，只需在小区间构造乱序序列即可。</p>
+<h2 id="实现">实现</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;random&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define N 100000000
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mt19937 mt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">save_index</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index;
+</span></span><span style="display:flex;"><span>	save_index(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> v <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">:</span> val(v), index(i) {}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(save_index<span style="color:#f92672">&amp;</span> p) {
+</span></span><span style="display:flex;"><span>		val <span style="color:#f92672">^=</span> p.val <span style="color:#f92672">^=</span> val <span style="color:#f92672">^=</span> p.val;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span> <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">const</span> save_index<span style="color:#f92672">&amp;</span> p) <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> index <span style="color:#f92672">&lt;</span> p.index;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort_byte</span>(save_index <span style="color:#f92672">*</span>fr, save_index <span style="color:#f92672">*</span>to, <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> bit) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">unsigned</span> bucket[<span style="color:#ae81ff">256</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#f92672">*</span>bucket_end <span style="color:#f92672">=</span> bucket <span style="color:#f92672">+</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span>	memset(bucket, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(bucket));
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (save_index <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> fr <span style="color:#f92672">+</span> len; it <span style="color:#f92672">!=</span> fr; <span style="color:#f92672">--</span>it)
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">++</span>bucket[(it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>].index <span style="color:#f92672">&gt;&gt;</span> bit) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">255</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> bucket; it <span style="color:#f92672">!=</span> bucket_end; it<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> it[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (save_index <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> fr <span style="color:#f92672">+</span> len; it <span style="color:#f92672">!=</span> fr; <span style="color:#f92672">--</span>it)
+</span></span><span style="display:flex;"><span>		to[<span style="color:#f92672">--</span>bucket[(it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>].index <span style="color:#f92672">&gt;&gt;</span> bit) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">255</span>]] <span style="color:#f92672">=</span> it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">radix_sort</span>(save_index <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> save_index b[N];
+</span></span><span style="display:flex;"><span>	sort_byte(a, b, n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(b, a, n, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(a, b, n, <span style="color:#ae81ff">16</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(b, a, n, <span style="color:#ae81ff">24</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">qsort_sim_gcc</span>(save_index<span style="color:#f92672">*</span> beg, save_index<span style="color:#f92672">*</span> end, <span style="color:#66d9ef">int</span> max_round) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> cur_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ((end <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>		(end <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> (end <span style="color:#f92672">-</span> beg) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (beg <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> end <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">--</span>max_round <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>		save_index <span style="color:#f92672">*</span>l <span style="color:#f92672">=</span> beg <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">*</span>r <span style="color:#f92672">=</span> end <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">*</span>m <span style="color:#f92672">=</span> beg <span style="color:#f92672">+</span> (end <span style="color:#f92672">-</span> beg) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cur_num;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (r<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			r<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cur_num;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cur_num;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> m<span style="color:#f92672">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> r<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>m);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> r<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>r);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>l);
+</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> r<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>m);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> r<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>l);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>				swap(<span style="color:#f92672">*</span>beg, <span style="color:#f92672">*</span>r);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> beg<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&amp;&amp;</span> l<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) ;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> beg<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&amp;&amp;</span> m<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			swap(<span style="color:#f92672">*</span>l, <span style="color:#f92672">*</span>m);
+</span></span><span style="display:flex;"><span>		beg <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">anti_qsort_gen_gcc</span>(save_index<span style="color:#f92672">*</span> vec, size_t len, <span style="color:#66d9ef">int</span> max_round) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		vec[i] <span style="color:#f92672">=</span> save_index((<span style="color:#66d9ef">int</span>)i);
+</span></span><span style="display:flex;"><span>	qsort_sim_gcc(vec, vec <span style="color:#f92672">+</span> len, max_round);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (vec[i].val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">++</span>cnt;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>val_list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[cnt];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> cnt; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		val_list[i] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> len <span style="color:#f92672">-</span> cnt;
+</span></span><span style="display:flex;"><span>	shuffle(val_list, val_list <span style="color:#f92672">+</span> cnt, mt);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (vec[i].val <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>			vec[i].val <span style="color:#f92672">=</span> val_list[j<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span>[] val_list;
+</span></span><span style="display:flex;"><span>	radix_sort(vec, len);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">anti_qsort_gen_gcc</span>(<span style="color:#66d9ef">int</span> arr[], size_t len) {
+</span></span><span style="display:flex;"><span>	save_index <span style="color:#f92672">*</span>vec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> save_index[len];
+</span></span><span style="display:flex;"><span>	anti_qsort_gen_gcc(vec, len, <span style="color:#ae81ff">150</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>		arr[i] <span style="color:#f92672">=</span> vec[i].val;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span>[] vec;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> A[N];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[]) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> N;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">switch</span> (argc) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>			cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Input too long!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>			sscanf(argv[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>n);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&gt;</span> N <span style="color:#f92672">||</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>				cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Input out of range.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (freopen(argv[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#34;w&#34;</span>, stdout) <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>				cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Couldn&#39;t open file &#34;</span> <span style="color:#f92672">&lt;&lt;</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>	cin.tie(<span style="color:#ae81ff">0</span>); cout.tie(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	random_device rd;
+</span></span><span style="display:flex;"><span>	mt.seed(rd());
+</span></span><span style="display:flex;"><span>	anti_qsort_gen_gcc(A, n);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) cout <span style="color:#f92672">&lt;&lt;</span> A[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="后记">后记</h1>
+<h2 id="关于为什么快排被称为快排">关于为什么快排被称为快排</h2>
+<p>实际上，最差时间复杂度优于快排的基于比较的排序算法有很多，如上文提到的堆排，最坏时间复杂度为 $O(N\log N)$。但是，考虑到计算机底层实现，访问内存时，相邻的内存块将进入缓存加快运行速度。若经常访问非连续内存，就失去了缓存加速的效果。堆排序中的向下调整是明显的访问非连续内存块的操作；相反，快排经常操作相邻内存，这使它的实际运行速度较快。</p>
+<h2 id="关于快排的其他优化">关于快排的其他优化</h2>
+<ul>
+<li>上文提到的内省排序是一种方式，保证了最劣时间复杂度为 $O(N\log N)$；</li>
+<li>另外，上文中提到的三数取中可以实现为取首项、末项、随机项的中位数，使攻击失效；</li>
+<li>另外，可以在划分数组时改为分成三段：小于基准、等于基准、大于基准；在存在大量相同数据时效果显著；</li>
+<li>此外，在小数据时也可以考虑插入排序或希尔排序。</li>
+</ul>
+<h2 id="关于快排的替代方案">关于快排的替代方案</h2>
+<p>基数排序在对整数排序时是相当不错的选择，这里提供 <code>int</code> 的基数排序模版：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sort_byte</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>fr, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>to, <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> bit) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">unsigned</span> bucket[<span style="color:#ae81ff">256</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#f92672">*</span>bucket_end <span style="color:#f92672">=</span> bucket <span style="color:#f92672">+</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span>	memset(bucket, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(bucket));
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> fr <span style="color:#f92672">+</span> len; it <span style="color:#f92672">!=</span> fr; <span style="color:#f92672">--</span>it)
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">++</span>bucket[(it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;&gt;</span> bit) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">255</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> bucket; it <span style="color:#f92672">!=</span> bucket_end; it<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> it[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">=</span> fr <span style="color:#f92672">+</span> len; it <span style="color:#f92672">!=</span> fr; <span style="color:#f92672">--</span>it)
+</span></span><span style="display:flex;"><span>		to[<span style="color:#f92672">--</span>bucket[(it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;&gt;</span> bit) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">255</span>]] <span style="color:#f92672">=</span> it[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">radix_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> len) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> b[N];
+</span></span><span style="display:flex;"><span>	sort_byte(a, b, len, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(b, a, len, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(a, b, len, <span style="color:#ae81ff">16</span>);
+</span></span><span style="display:flex;"><span>	sort_byte(b, a, len, <span style="color:#ae81ff">24</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>选择 $256$ 作为模数有两个好处：</p>
+<ol>
+<li>可以使用位运算优化，比乘除法快；</li>
+<li>$256$ 几乎是<strong>缓存有效工作</strong>的上限。</li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>不保证相同元素的相对位置；&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>在快速排序的基础上，若迭代次数达到 $O(\log N)$，改用堆排序。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
