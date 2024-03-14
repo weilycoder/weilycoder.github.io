@@ -62,8 +62,11 @@
     <main class="content container">
     <div class="post">
   <h1>最近公共祖先（LCA）</h1>
-  <time datetime=2024-03-01T22:42:08&#43;0800 class="post-date">Fri, Mar 1, 2024</time>
-  <h4 id="模板题目httpswwwluogucomcnproblemp3379"><a href="https://www.luogu.com.cn/problem/P3379">模板题目</a></h4>
+  <time datetime=2024-03-14T22:42:08&#43;0800 class="post-date">Thu, Mar 14, 2024</time>
+  <blockquote>
+<p>“对呀对呀！…… <code>LCA</code> 有六样写法，你知道么？”</p>
+</blockquote>
+<h1 id="模板题目httpswwwluogucomcnproblemp3379"><a href="https://www.luogu.com.cn/problem/P3379">模板题目</a></h1>
 <blockquote>
 <p>给定一棵有根多叉树，求指定两点 $x,y$ 的最近公共祖先 $\operatorname{LCA}(x,y)$。
 树的节点数有 $N$ 个，$M$ 次询问。
@@ -81,9 +84,10 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[<span style="color:#ae81ff">500050</span>], vis[<span style="color:#ae81ff">500050</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[N], vis[N];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[N];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">build</span>(<span style="color:#66d9ef">int</span> now, <span style="color:#66d9ef">int</span> fa, <span style="color:#66d9ef">int</span> dpth) {
 </span></span><span style="display:flex;"><span>    deep[now] <span style="color:#f92672">=</span> dpth;
@@ -115,18 +119,19 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u, v;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> u <span style="color:#f92672">&gt;&gt;</span> v;
 </span></span><span style="display:flex;"><span>        node[u].push_back(v); node[v].push_back(u);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    node[s].push_back(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    build(s, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x, y;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
@@ -141,9 +146,10 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[<span style="color:#ae81ff">500050</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[N];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[N];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">build</span>(<span style="color:#66d9ef">int</span> now, <span style="color:#66d9ef">int</span> fa, <span style="color:#66d9ef">int</span> dpth) {
 </span></span><span style="display:flex;"><span>    deep[now] <span style="color:#f92672">=</span> dpth;
@@ -155,24 +161,26 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lca</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> y) <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (deep[x] <span style="color:#f92672">==</span> deep[y]) <span style="color:#66d9ef">return</span> lca(node[x][<span style="color:#ae81ff">0</span>], node[y][<span style="color:#ae81ff">0</span>]);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (deep[x] <span style="color:#f92672">&lt;</span> deep[y]) swap(x, y);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> lca(node[x][<span style="color:#ae81ff">0</span>], y);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u, v;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> u <span style="color:#f92672">&gt;&gt;</span> v;
 </span></span><span style="display:flex;"><span>        node[u].push_back(v); node[v].push_back(u);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    node[s].push_back(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    build(s, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x, y;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
@@ -194,9 +202,10 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[<span style="color:#ae81ff">500050</span>], fa[<span style="color:#ae81ff">500050</span>][<span style="color:#ae81ff">20</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> deep[N], fa[N][<span style="color:#ae81ff">20</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[N];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">build</span>(<span style="color:#66d9ef">int</span> now, <span style="color:#66d9ef">int</span> f, <span style="color:#66d9ef">int</span> dpth) {
 </span></span><span style="display:flex;"><span>    deep[now] <span style="color:#f92672">=</span> dpth;
@@ -209,14 +218,16 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">qlog2</span>(<span style="color:#66d9ef">int</span> x) { <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">-</span> __builtin_clz(x); }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">qlog2</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">-</span> __builtin_clz(x);
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lca</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (deep[x] <span style="color:#f92672">&lt;</span> deep[y]) swap(x, y);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (deep[x] <span style="color:#f92672">!=</span> deep[y])
 </span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> fa[x][qlog2(deep[x] <span style="color:#f92672">-</span> deep[y])];
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> y) <span style="color:#66d9ef">return</span> x;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> qlog2(deep[x]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#f92672">--</span>i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> qlog2(deep[x]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#f92672">--</span>i)
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (fa[x][i] <span style="color:#f92672">!=</span> fa[y][i]) 
 </span></span><span style="display:flex;"><span>            x <span style="color:#f92672">=</span> fa[x][i], y <span style="color:#f92672">=</span> fa[y][i];
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fa[x][<span style="color:#ae81ff">0</span>];
@@ -224,18 +235,19 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u, v;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> u <span style="color:#f92672">&gt;&gt;</span> v;
 </span></span><span style="display:flex;"><span>        node[u].push_back(v); node[v].push_back(u);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    node[s].push_back(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    build(s, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x, y;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(x, y) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
@@ -262,11 +274,12 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fa[<span style="color:#ae81ff">500050</span>], vis[<span style="color:#ae81ff">500050</span>], results[<span style="color:#ae81ff">500050</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span>  fa[N], vis[N], results[N];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[N];
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">edge</span> { <span style="color:#66d9ef">int</span> v, id; };
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>edge<span style="color:#f92672">&gt;</span> query[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>edge<span style="color:#f92672">&gt;</span> query[N];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ask</span>(<span style="color:#66d9ef">int</span> x) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>fa[x] <span style="color:#f92672">||</span> fa[x] <span style="color:#f92672">==</span> x) <span style="color:#66d9ef">return</span> x;
@@ -288,21 +301,22 @@ $1\leq N,M\leq 5\times10^5.$</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u, v;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> u <span style="color:#f92672">&gt;&gt;</span> v;
 </span></span><span style="display:flex;"><span>        node[u].push_back(v), node[v].push_back(u);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x, y;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> y) results[i] <span style="color:#f92672">=</span> x;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> query[x].push_back({y, i}), query[y].push_back({x, i});
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    tarjan(s);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i)
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> results[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> results[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h1 id="用欧拉序列转化为-rmq-问题">用欧拉序列转化为 RMQ 问题</h1>
@@ -319,10 +333,11 @@ $$pos(\operatorname{LCA}(x,y))=\min{pos(k)|k\in E[pos(x)\dots pos(y)]}$$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> eu[<span style="color:#ae81ff">1000100</span>], pos[<span style="color:#ae81ff">500050</span>], pt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> st[<span style="color:#ae81ff">1048576</span>][<span style="color:#ae81ff">20</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[<span style="color:#ae81ff">500050</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> eu[N <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>], pos[N], pt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> st[N <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">20</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node[N];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> now, <span style="color:#66d9ef">int</span> fa) {
 </span></span><span style="display:flex;"><span>    pos[now] <span style="color:#f92672">=</span> pt;
@@ -334,30 +349,138 @@ $$pos(\operatorname{LCA}(x,y))=\min{pos(k)|k\in E[pos(x)\dots pos(y)]}$$</p>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">emin</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) { <span style="color:#66d9ef">return</span> pos[x] <span style="color:#f92672">&lt;</span> pos[y]<span style="color:#f92672">?</span> x: y; }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">emin</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pos[x] <span style="color:#f92672">&lt;</span> pos[y]<span style="color:#f92672">?</span> x: y;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">qlog2</span>(<span style="color:#66d9ef">int</span> x) { <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">-</span> __builtin_clz(x); }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">qlog2</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">-</span> __builtin_clz(x);
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u, v;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> u <span style="color:#f92672">&gt;&gt;</span> v;
 </span></span><span style="display:flex;"><span>        node[u].push_back(v); node[v].push_back(u);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    dfs(s, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pt; <span style="color:#f92672">++</span>i) st[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> eu[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j <span style="color:#f92672">&lt;=</span> pt; <span style="color:#f92672">++</span>j)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j) <span style="color:#f92672">&lt;=</span> pt; <span style="color:#f92672">++</span>i)
-</span></span><span style="display:flex;"><span>            st[i][j] <span style="color:#f92672">=</span> emin(st[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], st[i <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">register</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pt; <span style="color:#f92672">++</span>i) st[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> eu[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j <span style="color:#f92672">&lt;=</span> pt; <span style="color:#f92672">++</span>j)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j) <span style="color:#f92672">&lt;=</span> pt; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>            st[i][j] <span style="color:#f92672">=</span> emin(st[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], st[i <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> a, b;
 </span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> a <span style="color:#f92672">&gt;&gt;</span> b;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> pos[a], y <span style="color:#f92672">=</span> pos[b];
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&gt;</span> y) swap(x, y);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> qlog2(y <span style="color:#f92672">-</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> emin(st[x][k], st[y <span style="color:#f92672">-</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> k) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][k]) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> emin(st[x][k], st[y <span style="color:#f92672">-</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> k) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][k]) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="树链剖分">树链剖分</h1>
+<p>树链剖分一般分为 <em>重链剖分</em>、<em>长链剖分</em>、<em>实链剖分</em>。大多数情况下，“树链剖分”指“重链剖分”。</p>
+<p>重链剖分可以将树上的任意一条路径划分成不超过 $O(\log N)$ 条连续的链，每条链上的点深度互不相同。</p>
+<p>重链剖分还能保证划分出的每条链上的节点 <code>DFS</code> 序连续，因此可以方便地用一些维护序列的数据结构来维护树上路径的信息。</p>
+<p>此外，树剖可以 $O(\log N)$（且常数较小地）求 <code>LCA</code>。</p>
+<h2 id="重链剖分">重链剖分</h2>
+<p>具体地，我们定义：</p>
+<ul>
+<li>重子节点：其子节点中子树最大的子结点；</li>
+<li>轻子节点：剩余的所有子结点；</li>
+<li>重边：从这个结点到重子节点的边；</li>
+<li>轻边：到轻子节点的边；</li>
+<li>重链：若干条首尾衔接的重边；特别地，把落单的结点也当作重链。</li>
+</ul>
+<p>树剖的实现分为两个 <code>DFS</code>。</p>
+<p>第一个 <code>DFS</code> 记录每个节点的父节点、深度、子树大小、重子节点。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs1</span>(<span style="color:#66d9ef">int</span> o) {
+</span></span><span style="display:flex;"><span>    son[o] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    siz[o] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> chi: tree[o]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (dep[chi]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        dep[chi] <span style="color:#f92672">=</span> dep[o] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        fa[chi] <span style="color:#f92672">=</span> o;
+</span></span><span style="display:flex;"><span>        dfs1(chi);
+</span></span><span style="display:flex;"><span>        siz[o] <span style="color:#f92672">+=</span> siz[chi];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (son[o] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> siz[chi] <span style="color:#f92672">&gt;</span> siz[son[o]]) son[o] <span style="color:#f92672">=</span> chi;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>第二个 <code>DFS</code> 记录所在重链链顶、重边优先遍历时的 <code>DFS</code> 序、<code>DFS</code> 序对应的节点编号。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs2</span>(<span style="color:#66d9ef">int</span> o, <span style="color:#66d9ef">int</span> t) {
+</span></span><span style="display:flex;"><span>    top[o] <span style="color:#f92672">=</span> t;
+</span></span><span style="display:flex;"><span>    dfn[o] <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cnt;
+</span></span><span style="display:flex;"><span>    dfn[cnt] <span style="color:#f92672">=</span> o;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (son[o] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> ;
+</span></span><span style="display:flex;"><span>    dfs2(son[o], t);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> chi: tree[o])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (chi <span style="color:#f92672">!=</span> son[o] <span style="color:#f92672">&amp;&amp;</span> chi <span style="color:#f92672">!=</span> fa[o]) dfs2(chi, chi);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="树剖实现-lca">树剖实现 <code>LCA</code></h2>
+<p>当两个节点在同一条重链上时，较浅的节点即为 <code>LCA</code>；两个节点不在同一条重链上时，我们将链顶较深的节点跳至链顶的父节点。</p>
+<p>预处理的时间复杂度为 $O(N)$，单次查询的时间复杂度为 $O(\log N)$，且常数较小。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// 100pts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> size_t N <span style="color:#f92672">=</span> <span style="color:#ae81ff">500050</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, m, s;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tree[N];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fa[N], dep[N], siz[N], son[N], top[N], dfn[N], rnk[N], cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs1</span>(<span style="color:#66d9ef">int</span> o) {
+</span></span><span style="display:flex;"><span>    son[o] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    siz[o] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> chi: tree[o]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (dep[chi]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        dep[chi] <span style="color:#f92672">=</span> dep[o] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        fa[chi] <span style="color:#f92672">=</span> o;
+</span></span><span style="display:flex;"><span>        dfs1(chi);
+</span></span><span style="display:flex;"><span>        siz[o] <span style="color:#f92672">+=</span> siz[chi];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (son[o] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> siz[chi] <span style="color:#f92672">&gt;</span> siz[son[o]]) son[o] <span style="color:#f92672">=</span> chi;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs2</span>(<span style="color:#66d9ef">int</span> o, <span style="color:#66d9ef">int</span> t) {
+</span></span><span style="display:flex;"><span>    top[o] <span style="color:#f92672">=</span> t;
+</span></span><span style="display:flex;"><span>    dfn[o] <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cnt;
+</span></span><span style="display:flex;"><span>    dfn[cnt] <span style="color:#f92672">=</span> o;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (son[o] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> ;
+</span></span><span style="display:flex;"><span>    dfs2(son[o], t);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> chi: tree[o])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (chi <span style="color:#f92672">!=</span> son[o] <span style="color:#f92672">&amp;&amp;</span> chi <span style="color:#f92672">!=</span> fa[o]) dfs2(chi, chi);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lca</span>(<span style="color:#66d9ef">int</span> u, <span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (top[u] <span style="color:#f92672">!=</span> top[v]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (dep[top[u]] <span style="color:#f92672">&gt;</span> dep[top[v]])
+</span></span><span style="display:flex;"><span>            u <span style="color:#f92672">=</span> fa[top[u]];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            v <span style="color:#f92672">=</span> fa[top[v]];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dep[u] <span style="color:#f92672">&gt;</span> dep[v]<span style="color:#f92672">?</span> v: u;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    ios<span style="color:#f92672">::</span>sync_with_stdio(false);
+</span></span><span style="display:flex;"><span>    cin.tie(<span style="color:#ae81ff">0</span>), cout.tie(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m <span style="color:#f92672">&gt;&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x, y;
+</span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+</span></span><span style="display:flex;"><span>        tree[x].push_back(y), tree[y].push_back(x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    dep[s] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    dfs1(s), dfs2(s, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> a, b;
+</span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> a <span style="color:#f92672">&gt;&gt;</span> b;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> lca(a, b) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}

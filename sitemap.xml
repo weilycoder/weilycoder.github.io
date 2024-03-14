@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://weilycoder.github.io/hack/</loc>
-    <lastmod>2024-03-08T23:16:37+08:00</lastmod>
-  </url><url>
     <loc>https://weilycoder.github.io/</loc>
+    <lastmod>2024-03-14T22:42:08+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/post/</loc>
+    <lastmod>2024-03-14T22:42:08+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/post/lca/</loc>
+    <lastmod>2024-03-14T22:42:08+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/hack/</loc>
     <lastmod>2024-03-08T23:16:37+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/hack/sort/</loc>
@@ -23,9 +29,6 @@
     <loc>https://weilycoder.github.io/solutions/luogu_p1309/</loc>
     <lastmod>2024-03-07T23:25:59+08:00</lastmod>
   </url><url>
-    <loc>https://weilycoder.github.io/post/</loc>
-    <lastmod>2024-03-04T22:38:59+08:00</lastmod>
-  </url><url>
     <loc>https://weilycoder.github.io/post/linear-recurrence/</loc>
     <lastmod>2024-03-04T22:38:59+08:00</lastmod>
   </url><url>
@@ -34,9 +37,6 @@
   </url><url>
     <loc>https://weilycoder.github.io/post/int128/</loc>
     <lastmod>2024-03-01T23:19:16+08:00</lastmod>
-  </url><url>
-    <loc>https://weilycoder.github.io/post/lca/</loc>
-    <lastmod>2024-03-01T22:42:08+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/post/sqrt-decomposition/</loc>
     <lastmod>2024-03-01T22:20:46+08:00</lastmod>

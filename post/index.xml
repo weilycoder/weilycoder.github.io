@@ -6,8 +6,15 @@
     <description>Recent content in Posts on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 04 Mar 2024 22:38:59 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 Mar 2024 22:42:08 +0800</lastBuildDate>
     <atom:link href="https://weilycoder.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>最近公共祖先（LCA）</title>
+      <link>https://weilycoder.github.io/post/lca/</link>
+      <pubDate>Thu, 14 Mar 2024 22:42:08 +0800</pubDate>
+      <guid>https://weilycoder.github.io/post/lca/</guid>
+      <description>“对呀对呀！…… LCA 有六样写法，你知道么？”&#xA;模板题目 给定一棵有根多叉树，求指定两点 $x,y$ 的最近公共祖先 $\operatorname{LCA}(x,y)$。 树的节点数有 $N$ 个，$M$ 次询问。 $1\leq N,M\leq 5\times10^5.$&#xA;朴素做法 常见的朴素算法有两种，单次询问复杂度均为 $O(N)$。&#xA;向上标记法 从 $x$ 向上移动到根节点，标记经过的节点； 从 $y$ 向上移动到根节点，路径中第一个被标记的节点即为 $\operatorname{LCA}(x,y)$。 // 70pts #include &amp;lt;iostream&amp;gt; #include &amp;lt;vector&amp;gt; using namespace std; const size_t N = 500050; int n, m, s; int deep[N], vis[N]; vector&amp;lt;int&amp;gt; node[N]; void build(int now, int fa, int dpth) { deep[now] = dpth; for (int&amp;amp; ch: node[now]) { if (ch == fa) swap(node[now][0], ch); else build(ch, now, dpth + 1); } } void mark(int x, int mk) { vis[x] = mk; if (!</description>
+    </item>
     <item>
       <title>关于线性递推数列的计算加速</title>
       <link>https://weilycoder.github.io/post/linear-recurrence/</link>
@@ -28,13 +35,6 @@
       <pubDate>Fri, 01 Mar 2024 23:19:16 +0800</pubDate>
       <guid>https://weilycoder.github.io/post/int128/</guid>
       <description>简介 __int128 是一种占用 $128$ 字节的整数存储类型， 并不在 C/C++ 标准中，而是 64bit gcc 支持的内建类型，并且被大部分 OJ 支持。&#xA;__int128 存储范围 顾名思义，__int128 存储一个 $128$ 位的有符号整数，因此范围是 $[-2^{127},2^{127})$；当然可以使用 __int128 unsigned，范围变为 $[0,2^{128})$。&#xA;用十进制表达，__int128 的存储范围是 $$-170141183460469231731687303715884105728\sim170141183460469231731687303715884105727;$$&#xA;__int128 unsigned 的存储范围是 $$0\sim 340282366920938463463374607431768211455.$$&#xA;__int128 的使用场景 在比赛中，有时会遇到 long long 也存不下的数据，但我们又懒得写高精度。这时我们可以尝试使用 __int128。__int128 支持包括加减乘除在内的大部分内置运算。&#xA;注意：__int128 大约存储十进制数 $38$ 位。&#xA;__int128 的输入输出 实际上，由于 __int128 并不在 C/C++ 标准中，C/C++ 常见的输入输出函数都不能给 __int128 使用。&#xA;我们可以直接套快读快写模板：&#xA;void print(__int128 x) { if (x &amp;lt; 0) putchar(&amp;#39;-&amp;#39;), print(-x); else if (x &amp;lt; 10) putchar(x ^ &amp;#39;0&amp;#39;); else print(x / 10), print(x % 10); } __int128 scan() { char c = getchar(); int sign = 1; for (; c &amp;lt; &amp;#39;0&amp;#39; || c &amp;gt; &amp;#39;9&amp;#39;; c = getchar()) if (c == &amp;#39;-&amp;#39;) sign *= -1; __int128 x = 0; for (; c &amp;gt;= &amp;#39;0&amp;#39; &amp;amp;&amp;amp; c &amp;lt;= &amp;#39;9&amp;#39;; c = getchar()) x = x * 10 + (c ^ &amp;#39;0&amp;#39;); return x * sign; } 或者优雅一些，使用结构体+重载运算符模拟输入输出流：</description>
-    </item>
-    <item>
-      <title>最近公共祖先（LCA）</title>
-      <link>https://weilycoder.github.io/post/lca/</link>
-      <pubDate>Fri, 01 Mar 2024 22:42:08 +0800</pubDate>
-      <guid>https://weilycoder.github.io/post/lca/</guid>
-      <description>模板题目 给定一棵有根多叉树，求指定两点 $x,y$ 的最近公共祖先 $\operatorname{LCA}(x,y)$。 树的节点数有 $N$ 个，$M$ 次询问。 $1\leq N,M\leq 5\times10^5.$&#xA;朴素做法 常见的朴素算法有两种，单次询问复杂度均为 $O(N)$。&#xA;向上标记法 从 $x$ 向上移动到根节点，标记经过的节点； 从 $y$ 向上移动到根节点，路径中第一个被标记的节点即为 $\operatorname{LCA}(x,y)$。 // 70pts #include &amp;lt;iostream&amp;gt; #include &amp;lt;vector&amp;gt; using namespace std; int n, m, s; int deep[500050], vis[500050]; vector&amp;lt;int&amp;gt; node[500050]; void build(int now, int fa, int dpth) { deep[now] = dpth; for (int&amp;amp; ch: node[now]) { if (ch == fa) swap(node[now][0], ch); else build(ch, now, dpth + 1); } } void mark(int x, int mk) { vis[x] = mk; if (!</description>
     </item>
     <item>
       <title>数论分块</title>
