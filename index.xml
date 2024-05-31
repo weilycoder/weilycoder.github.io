@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Weily09&#39;s Blog</title>
-    <link>weilycoder.github.io/</link>
+    <link>https://weilycoder.github.io/</link>
     <description>Recent content on Weily09&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 01 Jun 2024 00:35:21 +0800</lastBuildDate>
-    <atom:link href="weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Who I am</title>
-      <link>weilycoder.github.io/post/about/</link>
+      <link>https://weilycoder.github.io/post/about/</link>
       <pubDate>Sat, 01 Jun 2024 00:35:21 +0800</pubDate>
-      <guid>weilycoder.github.io/post/about/</guid>
+      <guid>https://weilycoder.github.io/post/about/</guid>
       <description> 朝乾夕惕，功不唐捐。&#xA;👋 Hi, I’m weily09 🇨🇳 来自中国的一名准高中生 👀 对数学和计算机科学很感兴趣 🌱 现已考上山东省实验中学推荐生 💞️ 正在学习算法竞赛（Olympiad in Informatics） 📫 How to reach me &amp;hellip; QQ: 1991809701 / 40726462 e-mail: weily2009@outlook.com luogu: wly09 ⚡ 已成为 OI-wiki 贡献者！ </description>
     </item>
   </channel>
