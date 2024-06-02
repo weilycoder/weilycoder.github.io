@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Weily09&#39;s Blog</title>
-    <link>https://weilycoder.github.io/</link>
-    <description>Recent content on Weily09&#39;s Blog</description>
+    <title>Maths on Weily09&#39;s Blog</title>
+    <link>https://weilycoder.github.io/math/</link>
+    <description>Recent content in Maths on Weily09&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <lastBuildDate>Sat, 01 Jun 2024 21:56:39 +0800</lastBuildDate>
-    <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://weilycoder.github.io/math/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>质数及素性判断</title>
       <link>https://weilycoder.github.io/math/millerrabin/</link>
       <pubDate>Sat, 01 Jun 2024 21:56:39 +0800</pubDate>
       <guid>https://weilycoder.github.io/math/millerrabin/</guid>
       <description>$61$ 是个质数来着；&#xA;$601$ 也是；&#xA;$202406011$ 也是。&#xA;记于 2024 年 6 月 1 日，儿童节&#xA;质数的定义和若干性质 通常，我们在正整数上定义质数与合数：&#xA;若正整数 $p\lt 2$ 除了 $1$ 和 $p$ 没有其他正约数，那么称 $p$ 为质数（或素数、不可约数）。&#xA;若正整数 $a\gt 2$ 且 $a$ 不是质数，则称 $a$ 是合数。&#xA;质数有几个值得一提的性质：&#xA;对于合数 $a$，存在质数 $p\le\sqrt{a}$ 使 $p\mid a;$ 所有大于 $3$ 的质数都可表示为 $6n\pm 1;$ 质数有无穷多个。 另外，在 OI 领域，我们常将答案对质数取模；有时也用大质数作哈希模数。&#xA;我必须在此抱怨一句，不少人在取模数时简单的取自己的手机号或身份证号，我不是说这样不好，实际上我认为随机模数很好，只是这些数大都不是质数，哈希的冲突概率偏大，即使是随机数据也可能出现冲突，甚至多模数也难以补救。&#xA;现在技术已可以快速生成一组固定多模哈希冲突的数据1，不必大惊小怪，连 MD5 都已被破解，甚至可以制作可读的 MD5 冲突的 PDF。&#xA;这里公布一些常见质数，OI 赛制中请尽量避免使用它们作为哈希：&#xA;$10^5+3$, $2^{22}\times 5^2+1$, $2^{25}\times 5+1$, $2^{26}\times 7+1$, $2^{23}\times 7\times 17+1$, $10^9+7$, $10^9+9$, $2^{21}\times 479 + 1$, $2^{31}-1$, $2^{61}-1$, $10^{18}+3$.</description>
-    </item>
-    <item>
-      <title>Who I am</title>
-      <link>https://weilycoder.github.io/about/</link>
-      <pubDate>Sat, 01 Jun 2024 00:35:21 +0800</pubDate>
-      <guid>https://weilycoder.github.io/about/</guid>
-      <description> 朝乾夕惕，功不唐捐。&#xA;👋 Hi, I’m weily09 🇨🇳 来自中国的一名准高中生 👀 对数学和计算机科学很感兴趣 🌱 现已考上山东省实验中学推荐生 💞️ 正在学习算法竞赛（Olympiad in Informatics） 📫 How to reach me &amp;hellip; QQ: 1991809701 / 40726462 e-mail: weily2009@outlook.com luogu: wly09 ⚡ 已成为 OI-wiki 贡献者！ </description>
     </item>
   </channel>
 </rss>
