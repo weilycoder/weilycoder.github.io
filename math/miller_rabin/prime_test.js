@@ -37,9 +37,9 @@ function millerRabin(x) {
 function put_ans(s) {
     document.getElementById("ans").innerHTML = s;
 }
-function check(f) {
+function check() {
     try {
-        let p = f.p.value;
+        let p = document.getElementById("p").value;
         let a = millerRabin(p);
         if (a) {
             put_ans("Answer: is Prime.");

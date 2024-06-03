@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hans" lang="zh-Hans">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>数论基础 &middot; Weily09&#39;s Blog</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>Weily09&#39;s Blog</h1></a>
+      <p class="lead">
+       I write, therefore I am. 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693/"> Luogu </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>数论基础</h1>
+  <time datetime=2024-06-03T21:14:39&#43;0800 class="post-date">Mon, Jun 3, 2024</time>
+  <h2 id="整除">整除</h2>
+<blockquote>
+<p>设 $a,b\in\mathbb{Z},a\ne 0.$ 若 $\exists q\in\mathbb{Z}$，使 $b=aq$，那么说 $b$ 可被 $a$ 整除，记作 $a\mid b$；$b$ 不被 $a$ 整除记作 $a\nmid b.$</p>
+</blockquote>
+<p>整除的若干性质：</p>
+<ul>
+<li>$a\mid b\Leftrightarrow -a\mid b\Leftrightarrow a\mid -b\Leftrightarrow |a|\mid |b|$</li>
+<li>$a\mid b\wedge b\mid c\Rightarrow a\mid c$</li>
+<li>$a\mid b\wedge a\mid c\Leftrightarrow \forall x,y\in\mathbb{Z},a\mid (xb+yc)$</li>
+<li>$a\mid b\wedge b\mid a\Leftrightarrow b=\pm a$</li>
+<li>设 $m=0$，那么 $a\mid b\Leftrightarrow ma\mid mb$</li>
+<li>设 $b\ne 0$，那么 $a\mid b\Rightarrow |a|\le |b|$</li>
+<li>设 $a\ne 0,b=qa+c$，那么 $a\mid b\Leftrightarrow a|c$</li>
+</ul>
+<h2 id="约数">约数</h2>
+<blockquote>
+<p>若 $a\mid b$，则称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。</p>
+</blockquote>
+<p>$0$ 是所有非 $0$ 整数的倍数。对于整数 $b\ne 0$，$b$ 的约数只有有限个。</p>
+<p>平凡约数：对于整数 $b\ne 0$，$\pm 1,\pm b$ 是 $b$ 的平凡约数。当 $b=\pm 1$ 时，$b$ 只有两个平凡约数。</p>
+<p>对于整数 $b\ne 0$，$b$ 的其他约数称为真约数。</p>
+<p>约数的性质：</p>
+<ul>
+<li>设整数 $b\ne 0$，当 $d$ 遍历 $b$ 的全体约数时，$\dfrac{b}{d}$ 也遍历 $b$ 的全体约数。</li>
+<li>设整数 $b\gt 0$，当 $d$ 遍历 $b$ 的全体正约数时，$\dfrac{b}{d}$ 也遍历 $b$ 的全体正约数。</li>
+</ul>
+<p><strong>具体问题中，一般约数指正约数。</strong></p>
+<h2 id="带余除法">带余除法</h2>
+<blockquote>
+<p>设 $a,b\in \mathbb{Z},a\ne 0.$ 设 $d$ 为给定整数，那么，一定存在唯一整数对 $(q,r)$，满足 $b=qa+r,d\le r\lt |a|+d.$</p>
+</blockquote>
+<p>无论 $d$ 取何值，$r$ 统称为余数，$a\mid b$ 等价于 $a\mid r$。</p>
+<p>一般情况，$d$ 取零，此时 $b=qa+r,0\le r\lt |a|$ 称为带余除法。这里的余数 $r$ 称为最小非负余数。</p>
+<p>余数还有几种常见取法：</p>
+<ol>
+<li>绝对最小余数，$d=-\dfrac{|a|}{2}$。</li>
+<li>最小正余数，$d=1$。</li>
+<li>一般只见于编程语言，不定义 $d$，而是令 $q=\left[\dfrac{b}{a}\right]$，这里 $[x]$ 表示 $x$ 向零取整。</li>
+</ol>
+<p><strong>如果没有特殊说明，余数总指最小非负余数。</strong></p>
+<ul>
+<li>任一整数被正整数 $a$ 除后，余数一定是且仅是 $0$ 到 $(a-1)$ 这 $a$ 个数中的一个；</li>
+<li>相邻 $a$ 个整数被正整数 $a$ 除后，恰好取到上述 $a$ 个余数，特别地，一定有且仅有一个数被 $a$ 整除。</li>
+</ul>
+<h2 id="最大公约数和最小公倍数">最大公约数和最小公倍数</h2>
+<blockquote>
+<p>一组整数的公约数，是指同时是这组数中每一个数的约数的数。$\pm 1$ 是任意一组整数的公约数。</p>
+<p>一组整数的最大公约数，是指所有公约数里面最大的一个。</p>
+<p>对不全为 $0$ 的整数 $a,b$，将其最大公约数记为 $\gcd(a,b)$，不引起歧义时可简写为 $(a,b)$。</p>
+<p>对不全为 $0$ 的整数 $a_1,\dots,a_n$，将其最大公约数记为 $\gcd(a_1,\dots,a_n)$，不引起歧义时可简写为 $(a_1,\dots,a_n)$。</p>
+<blockquote>
+<p>一般认为 $0$ 与 $0$ 的最大公约数不存在，但考虑函数实现，也可以定义为 $0$。C++ STL 的实现采用后者。</p>
+</blockquote>
+<p>一组整数的公倍数，是指同时是这组数中每一个数的倍数的数。$0$ 是任意一组整数的公倍数。</p>
+<p>一组整数的最小公倍数，是指所有正的公倍数里面，最小的一个数。</p>
+<p>对整数 $a,b$，将其最小公倍数记为 $\operatorname{lcm}(a,b)$，不引起歧义时可简写为 $[a,b]$。</p>
+<p>对整数 $a_1,\dots,a_n$，将其最小公倍数记为 $\operatorname{lcm}(a_1,\dots,a_n)$，不引起歧义时可简写为 $[a_1,\dots,a_n]$。</p>
+</blockquote>
+<p>最大公约数和最小公倍数有如下性质：</p>
+<ul>
+<li>$(a_1,\dots,a_n)=(|a_1|,\dots,|a_n|)$；</li>
+<li>$(a,b)=(b,a)$；</li>
+<li>若 $a\ne 0$，则 $(a,0)=(a,a)=|a|$；</li>
+<li>$(bq+r,b)=(r,b)$；</li>
+<li>$(a_1,\dots,a_n)=((a_1,a_2),a_3,\dots,a_n)$；进而 $\forall 1\lt k\lt n-1,~(a_1,\dots,a_n)=((a_1,\dots,a_k),(a_{k+1},\dots,a_n))$；</li>
+<li>对不全为 $0$ 的整数 $a_1,\dots,a_n$ 和非零整数 $m$，$(ma_1,\dots,ma_n)=|m|(a_1,\dots,a_n)$；</li>
+<li>对不全为 $0$ 的整数 $a_1,\dots,a_n$，若 $(a_1,\dots,a_n)=d$，则 $(a_1/d,\dots,a_n/d)=1$；</li>
+<li>$(a^n,b^n)=(a,b)^n$；</li>
+<li>若 $b|ac,(a,b)=1$，则 $b\mid c$；</li>
+<li>若 $b|c,a|c,(a,b)=1$，则 $ab\mid c$；</li>
+<li>若 $(a,b)=1$，则 $(a,bc)=(a,c)$；</li>
+<li>若 $(a_i,b_j)=1,~\forall 1\leq i\leq n,1\leq j\leq m$，则 $\left(\prod_{i} a_i,\prod_{j} b_j\right)=1$；特别地，若 $(a,b)=1$，则 $(a^n,b^m)=1$；</li>
+<li>对整数 $a_1,\dots,a_n$，若 $\exists v\in \mathbb{Z},~\prod_i a_i=v^m$，且 $(a_i,a_j)=1,~\forall i\ne j$，则 $\forall 1\leq i\leq m,~\sqrt[m]{a_i}\in\mathbb{Z}$；</li>
+<li>$[a_1,\dots,a_n]=[|a_1|,\dots,|a_n|]$；</li>
+<li>$[a,b]=[b,a]$；</li>
+<li>若 $a\ne 0$，则 $[a,1]=[a,a]=|a|$；</li>
+<li>若 $a\mid b$，则 $[a,b]=|b|$；</li>
+<li>$[a_1,\dots,a_n]=[[a_1,a_2],a_3,\dots,a_n]$。进而 $\forall 1\lt k\lt n-1,~[a_1,\dots,a_n]=[[a_1,\dots,a_k],[a_{k+1},\dots,a_n]]$；</li>
+<li>若 $a_i\mid m,~\forall 1\leq i\leq n$，则 $[a_1,\dots,a_n]\mid m$；</li>
+<li>$[ma_1,\dots,ma_n]=|m|[a_1,\dots,a_n]$；</li>
+<li>$[a,b,c][ab,ba,ca]=[a,b][b,c][c,a]$；</li>
+<li>$[a^n,b^n]=[a,b]^n$；</li>
+<li>$(a,b)[a,b]=|ab|$；</li>
+<li>$(ab,bc,ca)[a,b,c]=|abc|$；</li>
+<li>$\dfrac{(a,b,c)^2}{(a,b)(b,c)(a,c)}=\dfrac{[a,b,c]^2}{[a,b][b,c][a,c]}$。</li>
+</ul>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
