@@ -6,8 +6,15 @@
     <description>Recent content in Maths on Weily09&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Mon, 03 Jun 2024 21:14:39 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2024 09:04:35 +0800</lastBuildDate>
     <atom:link href="https://weilycoder.github.io/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>辗转相除法和裴蜀定理</title>
+      <link>https://weilycoder.github.io/math/bezouts/</link>
+      <pubDate>Wed, 05 Jun 2024 09:04:35 +0800</pubDate>
+      <guid>https://weilycoder.github.io/math/bezouts/</guid>
+      <description>&lt;p&gt;数论基础第二弹！&lt;/p&gt;</description>
+    </item>
     <item>
       <title>数论基础笔记</title>
       <link>https://weilycoder.github.io/math/number_theory/</link>
