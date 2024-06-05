@@ -147,6 +147,65 @@
 <li>$(ab,bc,ca)[a,b,c]=|abc|$；</li>
 <li>$\dfrac{(a,b,c)^2}{(a,b)(b,c)(a,c)}=\dfrac{[a,b,c]^2}{[a,b][b,c][a,c]}$。</li>
 </ul>
+<h2 id="质数">质数</h2>
+<blockquote>
+<p>设整数 $p\ne 0,\pm 1$，如果 $p$ 除了平凡约数外没有其他约数，称 $p$ 为质数；</p>
+<p>若整数 $a\ne 0,\pm 1$，如果 $a$ 不是质数，称 $a$ 为合数。</p>
+</blockquote>
+<p>$p$ 与 $-p$ 同为质数或同为合数。<strong>如果没有特殊说明，质数一般限定在正数。</strong></p>
+<p>质数的其他性质可以参考我之前写的 <a href="../miller_rabin/">质数及素性判断</a>，这里不再列出。</p>
+<h2 id="算术基本定理">算术基本定理</h2>
+<h3 id="算术基本引理">算术基本引理</h3>
+<blockquote>
+<p>设 $p$ 为质数，$p\mid a_1a_2$，则 $p\mid a_1$ 和 $p\mid a_2$ 至少有一个成立。</p>
+</blockquote>
+<h3 id="算术基本定理-1">算术基本定理</h3>
+<p>又称唯一分解定理。</p>
+<blockquote>
+<p>设正整数 $a$，必有
+$$a=p_1p_2\dots p_s$$</p>
+<p>其中 $p_j(1\le j\le s)$ 是质数。在不计次序意义下，该表示唯一。</p>
+</blockquote>
+<h3 id="标准素因数分解式">标准素因数分解式</h3>
+<p>在上述表示中，将相同的质数合并，
+$$a=p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}(p_1\lt p_2\lt\dots\lt p_s),$$</p>
+<p>叫做正整数 $a$ 的标准质因数分解式。</p>
+<h2 id="同余">同余</h2>
+<blockquote>
+<p>设整数 $m\ne0$。若 $m\mid(a-b)$，称 m 为 模数（模），$a$ 同余于 $b$ 模 $m$，$b$ 是 $a$ 对模 $m$ 的 剩余。记作 $a\equiv b\pmod m$。</p>
+<p>否则，$a$ 不同余于 $b$ 模 m，$b$ 不是 $a$ 对模 $m$ 的剩余。记作 $a\not\equiv b\pmod m$。</p>
+<p>这样的等式，称为模 $m$ 的同余式，简称同余式。</p>
+</blockquote>
+<p>同余是等价关系，换句话说，同余满足自反性<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>、对称性<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>、传递性<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h2 id="数论函数和积性函数">数论函数和积性函数</h2>
+<p>数论函数指定义域是正整数的函数，因此也可以视为一个数列。</p>
+<p>积性函数是数论函数的一种，具有特殊的性质。</p>
+<blockquote>
+<p>若数论函数 $f(n)$ 满足 $f(1)=1$ 且 $\forall a,b\in\mathbb{N},(a,b)=1$ 都有 $f(ab)=f(a)f(b)$，称 $f(n)$ 为<em>积性函数</em>；</p>
+<p>若数论函数 $f(n)$ 满足 $f(1)=1$ 且 $\forall a,b\in\mathbb{N}$ 都有 $f(ab)=f(a)f(b)$，称 $f(n)$ 为<em>完全积性函数</em>。</p>
+</blockquote>
+<p>若 $f(n)$ 和 $g(n)$ 均为积性函数，则下列函数也是积性函数：</p>
+<ul>
+<li>$h(n)=f(n^p);$</li>
+<li>$h(n)=f^p(n);$</li>
+<li>$h(n)=f(n)g(n);$</li>
+<li>$h(n)=\sum_{d\mid n}f(d)g\left(\dfrac{n}{d}\right).$</li>
+</ul>
+<p>其中最后一个形式也记作 $h=f\ast g$，称 $h$ 是 $f$ 和 $g$ 的卷积。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>自反性，即 $a\equiv a\pmod{m}.$&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>对称性，即，若 $a\equiv b\pmod{m}$，则 $b\equiv a\pmod{m}.$&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>传递性，即，若 $a\equiv b\pmod{m},b\equiv c\pmod{m}$，则 $a\equiv c\pmod{m}.$&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 
 
   
