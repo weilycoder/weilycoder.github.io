@@ -103,6 +103,7 @@ $$\gcd(a,b)=\gcd(b,a-b).$$</p>
 <p>不然，假设我们已知 $(a\bmod b,b)$ 为系数时的一组解 $(x_0,y_0)$，尝试推出 $(a,b)$ 为系数的一组解：
 $$\begin{aligned}(a\bmod b)x_0+by_0&amp;=1;\\(a-\left\lfloor\dfrac{a}{b}\right\rfloor b)x_0+by_0&amp;=1;\\ax_0+b(y_0-\left\lfloor\dfrac{a}{b}\right\rfloor x_0)&amp;=1.\end{aligned}$$</p>
 <p>故解为 $(x_0,y_0-\left\lfloor\dfrac{a}{b}\right\rfloor x_0)$，由数学归纳法，对任意 $\gcd(a,b)=1$，均能构造 $(x,y)$ 使 $ax+by=1$，进而原命题得证。</p>
+<p>裴蜀定理的逆定理也成立。</p>
 <p>容易写出代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">exgcd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>y) {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>b) {
@@ -113,9 +114,42 @@ $$\begin{aligned}(a\bmod b)x_0+by_0&amp;=1;\\(a-\left\lfloor\dfrac{a}{b}\right\r
 </span></span><span style="display:flex;"><span>  y <span style="color:#f92672">-=</span> a <span style="color:#f92672">/</span> b <span style="color:#f92672">*</span> x;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> d;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>由于计算可行解在求最大公因数的过程中，这种算法被称作扩展欧几里得算法。</p>
-<p>有时我们担心，扩展欧几里得算法给出的可行解过大，使得发生溢出；幸运的是，可以证明，上述算法给出的解满足 $|x|&lt;b,|y|&lt;a.$</p>
+</span></span></code></pre></div><p>由于函数在求最大公因数的过程中计算可行解，这种算法被称作扩展欧几里得算法。</p>
+<p>有时我们担心，扩展欧几里得算法给出的可行解过大，使得变量发生溢出；幸运的是，可以证明，上述算法给出的解满足 $|x|&lt;b,|y|&lt;a.$</p>
 <p>归纳法易证。</p>
+<h2 id="裴蜀定理扩展">裴蜀定理扩展</h2>
+<h3 id="扩展一n-元一次不定方程">扩展一：$n$ 元一次不定方程</h3>
+<p>裴蜀定理可以扩展到 $n$ 元，以三元为例，考虑三元一次不定方程 $ax+by+cz=d.$</p>
+<p>令 $ax+by=(a,b)w$，由二元裴蜀定理，对于所有的 $w\in\mathbb{Z}$，都存在 $a,b\in\mathbb{Z}$ 使等式成立。</p>
+<p>原方程变为 $(a,b)w+cz=d$，由二元裴蜀定理，方程有解当且仅当 $((a,b),c)\mid d$，即 $(a,b,c)\mid d$。</p>
+<p>运用一次扩展欧几里得算法可以构造出一组 $(w,z)$，进而构造一组 $(x,y,z)$。</p>
+<p>类似地，$n$ 元一次不定方程只需运用 $n-1$ 次扩展欧几里得算法即可得到一组解。</p>
+<h3 id="扩展二不定方程的整数解">扩展二：不定方程的整数解</h3>
+<p>对于自然数 $a,b$ 和整数 $n$，$a,b$ 互质，考察不定方程
+$$ax+by=n,$$</p>
+<p>其中 $x,y$ 为自然数。若方程有解，简称为 $n$ 可以被 $a,b$ 表示。</p>
+<p>记 $C=ab-a-b$，则对任意整数 $n$，$n$ 和 $C-n$ 中，有且仅有一个可以被 $a,b$ 表示；$0$ 可被表示，$C$ 不可被表示；负数不可被表示，大于 $C$ 的数均可被表示。</p>
+<p>考虑证明。</p>
+<p>设方程的一组解为 $(x,y)$，其中 $0\le y\le a-1$，易知这样的 $y$ 是唯一的。</p>
+<ol>
+<li>
+<p>证明大于 $C$ 的数均能被表示：当 $n&gt;C$，
+$$ax=n-by\gt ab-a-b-by\ge ab-a-b-b(a-1)=-a,$$</p>
+<p>即 $x&gt;-1$，此时 $x$ 非负。</p>
+</li>
+<li>
+<p>证明 $C$ 不可被表示：反证法，设存在自然数 $x,y$ 使 $ax+by=ab-a-b$，则
+$$ab=a(x+1)+b(y+1)$$</p>
+<p>由 $a,b$ 互质，$x+1$ 被 $b$ 整除，$y+1$ 被 $a$ 整除；故 $a$ 不大于 $y+1$，$b$ 不大于 $x+1$，故
+$$ab=a(x+1)+b(y+1)\ge 2ab,$$</p>
+<p>矛盾！</p>
+</li>
+<li>
+<p>证明若 $n$ 不可被表示，$C-n$ 可被表示：由于已限定 $0\le y\le a-1$，$x&lt;0$，有
+$$C-n=ab-a-b-ax-by=a(-x-1)+b(a-1-y),$$</p>
+<p>显然此时 $-x-1,a-1-y$ 均不小于零。</p>
+</li>
+</ol>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://weilycoder.github.io/math/</loc>
-    <lastmod>2024-06-05T09:04:35+08:00</lastmod>
+    <loc>https://weilycoder.github.io/computation/</loc>
+    <lastmod>2024-06-06T08:01:28+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/</loc>
+    <lastmod>2024-06-06T08:01:28+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/computation/turing_machine/</loc>
+    <lastmod>2024-06-06T08:01:28+08:00</lastmod>
+  </url><url>
+    <loc>https://weilycoder.github.io/math/</loc>
     <lastmod>2024-06-05T09:04:35+08:00</lastmod>
   </url><url>
     <loc>https://weilycoder.github.io/math/bezouts/</loc>

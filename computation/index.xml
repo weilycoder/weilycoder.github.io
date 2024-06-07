@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computations on Weily09&#39;s Blog</title>
+    <link>https://weilycoder.github.io/computation/</link>
+    <description>Recent content in Computations on Weily09&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hans</language>
+    <lastBuildDate>Thu, 06 Jun 2024 08:01:28 +0800</lastBuildDate>
+    <atom:link href="https://weilycoder.github.io/computation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算理论基础：语言和图灵机</title>
+      <link>https://weilycoder.github.io/computation/turing_machine/</link>
+      <pubDate>Thu, 06 Jun 2024 08:01:28 +0800</pubDate>
+      <guid>https://weilycoder.github.io/computation/turing_machine/</guid>
+      <description>最近对计算理论很感兴趣</description>
+    </item>
+  </channel>
+</rss>
