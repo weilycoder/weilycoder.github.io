@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hans" lang="zh-Hans">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>读入/输出优化 &middot; Weily09&#39;s Blog</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>Weily09&#39;s Blog</h1></a>
+      <p class="lead">
+       I write, therefore I am. 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>读入/输出优化</h1>
+  <time datetime=2024-06-15T12:52:42&#43;0800 class="post-date">Sat, Jun 15, 2024</time>
+  <p>本文所有代码默认 <code>#include &lt;iostream&gt;</code> 且 <code>using namespace std;</code></p>
+<p>帮 N 老师搞完 <a href="https://github.com/weilycoder/fastioForOI/blob/main/art.md">Fast IO</a> 页面后有感而发，希望系统地写一下文件读入输出优化。</p>
+<h2 id="读入输出优化原理">读入/输出优化原理</h2>
+<h3 id="cincout-的速度"><code>cin/cout</code> 的速度</h3>
+<p>为啥 <code>cin/cout</code> 那么慢？C++ 不是 C plus plus 吗？怎么 IO 速度反而变慢了？</p>
+<p>实际上，这是 C++ 为实现向下兼容做出的保守措施：<code>cin/cout</code> 保证与 <code>printf/scanf</code> 混用时是<strong>线程安全</strong>的。</p>
+<p>即：如果你先调用 <code>cout</code>，再调用 <code>printf</code>，会保证前者先于后者输出；反之亦然。</p>
+<p>通常，我们认为，C++ 风格的输入输出是 C 风格的输入输出耗时的 3 倍左右（毕竟你带着小孩玩肯定不如自己玩爽）。</p>
+<p>因此，就有了第一种优化：</p>
+<h4 id="printfscanf-优化"><code>printf/scanf</code> 优化</h4>
+<p>既然 C++ 风格的输入输出慢，我不用他不就行了？</p>
+<p>我们可以用 <code>printf/scanf</code> 替代 <code>cout/cin</code>，达到加速读写的目的。</p>
+<p>不过 C 风格输入输出不够智能，需要在格式化字符串中指定输入类型，万一 <code>#define int long long</code> 之后下意识用了 <code>%d</code> 而不是 <code>%lld</code>，那就应了那句老话：</p>
+<blockquote>
+<p><em>十年 OI 一场空，不开 <code>long long</code> 见祖宗。</em></p>
+</blockquote>
+<p>不过 C 风格的输出应付浮点数比较方便。</p>
+<h4 id="iossync_with_stdiofalse-优化"><code>ios::sync_with_stdio(false)</code> 优化</h4>
+<p>我还是想用 C++！</p>
+<p>但是慢怎么办？</p>
+<p>既然因为要兼顾 C 才慢，我不管 C 不就行了？</p>
+<p>函数 <code>ios::sync_with_stdio</code> 可以设置标准 C++ 流是否与标准 C 流在每次输入/输出操作后同步。</p>
+<p>只要在<strong>进行 IO 操作之前</strong>调用 <code>ios::sync_with_stdio(false)</code>，即可使 C++ 摆脱 C。</p>
+<p>有关“同步”的内容可能实际更加复杂，参阅 <a href="(https://zh.cppreference.com/w/cpp/io/ios_base/sync_with_stdio)">cppreference</a>。</p>
+<h4 id="endlflushtie-优化"><code>endl/flush/tie</code> 优化</h4>
+<p>还是不够快！</p>
+<p>试试 <code>cin.tie(0)</code>！</p>
+<p>默认情况下，<code>cin</code> 和 <code>cout</code> 是“绑定”在一起的，即，每次调用 <code>cin</code>，会在读入数据前刷新 <code>cout</code> 的缓冲流。</p>
+<p>多次刷新缓冲流最终会使程序变慢。</p>
+<p>使用 <code>cin.tie(0)</code> 可以改变这一点，他会取消 <code>cin</code> 和 <code>cout</code> 的绑定。</p>
+<p>为了使程序不再主动进行不必要的刷新，我们需要使用 <code>'\n'</code> 替代 <code>endl</code>，后者在换行的同时会调用 <code>flush</code>。</p>
+<p>但是！如果我们在做交互题，我们往往需要让程序刷新缓冲流。这时手动调用 <code>flush</code> 即可。</p>
+<p>使用 <code>sync_with_stdio(false)</code> + <code>tie(0)</code> 后的 C++ 风格读入输出通常比 C 风格读入输出快一点。</p>
+<h3 id="函数调用开销">函数调用开销</h3>
+<p>无论是 C++ 风格的读入输出，还是 C 风格的，都封装了多层函数，来应对复杂的读入输出环境。</p>
+<p>可是，实际上，OI 界的读入输出并没有那么复杂，这无疑是一种浪费。</p>
+<p>因此，我们可以调用更底层的 <code>getchar/putchar</code> 来加快读写：</p>
+<h4 id="getcharputchar-优化"><code>getchar/putchar</code> 优化</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">read</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, f <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> getchar();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; c <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;9&#39;</span> <span style="color:#f92672">&lt;</span> c; c <span style="color:#f92672">=</span> getchar())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>) f <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&amp;&amp;</span> c <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;9&#39;</span>; c <span style="color:#f92672">=</span> getchar())
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (c <span style="color:#f92672">^</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> f;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) putchar(<span style="color:#e6db74">&#39;-&#39;</span>), print(<span style="color:#f92672">-</span>x);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>) putchar(x <span style="color:#f92672">^</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> print(x <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>), putchar((x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">^</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果保证读入的数是非负数，<code>read</code> 可以进一步优化：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">read</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, f <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> getchar();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; c <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;9&#39;</span> <span style="color:#f92672">&lt;</span> c; c <span style="color:#f92672">=</span> getchar())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>) f <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&amp;&amp;</span> c <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;9&#39;</span>; c <span style="color:#f92672">=</span> getchar())
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (c <span style="color:#f92672">^</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> f;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>同时，应考虑使用数组模拟栈防止递归开销：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> x) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> sta[<span style="color:#ae81ff">35</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>    sta[top<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, x <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">while</span> (x);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (top) putchar(sta[<span style="color:#f92672">--</span>top] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="文件-io">文件 IO</h3>
+<p>众所周知，计算机中，离 CPU 越近，空间越小，读写越快。</p>
+<p>例如，硬盘离 CPU 最远，读写最慢，但是，硬盘可以轻松存储十几甚至几百几千 G 的大文件，并且断电后不丢失。</p>
+<p>内存离 CPU 很近，读写比硬盘快得多，可是，内存总共可能才 4G，OI 题中顶天让你用 1G；并且，内存数据在断电后会缓慢丢失。</p>
+<p>缓存离 CPU 更近，读写比内存还快，空间更小。一般，如果 CPU 认为一段内存可能会多次使用，就会将它加载到缓存，提高数据处理速度，有些算法“缓存命中率”高，就是说这种算法可以充分利用这种性质。计算机中有多级缓存，大小从 1K 到 1M 不等。</p>
+<p>寄存器可能离 CPU 最近，最多就十几个 64 位变量，速度最快，效率最高。</p>
+<p>为啥说这个？因为 <code>getchar/putchar</code> 再底层，也是对硬盘操作，我们要尽量减少这样的操作。</p>
+<p>咋再减少？只有手动模拟一个巨大的缓冲区，一次读入/输出大量数据。</p>
+<h4 id="freadfwrite-优化"><code>fread/fwrite</code> 优化</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">20</span>], <span style="color:#f92672">*</span>p1, <span style="color:#f92672">*</span>p2;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define gc()                                             \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     ?EOF                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     :*p1++)
+</span></span></span></code></pre></div><p>这段代码实现了名为 <code>buf</code> 的读入缓冲区，一次从设备读入上百万个字符；并维护了缓冲区末尾指针 <code>p2</code> 和当前指针 <code>p1</code>。</p>
+<p>使用宏 <code>gc</code> 从缓冲区获得字符。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> pbuf[<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">20</span>], <span style="color:#f92672">*</span>pp <span style="color:#f92672">=</span> pbuf;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pc</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">&amp;</span>c) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (pp <span style="color:#f92672">-</span> pbuf <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">20</span>) fwrite(pbuf, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">20</span>, stdout), pp <span style="color:#f92672">=</span> pbuf;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">*</span>pp<span style="color:#f92672">++</span> <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这段代码维护了名为 <code>pbuf</code> 的输出缓冲区，在缓冲区满时自动输出并清空。</p>
+<p>使用 <code>pc</code> 向缓冲区写入字符。</p>
+<p>注意在结束程序前要使用 <code>fwrite(pbuf, 1, pp - pbuf, stdout)</code> 手动清空一次。</p>
+<p>这种方式的具体实现：参见我的 <a href="https://github.com/weilycoder/fastioForOI">fastioForOI</a> 项目。</p>
+
+  
+  <script src="https://giscus.app/client.js"
+        data-repo="weilycoder/MyBlogDiscussion"
+        data-repo-id="R_kgDOMElpzw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMElpz84Cf1wZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
