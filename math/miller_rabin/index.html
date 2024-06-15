@@ -49,7 +49,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="https://weilycoder.github.io/">Home</a> </li>
-        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693/"> Luogu </a></li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
       </ul>
     </nav>
 
@@ -158,13 +158,14 @@ $$\begin{aligned}(a+1)^p&amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+
 <p>在 OI 领域，我们通常对 $[1,2^{64})$ 内的数进行测试。对于 $[1,2^{32})$ 内的数，测试 $\{2,7,61\}$ 即可；对于 $[1,2^{64})$ 内的数，测试 $\{2, 325, 9375, 28178, 450775, 9780504, 1795265022\}$ 即可。</p>
 <p>后者不好记，也可以改为 $\{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37\}$（前 $12$ 个质数）。</p>
 <p>注意测试时要全取一遍，不能只选小于 $n$ 的。</p>
-<div style="background-color:#f9f9f9;padding: 25px;">
-<p>这里有一个 js 实现的高精度素性测试，使用至少 10 个随机数作为基底：</p>
-<script src="./prime_test.js"></script>
-Number: <input id="p" type="text" onkeyup="check()" value="37"> <input type="button" value="check" onclick="check()">
-<p id="ans">Answer: is Prime.</p>
-<!-- 基本够用，起码 46856248255981 可以正确判定 -->
-<!-- 现在 check 键基本没用了，input 的 onkeyup 可以实现实时判定 -->
+<div style="background-color:#f9f9f9;padding: 25px;" id="MillerRabinPrimeTest">
+  <p>这里有一个 js 实现的高精度素性测试，使用至少 10 个随机数作为基底：</p>
+  <script src="./prime_test.js"></script>
+  Number: <input id="p" type="text" onkeyup="check()" value="73"> <input type="button" value="check" onclick="check(true)">
+  <p id="ans">Answer: is a Prime Number.</p>
+  <!-- 基本够用，起码 46856248255981 可以正确判定 -->
+  <!-- 现在 check 键基本没用了，input 的 onkeyup 可以实现实时判定 -->
+  <!-- upd: 使用 check 键会在控制台输出判定细节 -->
 </div>
 <div class="footnotes" role="doc-endnotes">
 <hr>

@@ -49,7 +49,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="https://weilycoder.github.io/">Home</a> </li>
-        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693/"> Luogu </a></li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
       </ul>
     </nav>
 
@@ -104,7 +104,7 @@
 <p>对于一个判定问题，若存在一个总是在有限步内停机且能够正确进行判定的图灵机，则这个问题是一个<em>图灵可计算</em>的问题，否则这个问题是一个<em>图灵不可计算</em>的问题。</p>
 </blockquote>
 <p>很多人听说过“停机问题”，那是一个经典的图灵不可计算问题；不过，构造并证明它图灵不可计算并非最简的证明方式。</p>
-<p>一个非常简短的说明如下：图灵机可以被自然数编码，因此图灵机的个数是可数无穷；而语言的个数（显然等价于二进制串集合的个数<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，即自然数的超集中元素的个数）是不可数无穷。由于一个图灵机只能判定一个语言，故存在图灵不可计算的问题。</p>
+<p>一个非常简短的说明如下：图灵机可以被自然数编码，因此图灵机的个数是可数无穷；而语言的个数（显然等价于二进制串集合的个数<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，即自然数的幂集中元素的个数）是不可数无穷。由于一个图灵机只能判定一个语言，故存在图灵不可计算的问题。</p>
 <h4 id="停机问题">停机问题</h4>
 <p>停机问题是一个经典的图灵不可计算问题：给定 $\alpha$ 和 $x$，判定 $M_{\alpha}$ 在输入为 $x$ 时是否会在有限步内停机。</p>
 <p>定义函数 $\mathsf{UC}:\{0,1\}^{\ast}\to \{0,1\}$ 为：

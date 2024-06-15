@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hans" lang="zh-Hans">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>计算理论基础：P 问题、NP 问题和 NPC 问题 &middot; Weily09&#39;s Blog</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>Weily09&#39;s Blog</h1></a>
+      <p class="lead">
+       I write, therefore I am. 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>计算理论基础：P 问题、NP 问题和 NPC 问题</h1>
+  <time datetime=2024-06-07T23:26:50&#43;0800 class="post-date">Fri, Jun 7, 2024</time>
+  <h2 id="时间复杂度">时间复杂度</h2>
+<h3 id="大-o-表示法">大 O 表示法</h3>
+<p>如何衡量两个算法的优劣？</p>
+<p>通常来说，给定一个算法的运行过程，我们可以写出算法的基本操作数（加减乘除、比较判断、读写数组等）随数据规模变化的函数 $f(n)$。然而，算法的实现细节不同，函数的系数可能存在差异。甚至，我们所谓“基本操作”的用时差别也不能完全忽略。</p>
+<p>但是，我们发现，随着数据规模的不断扩大，这些细微差异的影响越来越小，考虑这些细枝末节的问题未免影响大局。</p>
+<p>根据经验，线性函数的增长速度总比不上平方级别的；平方级别总比不上立方级别的；而只要是幂函数，最终总比不上指数函数的增长。</p>
+<p>于是，我们可以把 $2n^2,n(n-1),3n^2-6n+10$ 等等全归入 $n^2$ 级别；将 $n(n^2-n+1),\dfrac{n^3}{3}$ 等归入 $n^3$……</p>
+<p>更形式化地，我们有 <strong>大 $\Theta$ 表示法</strong>：</p>
+<p>对于函数 $f(n),g(n)$，$f(n)=\Theta(g(n))$ 当且仅当 $\exists c_1,c_2,n_0\gt 0$，使 $\forall n\gt n_0,c_1\cdot g(n)\le f(n)\le c_2\cdot g(n).$</p>
+<p>需要注意，这里等号 $=$ 的含义更偏向属于号 $\in$。</p>
+<p>更多时候，我们对复杂度的要求并不严格，只需给出渐进上界，不关心其渐进下界。那么，我们有 <strong>大 O 表示法</strong>：</p>
+<p>$f(n)=O(g(n))$，当且仅当 $\exists c,n_0$，使得 $\forall n \ge n_0,0\le f(n)\le c\cdot g(n)$。</p>
+<p>如果说 $\Theta$ 符号表示“严格等于”，$O$ 符号就表示“大于等于”。</p>
+<p>更多时候，尽管确定了渐进下界，鉴于输入习惯，我们仍使用 $O$ 而非 $\Theta$。</p>
+<h3 id="常见复杂度级别">常见复杂度级别</h3>
+<p><img src="./Figure.webp" alt="常见复杂度图像"></p>
+<p><em><strong>注意：对于数值计算，OI 界常常直接用输入数据本身作为数据规模，但更科学的方法是使用数据的长度作为规模。这是 $O(n)$ 与 $O(\log n)$ 的差别，请联系上下文判断。</strong></em></p>
+<h4 id="常数级别-o1">常数级别 $O(1)$</h4>
+<p>意味着无论输入数据多大，运行时间都不会改变。</p>
+<p>在 OI 界，数的基本运算常被视作 $O(1)$ 的，因此常见于运用公式的计算，如 $\sum_{i=1}^{n}i=\frac{n(n+1)}{2}$，前者是 $O(n)$ 的，后者认为优化到了 $O(1)$；有些数据结构的单次查询复杂度也是 $O(1)$ 的（最简单的如数组）。</p>
+<p>不过，考虑到大整数的计算实际上不可能是常数级别，在数据增大时可能只是“伪常数”的。</p>
+<h4 id="反阿克曼函数-oalphan">反阿克曼函数 $O(\alpha(n))$</h4>
+<p>这是并查集的专利，是一个增速可以忽略不计的函数，$\text{R. E. Tarjan}$ 证明，$\forall n\le 2^{2^{10^{19729}}}$，都有 $\alpha(n)&lt;5$。因此在非学界完全可以视为 $O(1)$。</p>
+<h4 id="双对数-olog-log-n">双对数 $O(\log \log n)$</h4>
+<p>对数的对数，在分析时几乎可以视为常数忽略。似乎很少见单纯 $O(\log \log n)$ 的算法，但是可以与其他组合。</p>
+<p>例如，埃氏筛的时间复杂度是 $O(n\log \log n)$ 的，这意味着其与线性筛 $O(n)$ 的复杂度相差极小，在小数据范围<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>甚至可能更优。</p>
+<h4 id="对数-olog-n">对数 $O(\log n)$</h4>
+<p>常见于每次迭代缩小一半规模的算法，例如二分搜索。另外，由于质数个数函数的估计为 $\pi(n)\sim \dfrac{n}{\ln n}$，涉及质数的算法可能也会出现对数。</p>
+<blockquote>
+<p>由于换底公式 $\log_{a}b=\dfrac{\log_{c}b}{\log_{c}a}$，对数底数的差别只是常数的差距；另外，由于 $\log n^k=k\log n$，在 $k$ 为常数时，同样是常数差距。</p>
+</blockquote>
+<h4 id="对数的乘方-ologk-n">对数的乘方 $O(\log^k n)$</h4>
+<p>例如说，在 $O(\log n)$ 查询的数据结构上二分查找的复杂度是 $O(\log^2 n)$ 的；其他多重嵌套的数据结构的复杂度可能达到 $O(\log^k n)$。</p>
+<h4 id="亚线性-onepsilon">亚线性 $O(n^{\epsilon})$</h4>
+<p>使用根号分治思想的算法通常是 $O(\sqrt{n})$ 的，例如暴力因式分解，或者数论分块；</p>
+<p>基于期望的 Pollard-Rho 算法可以快速分解非平凡因子，时间复杂度是 $O(n^{1/4})$ 的；</p>
+<p>存在很多亚线性筛快速计算数论函数的前缀和，如杜教筛时间复杂度可达到 $O(n^{2/3})$。</p>
+<h4 id="线性-on">线性 $O(n)$</h4>
+<p>遍历数组的复杂度。</p>
+<h4 id="幂多项式-onk">幂（多项式） $O(n^k)$</h4>
+<p>多见于 $k$ 重循环。</p>
+<h4 id="指数-okn">指数 $O(k^n)$</h4>
+<p>多见于暴力搜索且不含剪枝，每次有 $k$ 个决策。</p>
+<h4 id="阶乘-on">阶乘 $O(n!)$</h4>
+<p>暴力搜索，如枚举全排列。</p>
+<h4 id="onn">$O(n^n)$</h4>
+<p>暴力搜索。</p>
+<h2 id="啥是-mathsfp-问题">啥是 $\mathsf{P}$ 问题</h2>
+<p>用一句话来说，$\mathsf{P}$ 问题就是你的计算机（确定性图灵机）可以在 $O(n^k)$ 内跑出结果的问题，这里 $k$ 是与输入无关的常数。</p>
+<p>更正式地，复杂度类 $\mathsf{P}$ 表示可以由确定性图灵机在多项式时间内解决的<strong>判定问题</strong>。</p>
+<p>由于普遍认为多项式函数的增长速度是最大的仍能使人接受的增长，我们认为：</p>
+<p><strong>一般来说，如果一个问题被归入 $\mathsf{P}$ 问题，我们认为它是快速、实用、高效的。</strong></p>
+<blockquote>
+<p>考虑 $f(x)=x^5,g(x)=2^x$，前者在最初高于后者，但后者在 $23$ 之后彻底反超。如果你做出 $\dfrac{f(x)}{g(x)}$ 和 $\dfrac{g(x)}{f(x)}$ 的图像，感受会更加深刻。</p>
+</blockquote>
+<h2 id="啥是-mathsfnp-问题">啥是 $\mathsf{NP}$ 问题</h2>
+<p>很多人在谈论 $\mathsf{NP}$ 问题时会将它与 $\mathsf{NPC}$ 问题或 $\mathsf{NP-hard}$ 问题混淆。</p>
+<p>有时，人们也以为，$\mathsf{NP}$ 指需要用超过多项式级别的算法解决问题（如 $O(k^n)$，即暴力搜索）</p>
+<p>$\mathsf{NP}$ 问题不是“非”多项式问题；$\mathsf{NP}$ 中的 N 的含义是“不确定的”，换句话说，$\mathsf{NP}$ 问题是非确定性图灵机可以在多项式的时间复杂度内解决的问题；或者说，若这类问题的答案可以由确定性图灵机在多项式时间内验证。</p>
+<p>有人可能会疑惑：什么叫验证答案？</p>
+<p>例如说，对 $25321938666092955675457495083563$ 分解质因数<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这个问题目前没有多项式级别的算法<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。可是，如果我说算出这个数的标准素因数分解式是 $1979263111111333 \times 12793619263623311$：首先，验证质数是可以在多项式时间内完成的<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，其次，将两个大数相乘不是难事。你就可以相信，我给出的标准质因数分解式是正确的。</p>
+<p>也就是说，可以提交一定的证据，使确定性图灵机经过多项式时间后的验证后确定问题的答案是“YES”。</p>
+<p>显然 $\mathsf{P}$ 其实是 $\mathsf{NP}$ 的一个子集，由此你可以看到那些错误的理解有多么离谱。</p>
+<h2 id="mathsfpmathsfnp">$\mathsf{P}=\mathsf{NP}?$</h2>
+<p>这是计算理论至今悬而未决的问题，$\mathsf{P}$ 问题与 $\mathsf{NP}$ 问题这两个集合显然是包含关系，即 $\mathsf{P}\subseteq\mathsf{NP}$，因为能多项式地求解一个问题，必定也能在多项式时间内验证问题。但是，$\mathsf{P}$ 等于 $\mathsf{NP}$ 吗？换句话说，能快速地验证问题，就一定能快速地解决吗？</p>
+<p>在 2002 年对于 100 名研究者的调查中，61 人相信答案是否定的，9 人相信答案是肯定的，22 人不确定，而 8 人相信问题可能和现在所接受的公理独立，所以不可能证明或证否。</p>
+<h2 id="mathsfnp-hard-问题">$\mathsf{NP-hard}$ 问题</h2>
+<p>这是对 $\mathsf{P}=\mathsf{NP}$ 问题解决的尝试。</p>
+<p>所谓 $\mathsf{NP-hard}$ 问题，就是说，所有 $\mathsf{NP}$ 问题可以在多项式时间内<em>规约</em>到这个问题。</p>
+<p>那么，什么是“归约”？</p>
+<p>这个词语或许有些抽象，你或许听过这个笑话：</p>
+<blockquote>
+<p>有个数学家想改行，于是他准备去应聘消防员。</p>
+<p>面试官问：如果发现火灾的怎么办？</p>
+<p>数学家：“打开灭火器把火扑灭。”</p>
+<p>面试官非常满意正准备让他通过，不经意又问了一句：“那如果发现没有火灾呢？”</p>
+<p>数学家：“那就把易燃物点着，构造一个火灾。”</p>
+<p>面试官震惊的问他为什么要这么做。</p>
+<p>数学家：“这样我们就把一个陌生的问题转化成一个已经解决的问题。”</p>
+</blockquote>
+<p>嗯，尽管“归约”的代价有些大，但确实将问题进行了转化。</p>
+<p>不过，$\mathsf{NP-hard}$ 一定是 $\mathsf{NP}$ 吗？</p>
+<p>这可不一定。例如，“子集和”的“前 $k$ 大”版本，即：给定 $n$ 个数和 $k(k\lt 2^n)$，判断这 $n$ 个数组成的相异的和的第 $k$ 大是否大于 $m$。</p>
+<p>由于“子集和”问题是 $\mathsf{NP-hard}$ 的，且后者可以“归约”到前者，因此前者也是 $\mathsf{NP-hard}$ 的。但由于 $k$ 是 $O(2^n)$ 级别的，前者不可能在多项式时间内验证，故前者只是 $\mathsf{NP-hard}$ 而不是 $\mathsf{NP}$ 问题。</p>
+<h2 id="mathsfnpc-问题">$\mathsf{NPC}$ 问题</h2>
+<p>或者叫 $\mathsf{NP-complete}$ 问题。</p>
+<p>若一个问题既是 $\mathsf{NP}$ 问题，又是 $\mathsf{NP-hard}$ 的，则其是 $\mathsf{NPC}$ 问题。</p>
+<p>第一个被证明是 $\mathsf{NPC}$ 的问题是 $\text{SAT}$ 问题，即：给定若干布尔表达式，问，是否存在一种变量取值，使所有表达式的值均为 $\text{TRUE}$。</p>
+<p>值得一提，若限定每个表达式中变量的个数为 $k$，则成为 $k-\text{SAT}$ 问题；$2-\text{SAT}$ 存在多项式解，但 $3-\text{SAT}$ 是 $\mathsf{NPC}$ 问题。</p>
+<p>$\mathsf{P}=\mathsf{NP}$ 即 $\mathsf{NPC}$ 问题属于 $\mathsf{P}$。</p>
+<p>也就是说，若找到一个 $\mathsf{NPC}$ 问题的多项式解（或证明存在），即可说明 $\mathsf{P}=\mathsf{NP}$。</p>
+<p>这也是学界倾向于 $\mathsf{P}\ne \mathsf{NP}$ 的原因。想象一下，假如我们找到了一个算法在多项式内解决 $\mathsf{NPC}$ 问题，那么几乎所有问题都可解了。甚至优化算法的工作也可以交给算法。另一方面，由于目前的加密算法全都依赖于 $\mathsf{NPC}$ 问题的难解性，整个世界的通信可能将会崩溃。</p>
+<h2 id="多项式真的更快吗">多项式真的更快吗？</h2>
+<p>不过，即使证明了 $\mathsf{P}=\mathsf{NP}$，更大的可能是我们什么也做不了。因为我们或许仍不能确定幂次的大小。即使真的给出了算法，$O(n^{100})$ 或许在现阶段与 $O(2^n)$ 没有差别。</p>
+<p>这是另一个话题，多项式实际上不一定比指数快，假如有一个算法的基本操作次数为 $T(n)=2^{1000}n^{2}$，它仍然是多项式的，甚至是 $O(n^2)$ 的，但实际上 $T&rsquo;(n)=\dfrac{2^n}{1000}$ 可能更优。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>在开满优化后，只筛质数，这个“小数据”可以高达 $2\times 10^8.$&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>分解质因数不是判定问题，但也容易改为判定版本（如：$n$ 有超过 $2$ 个质因子）。这里说着简单，就直接用了。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>曾经提过，但还是再注一次，通常我们将数的长度看做输入规模，因此枚举质因数实际是指数级别的复杂度。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>ASK 算法是首个不依赖未证明猜想的多项式级别的素性测试算法；Miller-Rabin 尽管更早，但其确定性测试版本的正确性依赖于广义 Riemann 猜想。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+  
+  <script src="https://giscus.app/client.js"
+        data-repo="weilycoder/MyBlogDiscussion"
+        data-repo-id="R_kgDOMElpzw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMElpz84Cf1wZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

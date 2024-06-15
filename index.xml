@@ -6,8 +6,15 @@
     <description>Recent content on Weily09&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Thu, 06 Jun 2024 08:01:28 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 07 Jun 2024 23:26:50 +0800</lastBuildDate>
     <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算理论基础：P 问题、NP 问题和 NPC 问题</title>
+      <link>https://weilycoder.github.io/computation/cc/</link>
+      <pubDate>Fri, 07 Jun 2024 23:26:50 +0800</pubDate>
+      <guid>https://weilycoder.github.io/computation/cc/</guid>
+      <description>常见的复杂度类</description>
+    </item>
     <item>
       <title>计算理论基础：语言和图灵机</title>
       <link>https://weilycoder.github.io/computation/turing_machine/</link>
