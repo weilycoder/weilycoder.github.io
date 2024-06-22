@@ -6,8 +6,15 @@
     <description>Recent content on Weily09&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Sat, 15 Jun 2024 12:52:42 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2024 16:23:26 +0800</lastBuildDate>
     <atom:link href="https://weilycoder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Useless Algorithms</title>
+      <link>https://weilycoder.github.io/post/useless/</link>
+      <pubDate>Fri, 21 Jun 2024 16:23:26 +0800</pubDate>
+      <guid>https://weilycoder.github.io/post/useless/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;If you know at least 3 of these things and you are not red — you are doing it wrong. Stop learning useless algorithms, go and solve some problems, learn how to use binary search.&lt;/p&gt;&#xA;&lt;p&gt;—— &lt;a href=&#34;https://codeforces.com/profile/Um_nik&#34;&gt;$\textcolor{black}{\text{U}}\textcolor{red}{\text{m_nik}}$&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
     <item>
       <title>读入/输出优化</title>
       <link>https://weilycoder.github.io/post/fastio/</link>
