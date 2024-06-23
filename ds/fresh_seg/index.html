@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hans" lang="zh-Hans">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>小清新线段树 &middot; Weily09&#39;s Blog</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>Weily09&#39;s Blog</h1></a>
+      <p class="lead">
+       I write, therefore I am. 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>小清新线段树</h1>
+  <time datetime=2024-06-23T17:22:36&#43;0800 class="post-date">Sun, Jun 23, 2024</time>
+  <p>通常来说，在使用线段树维护区间操作时，需要使操作在区间上能被快速计算，经典的区间加-区间求和是一个简单的例子。</p>
+<p>但是，这里也有一个看似难以维护的反例：</p>
+<blockquote>
+<p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3211"><strong>bzoj 3211 花神游历各国</strong></a></p>
+<p>维护一个序列 $A$，初始值为 $A=(a_1,a_2,a_3,\cdots,a_n)$，支持以下操作 $q$ 次：</p>
+<ol>
+<li>区间求和</li>
+<li>对区间每个数求平方根（向下取整）</li>
+</ol>
+<p>$1\le n,q\le 1\times 10^5,0\le a_i\le 10^{12}.$</p>
+</blockquote>
+<p>维护这种数据的线段树被称为小清新线段树。</p>
+<p>小清新线段树的概念由 <a href="http://jiruyi910387714.is-programmer.com/">$\textcolor{red}{\text{jiry_2}}$</a> 提出，命名与 $\text{ZKW}$（重口味）线段树<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 相对。是一类结合势能分析以及懒标记应用的非传统线段树。</p>
+<p>区间求平方根显然很难在非叶节点上维护，我们考虑暴力。</p>
+<p>即，对于整个区间求平方根的操作，我们暴力地向它的两个子节点下传操作。</p>
+<p>这样做的时间复杂度有保证吗？有！</p>
+<p>由于只有开根操作，最终的结果非 $1$ 即 $0$；当区间内均为 $1$ 或 $0$ 时，我们无需对这个块再做处理。对于 $N&gt;1$，所需的操作次数是 $O(\log\log n)$ 级别的。</p>
+<p>我们定义势能函数 $f(A)=\sum_{a\in A}c(a)$，其中 $c(a)$ 表示将 $a$ 降为 $0$ 或 $1$ 的次数。</p>
+<p>最劣情况下，结束时的势能 $f(A_e)=0$，而最开始要花费代价将势能升至 $f(A_s)=O(n\log\log \max a_i)$，因此维护区间平方根的总复杂度为 $O(n\log\log\max a_i)$.</p>
+<p>维护区间和的复杂度为 $O(q\log n)$.</p>
+<p>因此总的复杂度为 $O(q\log n+n\log\log\max a_i)$.</p>
+<p>这种思路也可以处理区间取欧拉函数、区间取模、区间整除、区间对一个数取 $\min$ 等抽象操作，具体实现和复杂度需要具体分析。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>由清华大学张昆玮提出的一种非递归线段树，常数接近树状数组，码量相对较小，不过对懒标记有性质要求。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  
+  <script src="https://giscus.app/client.js"
+        data-repo="weilycoder/MyBlogDiscussion"
+        data-repo-id="R_kgDOMElpzw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMElpz84Cf1wZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
