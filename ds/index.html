@@ -25,16 +25,84 @@
 
   
   <link href="https://weilycoder.github.io/ds/index.xml" rel="alternate" type="application/rss+xml" title="Weily09's Blog" />
-  <script>
+  <style type='text/css'>
+  .md-alert.md-alert-note {
+    border-left-color: rgb(9, 105, 218);
+  }
+
+  .md-alert.md-alert-important {
+    border-left-color: rgb(130, 80, 223);
+  }
+
+  .md-alert.md-alert-warning {
+    border-left-color: rgb(154, 103, 0);
+  }
+
+  .md-alert.md-alert-tip {
+    border-left-color: rgb(31, 136, 61);
+  }
+
+  .md-alert.md-alert-caution {
+    border-left-color: rgb(207, 34, 46);
+  }
+
+  .md-alert {
+    padding: 0px 1em;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: 0.25em solid rgb(0, 0, 0);
+  }
+
+  .md-alert-text-note {
+    color: rgb(9, 105, 218);
+  }
+
+  .md-alert-text-important {
+    color: rgb(130, 80, 223);
+  }
+
+  .md-alert-text-warning {
+    color: rgb(154, 103, 0);
+  }
+
+  .md-alert-text-tip {
+    color: rgb(31, 136, 61);
+  }
+
+  .md-alert-text-caution {
+    color: rgb(207, 34, 46);
+  }
+
+  .md-alert-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .md-alert-text svg {
+    fill: currentcolor;
+    position: relative;
+    top: 0.125em;
+    margin-right: 1ch;
+    overflow: visible;
+  }
+
+  .md-alert-text-container::after {
+    content: attr(data-text);
+    text-transform: capitalize;
+    pointer-events: none;
+    margin-right: 1ch;
+  }
+</style>
+
+<script>
   MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']]
     }
   };
-  </script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 
   <body class=" ">
@@ -61,6 +129,8 @@
     <main class="content container">
     <ul class="posts">
 <li>
+    <span><a href="https://weilycoder.github.io/ds/odt/">珂朵莉树</a> <time class="pull-right post-list" datetime="2024-06-24T15:45:44&#43;0800">Mon, Jun 24, 2024</time></span>
+  </li><li>
     <span><a href="https://weilycoder.github.io/ds/fresh_seg/">小清新线段树</a> <time class="pull-right post-list" datetime="2024-06-23T17:22:36&#43;0800">Sun, Jun 23, 2024</time></span>
   </li>
 </ul>

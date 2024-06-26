@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-Hans" lang="zh-Hans">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.123.6">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>珂朵莉树 &middot; Weily09&#39;s Blog</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://weilycoder.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <style type='text/css'>
+  .md-alert.md-alert-note {
+    border-left-color: rgb(9, 105, 218);
+  }
+
+  .md-alert.md-alert-important {
+    border-left-color: rgb(130, 80, 223);
+  }
+
+  .md-alert.md-alert-warning {
+    border-left-color: rgb(154, 103, 0);
+  }
+
+  .md-alert.md-alert-tip {
+    border-left-color: rgb(31, 136, 61);
+  }
+
+  .md-alert.md-alert-caution {
+    border-left-color: rgb(207, 34, 46);
+  }
+
+  .md-alert {
+    padding: 0px 1em;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: 0.25em solid rgb(0, 0, 0);
+  }
+
+  .md-alert-text-note {
+    color: rgb(9, 105, 218);
+  }
+
+  .md-alert-text-important {
+    color: rgb(130, 80, 223);
+  }
+
+  .md-alert-text-warning {
+    color: rgb(154, 103, 0);
+  }
+
+  .md-alert-text-tip {
+    color: rgb(31, 136, 61);
+  }
+
+  .md-alert-text-caution {
+    color: rgb(207, 34, 46);
+  }
+
+  .md-alert-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .md-alert-text svg {
+    fill: currentcolor;
+    position: relative;
+    top: 0.125em;
+    margin-right: 1ch;
+    overflow: visible;
+  }
+
+  .md-alert-text-container::after {
+    content: attr(data-text);
+    text-transform: capitalize;
+    pointer-events: none;
+    margin-right: 1ch;
+  }
+</style>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://weilycoder.github.io/"><h1>Weily09&#39;s Blog</h1></a>
+      <p class="lead">
+       I write, therefore I am. 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://weilycoder.github.io/">Home</a> </li>
+        <li><a href="https://github.com/weilycoder/"> Github </a></li><li><a href="https://www.luogu.com/user/818693"> Luogu </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2024. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>珂朵莉树</h1>
+  <time datetime=2024-06-24T15:45:44&#43;0800 class="post-date">Mon, Jun 24, 2024</time>
+  <p>珂朵莉树（Chtholly Tree），又名老司机树 ODT（Old Driver Tree）。起源自 <a href="https://codeforces.com/problemset/problem/896/C">CF896C</a>。</p>
+<p>实际上，这种想法的本质是基于数据随机的「颜色段均摊」，而不是一种数据结构。</p>
+<p>使用 <code>set</code> 实现的珂朵莉树的 <code>assign</code>、<code>add</code>、<code>sum</code> 操作复杂度为 $O(n\log\log n)$.</p>
+<p>ODT 的核心思想是将值相同的区间合并为一个结点存在 <code>set</code> 中，只要有区间赋值的题目都可以用 ODT 骗分。</p>
+<p>ODT 在随机数据上表现良好，但是不保证数据随机时，会被构造数据卡到 T 飞。</p>
+<h2 id="具体操作">具体操作</h2>
+<h3 id="节点声明">节点声明</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Note_t</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> l, r;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">mutable</span> <span style="color:#66d9ef">int</span> v;
+</span></span><span style="display:flex;"><span>  Node_t(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>il, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ir, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>iv)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">:</span> l(il), r(ir), v(iv) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;</span>(<span style="color:#66d9ef">const</span> Node_t <span style="color:#f92672">&amp;</span>o) <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> l <span style="color:#f92672">&lt;</span> o.l; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其中，<code>v</code> 是附加数据。</p>
+<div class="md-alert md-alert-note note"><p><span class="md-alert-text md-alert-text-note"><svg viewBox="0 0 16 16" version="1.1" width="1em" height="1em" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</span><br></p><p><code>mutable</code><span> 用于突破 </span><code>const</code><span> 的限制，即使 </span><code>Note_t</code><span> 被设为常量，仍能改变 </span><code>v</code><span> 的值。</span></p></div>
+<p>接下来，我们定义一个 <code>set</code> 存储节点。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>Node_t<span style="color:#f92672">&gt;</span> odt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> set<span style="color:#f92672">&lt;</span>Node_t<span style="color:#f92672">&gt;::</span>iterator iter;
+</span></span></code></pre></div><p><code>iter</code> 用于简化代码，如果题目支持 C++11，也可以使用 <code>auto</code>。</p>
+<h3 id="split">split</h3>
+<p><code>split</code> 是核心操作之一，用于将包含 $x$ 的区间 $[l,r]$ 分裂为 $[l,x)$ 和 $[x,r]$，并返回后者的迭代器。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>iter <span style="color:#a6e22e">split</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&gt;</span> n) <span style="color:#66d9ef">return</span> odt.end();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> <span style="color:#f92672">--</span>odt.upper_bound(Node_t(x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (it<span style="color:#f92672">-&gt;</span>l <span style="color:#f92672">==</span> x) <span style="color:#66d9ef">return</span> it;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> it<span style="color:#f92672">-&gt;</span>l, r <span style="color:#f92672">=</span> it<span style="color:#f92672">-&gt;</span>r, v <span style="color:#f92672">=</span> it<span style="color:#f92672">-&gt;</span>v;
+</span></span><span style="display:flex;"><span>  odt.erase(it);
+</span></span><span style="display:flex;"><span>  odt.insert(Node_t{l, x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, v});
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> odt.insert(Node_t(x, r, v).first;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="assign">assign</h3>
+<p><code>assign</code> 是另一个核心操作，用于对区间赋值，可以降低节点数量，保证了 ODT 的时间复杂度。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assign</span>(<span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> itr <span style="color:#f92672">=</span> split(r <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), itl <span style="color:#f92672">=</span> split(l);
+</span></span><span style="display:flex;"><span>  odt.erase(itl, itr);
+</span></span><span style="display:flex;"><span>  odt.insert(Node_t(l, r, v));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="md-alert md-alert-important important"><p><span class="md-alert-text md-alert-text-important"><svg viewBox="0 0 16 16" version="1.1" width="1em" height="1em" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</span><br></p><p><span>ODT 必须先 </span><code>split</code><span> 右端点，再 </span><code>split</code><span> 左端点，这和迭代器的失效有关。</span></p><p><span>不这样做，代码会随机 </span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="3.206ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 1417 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-51-TEX-N-52" d="M130 622Q123 629 119 631T103 634T60 637H27V683H202H236H300Q376 683 417 677T500 648Q595 600 609 517Q610 512 610 501Q610 468 594 439T556 392T511 361T472 343L456 338Q459 335 467 332Q497 316 516 298T545 254T559 211T568 155T578 94Q588 46 602 31T640 16H645Q660 16 674 32T692 87Q692 98 696 101T712 105T728 103T732 90Q732 59 716 27T672 -16Q656 -22 630 -22Q481 -16 458 90Q456 101 456 163T449 246Q430 304 373 320L363 322L297 323H231V192L232 61Q238 51 249 49T301 46H334V0H323Q302 3 181 3Q59 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM491 499V509Q491 527 490 539T481 570T462 601T424 623T362 636Q360 636 340 636T304 637H283Q238 637 234 628Q231 624 231 492V360H289Q390 360 434 378T489 456Q491 467 491 499Z"></path><path id="MJX-51-TEX-N-45" d="M128 619Q121 626 117 628T101 631T58 634H25V680H597V676Q599 670 611 560T625 444V440H585V444Q584 447 582 465Q578 500 570 526T553 571T528 601T498 619T457 629T411 633T353 634Q266 634 251 633T233 622Q233 622 233 621Q232 619 232 497V376H286Q359 378 377 385Q413 401 416 469Q416 471 416 473V493H456V213H416V233Q415 268 408 288T383 317T349 328T297 330Q290 330 286 330H232V196V114Q232 57 237 52Q243 47 289 47H340H391Q428 47 452 50T505 62T552 92T584 146Q594 172 599 200T607 247T612 270V273H652V270Q651 267 632 137T610 3V0H25V46H58Q100 47 109 49T128 61V619Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mstyle" fill="purple" stroke="purple"><g data-mml-node="mtext"><use data-c="52" xlink:href="#MJX-51-TEX-N-52"></use><use data-c="45" xlink:href="#MJX-51-TEX-N-45" transform="translate(736,0)"></use></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle mathcolor="purple"><mtext>RE</mtext></mstyle></math></mjx-assistive-mml></mjx-container><script type="math/tex">\textcolor{purple}{\text{RE}}</script><span>。</span></p></div>
+<h3 id="other">other</h3>
+<p>参考代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assign</span>(<span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> itr <span style="color:#f92672">=</span> split(r <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), itl <span style="color:#f92672">=</span> split(l);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; itl <span style="color:#f92672">!=</span> itr; <span style="color:#f92672">++</span>itl) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Perform Operations here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  
+  <script src="https://giscus.app/client.js"
+        data-repo="weilycoder/MyBlogDiscussion"
+        data-repo-id="R_kgDOMElpzw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMElpz84Cf1wZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
