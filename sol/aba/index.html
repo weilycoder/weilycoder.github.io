@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Sols &middot; Weily09&#39;s Blog</title>
+  <title>奇偶位翻转 &middot; Weily09&#39;s Blog</title>
   <meta name="description" content="" />
 
   
@@ -24,7 +24,6 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="https://weilycoder.github.io/sol/index.xml" rel="alternate" type="application/rss+xml" title="Weily09's Blog" />
   <style type='text/css'>
   .md-alert.md-alert-note {
     border-left-color: rgb(9, 105, 218);
@@ -127,11 +126,51 @@
 </aside>
 
     <main class="content container">
-    <ul class="posts">
-<li>
-    <span><a href="https://weilycoder.github.io/sol/aba/">奇偶位翻转</a> <time class="pull-right post-list" datetime="2024-06-30T09:45:57&#43;0800">Sun, Jun 30, 2024</time></span>
-  </li>
+    <div class="post">
+  <h1>奇偶位翻转</h1>
+  <time datetime=2024-06-30T09:45:57&#43;0800 class="post-date">Sun, Jun 30, 2024</time>
+  <blockquote>
+<p>比起高深的算法，或许精妙的技巧更令人惊叹。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://atcoder.jp/contests/arc180/tasks/arc180_a"><em>arc180A</em>-<strong>ABA and BAB</strong></a></p>
+<p>给定一个长 $N$ 的字符串 $S$，由字符 <code>A</code> 和 <code>B</code> 组成。</p>
+<p>你可以以任意顺序执行以下两种类型的操作零次或多次：</p>
+<ul>
+<li>在 $S$ 中选择一个子串 <code>ABA</code> 并替换为 <code>A</code>。</li>
+<li>在 $S$ 中选择一个子串 <code>BAB</code> 并替换为 <code>B</code>。</li>
 </ul>
+<p>求出进行上述操作后，可能的字符串的数目，对 $10^9+7$ 取模。</p>
+</blockquote>
+<p>不妨将字符串 $S$ 的偶数位翻转，那么操作变为：</p>
+<ul>
+<li><code>AAA</code> $\to$ <code>A</code></li>
+<li><code>BBB</code> $\to$ <code>B</code></li>
+</ul>
+<p>那么，对于每段连续的 <code>A</code> 或 <code>B</code>，我们每次可以将其减小 $2$ 的长度，因此对于每个这样的长 $L$ 的段，最终的状态数为 $\left\lceil\dfrac{L}{2}\right\rceil$。</p>
+<p>由乘法原理，将各个段的结果相乘即可。</p>
+
+  
+  <script src="https://giscus.app/client.js"
+        data-repo="weilycoder/MyBlogDiscussion"
+        data-repo-id="R_kgDOMElpzw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMElpz84Cf1wZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+</div>
+
+
     </main>
 
     
