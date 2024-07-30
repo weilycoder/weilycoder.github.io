@@ -16,13 +16,6 @@
       <description>&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;&#xA;&lt;p&gt;若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。&lt;/p&gt;&#xA;&lt;p&gt;显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>奇偶位翻转</title>
-      <link>https://weilycoder.github.io/sol/aba/</link>
-      <pubDate>Sun, 30 Jun 2024 09:45:57 +0800</pubDate>
-      <guid>https://weilycoder.github.io/sol/aba/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;比起高深的算法，或许精妙的技巧更令人惊叹。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://atcoder.jp/contests/arc180/tasks/arc180_a&#34;&gt;&lt;em&gt;arc180A&lt;/em&gt;-&lt;strong&gt;ABA and BAB&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;给定一个长 $N$ 的字符串 $S$，由字符 &lt;code&gt;A&lt;/code&gt; 和 &lt;code&gt;B&lt;/code&gt; 组成。&lt;/p&gt;&#xA;&lt;p&gt;你可以以任意顺序执行以下两种类型的操作零次或多次：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在 $S$ 中选择一个子串 &lt;code&gt;ABA&lt;/code&gt; 并替换为 &lt;code&gt;A&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;在 $S$ 中选择一个子串 &lt;code&gt;BAB&lt;/code&gt; 并替换为 &lt;code&gt;B&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;求出进行上述操作后，可能的字符串的数目，对 $10^9+7$ 取模。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
-    </item>
-    <item>
       <title>珂朵莉树</title>
       <link>https://weilycoder.github.io/ds/odt/</link>
       <pubDate>Mon, 24 Jun 2024 15:45:44 +0800</pubDate>
