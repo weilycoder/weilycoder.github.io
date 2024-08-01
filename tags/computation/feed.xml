@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
-    <title>Computation on Geekblog</title>
+    <title>Computation on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/computation/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/computation/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T13:21:38+08:00</updated>
+    <updated>2024-08-01T18:08:14+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
     <id>https://weilycoder.github.io/tags/computation/</id>
         <entry>
             <title>计算理论基础：P 问题、NP 问题和 NPC 问题</title>
@@ -13,7 +18,13 @@
             <published>2024-06-07T23:26:50+08:00</published>
             <updated>2024-06-07T23:26:50+08:00</updated>
             <content type="html">
-                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+                &lt;blockquote&gt;
+&lt;p&gt;部分内容来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;时间复杂度&#34;
     &gt;
         时间复杂度
@@ -230,18 +241,9 @@
 &lt;/div&gt;
 &lt;p&gt;这是对 $\mathsf{P}=\mathsf{NP}$ 问题解决的尝试。&lt;/p&gt;
 &lt;p&gt;所谓 $\mathsf{NP-hard}$ 问题，就是说，所有 $\mathsf{NP}$ 问题可以在多项式时间内&lt;em&gt;规约&lt;/em&gt;到这个问题。&lt;/p&gt;
-&lt;p&gt;那么，什么是“归约”？&lt;/p&gt;
-&lt;p&gt;这个词语或许有些抽象，你或许听过这个笑话：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;有个数学家想改行，于是他准备去应聘消防员。&lt;/p&gt;
-&lt;p&gt;面试官问：如果发现火灾的怎么办？&lt;/p&gt;
-&lt;p&gt;数学家：“打开灭火器把火扑灭。”&lt;/p&gt;
-&lt;p&gt;面试官非常满意正准备让他通过，不经意又问了一句：“那如果发现没有火灾呢？”&lt;/p&gt;
-&lt;p&gt;数学家：“那就把易燃物点着，构造一个火灾。”&lt;/p&gt;
-&lt;p&gt;面试官震惊的问他为什么要这么做。&lt;/p&gt;
-&lt;p&gt;数学家：“这样我们就把一个陌生的问题转化成一个已经解决的问题。”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;嗯，尽管“归约”的代价有些大，但确实将问题进行了转化。&lt;/p&gt;
+&lt;p&gt;那么，什么是“规约”？&lt;/p&gt;
+&lt;p&gt;这个词语或许有些抽象，简单来说，就是通过一些代价将一个问题转化为另一个问题。&lt;/p&gt;
+&lt;p&gt;例如说，可以通过计算树的欧拉序将不带修的 LCA 问题转化为 RMQ 问题。&lt;/p&gt;
 &lt;p&gt;不过，$\mathsf{NP-hard}$ 一定是 $\mathsf{NP}$ 吗？&lt;/p&gt;
 &lt;p&gt;这可不一定。例如，“子集和”的“前 $k$ 大”版本，即：给定 $n$ 个数和 $k(k\lt 2^n)$，判断这 $n$ 个数组成的相异的和的第 $k$ 大是否大于 $m$。&lt;/p&gt;
 &lt;p&gt;由于“子集和”问题是 $\mathsf{NP-hard}$ 的，且后者可以“归约”到前者，因此前者也是 $\mathsf{NP-hard}$ 的。但由于 $k$ 是 $O(2^n)$ 级别的，前者不可能在多项式时间内验证，故前者只是 $\mathsf{NP-hard}$ 而不是 $\mathsf{NP}$ 问题。&lt;/p&gt;
@@ -259,7 +261,7 @@
 &lt;p&gt;第一个被证明是 $\mathsf{NPC}$ 的问题是 $\text{SAT}$ 问题，即：给定若干布尔表达式，问，是否存在一种变量取值，使所有表达式的值均为 $\text{TRUE}$。&lt;/p&gt;
 &lt;p&gt;值得一提，若限定每个表达式中变量的个数为 $k$，则成为 $k-\text{SAT}$ 问题；$2-\text{SAT}$ 存在多项式解，但 $3-\text{SAT}$ 是 $\mathsf{NPC}$ 问题。&lt;/p&gt;
 &lt;p&gt;$\mathsf{P}=\mathsf{NP}$ 即 $\mathsf{NPC}$ 问题属于 $\mathsf{P}$。&lt;/p&gt;
-&lt;p&gt;也就是说，若找到一个 $\mathsf{NPC}$ 问题的多项式解（或证明存在），即可说明 $\mathsf{P}=\mathsf{NP}$。&lt;/p&gt;
+&lt;p&gt;也就是说，若找到一个 $\mathsf{NPC}$ 问题的多项式解（或证明存在），即可说明 $\mathsf{P}=\mathsf{NP}$（事实上，只要是 $\mathsf{NP-hard}$ 问题就行）。&lt;/p&gt;
 &lt;p&gt;这也是学界倾向于 $\mathsf{P}\ne \mathsf{NP}$ 的原因。想象一下，假如我们找到了一个算法在多项式内解决 $\mathsf{NPC}$ 问题，那么几乎所有问题都可解了。甚至优化算法的工作也可以交给算法。另一方面，由于目前的加密算法全都依赖于 $\mathsf{NPC}$ 问题的难解性，整个世界的通信可能将会崩溃。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;多项式真的更快吗&#34;
@@ -300,7 +302,13 @@
             <published>2024-06-06T08:01:28+08:00</published>
             <updated>2024-06-06T08:01:28+08:00</updated>
             <content type="html">
-                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;什么是图灵机&#34;
     &gt;
         什么是图灵机

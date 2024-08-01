@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
-    <title>Ds on Geekblog</title>
+    <title>Ds on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/ds/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/ds/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T13:21:38+08:00</updated>
+    <updated>2024-08-01T18:08:14+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
     <id>https://weilycoder.github.io/tags/ds/</id>
         <entry>
             <title>珂朵莉树</title>
@@ -21,6 +26,12 @@
 &lt;p&gt;使用 &lt;code&gt;set&lt;/code&gt; 实现的珂朵莉树的 &lt;code&gt;assign&lt;/code&gt;、&lt;code&gt;add&lt;/code&gt;、&lt;code&gt;sum&lt;/code&gt; 操作复杂度为 $O(n\log\log n)$.&lt;/p&gt;
 &lt;p&gt;ODT 的核心思想是将值相同的区间合并为一个结点存在 &lt;code&gt;set&lt;/code&gt; 中，只要有区间赋值的题目都可以用 ODT 骗分。&lt;/p&gt;
 &lt;p&gt;ODT 在随机数据上表现良好，但是不保证数据随机时，会被构造数据卡到 T 飞。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;具体操作&#34;
     &gt;
@@ -47,7 +58,15 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Node_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;v&lt;/code&gt; 是附加数据。&lt;/p&gt;
-&lt;div class=&#34;md-alert md-alert-note note&#34;&gt;&lt;p&gt;&lt;span class=&#34;md-alert-text md-alert-text-note&#34;&gt;&lt;svg viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;1em&#34; height=&#34;1em&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;code&gt;mutable&lt;/code&gt;&lt;span&gt; 用于突破 &lt;/span&gt;&lt;code&gt;const&lt;/code&gt;&lt;span&gt; 的限制，即使 &lt;/span&gt;&lt;code&gt;Note_t&lt;/code&gt;&lt;span&gt; 被设为常量，仍能改变 &lt;/span&gt;&lt;code&gt;v&lt;/code&gt;&lt;span&gt; 的值。&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+
+
+
+&lt;blockquote class=&#34;gblog-hint note&#34;&gt;
+  &lt;div class=&#34;gblog-hint__title flex align-center&#34;&gt;&lt;svg class=&#34;gblog-icon gblog_info_outline&#34;&gt;&lt;use xlink:href=&#34;#gblog_info_outline&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+      &lt;span&gt;Note&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&#34;gblog-hint__text&#34;&gt;&lt;code&gt;mutable&lt;/code&gt; 用于突破 &lt;code&gt;const&lt;/code&gt; 的限制，即使 &lt;code&gt;Note_t&lt;/code&gt; 被设为常量，仍能改变 &lt;code&gt;v&lt;/code&gt; 的值。&lt;/div&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;接下来，我们定义一个 &lt;code&gt;set&lt;/code&gt; 存储节点。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Node_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;odt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Node_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iterator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -86,7 +105,17 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;odt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;erase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;itl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;itr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;odt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;insert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Node_t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;md-alert md-alert-important important&#34;&gt;&lt;p&gt;&lt;span class=&#34;md-alert-text md-alert-text-important&#34;&gt;&lt;svg viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;1em&#34; height=&#34;1em&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Important&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;ODT 必须先 &lt;/span&gt;&lt;code&gt;split&lt;/code&gt;&lt;span&gt; 右端点，再 &lt;/span&gt;&lt;code&gt;split&lt;/code&gt;&lt;span&gt; 左端点，这和迭代器的失效有关。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;不这样做，代码会随机 &lt;/span&gt;&lt;mjx-container class=&#34;MathJax&#34; jax=&#34;SVG&#34; style=&#34;position: relative;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;3.206ex&#34; height=&#34;1.595ex&#34; role=&#34;img&#34; focusable=&#34;false&#34; viewBox=&#34;0 -683 1417 705&#34; xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34; aria-hidden=&#34;true&#34; style=&#34;vertical-align: -0.05ex;&#34;&gt;&lt;defs&gt;&lt;path id=&#34;MJX-51-TEX-N-52&#34; d=&#34;M130 622Q123 629 119 631T103 634T60 637H27V683H202H236H300Q376 683 417 677T500 648Q595 600 609 517Q610 512 610 501Q610 468 594 439T556 392T511 361T472 343L456 338Q459 335 467 332Q497 316 516 298T545 254T559 211T568 155T578 94Q588 46 602 31T640 16H645Q660 16 674 32T692 87Q692 98 696 101T712 105T728 103T732 90Q732 59 716 27T672 -16Q656 -22 630 -22Q481 -16 458 90Q456 101 456 163T449 246Q430 304 373 320L363 322L297 323H231V192L232 61Q238 51 249 49T301 46H334V0H323Q302 3 181 3Q59 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM491 499V509Q491 527 490 539T481 570T462 601T424 623T362 636Q360 636 340 636T304 637H283Q238 637 234 628Q231 624 231 492V360H289Q390 360 434 378T489 456Q491 467 491 499Z&#34;&gt;&lt;/path&gt;&lt;path id=&#34;MJX-51-TEX-N-45&#34; d=&#34;M128 619Q121 626 117 628T101 631T58 634H25V680H597V676Q599 670 611 560T625 444V440H585V444Q584 447 582 465Q578 500 570 526T553 571T528 601T498 619T457 629T411 633T353 634Q266 634 251 633T233 622Q233 622 233 621Q232 619 232 497V376H286Q359 378 377 385Q413 401 416 469Q416 471 416 473V493H456V213H416V233Q415 268 408 288T383 317T349 328T297 330Q290 330 286 330H232V196V114Q232 57 237 52Q243 47 289 47H340H391Q428 47 452 50T505 62T552 92T584 146Q594 172 599 200T607 247T612 270V273H652V270Q651 267 632 137T610 3V0H25V46H58Q100 47 109 49T128 61V619Z&#34;&gt;&lt;/path&gt;&lt;/defs&gt;&lt;g stroke=&#34;currentColor&#34; fill=&#34;currentColor&#34; stroke-width=&#34;0&#34; transform=&#34;scale(1,-1)&#34;&gt;&lt;g data-mml-node=&#34;math&#34;&gt;&lt;g data-mml-node=&#34;mstyle&#34; fill=&#34;purple&#34; stroke=&#34;purple&#34;&gt;&lt;g data-mml-node=&#34;mtext&#34;&gt;&lt;use data-c=&#34;52&#34; xlink:href=&#34;#MJX-51-TEX-N-52&#34;&gt;&lt;/use&gt;&lt;use data-c=&#34;45&#34; xlink:href=&#34;#MJX-51-TEX-N-45&#34; transform=&#34;translate(736,0)&#34;&gt;&lt;/use&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;&lt;mjx-assistive-mml unselectable=&#34;on&#34; display=&#34;inline&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;mstyle mathcolor=&#34;purple&#34;&gt;&lt;mtext&gt;RE&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/math&gt;&lt;/mjx-assistive-mml&gt;&lt;/mjx-container&gt;&lt;script type=&#34;math/tex&#34;&gt;\textcolor{purple}{\text{RE}}&lt;/script&gt;&lt;span&gt;。&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote class=&#34;gblog-hint important&#34;&gt;
+  &lt;div class=&#34;gblog-hint__title flex align-center&#34;&gt;&lt;svg class=&#34;gblog-icon gblog_error_outline&#34;&gt;&lt;use xlink:href=&#34;#gblog_error_outline&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+      &lt;span&gt;Important&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&#34;gblog-hint__text&#34;&gt;&lt;p&gt;ODT 必须先 &lt;code&gt;split&lt;/code&gt; 右端点，再 &lt;code&gt;split&lt;/code&gt; 左端点，这和迭代器的失效有关。&lt;/p&gt;
+&lt;p&gt;不这样做，代码会随机 $\textcolor{purple}{\text{RE}}$。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h3 id=&#34;other&#34;
     &gt;
@@ -111,6 +140,9 @@
             <title>小清新线段树</title>
             <link href="https://weilycoder.github.io/post/fresh_seg/" rel="alternate" type="text/html"  hreflang="en" />
             <id>https://weilycoder.github.io/post/fresh_seg/</id>
+                    <author>
+                        <name>weily</name>
+                    </author>
             <published>2024-06-23T17:22:36+08:00</published>
             <updated>2024-06-23T17:22:36+08:00</updated>
             <content type="html">
@@ -150,7 +182,8 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-            </content>   
+            </content>  
+                                <category scheme="https://weilycoder.github.io/authors/weily" term="weily" label="weily" />  
                                 <category scheme="https://weilycoder.github.io/tags/ds" term="ds" label="ds" />
         </entry>
 </feed>

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
-    <title>Math on Geekblog</title>
+    <title>Math on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/math/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/math/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T13:21:38+08:00</updated>
+    <updated>2024-08-01T18:08:14+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
     <id>https://weilycoder.github.io/tags/math/</id>
         <entry>
             <title>乘法逆元</title>
@@ -24,6 +29,12 @@
 &lt;/div&gt;
 &lt;p&gt;若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。&lt;/p&gt;
 &lt;p&gt;显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;计算逆元&#34;
     &gt;
@@ -161,6 +172,12 @@ $$
             <updated>2024-06-23T13:30:48+08:00</updated>
             <content type="html">
                 &lt;p&gt;Useless Algorithms 之一。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;序列 $a$ 的普通生成函数定义为形式幂级数：&lt;/p&gt;
 &lt;p&gt;$$
 F(x)=\sum_{n}a_nx_n
@@ -311,6 +328,12 @@ $$&lt;/p&gt;
             <updated>2024-06-05T09:04:35+08:00</updated>
             <content type="html">
                 &lt;p&gt;数论基础第二弹！&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;辗转相除法&#34;
     &gt;
@@ -491,7 +514,13 @@ $$&lt;/p&gt;
             <published>2024-06-03T21:14:39+08:00</published>
             <updated>2024-06-03T21:14:39+08:00</updated>
             <content type="html">
-                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;整除&#34;
     &gt;
         整除
@@ -745,6 +774,12 @@ $$a=p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}(p_1\lt p_2\lt\dots\lt p_s),
 &lt;p&gt;&lt;em&gt;记于 2024 年 6 月 1 日，儿童节&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;部分内容来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;oi-wiki.org&#34;
+&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;质数的定义和若干性质&#34;
     &gt;
@@ -882,11 +917,13 @@ $$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p
 &lt;p&gt;如此，我们得到一个较正确的素性测试：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;millerRabin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// test_time 为测试次数，建议设为不小于 8
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;test_time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;quickPow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 无需检查 0, 1, -1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;quickPow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;continue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -902,6 +939,7 @@ $$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p
 &lt;p&gt;在 OI 领域，我们通常对 $[1,2^{64})$ 内的数进行测试。对于 $[1,2^{32})$ 内的数，测试 $\{2,7,61\}$ 即可；对于 $[1,2^{64})$ 内的数，测试 $\{2, 325, 9375, 28178, 450775, 9780504, 1795265022\}$ 即可。&lt;/p&gt;
 &lt;p&gt;后者不好记，也可以改为 $\{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37\}$（前 $12$ 个质数）。&lt;/p&gt;
 &lt;p&gt;注意测试时要全取一遍，不能只选小于 $n$ 的。&lt;/p&gt;
+&lt;p&gt;另外，假设随机取 $k$ 个数作为基，那么错误的概率是 $4^{-k}$。&lt;/p&gt;
 &lt;div style=&#34;background-color:#f9f9f9;padding: 25px;&#34; id=&#34;MillerRabinPrimeTest&#34;&gt;
   &lt;p&gt;这里有一个 js 实现的高精度素性测试，使用至少 10 个随机数作为基底：&lt;/p&gt;
   &lt;script src=&#34;/prime_test.js&#34;&gt;&lt;/script&gt;

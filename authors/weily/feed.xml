@@ -1,175 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
-    <title>Misc on Weily&#39;s blog</title>
+    <title>Weily on Weily&#39;s blog</title>
         <subtitle>I write, therefore I am.</subtitle>
-            <link href="https://weilycoder.github.io/tags/misc/" rel="alternate" type="text/html" title="html" />
-            <link href="https://weilycoder.github.io/tags/misc/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+            <link href="https://weilycoder.github.io/authors/weily/" rel="alternate" type="text/html" title="html" />
+            <link href="https://weilycoder.github.io/authors/weily/feed.xml" rel="self" type="application/atom+xml" title="atom" />
     <updated>2024-08-01T18:08:14+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
         </author>
-    <id>https://weilycoder.github.io/tags/misc/</id>
+    <id>https://weilycoder.github.io/authors/weily/</id>
         <entry>
-            <title>Useless Algorithms</title>
-            <link href="https://weilycoder.github.io/post/useless/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>https://weilycoder.github.io/post/useless/</id>
-            <published>2024-06-21T16:23:26+08:00</published>
-            <updated>2024-06-21T16:23:26+08:00</updated>
+            <title>小清新线段树</title>
+            <link href="https://weilycoder.github.io/post/fresh_seg/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/fresh_seg/</id>
+                    <author>
+                        <name>weily</name>
+                    </author>
+            <published>2024-06-23T17:22:36+08:00</published>
+            <updated>2024-06-23T17:22:36+08:00</updated>
             <content type="html">
-                &lt;blockquote&gt;
-&lt;p&gt;If you know at least 3 of these things and you are not red — you are doing it wrong. Stop learning useless algorithms, go and solve some problems, learn how to use binary search.&lt;/p&gt;
-&lt;p&gt;—— &lt;a
+                &lt;p&gt;通常来说，在使用线段树维护区间操作时，需要使操作在区间上能被快速计算，经典的区间加-区间求和是一个简单的例子。&lt;/p&gt;
+&lt;p&gt;但是，这里也有一个看似难以维护的反例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/profile/Um_nik&#34;
-&gt;$\textcolor{black}{\text{U}}\textcolor{red}{\text{m_nik}}$&lt;/a&gt;&lt;/p&gt;
+  href=&#34;https://vjudge.net/problem/bzoj-3211&#34;
+&gt;&lt;strong&gt;bzoj 3211 花神游历各国&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;维护一个序列 $A$，初始值为 $A=(a_1,a_2,a_3,\cdots,a_n)$，支持以下操作 $q$ 次：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;区间求和&lt;/li&gt;
+&lt;li&gt;对区间每个数求平方根（向下取整）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$1\le n,q\le 1\times 10^5,0\le a_i\le 10^{12}.$&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本文来自 &lt;a
+&lt;p&gt;维护这种数据的线段树被称为小清新线段树。&lt;/p&gt;
+&lt;p&gt;小清新线段树的概念由 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/blog/entry/92248&#34;
-&gt;$\textcolor{black}{\text{U}}\textcolor{red}{\text{m_nik}}$ 的 CodeForces 博客&lt;/a&gt;，大多是一些强大复杂但是不一定有用的算法或数据结构。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/li-chao-tree/&#34;
-&gt;李超线段树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/seg-beats/&#34;
-&gt;吉司机线段树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/topic/rmq/#four-russian&#34;
-&gt;RMQ in $O(n)\sim O(1)$&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/treap/&#34;
-&gt;Treap&lt;/a&gt; 以外的&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/bst/&#34;
-&gt;平衡二叉树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/lct/&#34;
-&gt;动态树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;小波树（&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Wavelet_Tree&#34;
-&gt;Wavelet tree&lt;/a&gt;）&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;归并树&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Binomial_heap&#34;
-&gt;二项堆&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Fibonacci_heap&#34;
-&gt;斐波那契堆&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/ds/leftist-tree/&#34;
-&gt;左偏树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/dominator-tree/&#34;
-&gt;支配树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;3-connected components in $O(n)$ &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/kth-path/&#34;
-&gt;$k$ 短路&lt;/a&gt;&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/graph-matching/general-match/&#34;
-&gt;一般图最大匹配&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/graph-matching/general-weight-match/&#34;
-&gt;一般图最大权匹配&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/flow/max-flow/#push-relabel-%E9%A2%84%E6%B5%81%E6%8E%A8%E8%BF%9B%E7%AE%97%E6%B3%95&#34;
-&gt;网络流最大流-预流推进算法&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/flow/min-cost/&#34;
-&gt;多项式内的最小费用最大流&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/graph/dmst/&#34;
-&gt;$O(E\log V)$ 的最小树形图&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/string/suffix-tree/&#34;
-&gt;后缀树&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Convex_hull_algorithms#On-line_and_dynamic_convex_hull_problems&#34;
-&gt;在线二维凸包&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/geometry/convex-hull/#%E4%B8%89%E7%BB%B4%E5%87%B8%E5%8C%85&#34;
-&gt;三维凸包&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/geometry/half-plane/&#34;
-&gt;半平面交&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/geometry/triangulation/&#34;
-&gt;Voronoi 图 / 三角剖分&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/math/poly/elementary-func/&#34;
-&gt;多项式常见操作 (exp, log, sqrt, &amp;hellip;)&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/math/poly/ogf/&#34;
-&gt;生成函数&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/math/poly/lagrange-inversion/&#34;
-&gt;拉格朗日反演&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/blog/entry/76447&#34;
-&gt;That derivative magic&lt;/a&gt; by &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/profile/Elegia&#34;
-&gt;$\textcolor{red}{\text{Elegia}}$&lt;/a&gt;&lt;sup id=&#34;fnref1:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/blog/entry/92183&#34;
-&gt;That new subset convolution derivative magic&lt;/a&gt; by &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://codeforces.com/profile/Elegia&#34;
-&gt;$\textcolor{red}{\text{Elegia}}$&lt;/a&gt;&lt;sup id=&#34;fnref2:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org/misc/mo-algo-secondary-offline/&#34;
-&gt;扫描线莫队 / 莫队二次离线&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;Matroid intersection&lt;sup id=&#34;fnref3:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;。&lt;/li&gt;
-&lt;/ul&gt;
+  href=&#34;http://jiruyi910387714.is-programmer.com/&#34;
+&gt;$\textcolor{red}{\text{jiry_2}}$&lt;/a&gt; 提出，命名与 $\text{ZKW}$（重口味）线段树&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 相对。是一类结合势能分析以及懒标记应用的非传统线段树。&lt;/p&gt;
+&lt;p&gt;区间求平方根显然很难在非叶节点上维护，我们考虑暴力。&lt;/p&gt;
+&lt;p&gt;即，对于整个区间求平方根的操作，我们暴力地向它的两个子节点下传操作。&lt;/p&gt;
+&lt;p&gt;这样做的时间复杂度有保证吗？有！&lt;/p&gt;
+&lt;p&gt;由于只有开根操作，最终的结果非 $1$ 即 $0$；当区间内均为 $1$ 或 $0$ 时，我们无需对这个块再做处理。对于 $N&amp;gt;1$，所需的操作次数是 $O(\log\log n)$ 级别的。&lt;/p&gt;
+&lt;p&gt;我们定义势能函数 $f(A)=\sum_{a\in A}c(a)$，其中 $c(a)$ 表示将 $a$ 降为 $0$ 或 $1$ 的次数。&lt;/p&gt;
+&lt;p&gt;最劣情况下，结束时的势能 $f(A_e)=0$，而最开始要花费代价将势能升至 $f(A_s)=O(n\log\log \max a_i)$，因此维护区间平方根的总复杂度为 $O(n\log\log\max a_i)$.&lt;/p&gt;
+&lt;p&gt;维护区间和的复杂度为 $O(q\log n)$.&lt;/p&gt;
+&lt;p&gt;因此总的复杂度为 $O(q\log n+n\log\log\max a_i)$.&lt;/p&gt;
+&lt;p&gt;这种思路也可以处理区间取欧拉函数、区间取模、区间整除、区间对一个数取 $\min$ 等抽象操作，具体实现和复杂度需要具体分析。&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;在中文网上资料较少，这里保留英文名。&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;
-&lt;p&gt;在归并排序时将各级有序数组保留，可以用于解决区间第 $k$ 小问题。&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;原文如此（暂时没看懂）。&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref2:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref3:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:4&#34;&gt;
-&lt;p&gt;我擅自认为朴素 A* 不能被计算，因为它的复杂度不是最优的。&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;由清华大学张昆玮提出的一种非递归线段树，常数接近树状数组，码量相对较小，不过对懒标记有性质要求。&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-            </content>   
-                                <category scheme="https://weilycoder.github.io/tags/misc" term="misc" label="misc" />
+            </content>  
+                                <category scheme="https://weilycoder.github.io/authors/weily" term="weily" label="weily" />  
+                                <category scheme="https://weilycoder.github.io/tags/ds" term="ds" label="ds" />
         </entry>
         <entry>
             <title>读入/输出优化</title>

@@ -14,7 +14,7 @@
   <meta name="robots" content="noindex, nofollow" />
     <meta name="author" content="weily" />
 
-    <title>Misc | Weily&#39;s blog</title>
+    <title>Weily | Weily&#39;s blog</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 <link
@@ -35,17 +35,17 @@
     
   <meta
     property="og:title"
-    content="Misc"
+    content="Weily"
   />
   <meta property="og:site_name" content="Weily's blog" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://weilycoder.github.io/tags/misc/" />
+<meta property="og:url" content="https://weilycoder.github.io/authors/weily/" />
 
 
 
 
   <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Misc" />
+<meta name="twitter:title" content="Weily" />
 
 
 
@@ -119,7 +119,7 @@
   href="/custom.css"
   media="all"
 />
-  <link href="https://weilycoder.github.io/tags/misc/" rel="canonical" type="text/html" />
+  <link href="https://weilycoder.github.io/authors/weily/" rel="canonical" type="text/html" />
     <link href="https://weilycoder.github.io/feed.xml" rel="alternate" type="application/atom+xml" title="Weily's blog atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
@@ -247,9 +247,7 @@
         
           <li>
             <a
-              class="gblog-nav__entry
-                 is-active
-              "
+              class="gblog-nav__entry"
               href="/tags/misc/"
             >
               Misc
@@ -312,17 +310,24 @@
     <article class="gblog-post">
       <header class="gblog-post__header">
         <h1 class="gblog-post__title">
-          <a href="/post/useless/">Useless Algorithms</a>
+          <a href="/post/fresh_seg/">小清新线段树</a>
         </h1>
       </header>
 
       <section class="gblog-markdown">
-        <blockquote>
-<p>If you know at least 3 of these things and you are not red — you are doing it wrong. Stop learning useless algorithms, go and solve some problems, learn how to use binary search.</p>
-<p>—— <a
+        <p>通常来说，在使用线段树维护区间操作时，需要使操作在区间上能被快速计算，经典的区间加-区间求和是一个简单的例子。</p>
+<p>但是，这里也有一个看似难以维护的反例：</p>
+<blockquote>
+<p><a
   class="gblog-markdown__link"
-  href="https://codeforces.com/profile/Um_nik"
->$\textcolor{black}{\text{U}}\textcolor{red}{\text{m_nik}}$</a></p>
+  href="https://vjudge.net/problem/bzoj-3211"
+><strong>bzoj 3211 花神游历各国</strong></a></p>
+<p>维护一个序列 $A$，初始值为 $A=(a_1,a_2,a_3,\cdots,a_n)$，支持以下操作 $q$ 次：</p>
+<ol>
+<li>区间求和</li>
+<li>对区间每个数求平方根（向下取整）</li>
+</ol>
+<p>$1\le n,q\le 1\times 10^5,0\le a_i\le 10^{12}.$</p>
 </blockquote>
       </section>
       <div class="gblog-post__readmore">
@@ -330,7 +335,7 @@
           <a
             class="flex-inline align-center fake-link"
             title="Read full post"
-            href="/post/useless/"
+            href="/post/fresh_seg/"
           >
             Read full post
             <i class="gblog-icon">gblog_arrow_right</i>
@@ -343,9 +348,9 @@
           <span class="flex align-center no-wrap gblog-post__meta--update">
   <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
-    <time datetime="2024-06-21T16:23:26&#43;08:00">
+    <time datetime="2024-06-23T17:22:36&#43;08:00">
       
-      Jun 21, 2024
+      Jun 23, 2024
     </time>
   </span>
 </span>
@@ -358,6 +363,25 @@
 
 
 
+
+  
+    
+    
+      
+        <span class="flex align-center no-wrap gblog-post__meta--author">
+          <svg class="gblog-icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a class="gblog-button__link" href="/authors/weily/" title="All posts of this author">
+      weily
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
 
 
 
@@ -372,10 +396,10 @@
   <span class="gblog-post__tag gblog-button gblog-button--regular">
     <a
       class="gblog-button__link"
-      href="/tags/misc/"
-      title="All posts tagged with 'misc'"
+      href="/tags/ds/"
+      title="All posts tagged with 'ds'"
     >
-      misc
+      ds
     </a>
   </span>
 
