@@ -5,7 +5,7 @@
         <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/About/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/About/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T18:08:14+08:00</updated>
+    <updated>2024-08-02T18:25:37+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
@@ -124,8 +124,8 @@
 &gt;MathJax&lt;/a&gt; 支持。&lt;/li&gt;
 &lt;li&gt;学习时可能搬一些 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt; 的内容，会注明。&lt;/li&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt; 的内容，会注明。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;为了支持公式，补充了 &lt;code&gt;Theme&lt;/code&gt; 中的 &lt;code&gt;custom.html&lt;/code&gt;，将内容公开（&lt;code&gt;Theme&lt;/code&gt; 文件夹是 Hugo 构建站点所用，不在网站中；不过你应该可以从网站源码中找到下述代码片段）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- You can add custom elements to the page header here. --&amp;gt;&lt;/span&gt;

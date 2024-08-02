@@ -5,7 +5,7 @@
         <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/ds/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/ds/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T18:08:14+08:00</updated>
+    <updated>2024-08-02T18:25:37+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
@@ -29,8 +29,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;内容基本来自 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;具体操作&#34;

@@ -76,7 +76,7 @@ $202406011$ 也是。
       "url" : "https://weilycoder.github.io/post/miller_rabin/",
       "headline": "质数及素性判断",
       "description": " $61$ 是个质数来着；\n$601$ 也是；\n$202406011$ 也是。\n记于 2024 年 6 月 1 日，儿童节",
-      "wordCount" : "494",
+      "wordCount" : "606",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -437,8 +437,8 @@ $202406011$ 也是。
 <blockquote>
 <p>部分内容来自 <a
   class="gblog-markdown__link"
-  href="oi-wiki.org"
->OI-wiki</a>。</p>
+  href="https://oi-wiki.org"
+>OI-Wiki</a>。</p>
 </blockquote>
 <div class="flex align-center gblog-post__anchorwrap">
     <h2 id="质数的定义和若干性质"
@@ -536,10 +536,10 @@ $202406011$ 也是。
 </ol>
 <p>在 OI 领域，概率性测试更为普遍。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h4 id="fermat-测试"
+    <h3 id="fermat-测试"
     >
         Fermat 测试
-    </h4>
+    </h3>
     <a data-clipboard-text="https://weilycoder.github.io/post/miller_rabin/#fermat-测试" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Fermat 测试" href="#fermat-%e6%b5%8b%e8%af%95">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
@@ -560,10 +560,10 @@ $$\begin{aligned}(a+1)^p&amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+
 >Carmichael 数</a>。</p>
 <p>容易证明，Carmichael 数有无穷个，$561=3\times 11\times 17$ 是最小的 Carmichael 数。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h4 id="millerrabin-测试"
+    <h3 id="millerrabin-测试"
     >
         Miller–Rabin 测试
-    </h4>
+    </h3>
     <a data-clipboard-text="https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Miller–Rabin 测试" href="#millerrabin-%e6%b5%8b%e8%af%95">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
@@ -609,6 +609,39 @@ $$\begin{aligned}(a+1)^p&amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+
   <!-- 现在 check 键基本没用了，input 的 onkeyup 可以实现实时判定 -->
   <!-- upd: 使用 check 键会在控制台输出判定细节 -->
 </div>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h3 id="millerrabin-测试的基数选取"
+    >
+        Miller–Rabin 测试的基数选取
+    </h3>
+    <a data-clipboard-text="https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试的基数选取" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Miller–Rabin 测试的基数选取" href="#millerrabin-%e6%b5%8b%e8%af%95%e7%9a%84%e5%9f%ba%e6%95%b0%e9%80%89%e5%8f%96">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>上文所述的取固定数作为基，可以看作 Miller-Rabin 测试的确定性变体，可以在 <a
+  class="gblog-markdown__link"
+  href="https://miller-rabin.appspot.com/#"
+>Deterministic variant of the Miller-Rabin primality test</a> 了解更多信息。</p>
+<p>如果认为多轮测试的常数太大，可以选择随机选取基数，不要选取已知基数的前几项，因为一旦已知或被猜到，容易选择强伪素数进行攻击。例如，假如选择前 $8$ 个质数（而不是前 $12$ 个），那么以下合数都能通过测试：</p>
+<ul>
+<li>$341550071728321 = 10670053 \times 32010157$</li>
+<li>$84983557412237221 = 206135341 \times 412270681$</li>
+<li>$230245660726188031 = 214831 \times 787711 \times 1360591$</li>
+<li>$1134931906634489281 = 753303361 \times 1506606721$</li>
+<li>$1144336081150073701 = 756417901 \times 1512835801$</li>
+<li>$1167748053436849501 = 764116501 \times 1528233001$</li>
+<li>$1646697619851137101 = 907385701 \times 1814771401$</li>
+<li>$3825123056546413051 = 149491 \times 747451 \times 34233211$</li>
+<li>$4265186605968234451 = 1032616411 \times 4130465641$</li>
+<li>$5474093792130026911 = 21319 \times 2238391 \times 114712159$</li>
+<li>$7033671664103127781 = 1875322861 \times 3750645721$</li>
+<li>$7361235187296010651 = 412339 \times 2061691 \times 8659099$</li>
+<li>$8276442534101054431 = 209431 \times 3560311 \times 11099791$</li>
+<li>$14688059738864848381 = 2709987061 \times 5419974121$</li>
+<li>$16043083915816662841 = 2832232681 \times 5664465361$</li>
+</ul>
+<p>其中，$3825123056546413051$ 必须经过 $12$ 轮检验（即前 $12$ 个质数中只有 $37$ 认为它是合数）。</p>
+<p>本文中记录的基数选择经过验证，可以确保正确，不要轻易选择其他固定的基数组合。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -631,6 +664,23 @@ $$\begin{aligned}(a+1)^p&amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+
 </div>
     </section>
   </article>
+  
+  <script src="https://giscus.app/client.js"
+    data-repo="weilycoder/MyBlogDiscussion"
+    data-repo-id="R_kgDOMElpzw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOMElpz84Cf1wZ"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light_high_contrast"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
 
       </main>
 

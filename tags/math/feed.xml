@@ -5,7 +5,7 @@
         <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/math/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/math/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-01T18:08:14+08:00</updated>
+    <updated>2024-08-02T18:25:37+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
@@ -18,7 +18,13 @@
             <published>2024-07-18T22:09:36+08:00</published>
             <updated>2024-07-18T22:09:36+08:00</updated>
             <content type="html">
-                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;定义&#34;
     &gt;
         定义
@@ -29,12 +35,6 @@
 &lt;/div&gt;
 &lt;p&gt;若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。&lt;/p&gt;
 &lt;p&gt;显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;内容基本来自 &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;计算逆元&#34;
     &gt;
@@ -161,6 +161,7 @@ $$
 &lt;/div&gt;
 &lt;p&gt;存在一种 $\Theta(p^{2/3})$ 预处理，在线 $\Theta(1)$ 查询的算法。&lt;/p&gt;
 &lt;p&gt;等我会了来写。&lt;/p&gt;
+
             </content>   
                                 <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
         </entry>
@@ -175,8 +176,8 @@ $$
 &lt;blockquote&gt;
 &lt;p&gt;内容基本来自 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;序列 $a$ 的普通生成函数定义为形式幂级数：&lt;/p&gt;
 &lt;p&gt;$$
@@ -331,8 +332,8 @@ $$&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;内容基本来自 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;&lt;/p&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;辗转相除法&#34;
@@ -517,8 +518,8 @@ $$&lt;/p&gt;
                 &lt;blockquote&gt;
 &lt;p&gt;内容基本来自 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;整除&#34;
@@ -624,7 +625,7 @@ $$&lt;/p&gt;
 &lt;li&gt;若 $b|c,a|c,(a,b)=1$，则 $ab\mid c$；&lt;/li&gt;
 &lt;li&gt;若 $(a,b)=1$，则 $(a,bc)=(a,c)$；&lt;/li&gt;
 &lt;li&gt;若 $(a_i,b_j)=1,~\forall 1\leq i\leq n,1\leq j\leq m$，则 $\left(\prod_{i} a_i,\prod_{j} b_j\right)=1$；特别地，若 $(a,b)=1$，则 $(a^n,b^m)=1$；&lt;/li&gt;
-&lt;li&gt;对整数 $a_1,\dots,a_n$，若 $\exists v\in \mathbb{Z},&lt;del&gt;\prod_i a_i=v^m$，且 $(a_i,a_j)=1,&lt;/del&gt;\forall i\ne j$，则 $\forall 1\leq i\leq m,~\sqrt[m]{a_i}\in\mathbb{Z}$；&lt;/li&gt;
+&lt;li&gt;对整数 $a_1,\dots,a_n$，若 $\exists v\in \mathbb{Z},\prod_i a_i=v^m$，且 $(a_i,a_j)=1,\forall i\ne j$，则 $\forall 1\leq i\leq m,~\sqrt[m]{a_i}\in\mathbb{Z}$；&lt;/li&gt;
 &lt;li&gt;$[a_1,\dots,a_n]=[|a_1|,\dots,|a_n|]$；&lt;/li&gt;
 &lt;li&gt;$[a,b]=[b,a]$；&lt;/li&gt;
 &lt;li&gt;若 $a\ne 0$，则 $[a,1]=[a,a]=|a|$；&lt;/li&gt;
@@ -654,7 +655,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$p$ 与 $-p$ 同为质数或同为合数。&lt;strong&gt;如果没有特殊说明，质数一般限定在正数。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;质数的其他性质可以参考我之前写的 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;../miller_rabin/&#34;
+  href=&#34;/post/miller_rabin/&#34;
 &gt;质数及素性判断&lt;/a&gt;，这里不再列出。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;算术基本定理&#34;
@@ -777,8 +778,8 @@ $$a=p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}(p_1\lt p_2\lt\dots\lt p_s),
 &lt;blockquote&gt;
 &lt;p&gt;部分内容来自 &lt;a
   class=&#34;gblog-markdown__link&#34;
-  href=&#34;oi-wiki.org&#34;
-&gt;OI-wiki&lt;/a&gt;。&lt;/p&gt;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;质数的定义和若干性质&#34;
@@ -876,10 +877,10 @@ $$a=p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}(p_1\lt p_2\lt\dots\lt p_s),
 &lt;/ol&gt;
 &lt;p&gt;在 OI 领域，概率性测试更为普遍。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h4 id=&#34;fermat-测试&#34;
+    &lt;h3 id=&#34;fermat-测试&#34;
     &gt;
         Fermat 测试
-    &lt;/h4&gt;
+    &lt;/h3&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#fermat-测试&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Fermat 测试&#34; href=&#34;#fermat-%e6%b5%8b%e8%af%95&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
@@ -900,10 +901,10 @@ $$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p
 &gt;Carmichael 数&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;容易证明，Carmichael 数有无穷个，$561=3\times 11\times 17$ 是最小的 Carmichael 数。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h4 id=&#34;millerrabin-测试&#34;
+    &lt;h3 id=&#34;millerrabin-测试&#34;
     &gt;
         Miller–Rabin 测试
-    &lt;/h4&gt;
+    &lt;/h3&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Miller–Rabin 测试&#34; href=&#34;#millerrabin-%e6%b5%8b%e8%af%95&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
@@ -949,6 +950,39 @@ $$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p
   &lt;!-- 现在 check 键基本没用了，input 的 onkeyup 可以实现实时判定 --&gt;
   &lt;!-- upd: 使用 check 键会在控制台输出判定细节 --&gt;
 &lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;millerrabin-测试的基数选取&#34;
+    &gt;
+        Miller–Rabin 测试的基数选取
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试的基数选取&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Miller–Rabin 测试的基数选取&#34; href=&#34;#millerrabin-%e6%b5%8b%e8%af%95%e7%9a%84%e5%9f%ba%e6%95%b0%e9%80%89%e5%8f%96&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;上文所述的取固定数作为基，可以看作 Miller-Rabin 测试的确定性变体，可以在 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://miller-rabin.appspot.com/#&#34;
+&gt;Deterministic variant of the Miller-Rabin primality test&lt;/a&gt; 了解更多信息。&lt;/p&gt;
+&lt;p&gt;如果认为多轮测试的常数太大，可以选择随机选取基数，不要选取已知基数的前几项，因为一旦已知或被猜到，容易选择强伪素数进行攻击。例如，假如选择前 $8$ 个质数（而不是前 $12$ 个），那么以下合数都能通过测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$341550071728321 = 10670053 \times 32010157$&lt;/li&gt;
+&lt;li&gt;$84983557412237221 = 206135341 \times 412270681$&lt;/li&gt;
+&lt;li&gt;$230245660726188031 = 214831 \times 787711 \times 1360591$&lt;/li&gt;
+&lt;li&gt;$1134931906634489281 = 753303361 \times 1506606721$&lt;/li&gt;
+&lt;li&gt;$1144336081150073701 = 756417901 \times 1512835801$&lt;/li&gt;
+&lt;li&gt;$1167748053436849501 = 764116501 \times 1528233001$&lt;/li&gt;
+&lt;li&gt;$1646697619851137101 = 907385701 \times 1814771401$&lt;/li&gt;
+&lt;li&gt;$3825123056546413051 = 149491 \times 747451 \times 34233211$&lt;/li&gt;
+&lt;li&gt;$4265186605968234451 = 1032616411 \times 4130465641$&lt;/li&gt;
+&lt;li&gt;$5474093792130026911 = 21319 \times 2238391 \times 114712159$&lt;/li&gt;
+&lt;li&gt;$7033671664103127781 = 1875322861 \times 3750645721$&lt;/li&gt;
+&lt;li&gt;$7361235187296010651 = 412339 \times 2061691 \times 8659099$&lt;/li&gt;
+&lt;li&gt;$8276442534101054431 = 209431 \times 3560311 \times 11099791$&lt;/li&gt;
+&lt;li&gt;$14688059738864848381 = 2709987061 \times 5419974121$&lt;/li&gt;
+&lt;li&gt;$16043083915816662841 = 2832232681 \times 5664465361$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，$3825123056546413051$ 必须经过 $12$ 轮检验（即前 $12$ 个质数中只有 $37$ 认为它是合数）。&lt;/p&gt;
+&lt;p&gt;本文中记录的基数选择经过验证，可以确保正确，不要轻易选择其他固定的基数组合。&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
