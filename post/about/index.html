@@ -67,7 +67,7 @@
       "url" : "https://weilycoder.github.io/post/about/",
       "headline": "Who I am",
       "description": " 朝乾夕惕，功不唐捐。",
-      "wordCount" : "100",
+      "wordCount" : "56",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -178,6 +178,14 @@
 
     
 
+<style>
+    .center-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <script>
     MathJax = {
         tex: {
@@ -188,7 +196,7 @@
         }
     };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+<script id="MathJax-script" async src="/tex-mml-svg.js">
 </script>
   </head>
 
@@ -354,17 +362,16 @@
 
       <main class="gblog-page container">
         
-  <article class="gblog-post">
+<article class="gblog-post">
     <header class="gblog-post__header">
-      
-      
+         
 
 
-      <h1 class="gblog-post__title">Who I am</h1>
+        <h1 class="gblog-post__title">Who I am</h1>
 
-      
+        
         <div class="flex flex-wrap align-center gblog-post__meta gblog-post__meta--head">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
+            <span class="flex align-center no-wrap gblog-post__meta--update">
   <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
     <time datetime="2024-06-01T00:35:21&#43;08:00">
@@ -420,10 +427,10 @@
 
 
         </div>
-      
+        
     </header>
     <section class="gblog-markdown">
-      <p><a
+        <p><a
   class="gblog-markdown__link--raw"
   href="https://badges.toozhao.com/stats/01HYYXADZH998DH2N5QTGZSZG1"
 ><img
@@ -532,42 +539,13 @@
   href="https://oi-wiki.org"
 >OI-Wiki</a> 的内容，会注明。</li>
 </ol>
-<p>为了支持公式，补充了 <code>Theme</code> 中的 <code>custom.html</code>，将内容公开（<code>Theme</code> 文件夹是 Hugo 构建站点所用，不在网站中；不过你应该可以从网站源码中找到下述代码片段）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- You can add custom elements to the page header here. --&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- Markdown 风格公式支持 --&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span></code></pre></div>
     </section>
-  </article>
-  
-  <script src="https://giscus.app/client.js"
-    data-repo="weilycoder/MyBlogDiscussion"
-    data-repo-id="R_kgDOMElpzw"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOMElpz84Cf1wZ"
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="light_high_contrast"
-    data-lang="zh-CN"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async>
-  </script>
+</article>
+
+
+<script src="https://giscus.app/client.js" data-repo="weilycoder/MyBlogDiscussion" data-repo-id="R_kgDOMElpzw" data-category="Announcements" data-category-id="DIC_kwDOMElpz84Cf1wZ" data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0"
+    data-input-position="top" data-theme="cobalt" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+</script>
 
       </main>
 

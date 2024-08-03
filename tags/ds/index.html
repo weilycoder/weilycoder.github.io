@@ -126,6 +126,14 @@
 
     
 
+<style>
+    .center-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <script>
     MathJax = {
         tex: {
@@ -136,7 +144,7 @@
         }
     };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+<script id="MathJax-script" async src="/tex-mml-svg.js">
 </script>
   </head>
 
@@ -323,7 +331,7 @@
 >CF896C</a>。</p>
 <p>实际上，这种想法的本质是基于数据随机的「颜色段均摊」，而不是一种数据结构。</p>
 <p>使用 <code>set</code> 实现的珂朵莉树的 <code>assign</code>、<code>add</code>、<code>sum</code> 操作复杂度为 $O(n\log\log n)$.</p>
-<p>ODT 的核心思想是将值相同的区间合并为一个结点存在 <code>set</code> 中，只要有区间赋值的题目都可以用 ODT 骗分。</p>
+<p>ODT 的核心思想是将值相同的区间合并为一个结点维护，只要有区间赋值的题目都可以用 ODT 骗分。</p>
 <p>ODT 在随机数据上表现良好，但是不保证数据随机时，会被构造数据卡到 T 飞。</p>
       </section>
       <div class="gblog-post__readmore">

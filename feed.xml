@@ -5,7 +5,7 @@
         <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-02T18:25:37+08:00</updated>
+    <updated>2024-08-03T08:55:47+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
@@ -127,23 +127,6 @@
   href=&#34;https://oi-wiki.org&#34;
 &gt;OI-Wiki&lt;/a&gt; 的内容，会注明。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;为了支持公式，补充了 &lt;code&gt;Theme&lt;/code&gt; 中的 &lt;code&gt;custom.html&lt;/code&gt;，将内容公开（&lt;code&gt;Theme&lt;/code&gt; 文件夹是 Hugo 构建站点所用，不在网站中；不过你应该可以从网站源码中找到下述代码片段）：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- You can add custom elements to the page header here. --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- Markdown 风格公式支持 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;MathJax&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nx&#34;&gt;tex&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;inlineMath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;\\(&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;\\)&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;MathJax-script&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
             </content>   
                                 <category scheme="https://weilycoder.github.io/tags/About" term="About" label="About" />
         </entry>
@@ -154,13 +137,7 @@
             <published>2024-07-18T22:09:36+08:00</published>
             <updated>2024-07-18T22:09:36+08:00</updated>
             <content type="html">
-                &lt;blockquote&gt;
-&lt;p&gt;内容基本来自 &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://oi-wiki.org&#34;
-&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;定义&#34;
     &gt;
         定义
@@ -172,28 +149,19 @@
 &lt;p&gt;若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。&lt;/p&gt;
 &lt;p&gt;显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;计算逆元&#34;
-    &gt;
-        计算逆元
-    &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#计算逆元&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 计算逆元&#34; href=&#34;#%e8%ae%a1%e7%ae%97%e9%80%86%e5%85%83&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h3 id=&#34;在线单点求值&#34;
+    &lt;h2 id=&#34;在线单点求值&#34;
     &gt;
         在线单点求值
-    &lt;/h3&gt;
+    &lt;/h2&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#在线单点求值&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 在线单点求值&#34; href=&#34;#%e5%9c%a8%e7%ba%bf%e5%8d%95%e7%82%b9%e6%b1%82%e5%80%bc&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h4 id=&#34;扩展欧几里得法&#34;
+    &lt;h3 id=&#34;扩展欧几里得法&#34;
     &gt;
         扩展欧几里得法
-    &lt;/h4&gt;
+    &lt;/h3&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#扩展欧几里得法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 扩展欧几里得法&#34; href=&#34;#%e6%89%a9%e5%b1%95%e6%ac%a7%e5%87%a0%e9%87%8c%e5%be%97%e6%b3%95&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
@@ -227,19 +195,19 @@ a^{-1}\equiv a^{p-2}\pmod{p}
 $$
 复杂度为 $\Theta(\log p)$。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h3 id=&#34;离线多点求值&#34;
+    &lt;h2 id=&#34;离线多点求值&#34;
     &gt;
         离线多点求值
-    &lt;/h3&gt;
+    &lt;/h2&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#离线多点求值&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 离线多点求值&#34; href=&#34;#%e7%a6%bb%e7%ba%bf%e5%a4%9a%e7%82%b9%e6%b1%82%e5%80%bc&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h4 id=&#34;1sim-n-的逆元&#34;
+    &lt;h3 id=&#34;1sim-n-的逆元&#34;
     &gt;
         $1\sim n$ 的逆元
-    &lt;/h4&gt;
+    &lt;/h3&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#1sim-n-的逆元&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $1\sim n$ 的逆元&#34; href=&#34;#1sim-n-%e7%9a%84%e9%80%86%e5%85%83&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
@@ -262,10 +230,10 @@ $$
   
 /&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h4 id=&#34;任意-n-个数的逆元&#34;
+    &lt;h3 id=&#34;任意-n-个数的逆元&#34;
     &gt;
         任意 $n$ 个数的逆元
-    &lt;/h4&gt;
+    &lt;/h3&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#任意-n-个数的逆元&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 任意 $n$ 个数的逆元&#34; href=&#34;#%e4%bb%bb%e6%84%8f-n-%e4%b8%aa%e6%95%b0%e7%9a%84%e9%80%86%e5%85%83&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
@@ -287,16 +255,44 @@ $$
 &lt;/ul&gt;
 &lt;p&gt;时间复杂度 $\Theta(n+\log p)$。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h3 id=&#34;预处理后快速求解&#34;
+    &lt;h2 id=&#34;预处理后快速求解&#34;
     &gt;
         预处理后快速求解
-    &lt;/h3&gt;
+    &lt;/h2&gt;
     &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#预处理后快速求解&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 预处理后快速求解&#34; href=&#34;#%e9%a2%84%e5%a4%84%e7%90%86%e5%90%8e%e5%bf%ab%e9%80%9f%e6%b1%82%e8%a7%a3&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;存在一种 $\Theta(p^{2/3})$ 预处理，在线 $\Theta(1)$ 查询的算法。&lt;/p&gt;
-&lt;p&gt;等我会了来写。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;farey-序列&#34;
+    &gt;
+        Farey 序列
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#farey-序列&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Farey 序列&#34; href=&#34;#farey-%e5%ba%8f%e5%88%97&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;第 $i$ 个 Farey 序列记作 $F_i$，是把分母小于等于 $i$ 的所有最简真分数从小到大排成的序列；特别地，序列的首项是 $\dfrac{0}{1}$，末项为 $\dfrac{1}{1}$。&lt;/p&gt;
+&lt;div class=&#34;center-flex&#34;&gt;
+  &lt;img src=&#34;https://cdn.jsdelivr.net/gh/weilycoder/image_hosting@master/202408022026646-72ea53848d5932dc.png&#34; style=&#34;margin:auto;&#34;/&gt;
+&lt;/div&gt;
+&lt;p&gt;注意到 Farey 序列可以迭代生成，每次只需选择 $F_{n-1}$ 中每对相邻的 $\dfrac{a}{b},\dfrac{c}{d}$，满足 $b+d=n$，将 $\dfrac{a+c}{b+d}$ 放在中间即可。&lt;/p&gt;
+&lt;p&gt;同时，Farey 序列有性质：$bc-ad=1$。&lt;/p&gt;
+&lt;p&gt;我看到很多博客提到一个定理：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于任意整数 $n\le 2$ 和任意实数 $v\in [0,1]$，总能在 $F_{n−1}$ 找到 $\dfrac{x}{y}$ 满足 $\left|v−\dfrac{x}{y}\right|≤\dfrac{1}{yn}$ 。更强地，这个 $\dfrac{x}{y}$ 一定是 $v$ 序列中最接近 $v$ 的第一个分数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;实际上，如果引入渐进分数，有另一个不等式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对实数 $x$ 与渐进分数 $\dfrac{p_k}{q_k}$ ，有
+$$
+\dfrac{1}{q_k(q_k+q_{k+1})}&amp;lt;\left|x-\frac{p_k}{q_k}\right|&amp;lt;\dfrac{1}{q_kq_{k+1}}
+$$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个不等式更松一些。&lt;/p&gt;
+&lt;p&gt;我们固定 $n$，对于 $a$ 令 $v=\dfrac{a}{p}$ 并找到 $\dfrac{x}{y}$ 满足 $\left|\dfrac{a}{p}-\dfrac{x}{y}\right|\le\dfrac{1}{yn}$。即 $|ay-px|\le\left\lfloor\dfrac{p}{n}\right\rfloor$。也就是说 $ay\equiv u\pmod p$，其中 $|u|\le \left\lfloor\dfrac{p}{n}\right\rfloor$。注意到 $a^{-1}=u^{-1}y\pmod p$，我们只需预处理 $O\left(\left\lfloor\dfrac{p}{n}\right\rfloor\right)$ 个数的逆元。&lt;/p&gt;
+&lt;p&gt;注意到序列中 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 互不相同，我们开一个长 $n^2$ 的 $0/1$ 数组记录是否有 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 等于 $i$。将序列求前缀和即可 $O(1)$ 查大于或小于 $\dfrac{x}{y}$ 的的第一个数。&lt;/p&gt;
 
             </content>   
                                 <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
@@ -314,7 +310,7 @@ $$
 &gt;CF896C&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;实际上，这种想法的本质是基于数据随机的「颜色段均摊」，而不是一种数据结构。&lt;/p&gt;
 &lt;p&gt;使用 &lt;code&gt;set&lt;/code&gt; 实现的珂朵莉树的 &lt;code&gt;assign&lt;/code&gt;、&lt;code&gt;add&lt;/code&gt;、&lt;code&gt;sum&lt;/code&gt; 操作复杂度为 $O(n\log\log n)$.&lt;/p&gt;
-&lt;p&gt;ODT 的核心思想是将值相同的区间合并为一个结点存在 &lt;code&gt;set&lt;/code&gt; 中，只要有区间赋值的题目都可以用 ODT 骗分。&lt;/p&gt;
+&lt;p&gt;ODT 的核心思想是将值相同的区间合并为一个结点维护，只要有区间赋值的题目都可以用 ODT 骗分。&lt;/p&gt;
 &lt;p&gt;ODT 在随机数据上表现良好，但是不保证数据随机时，会被构造数据卡到 T 飞。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;内容基本来自 &lt;a
@@ -354,7 +350,9 @@ $$
 &lt;blockquote class=&#34;gblog-hint note&#34;&gt;
   &lt;div class=&#34;gblog-hint__title flex align-center&#34;&gt;&lt;svg class=&#34;gblog-icon gblog_info_outline&#34;&gt;&lt;use xlink:href=&#34;#gblog_info_outline&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
       &lt;span&gt;Note&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&#34;gblog-hint__text&#34;&gt;&lt;code&gt;mutable&lt;/code&gt; 用于突破 &lt;code&gt;const&lt;/code&gt; 的限制，即使 &lt;code&gt;Note_t&lt;/code&gt; 被设为常量，仍能改变 &lt;code&gt;v&lt;/code&gt; 的值。&lt;/div&gt;
+  &lt;div class=&#34;gblog-hint__text&#34;&gt;&lt;p&gt;&lt;code&gt;mutable&lt;/code&gt; 用于突破 &lt;code&gt;const&lt;/code&gt; 的限制，即使 &lt;code&gt;Note_t&lt;/code&gt; 被设为常量，仍能改变 &lt;code&gt;v&lt;/code&gt; 的值。&lt;/p&gt;
+&lt;p&gt;这意味着，我们可以直接修改已经插入 &lt;code&gt;set&lt;/code&gt; 的元素的 &lt;code&gt;v&lt;/code&gt; 值，而不用将该元素取出后重新加入 &lt;code&gt;set&lt;/code&gt;。&lt;/p&gt;
+&lt;/div&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;接下来，我们定义一个 &lt;code&gt;set&lt;/code&gt; 存储节点。&lt;/p&gt;
@@ -782,7 +780,7 @@ $$&lt;/p&gt;
 &lt;p&gt;在归并排序时将各级有序数组保留，可以用于解决区间第 $k$ 小问题。&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;原文如此（暂时没看懂）。&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref2:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref3:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;原文如此。&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref2:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref3:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34;&gt;
 &lt;p&gt;我擅自认为朴素 A* 不能被计算，因为它的复杂度不是最优的。&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;

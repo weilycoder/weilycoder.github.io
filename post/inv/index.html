@@ -67,7 +67,7 @@
       "url" : "https://weilycoder.github.io/post/inv/",
       "headline": "乘法逆元",
       "description": "数论基础第三弹！",
-      "wordCount" : "158",
+      "wordCount" : "239",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -178,6 +178,14 @@
 
     
 
+<style>
+    .center-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <script>
     MathJax = {
         tex: {
@@ -188,7 +196,7 @@
         }
     };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+<script id="MathJax-script" async src="/tex-mml-svg.js">
 </script>
   </head>
 
@@ -354,17 +362,16 @@
 
       <main class="gblog-page container">
         
-  <article class="gblog-post">
+<article class="gblog-post">
     <header class="gblog-post__header">
-      
-      
+         
 
 
-      <h1 class="gblog-post__title">乘法逆元</h1>
+        <h1 class="gblog-post__title">乘法逆元</h1>
 
-      
+        
         <div class="flex flex-wrap align-center gblog-post__meta gblog-post__meta--head">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
+            <span class="flex align-center no-wrap gblog-post__meta--update">
   <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
     <time datetime="2024-07-18T22:09:36&#43;08:00">
@@ -376,7 +383,7 @@
 
 <span class="flex align-center no-wrap gblog-post__meta--readtime">
   <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
+  <span class="gblog-post__tag">2 min read</span>
 </span>
 
 
@@ -415,16 +422,10 @@
 
 
         </div>
-      
+        
     </header>
     <section class="gblog-markdown">
-      <blockquote>
-<p>内容基本来自 <a
-  class="gblog-markdown__link"
-  href="https://oi-wiki.org"
->OI-Wiki</a>。</p>
-</blockquote>
-<div class="flex align-center gblog-post__anchorwrap">
+        <div class="flex align-center gblog-post__anchorwrap">
     <h2 id="定义"
     >
         定义
@@ -436,28 +437,19 @@
 <p>若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。</p>
 <p>显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h2 id="计算逆元"
-    >
-        计算逆元
-    </h2>
-    <a data-clipboard-text="https://weilycoder.github.io/post/inv/#计算逆元" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 计算逆元" href="#%e8%ae%a1%e7%ae%97%e9%80%86%e5%85%83">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="在线单点求值"
+    <h2 id="在线单点求值"
     >
         在线单点求值
-    </h3>
+    </h2>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#在线单点求值" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 在线单点求值" href="#%e5%9c%a8%e7%ba%bf%e5%8d%95%e7%82%b9%e6%b1%82%e5%80%bc">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h4 id="扩展欧几里得法"
+    <h3 id="扩展欧几里得法"
     >
         扩展欧几里得法
-    </h4>
+    </h3>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#扩展欧几里得法" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 扩展欧几里得法" href="#%e6%89%a9%e5%b1%95%e6%ac%a7%e5%87%a0%e9%87%8c%e5%be%97%e6%b3%95">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
@@ -491,19 +483,19 @@ a^{-1}\equiv a^{p-2}\pmod{p}
 $$
 复杂度为 $\Theta(\log p)$。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="离线多点求值"
+    <h2 id="离线多点求值"
     >
         离线多点求值
-    </h3>
+    </h2>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#离线多点求值" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 离线多点求值" href="#%e7%a6%bb%e7%ba%bf%e5%a4%9a%e7%82%b9%e6%b1%82%e5%80%bc">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h4 id="1sim-n-的逆元"
+    <h3 id="1sim-n-的逆元"
     >
         $1\sim n$ 的逆元
-    </h4>
+    </h3>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#1sim-n-的逆元" class="gblog-post__anchor clip flex align-center" aria-label="Anchor $1\sim n$ 的逆元" href="#1sim-n-%e7%9a%84%e9%80%86%e5%85%83">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
@@ -526,10 +518,10 @@ $$
   
 /></p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h4 id="任意-n-个数的逆元"
+    <h3 id="任意-n-个数的逆元"
     >
         任意 $n$ 个数的逆元
-    </h4>
+    </h3>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#任意-n-个数的逆元" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 任意 $n$ 个数的逆元" href="#%e4%bb%bb%e6%84%8f-n-%e4%b8%aa%e6%95%b0%e7%9a%84%e9%80%86%e5%85%83">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
@@ -551,36 +543,52 @@ $$
 </ul>
 <p>时间复杂度 $\Theta(n+\log p)$。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="预处理后快速求解"
+    <h2 id="预处理后快速求解"
     >
         预处理后快速求解
-    </h3>
+    </h2>
     <a data-clipboard-text="https://weilycoder.github.io/post/inv/#预处理后快速求解" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 预处理后快速求解" href="#%e9%a2%84%e5%a4%84%e7%90%86%e5%90%8e%e5%bf%ab%e9%80%9f%e6%b1%82%e8%a7%a3">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>存在一种 $\Theta(p^{2/3})$ 预处理，在线 $\Theta(1)$ 查询的算法。</p>
-<p>等我会了来写。</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h3 id="farey-序列"
+    >
+        Farey 序列
+    </h3>
+    <a data-clipboard-text="https://weilycoder.github.io/post/inv/#farey-序列" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Farey 序列" href="#farey-%e5%ba%8f%e5%88%97">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>第 $i$ 个 Farey 序列记作 $F_i$，是把分母小于等于 $i$ 的所有最简真分数从小到大排成的序列；特别地，序列的首项是 $\dfrac{0}{1}$，末项为 $\dfrac{1}{1}$。</p>
+<div class="center-flex">
+  <img src="https://cdn.jsdelivr.net/gh/weilycoder/image_hosting@master/202408022026646-72ea53848d5932dc.png" style="margin:auto;"/>
+</div>
+<p>注意到 Farey 序列可以迭代生成，每次只需选择 $F_{n-1}$ 中每对相邻的 $\dfrac{a}{b},\dfrac{c}{d}$，满足 $b+d=n$，将 $\dfrac{a+c}{b+d}$ 放在中间即可。</p>
+<p>同时，Farey 序列有性质：$bc-ad=1$。</p>
+<p>我看到很多博客提到一个定理：</p>
+<blockquote>
+<p>对于任意整数 $n\le 2$ 和任意实数 $v\in [0,1]$，总能在 $F_{n−1}$ 找到 $\dfrac{x}{y}$ 满足 $\left|v−\dfrac{x}{y}\right|≤\dfrac{1}{yn}$ 。更强地，这个 $\dfrac{x}{y}$ 一定是 $v$ 序列中最接近 $v$ 的第一个分数。</p>
+</blockquote>
+<p>实际上，如果引入渐进分数，有另一个不等式：</p>
+<blockquote>
+<p>对实数 $x$ 与渐进分数 $\dfrac{p_k}{q_k}$ ，有
+$$
+\dfrac{1}{q_k(q_k+q_{k+1})}&lt;\left|x-\frac{p_k}{q_k}\right|&lt;\dfrac{1}{q_kq_{k+1}}
+$$</p>
+</blockquote>
+<p>这个不等式更松一些。</p>
+<p>我们固定 $n$，对于 $a$ 令 $v=\dfrac{a}{p}$ 并找到 $\dfrac{x}{y}$ 满足 $\left|\dfrac{a}{p}-\dfrac{x}{y}\right|\le\dfrac{1}{yn}$。即 $|ay-px|\le\left\lfloor\dfrac{p}{n}\right\rfloor$。也就是说 $ay\equiv u\pmod p$，其中 $|u|\le \left\lfloor\dfrac{p}{n}\right\rfloor$。注意到 $a^{-1}=u^{-1}y\pmod p$，我们只需预处理 $O\left(\left\lfloor\dfrac{p}{n}\right\rfloor\right)$ 个数的逆元。</p>
+<p>注意到序列中 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 互不相同，我们开一个长 $n^2$ 的 $0/1$ 数组记录是否有 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 等于 $i$。将序列求前缀和即可 $O(1)$ 查大于或小于 $\dfrac{x}{y}$ 的的第一个数。</p>
 
     </section>
-  </article>
-  
-  <script src="https://giscus.app/client.js"
-    data-repo="weilycoder/MyBlogDiscussion"
-    data-repo-id="R_kgDOMElpzw"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOMElpz84Cf1wZ"
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="light_high_contrast"
-    data-lang="zh-CN"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async>
-  </script>
+</article>
+
+
+<script src="https://giscus.app/client.js" data-repo="weilycoder/MyBlogDiscussion" data-repo-id="R_kgDOMElpzw" data-category="Announcements" data-category-id="DIC_kwDOMElpz84Cf1wZ" data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0"
+    data-input-position="top" data-theme="cobalt" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+</script>
 
       </main>
 
