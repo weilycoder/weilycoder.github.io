@@ -5,7 +5,7 @@
         <subtitle>I write, therefore I am.</subtitle>
             <link href="https://weilycoder.github.io/tags/math/" rel="alternate" type="text/html" title="html" />
             <link href="https://weilycoder.github.io/tags/math/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2024-08-03T08:55:47+08:00</updated>
+    <updated>2024-08-10T07:58:36+08:00</updated>
         <author>
             <name>weily</name>
                 <email>weily2009@outlook.com</email>
@@ -56,7 +56,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;exgcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;复杂度为 $O(\log p)$。&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;复杂度为 $O(\log a)$。&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h3 id=&#34;快速幂法&#34;
     &gt;
@@ -171,7 +171,7 @@ $$
 \dfrac{1}{q_k(q_k+q_{k+1})}&amp;lt;\left|x-\frac{p_k}{q_k}\right|&amp;lt;\dfrac{1}{q_kq_{k+1}}
 $$&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;这个不等式更松一些。&lt;/p&gt;
+&lt;p&gt;这个不等式更紧一些，因为 $q_{k+1}$ 不会比 $n$ 更小。&lt;/p&gt;
 &lt;p&gt;我们固定 $n$，对于 $a$ 令 $v=\dfrac{a}{p}$ 并找到 $\dfrac{x}{y}$ 满足 $\left|\dfrac{a}{p}-\dfrac{x}{y}\right|\le\dfrac{1}{yn}$。即 $|ay-px|\le\left\lfloor\dfrac{p}{n}\right\rfloor$。也就是说 $ay\equiv u\pmod p$，其中 $|u|\le \left\lfloor\dfrac{p}{n}\right\rfloor$。注意到 $a^{-1}=u^{-1}y\pmod p$，我们只需预处理 $O\left(\left\lfloor\dfrac{p}{n}\right\rfloor\right)$ 个数的逆元。&lt;/p&gt;
 &lt;p&gt;注意到序列中 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 互不相同，我们开一个长 $n^2$ 的 $0/1$ 数组记录是否有 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 等于 $i$。将序列求前缀和即可 $O(1)$ 查大于或小于 $\dfrac{x}{y}$ 的的第一个数。&lt;/p&gt;
 
@@ -996,6 +996,10 @@ $$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p
 &lt;/ul&gt;
 &lt;p&gt;其中，$3825123056546413051$ 必须经过 $12$ 轮检验（即前 $12$ 个质数中只有 $37$ 认为它是合数）。&lt;/p&gt;
 &lt;p&gt;本文中记录的基数选择经过验证，可以确保正确，不要轻易选择其他固定的基数组合。&lt;/p&gt;
+&lt;p&gt;以上伪素数筛选自&lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://www.cecm.sfu.ca/Pseudoprimes/&#34;
+&gt;伪素数表&lt;/a&gt;，其中约有 $1.1\times 10^8$ 个质数。&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;

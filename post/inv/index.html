@@ -67,7 +67,7 @@
       "url" : "https://weilycoder.github.io/post/inv/",
       "headline": "乘法逆元",
       "description": "数论基础第三弹！",
-      "wordCount" : "239",
+      "wordCount" : "243",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -196,7 +196,7 @@
         }
     };
 </script>
-<script id="MathJax-script" async src="/tex-mml-svg.js">
+<script id="MathJax-script" async src="/mathjax/es5/tex-mml-svg.js">
 </script>
   </head>
 
@@ -463,7 +463,7 @@
 </span></span><span class="line"><span class="cl">  <span class="n">exgcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">y</span> <span class="o">-=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>复杂度为 $O(\log p)$。</p>
+</span></span></code></pre></div><p>复杂度为 $O(\log a)$。</p>
 <div class="flex align-center gblog-post__anchorwrap">
     <h3 id="快速幂法"
     >
@@ -578,7 +578,7 @@ $$
 \dfrac{1}{q_k(q_k+q_{k+1})}&lt;\left|x-\frac{p_k}{q_k}\right|&lt;\dfrac{1}{q_kq_{k+1}}
 $$</p>
 </blockquote>
-<p>这个不等式更松一些。</p>
+<p>这个不等式更紧一些，因为 $q_{k+1}$ 不会比 $n$ 更小。</p>
 <p>我们固定 $n$，对于 $a$ 令 $v=\dfrac{a}{p}$ 并找到 $\dfrac{x}{y}$ 满足 $\left|\dfrac{a}{p}-\dfrac{x}{y}\right|\le\dfrac{1}{yn}$。即 $|ay-px|\le\left\lfloor\dfrac{p}{n}\right\rfloor$。也就是说 $ay\equiv u\pmod p$，其中 $|u|\le \left\lfloor\dfrac{p}{n}\right\rfloor$。注意到 $a^{-1}=u^{-1}y\pmod p$，我们只需预处理 $O\left(\left\lfloor\dfrac{p}{n}\right\rfloor\right)$ 个数的逆元。</p>
 <p>注意到序列中 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 互不相同，我们开一个长 $n^2$ 的 $0/1$ 数组记录是否有 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 等于 $i$。将序列求前缀和即可 $O(1)$ 查大于或小于 $\dfrac{x}{y}$ 的的第一个数。</p>
 
