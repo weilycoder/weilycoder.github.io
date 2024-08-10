@@ -11,10 +11,11 @@
 <meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content="Hugo 0.130.0">
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="计算数值积分的常用方法" />
     <meta name="author" content="weily" />
 
-    <title>Post | Weily&#39;s blog</title>
+    <title>辛普森法求数值积分 | Weily&#39;s blog</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 <link
@@ -35,19 +36,70 @@
     
   <meta
     property="og:title"
-    content="Post"
+    content="辛普森法求数值积分"
   />
   <meta property="og:site_name" content="Weily's blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://weilycoder.github.io/post/" />
+  <meta property="og:description" content="计算数值积分的常用方法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://weilycoder.github.io/post/simpson/" />
 
-
+<meta property="article:section" content="Post" />
+    <meta
+      property="article:published_time"
+      content="2024-08-10T11:35:20+08:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2024-08-10T11:35:20+08:00"
+    />
 
 
   <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Post" />
+<meta name="twitter:title" content="辛普森法求数值积分" />
+  <meta name="twitter:description" content="计算数值积分的常用方法" />
 
-
+<script type="application/ld+json">
+  {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "articleSection": "Post",
+      "name": "辛普森法求数值积分",
+      "url" : "https://weilycoder.github.io/post/simpson/",
+      "headline": "辛普森法求数值积分",
+      "description": "计算数值积分的常用方法",
+      "wordCount" : "178",
+      "license": "CC BY-SA 4.0",
+      "inLanguage": "en",
+      "isFamilyFriendly": "true",
+      "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://weilycoder.github.io/post/simpson/"
+      },
+      "keywords" : [ "math" ],
+      "author" : [
+          {
+              "@type": "Person",
+              "name": "weily"
+          }
+      ],
+      "copyrightHolder" : "Weily\u0027s blog",
+      "copyrightYear" : "2024",
+      "dateCreated": "2024-08-10T11:35:20.00Z",
+      "datePublished": "2024-08-10T11:35:20.00Z",
+      "dateModified": "2024-08-10T11:35:20.00Z",
+      "publisher":{
+          "@type":"Organization",
+          "name": "Weily's blog",
+          "url": "https://weilycoder.github.io/",
+          "logo": {
+              "@type": "ImageObject",
+              "url": "https://weilycoder.github.io/brand.svg",
+              "width":"32",
+              "height":"32"
+          }
+      }
+  }
+  </script>
 
 
     
@@ -119,7 +171,7 @@
   href="/custom.css"
   media="all"
 />
-  <link href="https://weilycoder.github.io/post/" rel="canonical" type="text/html" />
+  <link href="https://weilycoder.github.io/post/simpson/" rel="canonical" type="text/html" />
     <link href="https://weilycoder.github.io/feed.xml" rel="alternate" type="application/atom+xml" title="Weily's blog atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
@@ -310,146 +362,16 @@
 
       <main class="gblog-page container">
         
-  
-  
+<article class="gblog-post">
+    <header class="gblog-post__header">
+         
 
-  
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/about/">Who I am</a>
-        </h1>
-      </header>
 
-      <section class="gblog-markdown">
-        <p><a
-  class="gblog-markdown__link--raw"
-  href="https://badges.toozhao.com/stats/01HYYXADZH998DH2N5QTGZSZG1"
-><img
-  src="https://badges.toozhao.com/badges/01HYYXADZH998DH2N5QTGZSZG1/green.svg"
-  alt="Page Views Count"
-  
-/></a>
-<a
-  class="gblog-markdown__link--raw"
-  href="https://codeforces.com/profile/weily"
-><img
-  src="https://cfrating.baoshuo.dev/rating?username=weily&amp;style=flat"
-  alt="Codeforces Rating of @weily"
-  
-/></a>
-<a
-  class="gblog-markdown__link--raw"
-  href="https://atcoder.jp/users/weily"
-><img
-  src="https://atrating.baoshuo.dev/rating?username=weily&amp;style=flat"
-  alt="AtCoder Rating of @weily"
-  
-/></a>
-<a
-  class="gblog-markdown__link--raw"
-  href="https://github.com/weilycoder"
-><img
-  src="https://img.shields.io/badge/github-weilycoder-blue?logo=github"
-  alt="github"
-  
-/></a></p>
-<blockquote>
-<p>朝乾夕惕，功不唐捐。</p>
-</blockquote>
-      </section>
-      <div class="gblog-post__readmore">
+        <h1 class="gblog-post__title">辛普森法求数值积分</h1>
+
         
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/about/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-01T00:35:21&#43;08:00">
-      
-      Jun 1, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-  <span class="flex align-center no-wrap gblog-post__meta--pinned">
-    <svg class="gblog-icon gblog_pin"><use xlink:href="#gblog_pin"></use></svg>
-    <span class="gblog-post__tag">Pinned</span>
-  </span>
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/About/"
-      title="All posts tagged with 'About'"
-    >
-      About
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/simpson/">辛普森法求数值积分</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        计算数值积分的常用方法
-      </section>
-      <div class="gblog-post__readmore">
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
+        <div class="flex flex-wrap align-center gblog-post__meta gblog-post__meta--head">
+            <span class="flex align-center no-wrap gblog-post__meta--update">
   <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
     <time datetime="2024-08-10T11:35:20&#43;08:00">
@@ -500,736 +422,94 @@
 
 
         </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/interactive/">道高一尺 or 魔高一丈：浅谈交互库编写</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>有些时候，为了实现特殊的需求，我们可能需要编写交互库，要求选手链接。</p>
-<p>常见的情景有：</p>
-<ul>
-<li>强制在线：一些题目不强制在线可能会被“乱搞”通过。例如可持久化数据结构有众所周知的离线做法。</li>
-<li>加速输入输出：一些题目为了要求严格线性可能需要 $10^8$ 以上的输入量，如此大的数据必须在内存生成并交换。</li>
-<li>限制操作：一些思维题不允许选手直接读取数据，而是要求选手做特定询问获取详细内容；或者可能限制操作次数。</li>
-<li>人机对抗：另一些思维题要求选手找到最优策略，那么可以要求选手通过接口与交互库对抗。</li>
-</ul>
-<p>既然交互库要链接选手的程序，就必须做好防范措施，避免选手使用不当操作 $\textcolor{green}{\text{AC}}$。</p>
-      </section>
-      <div class="gblog-post__readmore">
         
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/interactive/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-08-04T14:22:57&#43;08:00">
-      
-      Aug 4, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--author">
-          <svg class="gblog-icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a class="gblog-button__link" href="/authors/weily/" title="All posts of this author">
-      weily
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/misc/"
-      title="All posts tagged with 'misc'"
-    >
-      misc
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/inv/">乘法逆元</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        数论基础第三弹！
-      </section>
-      <div class="gblog-post__readmore">
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-07-18T22:09:36&#43;08:00">
-      
-      Jul 18, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">2 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/math/"
-      title="All posts tagged with 'math'"
-    >
-      math
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/odt/">珂朵莉树</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>珂朵莉树（Chtholly Tree），又名老司机树 ODT（Old Driver Tree）。起源自 <a
-  class="gblog-markdown__link"
-  href="https://codeforces.com/problemset/problem/896/C"
->CF896C</a>。</p>
-<p>实际上，这种想法的本质是基于数据随机的「颜色段均摊」，而不是一种数据结构。</p>
-<p>使用 <code>set</code> 实现的珂朵莉树的 <code>assign</code>、<code>add</code>、<code>sum</code> 操作复杂度为 $O(n\log\log n)$.</p>
-<p>ODT 的核心思想是将值相同的区间合并为一个结点维护，只要有区间赋值的题目都可以用 ODT 骗分。</p>
-<p>ODT 在随机数据上表现良好，但是不保证数据随机时，会被构造数据卡到 T 飞。</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/odt/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-24T15:45:44&#43;08:00">
-      
-      Jun 24, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/ds/"
-      title="All posts tagged with 'ds'"
-    >
-      ds
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/fresh_seg/">小清新线段树</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>通常来说，在使用线段树维护区间操作时，需要使操作在区间上能被快速计算，经典的区间加-区间求和是一个简单的例子。</p>
-<p>但是，这里也有一个看似难以维护的反例：</p>
-<blockquote>
-<p><a
-  class="gblog-markdown__link"
-  href="https://vjudge.net/problem/bzoj-3211"
-><strong>bzoj 3211 花神游历各国</strong></a></p>
-<p>维护一个序列 $A$，初始值为 $A=(a_1,a_2,a_3,\cdots,a_n)$，支持以下操作 $q$ 次：</p>
-<ol>
-<li>区间求和</li>
-<li>对区间每个数求平方根（向下取整）</li>
-</ol>
-<p>$1\le n,q\le 1\times 10^5,0\le a_i\le 10^{12}.$</p>
-</blockquote>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/fresh_seg/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-23T17:22:36&#43;08:00">
-      
-      Jun 23, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--author">
-          <svg class="gblog-icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a class="gblog-button__link" href="/authors/weily/" title="All posts of this author">
-      weily
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/ds/"
-      title="All posts tagged with 'ds'"
-    >
-      ds
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/ogf/">生成函数</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>Useless Algorithms 之一。</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/ogf/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-23T13:30:48&#43;08:00">
-      
-      Jun 23, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/math/"
-      title="All posts tagged with 'math'"
-    >
-      math
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/useless/">Useless Algorithms</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
+    </header>
+    <section class="gblog-markdown">
         <blockquote>
-<p>If you know at least 3 of these things and you are not red — you are doing it wrong. Stop learning useless algorithms, go and solve some problems, learn how to use binary search.</p>
-<p>—— <a
+<p>部分内容来自 <a
   class="gblog-markdown__link"
-  href="https://codeforces.com/profile/Um_nik"
->$\textcolor{black}{\text{U}}\textcolor{red}{\text{m_nik}}$</a></p>
+  href="https://oi-wiki.org"
+>OI-Wiki</a>。</p>
 </blockquote>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/useless/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-21T16:23:26&#43;08:00">
-      
-      Jun 21, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">1 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/misc/"
-      title="All posts tagged with 'misc'"
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="辛普森公式"
     >
-      misc
+        辛普森公式
+    </h2>
+    <a data-clipboard-text="https://weilycoder.github.io/post/simpson/#辛普森公式" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 辛普森公式" href="#%e8%be%9b%e6%99%ae%e6%a3%ae%e5%85%ac%e5%bc%8f">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/fastio/">读入/输出优化</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>本文所有代码默认 <code>#include &lt;iostream&gt;</code> 且 <code>using namespace std;</code></p>
-<p>帮 N 老师搞完 <a
+</div>
+<p>首先，我们引入二次函数积分公式。</p>
+<p>对于二次函数</p>
+<p>$$
+f(x)=ax^2+bx+c,
+$$</p>
+<p>有</p>
+<p>$$
+\int_{L}^{R} f(x)\text{d}x=\dfrac{R-L}{6}\left[f(L)+f(R)+4f\left(\dfrac{L+R}{2}\right)\right]
+$$</p>
+<p>这里给出计算过程：</p>
+<p>先求出 $f(x)$ 的原函数：</p>
+<p>$$
+F(x)=\int f(x)\text{d}x=\dfrac{a}{3}x^3+\dfrac{b}{2}x^2+cx+D
+$$</p>
+<p>由牛顿-莱布尼茨公式，</p>
+<p>$$
+\begin{aligned}
+\int_{L}^{R} f(x)\text{d}x
+&amp;=F(R)-F(L)\\
+&amp;=\dfrac{a}{3}(R^3-L^3)+\dfrac{b}{2}(R^2-L^2)+c(r-l)\\
+&amp;=(R-L)\left(\dfrac{a}{3}(L^2+LR+R^2)+\dfrac{b}{2}(L+R)+c\right)\\
+&amp;=\dfrac{R-L}{6}(2L^2+2LR+2R^2+3L+3R+6c)\\
+&amp;=\dfrac{R-L}{6}\left\{(aL^2+bL+c)+(aR^2+bR+c)+4\left[a\left(\dfrac{l+r}{2}\right)^2+b\left(\dfrac{l+r}{2}\right)+c\right]\right\}\\
+&amp;=\dfrac{R-L}{6}\left[f(L)+f(R)+4f\left(\dfrac{L+R}{2}\right)\right]
+\end{aligned}
+$$</p>
+<p>需要注意这里其实不要求 $a\ne 0$。</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="自适应辛普森法"
+    >
+        自适应辛普森法
+    </h2>
+    <a data-clipboard-text="https://weilycoder.github.io/post/simpson/#自适应辛普森法" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 自适应辛普森法" href="#%e8%87%aa%e9%80%82%e5%ba%94%e8%be%9b%e6%99%ae%e6%a3%ae%e6%b3%95">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>考虑使用二次函数拟合被积函数，将被积函数分成若干段，每段内使用辛普森公式求近似值。</p>
+<p>但是，如果我们不断细分，无疑会增大算量；如果细分的程度不够，又会影响精度。</p>
+<p>一般，我们先将函数分成几段，接下来对每段检查二次函数是否能良好拟合。</p>
+<p>具体地，对于函数的某一段 $[l,r]$，如果拟合 $[l,r]$ 的结果跟 $[l,\frac{l+r}{2}]$ 与 $[\frac{l+r}{2},r]$ 的和接近，那么认为拟合良好。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">simpson</span><span class="p">(</span><span class="kt">double</span> <span class="n">l</span><span class="p">,</span> <span class="kt">double</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">asr</span><span class="p">(</span><span class="kt">double</span> <span class="n">l</span><span class="p">,</span> <span class="kt">double</span> <span class="n">r</span><span class="p">,</span> <span class="kt">double</span> <span class="n">eps</span><span class="p">,</span> <span class="kt">double</span> <span class="n">ans</span><span class="p">,</span> <span class="kt">int</span> <span class="n">step</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">fl</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">mid</span><span class="p">),</span> <span class="n">fr</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">fl</span> <span class="o">+</span> <span class="n">fr</span> <span class="o">-</span> <span class="n">ans</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">&amp;&amp;</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">fl</span> <span class="o">+</span> <span class="n">fr</span> <span class="o">+</span> <span class="p">(</span><span class="n">fl</span> <span class="o">+</span> <span class="n">fr</span> <span class="o">-</span> <span class="n">ans</span><span class="p">)</span> <span class="o">/</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">asr</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">eps</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fl</span><span class="p">,</span> <span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">         <span class="n">asr</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fr</span><span class="p">,</span> <span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">calc</span><span class="p">(</span><span class="kt">double</span> <span class="n">l</span><span class="p">,</span> <span class="kt">double</span> <span class="n">r</span><span class="p">,</span> <span class="kt">double</span> <span class="n">eps</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">asr</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">simpson</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>其中 <code>15</code> 是一个 Magic Number，在 <a
   class="gblog-markdown__link"
-  href="https://github.com/weilycoder/fastioForOI/blob/main/art.md"
->Fast IO</a> 页面后有感而发，希望系统地写一下文件读入输出优化。</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/fastio/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
+  href="https://doi.org/10.1145/321526.321537"
+>https://doi.org/10.1145/321526.321537</a> 给出了论述。</p>
+<p>需要指出，也存在一些病态函数，直接应用自适应辛普森法可能会出错。</p>
 
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-15T12:52:42&#43;08:00">
-      
-      Jun 15, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">3 min read</span>
-</span>
+    </section>
+</article>
 
 
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--author">
-          <svg class="gblog-icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a class="gblog-button__link" href="/authors/weily/" title="All posts of this author">
-      weily
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/misc/"
-      title="All posts tagged with 'misc'"
-    >
-      misc
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/cc/">计算理论基础：P 问题、NP 问题和 NPC 问题</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        常见的复杂度类
-      </section>
-      <div class="gblog-post__readmore">
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-07T23:26:50&#43;08:00">
-      
-      Jun 7, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">2 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/computation/"
-      title="All posts tagged with 'computation'"
-    >
-      computation
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-  
-
-
-<nav class="gblog-paging flex flex-even align-center" role="navigation">
-  <div class="gblog-paging__item gblog-paging__item--prev">
-    
-  </div>
-  <div class="gblog-paging__state">Page 1 of 2</div>
-  <div class="gblog-paging__item gblog-paging__item--next">
-    
-      <a class="flex-inline align-center fake-link no-wrap" href="/post/page/2/">
-        NEXT
-        <i class="gblog-icon">gblog_keyboard_arrow_right</i>
-      </a>
-    
-  </div>
-</nav>
-
+<script src="https://giscus.app/client.js" data-repo="weilycoder/MyBlogDiscussion" data-repo-id="R_kgDOMElpzw" data-category="Announcements" data-category-id="DIC_kwDOMElpz84Cf1wZ" data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0"
+    data-input-position="top" data-theme="cobalt" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+</script>
 
       </main>
 
