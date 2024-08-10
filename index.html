@@ -151,7 +151,7 @@
         }
     };
 </script>
-<script id="MathJax-script" async src="/mathjax/es5/tex-mml-svg.js">
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
   </head>
 
@@ -424,6 +424,112 @@
       title="All posts tagged with 'About'"
     >
       About
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
+
+
+
+
+
+
+        </div>
+      </footer>
+    </article>
+  
+    <article class="gblog-post">
+      <header class="gblog-post__header">
+        <h1 class="gblog-post__title">
+          <a href="/post/interactive/">道高一尺 or 魔高一丈：浅谈交互库编写</a>
+        </h1>
+      </header>
+
+      <section class="gblog-markdown">
+        <p>有些时候，为了实现特殊的需求，我们可能需要编写交互库，要求选手链接。</p>
+<p>常见的情景有：</p>
+<ul>
+<li>强制在线：一些题目不强制在线可能会被“乱搞”通过。例如可持久化数据结构有众所周知的离线做法。</li>
+<li>加速输入输出：一些题目为了要求严格线性可能需要 $10^8$ 以上的输入量，如此大的数据必须在内存生成并交换。</li>
+<li>限制操作：一些思维题不允许选手直接读取数据，而是要求选手做特定询问获取详细内容；或者可能限制操作次数。</li>
+<li>人机对抗：另一些思维题要求选手找到最优策略，那么可以要求选手通过接口与交互库对抗。</li>
+</ul>
+<p>既然交互库要链接选手的程序，就必须做好防范措施，避免选手使用不当操作 $\textcolor{green}{\text{AC}}$。</p>
+      </section>
+      <div class="gblog-post__readmore">
+        
+          <a
+            class="flex-inline align-center fake-link"
+            title="Read full post"
+            href="/post/interactive/"
+          >
+            Read full post
+            <i class="gblog-icon">gblog_arrow_right</i>
+          </a>
+        
+      </div>
+
+      <footer class="gblog-post__footer">
+        <div class="flex flex-wrap align-center gblog-post__meta">
+          <span class="flex align-center no-wrap gblog-post__meta--update">
+  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
+  <span class="gblog-post__tag">
+    <time datetime="2024-08-04T14:22:57&#43;08:00">
+      
+      Aug 4, 2024
+    </time>
+  </span>
+</span>
+
+<span class="flex align-center no-wrap gblog-post__meta--readtime">
+  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
+  <span class="gblog-post__tag">1 min read</span>
+</span>
+
+
+
+
+
+  
+    
+    
+      
+        <span class="flex align-center no-wrap gblog-post__meta--author">
+          <svg class="gblog-icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a class="gblog-button__link" href="/authors/weily/" title="All posts of this author">
+      weily
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
+
+
+
+
+  
+    
+    
+      
+        <span class="flex align-center no-wrap gblog-post__meta--tag">
+          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a
+      class="gblog-button__link"
+      href="/tags/misc/"
+      title="All posts tagged with 'misc'"
+    >
+      misc
     </a>
   </span>
 
@@ -1097,85 +1203,6 @@
       title="All posts tagged with 'computation'"
     >
       computation
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/post/bezouts/">辗转相除法和裴蜀定理</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>数论基础第二弹！</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/post/bezouts/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2024-06-05T09:04:35&#43;08:00">
-      
-      Jun 5, 2024
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">2 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/math/"
-      title="All posts tagged with 'math'"
-    >
-      math
     </a>
   </span>
 
