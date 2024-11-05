@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+
+    <link rel="stylesheet" href="./typora-theme.css" />
+    <title>Prime Test</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+</head>
+
+<body class='typora-export os-windows'>
+    <div class='typora-export-content'>
+        <div id='write' class=''>
+            <h2 id='高精度素性测试'><span>高精度素性测试</span></h2>
+            <div style="background-color:#f9f9f9;padding: 25px;" id="primetest">
+                <script src="./prime_test.js"></script>
+                Number: <input id="p" type="text" onkeyup="check()" value="73"> <input type="button" value="check" onclick="check(true)">
+                <p id="ans">Answer: is a Prime Number.</p>
+                <!-- 现在 check 键基本没用了，input 的 onkeyup 可以实现实时判定 -->
+                <!-- upd: 使用 check 键会在控制台输出判定细节 -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

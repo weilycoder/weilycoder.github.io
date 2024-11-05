@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
+    <title>About on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
+            <link href="https://weilycoder.github.io/tags/About/" rel="alternate" type="text/html" title="html" />
+            <link href="https://weilycoder.github.io/tags/About/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2024-11-05T21:24:15+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
+    <id>https://weilycoder.github.io/tags/About/</id>
+        <entry>
+            <title>Who I am</title>
+            <link href="https://weilycoder.github.io/post/about/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/about/</id>
+            <published>2024-06-01T00:35:21+08:00</published>
+            <updated>2024-06-01T00:35:21+08:00</updated>
+            <content type="html">
+                &lt;p&gt;&lt;a
+  class=&#34;gblog-markdown__link--raw&#34;
+  href=&#34;https://badges.toozhao.com/stats/01HYYXADZH998DH2N5QTGZSZG1&#34;
+&gt;&lt;img
+  src=&#34;https://badges.toozhao.com/badges/01HYYXADZH998DH2N5QTGZSZG1/green.svg&#34;
+  alt=&#34;Page Views Count&#34;
+  
+/&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;gblog-markdown__link--raw&#34;
+  href=&#34;https://codeforces.com/profile/weily&#34;
+&gt;&lt;img
+  src=&#34;https://cfrating.baoshuo.dev/rating?username=weily&amp;amp;style=flat&#34;
+  alt=&#34;Codeforces Rating of @weily&#34;
+  
+/&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;gblog-markdown__link--raw&#34;
+  href=&#34;https://atcoder.jp/users/weily&#34;
+&gt;&lt;img
+  src=&#34;https://atrating.baoshuo.dev/rating?username=weily&amp;amp;style=flat&#34;
+  alt=&#34;AtCoder Rating of @weily&#34;
+  
+/&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;gblog-markdown__link--raw&#34;
+  href=&#34;https://github.com/weilycoder&#34;
+&gt;&lt;img
+  src=&#34;https://img.shields.io/badge/github-weilycoder-blue?logo=github&#34;
+  alt=&#34;github&#34;
+  
+/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;朝乾夕惕，功不唐捐。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;自我介绍&#34;
+    &gt;
+        自我介绍
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/about/#自我介绍&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 自我介绍&#34; href=&#34;#%e8%87%aa%e6%88%91%e4%bb%8b%e7%bb%8d&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;👋 Hi, I’m weily&lt;/li&gt;
+&lt;li&gt;🇨🇳 来自中国的一名高中生&lt;/li&gt;
+&lt;li&gt;👀 对数学和计算机科学很感兴趣&lt;/li&gt;
+&lt;li&gt;🌱 现已考上&lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;http://sdshiyan.jinan.cn/&#34;
+&gt;山东省实验中学&lt;/a&gt;推荐生&lt;/li&gt;
+&lt;li&gt;💞️ 正在学习算法竞赛（Olympiad in Informatics）&lt;/li&gt;
+&lt;li&gt;📫 How to reach me &amp;hellip;
+&lt;ul&gt;
+&lt;li&gt;QQ: 1991809701 / 40726462&lt;/li&gt;
+&lt;li&gt;e-mail: &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;mailto:weily2009@outlook.com&#34;
+&gt;weily2009@outlook.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;luogu: &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://www.luogu.com/user/818693&#34;
+&gt;wly09&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;⚡ 已成为 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://github.com/OI-wiki/OI-wiki&#34;
+&gt;OI-wiki&lt;/a&gt; 贡献者！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外，我在&lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://www.cnblogs.com/weily09&#34;
+&gt;博客园&lt;/a&gt;也会发布文章。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;声明&#34;
+    &gt;
+        声明
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/about/#声明&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 声明&#34; href=&#34;#%e5%a3%b0%e6%98%8e&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;Page Views Count 是我的所有个人介绍页面公用的，而且大部分是我的访问。&lt;/li&gt;
+&lt;li&gt;博客托管在 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://github.com&#34;
+&gt;Github&lt;/a&gt; 提供的静态页面服务，网站构建使用 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://gohugo.io/&#34;
+&gt;Hugo&lt;/a&gt;，主题风格来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://hugo-geekblog.geekdocs.de/&#34;
+&gt;hugo-geekblog&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;博客文章使用 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://creativecommons.org/licenses/by-sa/4.0/&#34;
+&gt;CC BY-SA 4.0&lt;/a&gt; 协议。&lt;/li&gt;
+&lt;li&gt;数学公式由 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://www.mathjax.org/&#34;
+&gt;MathJax&lt;/a&gt; 支持。&lt;/li&gt;
+&lt;li&gt;学习时可能搬一些 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt; 的内容，会注明。&lt;/li&gt;
+&lt;/ol&gt;
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/About" term="About" label="About" />
+        </entry>
+</feed>

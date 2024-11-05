@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
+    <title>Computation on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
+            <link href="https://weilycoder.github.io/tags/computation/" rel="alternate" type="text/html" title="html" />
+            <link href="https://weilycoder.github.io/tags/computation/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2024-11-05T21:24:15+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
+    <id>https://weilycoder.github.io/tags/computation/</id>
+        <entry>
+            <title>计算理论基础：P 问题、NP 问题和 NPC 问题</title>
+            <link href="https://weilycoder.github.io/post/cc/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/cc/</id>
+            <published>2024-06-07T23:26:50+08:00</published>
+            <updated>2024-06-07T23:26:50+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;部分内容来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;时间复杂度&#34;
+    &gt;
+        时间复杂度
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#时间复杂度&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 时间复杂度&#34; href=&#34;#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;大-o-表示法&#34;
+    &gt;
+        大 O 表示法
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#大-o-表示法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 大 O 表示法&#34; href=&#34;#%e5%a4%a7-o-%e8%a1%a8%e7%a4%ba%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;如何衡量两个算法的优劣？&lt;/p&gt;
+&lt;p&gt;通常来说，给定一个算法的运行过程，我们可以写出算法的基本操作数（加减乘除、比较判断、读写数组等）随数据规模变化的函数 $f(n)$。然而，算法的实现细节不同，函数的系数可能存在差异。甚至，我们所谓“基本操作”的用时差别也不能完全忽略。&lt;/p&gt;
+&lt;p&gt;但是，我们发现，随着数据规模的不断扩大，这些细微差异的影响越来越小，考虑这些细枝末节的问题未免耽误大局。&lt;/p&gt;
+&lt;p&gt;根据经验，线性函数的增长速度总比不上平方级别的；平方级别总比不上立方级别的；而只要是幂函数，最终总比不上指数函数的增长。&lt;/p&gt;
+&lt;p&gt;于是，我们可以把 $2n^2,n(n-1),3n^2-6n+10$ 等等全归入 $n^2$ 级别；将 $n(n^2-n+1),\dfrac{n^3}{3}$ 等归入 $n^3$……&lt;/p&gt;
+&lt;p&gt;更形式化地，我们有 &lt;strong&gt;大 $\Theta$ 表示法&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;对于函数 $f(n),g(n)$，$f(n)=\Theta(g(n))$ 当且仅当 $\exists c_1,c_2,n_0\gt 0$，使 $\forall n\gt n_0,c_1\cdot g(n)\le f(n)\le c_2\cdot g(n).$&lt;/p&gt;
+&lt;p&gt;需要注意，这里等号 $=$ 的含义更偏向属于号 $\in$。&lt;/p&gt;
+&lt;p&gt;更多时候，我们对复杂度的要求并不严格，只需给出渐进上界，不关心其渐进下界。那么，我们有 &lt;strong&gt;大 O 表示法&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;$f(n)=O(g(n))$，当且仅当 $\exists c,n_0$，使得 $\forall n \ge n_0,0\le f(n)\le c\cdot g(n)$。&lt;/p&gt;
+&lt;p&gt;如果说 $\Theta$ 符号表示“严格等于”，$O$ 符号就表示“大于等于”。&lt;/p&gt;
+&lt;p&gt;更多时候，尽管确定了渐进下界，鉴于输入习惯，我们仍使用 $O$ 而非 $\Theta$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;常见复杂度级别&#34;
+    &gt;
+        常见复杂度级别
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#常见复杂度级别&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 常见复杂度级别&#34; href=&#34;#%e5%b8%b8%e8%a7%81%e5%a4%8d%e6%9d%82%e5%ba%a6%e7%ba%a7%e5%88%ab&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img
+  src=&#34;/Figure.webp&#34;
+  alt=&#34;常见复杂度图像&#34;
+  
+/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;注意：对于数值计算，OI 界常常直接用输入数据本身作为数据规模，但更科学的方法是使用数据的长度作为规模。这是 $O(n)$ 与 $O(\log n)$ 的差别，请联系上下文判断。&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;常数级别-o1&#34;
+    &gt;
+        常数级别 $O(1)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#常数级别-o1&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 常数级别 $O(1)$&#34; href=&#34;#%e5%b8%b8%e6%95%b0%e7%ba%a7%e5%88%ab-o1&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;意味着无论输入数据多大，运行时间都不会改变。&lt;/p&gt;
+&lt;p&gt;在 OI 界，数的基本运算常被视作 $O(1)$ 的，因此常见于运用公式的计算，如 $\sum_{i=1}^{n}i=\frac{n(n+1)}{2}$，前者是 $O(n)$ 的，后者认为优化到了 $O(1)$；有些数据结构的单次查询复杂度也是 $O(1)$ 的（最简单的如数组）。&lt;/p&gt;
+&lt;p&gt;不过，考虑到大整数的计算实际上不可能是常数级别，在数据增大时可能只是“伪常数”的。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;反阿克曼函数-oalphan&#34;
+    &gt;
+        反阿克曼函数 $O(\alpha(n))$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#反阿克曼函数-oalphan&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 反阿克曼函数 $O(\alpha(n))$&#34; href=&#34;#%e5%8f%8d%e9%98%bf%e5%85%8b%e6%9b%bc%e5%87%bd%e6%95%b0-oalphan&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;这是并查集的专利，是一个增速可以忽略不计的函数，$\text{R. E. Tarjan}$ 证明，$\forall n\le 2^{2^{10^{19729}}}$，都有 $\alpha(n)&amp;lt;5$。因此在非学界完全可以视为 $O(1)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;双对数-olog-log-n&#34;
+    &gt;
+        双对数 $O(\log \log n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#双对数-olog-log-n&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 双对数 $O(\log \log n)$&#34; href=&#34;#%e5%8f%8c%e5%af%b9%e6%95%b0-olog-log-n&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;对数的对数，在分析时几乎可以视为常数忽略。似乎很少见单纯 $O(\log \log n)$ 的算法，但是可以与其他组合。&lt;/p&gt;
+&lt;p&gt;例如，埃氏筛的时间复杂度是 $O(n\log \log n)$ 的，这意味着其与线性筛 $O(n)$ 的复杂度相差极小，在小数据范围&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;甚至可能更优。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;对数-olog-n&#34;
+    &gt;
+        对数 $O(\log n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#对数-olog-n&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 对数 $O(\log n)$&#34; href=&#34;#%e5%af%b9%e6%95%b0-olog-n&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;常见于每次迭代缩小一半规模的算法，例如二分搜索。另外，由于质数个数函数的估计为 $\pi(n)\sim \dfrac{n}{\ln n}$，涉及质数的算法可能也会出现对数。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于换底公式 $\log_{a}b=\dfrac{\log_{c}b}{\log_{c}a}$，对数底数的差别只是常数的差距；另外，由于 $\log n^k=k\log n$，在 $k$ 为常数时，同样是常数差距。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;对数的乘方-ologk-n&#34;
+    &gt;
+        对数的乘方 $O(\log^k n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#对数的乘方-ologk-n&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 对数的乘方 $O(\log^k n)$&#34; href=&#34;#%e5%af%b9%e6%95%b0%e7%9a%84%e4%b9%98%e6%96%b9-ologk-n&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;例如说，在 $O(\log n)$ 查询的数据结构上二分查找的复杂度是 $O(\log^2 n)$ 的；其他多重嵌套的数据结构的复杂度可能达到 $O(\log^k n)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;亚线性-onepsilon&#34;
+    &gt;
+        亚线性 $O(n^{\epsilon})$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#亚线性-onepsilon&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 亚线性 $O(n^{\epsilon})$&#34; href=&#34;#%e4%ba%9a%e7%ba%bf%e6%80%a7-onepsilon&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;使用根号分治思想的算法通常是 $O(\sqrt{n})$ 的，例如暴力因式分解，或者数论分块；&lt;/p&gt;
+&lt;p&gt;基于期望的 Pollard-Rho 算法可以快速分解非平凡因子，时间复杂度是 $O(n^{1/4})$ 的；&lt;/p&gt;
+&lt;p&gt;存在很多亚线性筛快速计算数论函数的前缀和，如杜教筛时间复杂度可达到 $O(n^{2/3})$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;线性-on&#34;
+    &gt;
+        线性 $O(n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#线性-on&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 线性 $O(n)$&#34; href=&#34;#%e7%ba%bf%e6%80%a7-on&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;遍历数组的复杂度。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;幂多项式-onk&#34;
+    &gt;
+        幂（多项式） $O(n^k)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#幂多项式-onk&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 幂（多项式） $O(n^k)$&#34; href=&#34;#%e5%b9%82%e5%a4%9a%e9%a1%b9%e5%bc%8f-onk&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;多见于 $k$ 重循环。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;指数-okn&#34;
+    &gt;
+        指数 $O(k^n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#指数-okn&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 指数 $O(k^n)$&#34; href=&#34;#%e6%8c%87%e6%95%b0-okn&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;多见于暴力搜索且不含剪枝，每次有 $k$ 个决策。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;阶乘-on&#34;
+    &gt;
+        阶乘 $O(n!)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#阶乘-on&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 阶乘 $O(n!)$&#34; href=&#34;#%e9%98%b6%e4%b9%98-on&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;暴力搜索，如枚举全排列。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;onn&#34;
+    &gt;
+        $O(n^n)$
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#onn&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $O(n^n)$&#34; href=&#34;#onn&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;暴力搜索。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;啥是-mathsfp-问题&#34;
+    &gt;
+        啥是 $\mathsf{P}$ 问题
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#啥是-mathsfp-问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 啥是 $\mathsf{P}$ 问题&#34; href=&#34;#%e5%95%a5%e6%98%af-mathsfp-%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;用一句话来说，$\mathsf{P}$ 问题就是你的计算机（确定性图灵机）可以在 $O(n^k)$ 内跑出结果的问题，这里 $k$ 是与输入无关的常数。&lt;/p&gt;
+&lt;p&gt;更正式地，复杂度类 $\mathsf{P}$ 表示可以由确定性图灵机在多项式时间内解决的&lt;strong&gt;判定问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;由于普遍认为多项式函数的增长速度是最大的仍能使人接受的增长，我们认为：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一般来说，如果一个问题被归入 $\mathsf{P}$ 问题，我们认为它是快速、实用、高效的。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;考虑 $f(x)=x^5,g(x)=2^x$，前者在最初高于后者，但后者在 $23$ 之后彻底反超。如果你做出 $\dfrac{f(x)}{g(x)}$ 和 $\dfrac{g(x)}{f(x)}$ 的图像，感受会更加深刻。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;啥是-mathsfnp-问题&#34;
+    &gt;
+        啥是 $\mathsf{NP}$ 问题
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#啥是-mathsfnp-问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 啥是 $\mathsf{NP}$ 问题&#34; href=&#34;#%e5%95%a5%e6%98%af-mathsfnp-%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;很多人在谈论 $\mathsf{NP}$ 问题时会将它与 $\mathsf{NPC}$ 问题或 $\mathsf{NP-hard}$ 问题混淆。&lt;/p&gt;
+&lt;p&gt;有时，人们也以为，$\mathsf{NP}$ 指需要用超过多项式级别的算法解决问题（如 $O(k^n)$，即暴力搜索）&lt;/p&gt;
+&lt;p&gt;$\mathsf{NP}$ 问题不是“非”多项式问题；$\mathsf{NP}$ 中的 N 的含义是“不确定的”，换句话说，$\mathsf{NP}$ 问题是非确定性图灵机可以在多项式的时间复杂度内解决的问题；或者说，若这类问题的答案可以由确定性图灵机在多项式时间内验证。&lt;/p&gt;
+&lt;p&gt;有人可能会疑惑：什么叫验证答案？&lt;/p&gt;
+&lt;p&gt;例如说，对 $25321938666092955675457495083563$ 分解质因数&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;。这个问题目前没有多项式级别的算法&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;。可是，如果我说算出这个数的标准素因数分解式是 $1979263111111333 \times 12793619263623311$：首先，验证质数是可以在多项式时间内完成的&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;，其次，将两个大数相乘不是难事。你就可以相信，我给出的标准质因数分解式是正确的。&lt;/p&gt;
+&lt;p&gt;也就是说，可以提交一定的证据，使确定性图灵机经过多项式时间后的验证后确定问题的答案是“YES”。&lt;/p&gt;
+&lt;p&gt;显然 $\mathsf{P}$ 其实是 $\mathsf{NP}$ 的一个子集，由此你可以看到那些错误的理解有多么离谱。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;mathsfpmathsfnp&#34;
+    &gt;
+        $\mathsf{P}=\mathsf{NP}?$
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#mathsfpmathsfnp&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $\mathsf{P}=\mathsf{NP}?$&#34; href=&#34;#mathsfpmathsfnp&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;这是计算理论至今悬而未决的问题，$\mathsf{P}$ 问题与 $\mathsf{NP}$ 问题这两个集合显然是包含关系，即 $\mathsf{P}\subseteq\mathsf{NP}$，因为能多项式地求解一个问题，必定也能在多项式时间内验证问题。但是，$\mathsf{P}$ 等于 $\mathsf{NP}$ 吗？换句话说，能快速地验证问题，就一定能快速地解决吗？&lt;/p&gt;
+&lt;p&gt;在 2002 年对于 100 名研究者的调查中，61 人相信答案是否定的，9 人相信答案是肯定的，22 人不确定，而 8 人相信问题可能和现在所接受的公理独立，所以不可能证明或证否。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;mathsfnp-hard-问题&#34;
+    &gt;
+        $\mathsf{NP-hard}$ 问题
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#mathsfnp-hard-问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $\mathsf{NP-hard}$ 问题&#34; href=&#34;#mathsfnp-hard-%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;这是对 $\mathsf{P}=\mathsf{NP}$ 问题解决的尝试。&lt;/p&gt;
+&lt;p&gt;所谓 $\mathsf{NP-hard}$ 问题，就是说，所有 $\mathsf{NP}$ 问题可以在多项式时间内&lt;em&gt;规约&lt;/em&gt;到这个问题。&lt;/p&gt;
+&lt;p&gt;那么，什么是“规约”？&lt;/p&gt;
+&lt;p&gt;这个词语或许有些抽象，简单来说，就是通过一些代价将一个问题转化为另一个问题。&lt;/p&gt;
+&lt;p&gt;例如说，可以通过计算树的欧拉序将不带修的 LCA 问题转化为 RMQ 问题。&lt;/p&gt;
+&lt;p&gt;不过，$\mathsf{NP-hard}$ 一定是 $\mathsf{NP}$ 吗？&lt;/p&gt;
+&lt;p&gt;这可不一定。例如，“子集和”的“前 $k$ 大”版本，即：给定 $n$ 个数和 $k(k\lt 2^n)$，判断这 $n$ 个数组成的相异的和的第 $k$ 大是否大于 $m$。&lt;/p&gt;
+&lt;p&gt;由于“子集和”问题是 $\mathsf{NP-hard}$ 的，且后者可以“归约”到前者，因此前者也是 $\mathsf{NP-hard}$ 的。但由于 $k$ 是 $O(2^n)$ 级别的，前者不可能在多项式时间内验证，故前者只是 $\mathsf{NP-hard}$ 而不是 $\mathsf{NP}$ 问题。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;mathsfnpc-问题&#34;
+    &gt;
+        $\mathsf{NPC}$ 问题
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#mathsfnpc-问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $\mathsf{NPC}$ 问题&#34; href=&#34;#mathsfnpc-%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;或者叫 $\mathsf{NP-complete}$ 问题。&lt;/p&gt;
+&lt;p&gt;若一个问题既是 $\mathsf{NP}$ 问题，又是 $\mathsf{NP-hard}$ 的，则其是 $\mathsf{NPC}$ 问题。&lt;/p&gt;
+&lt;p&gt;第一个被证明是 $\mathsf{NPC}$ 的问题是 $\text{SAT}$ 问题，即：给定若干布尔表达式，问，是否存在一种变量取值，使所有表达式的值均为 $\text{TRUE}$。&lt;/p&gt;
+&lt;p&gt;值得一提，若限定每个表达式中变量的个数为 $k$，则成为 $k-\text{SAT}$ 问题；$2-\text{SAT}$ 存在多项式解，但 $3-\text{SAT}$ 是 $\mathsf{NPC}$ 问题。&lt;/p&gt;
+&lt;p&gt;$\mathsf{P}=\mathsf{NP}$ 即 $\mathsf{NPC}$ 问题属于 $\mathsf{P}$。&lt;/p&gt;
+&lt;p&gt;也就是说，若找到一个 $\mathsf{NPC}$ 问题的多项式解（或证明存在），即可说明 $\mathsf{P}=\mathsf{NP}$（事实上，只要是 $\mathsf{NP-hard}$ 问题就行）。&lt;/p&gt;
+&lt;p&gt;这也是学界倾向于 $\mathsf{P}\ne \mathsf{NP}$ 的原因。想象一下，假如我们找到了一个算法在多项式内解决 $\mathsf{NPC}$ 问题，那么几乎所有问题都可解了。甚至优化算法的工作也可以交给算法。另一方面，由于目前的加密算法全都依赖于 $\mathsf{NPC}$ 问题的难解性，整个世界的通信可能将会崩溃。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;多项式真的更快吗&#34;
+    &gt;
+        多项式真的更快吗？
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/cc/#多项式真的更快吗&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 多项式真的更快吗？&#34; href=&#34;#%e5%a4%9a%e9%a1%b9%e5%bc%8f%e7%9c%9f%e7%9a%84%e6%9b%b4%e5%bf%ab%e5%90%97&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;不过，即使证明了 $\mathsf{P}=\mathsf{NP}$，更大的可能是我们什么也做不了。因为我们或许仍不能确定幂次的大小。即使真的给出了算法，$O(n^{100})$ 或许在现阶段与 $O(2^n)$ 没有差别。&lt;/p&gt;
+&lt;p&gt;这是另一个话题，多项式实际上不一定比指数快，假如有一个算法的基本操作次数为 $T(n)=2^{1000}n^{2}$，它仍然是多项式的，甚至是 $O(n^2)$ 的，但实际上 $T&amp;rsquo;(n)=\dfrac{2^n}{1000}$ 可能更优。&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;在开满优化后，只筛质数，这个“小数据”可以高达 $2\times 10^8.$&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;分解质因数不是判定问题，但也容易改为判定版本（如：$n$ 有超过 $2$ 个质因子）。这里说着简单，就直接用了。&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;曾经提过，但还是再注一次，通常我们将数的长度看做输入规模，因此枚举质因数实际是指数级别的复杂度。&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;ASK 算法是首个不依赖未证明猜想的多项式级别的素性测试算法；Miller-Rabin 尽管更早，但其确定性测试版本的正确性依赖于广义 Riemann 猜想。&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/computation" term="computation" label="computation" />
+        </entry>
+        <entry>
+            <title>计算理论基础：语言和图灵机</title>
+            <link href="https://weilycoder.github.io/post/turing_machine/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/turing_machine/</id>
+            <published>2024-06-06T08:01:28+08:00</published>
+            <updated>2024-06-06T08:01:28+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;什么是图灵机&#34;
+    &gt;
+        什么是图灵机
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#什么是图灵机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 什么是图灵机&#34; href=&#34;#%e4%bb%80%e4%b9%88%e6%98%af%e5%9b%be%e7%81%b5%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;img src=&#34;/turing_machine_model.webp&#34; alt=&#34;图灵机模型&#34; style=&#34;float:right;width:40%&#34;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;是的，我决定先讲图灵机而非语言&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;图灵机是图灵发明的一个数学模型；通常，它被描述为在一条两端都无限长的纸带上工作的一台机器。图灵机存有一个内部状态，每一个运行时间内，图灵机会根据当前纸带上的内容和内部状态，决定如何改变纸带内容、内部状态以及下一步向左或是向右。如果图灵机当前的状态没有规定如何处理纸带内容，那么图灵机“停机”，如果图灵机停机在预先设定好的状态中，就说图灵机“接受”了当前输入。&lt;/p&gt;
+&lt;p&gt;更正式地，我们用一个七元组 $M=\langle Q,\Gamma,b,\Sigma,\delta,q_0,F\rangle$ 描述一个图灵机：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$Q$ 是一个有限非空的&lt;em&gt;状态集合&lt;/em&gt;；&lt;/li&gt;
+&lt;li&gt;$\Gamma$ 是一个有限非空的&lt;em&gt;磁带字母表&lt;/em&gt;；&lt;/li&gt;
+&lt;li&gt;$b\in \Gamma$ 是&lt;em&gt;空字符&lt;/em&gt;，在磁带上无限频繁地出现；&lt;/li&gt;
+&lt;li&gt;$\Sigma\subseteq(\Gamma\setminus \{b\})$ 是&lt;em&gt;输入符号集&lt;/em&gt;，可以出现在初始磁带上作为输入的字符；&lt;/li&gt;
+&lt;li&gt;$q_0\in Q$ 是&lt;em&gt;初始状态&lt;/em&gt;；&lt;/li&gt;
+&lt;li&gt;$F\subseteq Q$ 是&lt;em&gt;接受状态&lt;/em&gt;，如果图灵机在某个接受状态停机，就说初始磁带上的内容被图灵机接受；&lt;/li&gt;
+&lt;li&gt;$\delta: (Q\setminus F)\times \Gamma \not\to Q\times\Gamma\times\{\text{L},\text{R}\}$ 是一个被称作&lt;em&gt;转移函数&lt;/em&gt;的&lt;em&gt;偏函数&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/em&gt;，若 $\delta$ 在当前状态下未定义，图灵机停机。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;图灵机从初始状态与纸带起点起，每次根据当前的内部状态 $x$ 和当前磁针指向的纸带上的单元格中的字符 $y$ 进行操作：若 $\delta(x,y)$ 没有定义则停机，否则若 $\delta(x,y)=(a,b,c)$，则将内部状态修改为 $a$，将磁针指向的格子中的字符修改为 $b$，若 $c$ 为 $\text{L}$ 则向左移动一格，为 $\text{R}$ 则向右移动一格。一个不太常见的变体允许“无偏移”，通常用 $\text{N}$ 表示，作为方向集 $\{\text{L},\text{R}\}$ 的第三个元素。&lt;/p&gt;
+&lt;p&gt;图灵机的输出用 $M(x)$ 表示，$M(x)=1$ 当且仅当 $M$ 接受 $x$；$M(x)=0$ 当且仅当 $M$ 在有限步内停机且 $M$ 不接受 $x$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;语言&#34;
+    &gt;
+        语言
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#语言&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 语言&#34; href=&#34;#%e8%af%ad%e8%a8%80&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;容易理解的是，对于输入符号集 $\Sigma$ 构成的串的集合 $\Sigma^{\ast}$，只有一部分（或者全部）可以让图灵机接受，这一部分构成 $\Sigma^{\ast}$ 的一个子集，记为 $L$。我们把集合 $L$ 称为字母表 $\Sigma^{\ast}$ 上的一个&lt;em&gt;语言&lt;/em&gt;。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;判定性问题&#34;
+    &gt;
+        判定性问题
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#判定性问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 判定性问题&#34; href=&#34;#%e5%88%a4%e5%ae%9a%e6%80%a7%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;反过来说，给定一个字符集上的一个语言，要求图灵机接受所有属于这个语言的串，这种问题被称为&lt;em&gt;判定性问题&lt;/em&gt;。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;功能性问题&#34;
+    &gt;
+        功能性问题
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#功能性问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 功能性问题&#34; href=&#34;#%e5%8a%9f%e8%83%bd%e6%80%a7%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;功能性问题的答案不止 YES/NO，可以是一个串或其他；例如，求两个数的和是一个功能性问题。&lt;/p&gt;
+&lt;p&gt;判定问题也可以转化为一个功能性问题：求这个问题的指示函数。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;计算机器的局限&#34;
+    &gt;
+        计算机器的局限
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#计算机器的局限&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 计算机器的局限&#34; href=&#34;#%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%99%a8%e7%9a%84%e5%b1%80%e9%99%90&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;一个振奋人心的猜测是，对于所有问题（至少是判定问题），我们总能设计一个图灵机，使得这台图灵机可以解决这个问题。遗憾地是，将会看到，这个猜测是错误的。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;图灵机的编码&#34;
+    &gt;
+        图灵机的编码
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#图灵机的编码&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 图灵机的编码&#34; href=&#34;#%e5%9b%be%e7%81%b5%e6%9c%ba%e7%9a%84%e7%bc%96%e7%a0%81&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;图灵机可以被自然数编码，即存在满射函数 $f:\mathbb{N}\to \mathbb{M}$。每个自然数都对应一个图灵机，每个图灵机都有无数个编码。因此，由图灵机构成的集合可以看做一个语言。&lt;/p&gt;
+&lt;p&gt;$M_\alpha$ 表示自然数 $\alpha$ 编码的图灵机。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;通用图灵机&#34;
+    &gt;
+        通用图灵机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#通用图灵机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 通用图灵机&#34; href=&#34;#%e9%80%9a%e7%94%a8%e5%9b%be%e7%81%b5%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;存在一台图灵机 $\mathcal U$ 满足：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若 $M_{\alpha}$ 在输入 $x$ 下在有限时间内停机，则 $\mathcal{U}(x, \alpha)=M_{\alpha}(x)$，否则 $\mathcal{U}(x, \alpha)$ 不会在有限时间内停机；&lt;/li&gt;
+&lt;li&gt;如果对于任意 $x\in\{0, 1\}^\ast$，$M_\alpha$ 在输入 $x$ 下在 $T(|x|)$ 时间内停机，则对于任意 $x\in{0, 1}^\ast$，$\mathcal{U}(x, \alpha)$ 在 $O(T(|x|)\log T(|x|))$ 时间内停机。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;即：存在一台通用图灵机，它能模拟任何一台图灵机，且花费的时间只会比这台被模拟的图灵机慢其运行时间的对数。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;图灵不可计算问题&#34;
+    &gt;
+        图灵不可计算问题
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#图灵不可计算问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 图灵不可计算问题&#34; href=&#34;#%e5%9b%be%e7%81%b5%e4%b8%8d%e5%8f%af%e8%ae%a1%e7%ae%97%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;有了以上两条知识，我们可以对“可计算性”给出一些解释。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于一个判定问题，若存在一个总是在有限步内停机且能够正确进行判定的图灵机，则这个问题是一个&lt;em&gt;图灵可计算&lt;/em&gt;的问题，否则这个问题是一个&lt;em&gt;图灵不可计算&lt;/em&gt;的问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;很多人听说过“停机问题”，那是一个经典的图灵不可计算问题；不过，构造并证明它图灵不可计算并非最简的证明方式。&lt;/p&gt;
+&lt;p&gt;一个非常简短的说明如下：图灵机可以被自然数编码，因此图灵机的个数是可数无穷；而语言的个数（显然等价于二进制串集合的个数&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;，即自然数的幂集中元素的个数）是不可数无穷。由于一个图灵机只能判定一个语言，故存在图灵不可计算的问题。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h4 id=&#34;停机问题&#34;
+    &gt;
+        停机问题
+    &lt;/h4&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#停机问题&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 停机问题&#34; href=&#34;#%e5%81%9c%e6%9c%ba%e9%97%ae%e9%a2%98&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;停机问题是一个经典的图灵不可计算问题：给定 $\alpha$ 和 $x$，判定 $M_{\alpha}$ 在输入为 $x$ 时是否会在有限步内停机。&lt;/p&gt;
+&lt;p&gt;定义函数 $\mathsf{UC}:\{0,1\}^{\ast}\to \{0,1\}$ 为：
+$$\mathsf{UC}(\alpha)=\begin{cases}0,&amp;amp;M_\alpha(\alpha)=1\\1,&amp;amp;\text{otherwise}\end{cases}$$&lt;/p&gt;
+&lt;p&gt;先证 $\mathsf{UC}$ 函数是图灵不可计算的：若存在 $M_{\beta}$ 可以计算 $\mathsf{UC}$ 函数，则 $M_{\beta}(\beta)=\mathsf{UC}(\beta)$；但是由 $\mathsf{UC}$ 的定义，$\mathsf{UC}(\beta)=1\Leftrightarrow M_\beta(\beta)\ne 1$，矛盾！&lt;/p&gt;
+&lt;p&gt;令 $M_{\mathsf{HALT}}$ 是一台可以解决停机问题的图灵机，$M_{\mathsf{HALT}}(x,\alpha)$ 的值是判定图灵机 $\alpha$ 是否会在输入 $x$ 时在有限步内停机。那么，可以构造一台计算 $\mathsf{UC}$ 的图灵机：$M_{\mathsf{UC}}$ 先调用 $M_{\mathsf{HALT}}$，若 $M_{\mathsf{HALT}}$ 输出 $0$，则输出 $1$；否则，使用通用图灵机模拟计算得到答案。由于$\mathsf{UC}$ 是图灵不可计算的，停机问题也是图灵不可计算的。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;其他型号的机器&#34;
+    &gt;
+        其他型号的机器
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#其他型号的机器&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 其他型号的机器&#34; href=&#34;#%e5%85%b6%e4%bb%96%e5%9e%8b%e5%8f%b7%e7%9a%84%e6%9c%ba%e5%99%a8&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;为了更深入地研究问题，人们还设计了许多具有其他功能的机器，不过其中有一部分被证明与图灵机的计算能力相同。&lt;/p&gt;
+&lt;p&gt;有趣的是，即使被设计得看似十分强大的机器，也无法解决自己的停机问题。私以为这具有逻辑上奇妙的美感。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;非确定性图灵机&#34;
+    &gt;
+        非确定性图灵机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#非确定性图灵机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 非确定性图灵机&#34; href=&#34;#%e9%9d%9e%e7%a1%ae%e5%ae%9a%e6%80%a7%e5%9b%be%e7%81%b5%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;非确定性图灵机与普通的图灵机相比，它的转移函数 $\delta$ 可以是多值的。一个很酷的解释是：非确定性图灵机在每次转移时将会“同时”进行若干种不同的转移——就像平行宇宙一样——从而在这些分支“并行”计算。如果“平行宇宙”中一个图灵机在接受状态停机，整台非确定性图灵机就看做接受了这个输入。&lt;/p&gt;
+&lt;p&gt;另一个解释是：非确定性图灵机在每次转移时将会“运气极好”地选择将在最少步内接受并停机的分支。&lt;/p&gt;
+&lt;p&gt;相对地，普通的图灵机也叫做确定性图灵机。&lt;/p&gt;
+&lt;p&gt;实际上，任何确定性图灵机可以用迭代加深的形式在指数级时间模拟一台非确定性图灵机多项式时间内的行为。&lt;/p&gt;
+&lt;p&gt;也有定义设定了显式拒绝状态，但是仅当非确定性图灵机在所有分支均拒绝时，才能认为整台非确定性图灵机拒绝。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;计算机&#34;
+    &gt;
+        计算机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#计算机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 计算机&#34; href=&#34;#%e8%ae%a1%e7%ae%97%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;图灵机与冯·诺依曼计算机解决问题的时间复杂度差别在多项式级别内。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;多磁带图灵机&#34;
+    &gt;
+        多磁带图灵机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#多磁带图灵机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 多磁带图灵机&#34; href=&#34;#%e5%a4%9a%e7%a3%81%e5%b8%a6%e5%9b%be%e7%81%b5%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;标准的图灵机只能在一条纸带上进行操作；对于一个 $k$ 带图灵机，其中一条纸带是只读的输入带，而剩下的 $k-1$ 条纸带可以进行读写，并且这 $k-1$ 条纸带中还有一条纸带用作输出。&lt;/p&gt;
+&lt;p&gt;多带图灵机的纸带数必须是有限的。&lt;/p&gt;
+&lt;p&gt;尽管多带图灵机直观上更加强大，实际上标准图灵机只需多二次（$n^2$）的时间即可模拟多带图灵机。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;概率图灵机&#34;
+    &gt;
+        概率图灵机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#概率图灵机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 概率图灵机&#34; href=&#34;#%e6%a6%82%e7%8e%87%e5%9b%be%e7%81%b5%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;概率图灵机拥有两个转移函数，在每次转移时以独立平等的概率（可以看做抛硬币）选择其中一个——但是没有平行宇宙！&lt;/p&gt;
+&lt;p&gt;直观地，在给定的输入和指令状态机上，它可能具有不同的运行时间，或者它可能根本不停止；此外，它可以在一个执行中接受一个输入，而在另一个执行中拒绝相同的输入。&lt;/p&gt;
+&lt;p&gt;OI 中，不少算法基于概率，比较经典的例如对大整数的 Miller-Rabin 算法。不过，我们一般可以对成功率进行估计。&lt;/p&gt;
+&lt;p&gt;比较理想的情况是：机器可能接受不属于语言 $L$ 的串，但不拒绝属于 $L$ 的串，并且不会不停机；这样我们可以多次运行来保证正确性。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;谕示机&#34;
+    &gt;
+        谕示机
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/turing_machine/#谕示机&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 谕示机&#34; href=&#34;#%e8%b0%95%e7%a4%ba%e6%9c%ba&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;这种机器相比其他构造更有神秘色彩。谕示机定义了一个黑盒，它可以在一次运算时间内解决一个特定问题，这个问题可以是任何复杂度类，甚至是图灵不可计算问题。&lt;/p&gt;
+&lt;p&gt;具有停机问题的预言机的机器可以确定特定的图灵机是否会在特定的输入上停止，但通常它不能确定与自身等效的机器是否会停止。&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;em&gt;partial function&lt;/em&gt;，是只对定义域的一个子集有定义的函数；翻译来自中文维基百科。&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;任何语言都可以编码为 01 串。&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/computation" term="computation" label="computation" />
+        </entry>
+</feed>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
+    <title>Graph on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
+            <link href="https://weilycoder.github.io/tags/graph/" rel="alternate" type="text/html" title="html" />
+            <link href="https://weilycoder.github.io/tags/graph/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2024-11-05T21:24:15+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
+    <id>https://weilycoder.github.io/tags/graph/</id>
+        <entry>
+            <title>Floyd 算法</title>
+            <link href="https://weilycoder.github.io/post/floyd/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/floyd/</id>
+                    <author>
+                        <name>weily</name>
+                    </author>
+            <published>2024-11-05T20:40:07+08:00</published>
+            <updated>2024-11-05T20:40:07+08:00</updated>
+            <content type="html">
+                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;floyd-算法&#34;
+    &gt;
+        Floyd 算法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/floyd/#floyd-算法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Floyd 算法&#34; href=&#34;#floyd-%e7%ae%97%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;用于求图中任意两点最短路算法。&lt;/p&gt;
+&lt;p&gt;Floyd 算法本质是 dp。设 $i\to j$ 最短路为 $f_{i,j}$，初始置 $f_{i,j}$ 为 $i\to j$ 的边权；若 $i\to j$ 没有直接连边，置 $f_{i,j}$ 为 $+\infty$。&lt;/p&gt;
+&lt;p&gt;枚举 $k$，检查 $i\to k\to j$ 是否比原有的路径长度短，即令&lt;/p&gt;
+&lt;p&gt;$$
+f_{i,j}\gets \min(f_{i,j},f_{i,k}+f_{k,j})
+$$&lt;/p&gt;
+&lt;p&gt;当 $k$ 遍历过所有点，全局最短路就确定了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]);&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;注意 Floyd 算法的枚举顺序是 $(k,i,j)$，更改枚举顺序会导致算法出错。&lt;/p&gt;
+&lt;p&gt;值得一提，在&lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://arxiv.org/pdf/1904.01210&#34;
+&gt;这篇论文&lt;/a&gt;证明，对于 $(i,k,j)$ 的枚举顺序，算法最多跑 $2$ 遍即可得到正确结果；对于 $(i,j,k)$ 的枚举顺序，算法最多跑 $3$ 遍即可得到正确结果。&lt;/p&gt;
+&lt;p&gt;不过，对单个变量的枚举顺序显然没有要求，正序倒序乱序显然都可以。&lt;/p&gt;
+&lt;p&gt;特别地，假设枚举变量 $k$ 已经遍历且仅遍历了 $S$ 中的点，当前答案的意义就是：只经过 $S$ 中的点作为“中继”，任意两点的最短路。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;bitset-优化传递闭包&#34;
+    &gt;
+        bitset 优化传递闭包
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/floyd/#bitset-优化传递闭包&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor bitset 优化传递闭包&#34; href=&#34;#bitset-%e4%bc%98%e5%8c%96%e4%bc%a0%e9%80%92%e9%97%ad%e5%8c%85&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;计算任意两点是否可达。&lt;/p&gt;
+&lt;p&gt;我们对 dp 数组的含义重新定义，初始若 $i\to j$ 有边，置 $f_{i,j}$ 为 $1$，否者置为 $0$，特别地，$i=j$ 时应置为 $1$。&lt;/p&gt;
+&lt;p&gt;转移方程为：&lt;/p&gt;
+&lt;p&gt;$$
+f_{i,j}\gets f_{i,j}\cup(f_{i,k}\cap f_{k,j})
+$$&lt;/p&gt;
+&lt;p&gt;这里 $\cup$ 表示按位或；$\cap$ 表示按位与。&lt;/p&gt;
+&lt;p&gt;考虑用 &lt;code&gt;bitset&lt;/code&gt; 优化。&lt;/p&gt;
+&lt;p&gt;我们用 &lt;code&gt;bitset&lt;/code&gt; 数组作为 dp 数组，$f_i$ 是一个长 $N$ 的 &lt;code&gt;bitset&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;转移方程显然可以看成：&lt;/p&gt;
+&lt;p&gt;$$
+f_{i,j}=
+\begin{cases}
+f_{i,j}\cup f_{k,j},&amp;amp;\text{if }f_{i,k}=\text{true} \\
+f_{i,j},&amp;amp;\text{otherwise}
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;注意到若 $f_{i,k}$ 为真，则需遍历所有 $j$ 对 $f_{i,j}$ 和 $f_{k,j}$ 取或。&lt;/p&gt;
+&lt;p&gt;这个过程可以用 &lt;code&gt;bitset&lt;/code&gt; 优化。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;由于 &lt;code&gt;bitset&lt;/code&gt; 实现上会压位，时间复杂度是 $O\left(\dfrac{N^3}{w}\right)$，$w$ 是计算机的位数，一般是 $32$ 或 $64$。&lt;/p&gt;
+&lt;p&gt;开 O2 优化后，编译器可能会进行循环展开，这会使常数变为原来的 $\dfrac18\sim \dfrac14$。因此，Floyd 传递闭包的复杂度尽管是 $O(n^3)$，但常常可以跑过 $3000$ 左右的数据。&lt;/p&gt;
+
+            </content>  
+                                <category scheme="https://weilycoder.github.io/authors/weily" term="weily" label="weily" />  
+                                <category scheme="https://weilycoder.github.io/tags/graph" term="graph" label="graph" />
+        </entry>
+</feed>

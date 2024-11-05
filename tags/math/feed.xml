@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
+    <title>Math on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
+            <link href="https://weilycoder.github.io/tags/math/" rel="alternate" type="text/html" title="html" />
+            <link href="https://weilycoder.github.io/tags/math/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2024-11-05T21:24:15+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
+    <id>https://weilycoder.github.io/tags/math/</id>
+        <entry>
+            <title>拉格朗日插值</title>
+            <link href="https://weilycoder.github.io/post/lag-interp/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/lag-interp/</id>
+            <published>2024-11-05T11:21:12+08:00</published>
+            <updated>2024-11-05T11:21:12+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;插值是通过已知的、离散的数据点，推算未知的新数据点的方法。&lt;/p&gt;
+&lt;p&gt;最普通地，可以将原数据点用线段连接，构成分段函数，叫做线性插值；C++ 20 开始，标准库实现了 &lt;a
+  class=&#34;gblog-markdown__link--code&#34;
+  href=&#34;https://zh.cppreference.com/w/cpp/numeric/lerp&#34;
+&gt;&lt;code&gt;std::lerp&lt;/code&gt;&lt;/a&gt; 函数，用于线性插值。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;拉格朗日插值法&#34;
+    &gt;
+        拉格朗日插值法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/lag-interp/#拉格朗日插值法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 拉格朗日插值法&#34; href=&#34;#%e6%8b%89%e6%a0%bc%e6%9c%97%e6%97%a5%e6%8f%92%e5%80%bc%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;但是，我们通常对精度有更高的要求；一般的，已知 $n+1$ 个点 $(x_0,y_0),(x_1,y_1),\cdots,(x_n,y_n)$ &lt;strong&gt;通常&lt;/strong&gt;可以求出 $n$ 次多项式 $f(x)$ 满足 $f(x_i)=y_i,\forall i=0,1,\cdots,n$。&lt;/p&gt;
+&lt;p&gt;最暴力地，我们可以使用高斯消元 $O(n^3)$ 计算 $f(x)$，单次插值可以 $O(n)$。&lt;/p&gt;
+&lt;p&gt;朴素的拉格朗日插值无需计算具体的函数 $f(x)$，单次插值 $O(n^2)$，通过多项式技巧可以做到 $O(n\log^2 n)$。&lt;/p&gt;
+&lt;p&gt;具体地，记原数据点为 $P_1(x_1,y_1),P_2(x_2,y_2),\cdots,P_n(x_n,y_n)$，它们在 $x$ 轴上的投影为 $P&amp;rsquo;_1(x_1,0),P&amp;rsquo;_2(x_2,0),\cdots,P&amp;rsquo;_n(x_n,0)$。&lt;/p&gt;
+&lt;p&gt;考虑构造 $n$ 个函数，第 $i$ 个函数 $f_i(x)$ 过 $\begin{cases}P_j ,&amp;amp; j=i \\ P&amp;rsquo;_j ,&amp;amp; \text{otherwise}\end{cases}$。&lt;/p&gt;
+&lt;p&gt;不妨令 $f_i(x)=a\cdot\prod_{j\ne i}(x-x_j)$，将 $P_i$ 代入，得 $a=\dfrac{y_i}{\prod_{j\ne i}(x_i-x_j)}$，于是&lt;/p&gt;
+&lt;p&gt;$$
+f_i(x)=y_i\cdot\dfrac{\prod_{j\ne i}(x-x_j)}{\prod_{j\ne i}(x_i-x_j)}=y_i\cdot\prod_{j\ne i}\dfrac{x-x_j}{x_i-x_j}
+$$&lt;/p&gt;
+&lt;p&gt;因此所求函数 $f(x)$ 即为：&lt;/p&gt;
+&lt;p&gt;$$
+f(x)=\sum_{i=1}^{n}y_i\cdot\prod_{j\ne i}\dfrac{x-x_j}{x_i-x_j}
+$$&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;横坐标为连续整数的插值&#34;
+    &gt;
+        横坐标为连续整数的插值
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/lag-interp/#横坐标为连续整数的插值&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 横坐标为连续整数的插值&#34; href=&#34;#%e6%a8%aa%e5%9d%90%e6%a0%87%e4%b8%ba%e8%bf%9e%e7%bb%ad%e6%95%b4%e6%95%b0%e7%9a%84%e6%8f%92%e5%80%bc&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;例如，已知 $1\sim n+1$ 的点值，有：&lt;/p&gt;
+&lt;p&gt;$$
+f(x)=\sum\limits_{i=1}^{n+1}(-1)^{n+1-i}y_i\cdot\frac{\prod\limits_{j=1}^{n+1}(x-j)}{(i-1)!(n+1-i)!(x-i)}
+$$&lt;/p&gt;
+&lt;p&gt;预处理后线性。&lt;/p&gt;
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>辛普森法求数值积分</title>
+            <link href="https://weilycoder.github.io/post/simpson/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/simpson/</id>
+            <published>2024-08-10T11:35:20+08:00</published>
+            <updated>2024-08-10T11:35:20+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;部分内容来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;辛普森公式&#34;
+    &gt;
+        辛普森公式
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/simpson/#辛普森公式&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 辛普森公式&#34; href=&#34;#%e8%be%9b%e6%99%ae%e6%a3%ae%e5%85%ac%e5%bc%8f&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;首先，我们引入二次函数积分公式。&lt;/p&gt;
+&lt;p&gt;对于二次函数&lt;/p&gt;
+&lt;p&gt;$$
+f(x)=ax^2+bx+c,
+$$&lt;/p&gt;
+&lt;p&gt;有&lt;/p&gt;
+&lt;p&gt;$$
+\int_{L}^{R} f(x)\text{d}x=\dfrac{R-L}{6}\left[f(L)+f(R)+4f\left(\dfrac{L+R}{2}\right)\right]
+$$&lt;/p&gt;
+&lt;p&gt;这里给出计算过程：&lt;/p&gt;
+&lt;p&gt;先求出 $f(x)$ 的原函数：&lt;/p&gt;
+&lt;p&gt;$$
+F(x)=\int f(x)\text{d}x=\dfrac{a}{3}x^3+\dfrac{b}{2}x^2+cx+D
+$$&lt;/p&gt;
+&lt;p&gt;由牛顿-莱布尼茨公式，&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\int_{L}^{R} f(x)\text{d}x
+&amp;amp;=F(R)-F(L)\\
+&amp;amp;=\dfrac{a}{3}(R^3-L^3)+\dfrac{b}{2}(R^2-L^2)+c(r-l)\\
+&amp;amp;=(R-L)\left(\dfrac{a}{3}(L^2+LR+R^2)+\dfrac{b}{2}(L+R)+c\right)\\
+&amp;amp;=\dfrac{R-L}{6}(2L^2+2LR+2R^2+3L+3R+6c)\\
+&amp;amp;=\dfrac{R-L}{6}\left\{(aL^2+bL+c)+(aR^2+bR+c)+4\left[a\left(\dfrac{l+r}{2}\right)^2+b\left(\dfrac{l+r}{2}\right)+c\right]\right\}\\
+&amp;amp;=\dfrac{R-L}{6}\left[f(L)+f(R)+4f\left(\dfrac{L+R}{2}\right)\right]
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;需要注意这里其实不要求 $a\ne 0$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;自适应辛普森法&#34;
+    &gt;
+        自适应辛普森法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/simpson/#自适应辛普森法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 自适应辛普森法&#34; href=&#34;#%e8%87%aa%e9%80%82%e5%ba%94%e8%be%9b%e6%99%ae%e6%a3%ae%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;考虑使用二次函数拟合被积函数，将被积函数分成若干段，每段内使用辛普森公式求近似值。&lt;/p&gt;
+&lt;p&gt;但是，如果我们不断细分，无疑会增大算量；如果细分的程度不够，又会影响精度。&lt;/p&gt;
+&lt;p&gt;一般，我们先将函数分成几段，接下来对每段检查二次函数是否能良好拟合。&lt;/p&gt;
+&lt;p&gt;具体地，对于函数的某一段 $[l,r]$，如果拟合 $[l,r]$ 的结果跟 $[l,\frac{l+r}{2}]$ 与 $[\frac{l+r}{2},r]$ 的和接近，那么认为拟合良好。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;simpson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;asr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;step&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;simpson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;simpson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;abs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;step&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;asr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;step&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         &lt;span class=&#34;n&#34;&gt;asr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;step&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;asr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;simpson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;其中 &lt;code&gt;15&lt;/code&gt; 是一个 Magic Number，在 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://doi.org/10.1145/321526.321537&#34;
+&gt;https://doi.org/10.1145/321526.321537&lt;/a&gt; 给出了论述。&lt;/p&gt;
+&lt;p&gt;需要指出，也存在一些病态函数，直接应用自适应辛普森法可能会出错。&lt;/p&gt;
+
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>乘法逆元</title>
+            <link href="https://weilycoder.github.io/post/inv/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/inv/</id>
+            <published>2024-07-18T22:09:36+08:00</published>
+            <updated>2024-07-18T22:09:36+08:00</updated>
+            <content type="html">
+                &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;定义&#34;
+    &gt;
+        定义
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#定义&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 定义&#34; href=&#34;#%e5%ae%9a%e4%b9%89&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;若 $ax\equiv 1\pmod{p}$，则称 $x$ 是模 $p$ 意义下 $a$ 的乘法逆元，记作 $a^{-1}$。&lt;/p&gt;
+&lt;p&gt;显然，它相当于模意义下 $a$ 的倒数。不那么严谨地说，模意义下除以 $a$ 就是乘 $a^{-1}$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;在线单点求值&#34;
+    &gt;
+        在线单点求值
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#在线单点求值&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 在线单点求值&#34; href=&#34;#%e5%9c%a8%e7%ba%bf%e5%8d%95%e7%82%b9%e6%b1%82%e5%80%bc&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;扩展欧几里得法&#34;
+    &gt;
+        扩展欧几里得法
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#扩展欧几里得法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 扩展欧几里得法&#34; href=&#34;#%e6%89%a9%e5%b1%95%e6%ac%a7%e5%87%a0%e9%87%8c%e5%be%97%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;由于求逆元相当于求 $ax+py=1$ 的一组整数解，所以可以使用扩展欧几里得法。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;exgcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;exgcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;复杂度为 $O(\log a)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;快速幂法&#34;
+    &gt;
+        快速幂法
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#快速幂法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 快速幂法&#34; href=&#34;#%e5%bf%ab%e9%80%9f%e5%b9%82%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;由费马小定理（$p$ 为质数）：&lt;/p&gt;
+&lt;p&gt;$$
+a^{p}\equiv a\pmod{p}
+$$&lt;/p&gt;
+&lt;p&gt;因此 $(a,p)=1$ 时，&lt;/p&gt;
+&lt;p&gt;$$
+a^{-1}\equiv a^{p-2}\pmod{p}
+$$&lt;/p&gt;
+&lt;p&gt;复杂度为 $\Theta(\log p)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;离线多点求值&#34;
+    &gt;
+        离线多点求值
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#离线多点求值&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 离线多点求值&#34; href=&#34;#%e7%a6%bb%e7%ba%bf%e5%a4%9a%e7%82%b9%e6%b1%82%e5%80%bc&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;1sim-n-的逆元&#34;
+    &gt;
+        $1\sim n$ 的逆元
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#1sim-n-的逆元&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor $1\sim n$ 的逆元&#34; href=&#34;#1sim-n-%e7%9a%84%e9%80%86%e5%85%83&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;首先，$1^{-1}\equiv 1\pmod p$；&lt;/p&gt;
+&lt;p&gt;其次，考虑 $i^{-1}$，令 $k=\left\lfloor\dfrac{p}{i}\right\rfloor,j=p\bmod i$，有 $p=ki+j$，则模意义下有 $ki+j\equiv 0\pmod p$；两边同时乘 $i^{-1}j^{-1}$：&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+kj^{-1}+i^{-1}&amp;amp;\equiv 0&amp;amp;\pmod p\\
+i^{-1}&amp;amp;\equiv -kj^{-1}&amp;amp;\pmod p\\
+i^{-1}&amp;amp;\equiv -\left\lfloor\dfrac{p}{i}\right\rfloor(p\bmod i)^{-1}&amp;amp;\pmod p\\
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;递推即可，时间复杂度 $\Theta(n)$。&lt;/p&gt;
+&lt;p&gt;注意到 $0^{-1}$ 未定义，因此对任意 $i\mid p$，$i^{-1}$ 同样未定义。&lt;/p&gt;
+&lt;p&gt;注意到这种方法同样可以单点求逆元，现在已经证明其复杂度为 $O(\sqrt[3]{n\ln n})$，且 $\Omega(\dfrac{\ln n}{\ln\ln n})$，同时观察到可能是 $O(\log n)$ 的。&lt;/p&gt;
+&lt;p&gt;&lt;img
+  src=&#34;https://cdn.jsdelivr.net/gh/weilycoder/image_hosting@master/pmodn-5723a1e5b899a5d7.svg&#34;
+  alt=&#34;&#34;
+  
+/&gt;&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;任意-n-个数的逆元&#34;
+    &gt;
+        任意 $n$ 个数的逆元
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#任意-n-个数的逆元&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 任意 $n$ 个数的逆元&#34; href=&#34;#%e4%bb%bb%e6%84%8f-n-%e4%b8%aa%e6%95%b0%e7%9a%84%e9%80%86%e5%85%83&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;给定序列 $a$，线性求序列中每个数的逆元。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;首先，求出 $a$ 的前缀积 $s$；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;然后，使用快速幂或扩展欧几里得法求 $s_n$ 的逆元 $v_n$；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;由 $v_{i}=v_{i+1}\cdot a_{i+1}$，可以递推出整个序列 $v$；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$a_{i}=s_{i}\cdot v_{i-1}$。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;时间复杂度 $\Theta(n+\log p)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;预处理后快速求解&#34;
+    &gt;
+        预处理后快速求解
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#预处理后快速求解&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 预处理后快速求解&#34; href=&#34;#%e9%a2%84%e5%a4%84%e7%90%86%e5%90%8e%e5%bf%ab%e9%80%9f%e6%b1%82%e8%a7%a3&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;存在一种 $\Theta(p^{2/3})$ 预处理，在线 $\Theta(1)$ 查询的算法。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;farey-序列&#34;
+    &gt;
+        Farey 序列
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/inv/#farey-序列&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Farey 序列&#34; href=&#34;#farey-%e5%ba%8f%e5%88%97&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;第 $i$ 个 Farey 序列记作 $F_i$，是把分母小于等于 $i$ 的所有最简真分数从小到大排成的序列；特别地，序列的首项是 $\dfrac{0}{1}$，末项为 $\dfrac{1}{1}$。&lt;/p&gt;
+&lt;p&gt;$$
+\begin{array}{lllllllllllll}
+F_1=\bigg\{&amp;amp;\dfrac{0}{1},&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;\dfrac{1}{1}&amp;amp;\bigg\}\\
+F_2=\bigg\{&amp;amp;\dfrac{0}{1},&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;\dfrac{1}{2},&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;\dfrac{1}{1}&amp;amp;\bigg\}\\
+F_3=\bigg\{&amp;amp;\dfrac{0}{1},&amp;amp;&amp;amp;&amp;amp;\dfrac{1}{3},&amp;amp;&amp;amp;\dfrac{1}{2},&amp;amp;&amp;amp;\dfrac{2}{3},&amp;amp;&amp;amp;&amp;amp;\dfrac{1}{1}&amp;amp;\bigg\}\\
+F_4=\bigg\{&amp;amp;\dfrac{0}{1},&amp;amp;&amp;amp;\dfrac{1}{4},&amp;amp;\dfrac{1}{3},&amp;amp;&amp;amp;\dfrac{1}{2},&amp;amp;&amp;amp;\dfrac{2}{3},&amp;amp;\dfrac{3}{4},&amp;amp;&amp;amp;\dfrac{1}{1}&amp;amp;\bigg\}\\
+F_5=\bigg\{&amp;amp;\dfrac{0}{1},&amp;amp;\dfrac{1}{5},&amp;amp;\dfrac{1}{4},&amp;amp;\dfrac{1}{3},&amp;amp;\dfrac{2}{5},&amp;amp;\dfrac{1}{2},&amp;amp;\dfrac{3}{5},&amp;amp;\dfrac{2}{3},&amp;amp;\dfrac{3}{4},&amp;amp;\dfrac{4}{5},&amp;amp;\dfrac{1}{1}&amp;amp;\bigg\}
+\end{array}
+$$&lt;/p&gt;
+&lt;!-- &lt;div class=&#34;center-flex&#34;&gt;
+  &lt;img src=&#34;https://cdn.jsdelivr.net/gh/weilycoder/image_hosting@master/202408022026646-72ea53848d5932dc.png&#34; style=&#34;margin:auto;&#34;/&gt;
+&lt;/div&gt; --&gt;
+&lt;p&gt;注意到 Farey 序列可以迭代生成，每次只需选择 $F_{n-1}$ 中每对相邻的 $\dfrac{a}{b},\dfrac{c}{d}$，满足 $b+d=n$，将 $\dfrac{a+c}{b+d}$ 放在中间即可。&lt;/p&gt;
+&lt;p&gt;同时，Farey 序列有性质：$bc-ad=1$。&lt;/p&gt;
+&lt;p&gt;我看到很多博客提到一个定理：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于任意整数 $n\le 2$ 和任意实数 $v\in [0,1]$，总能在 $F_{n−1}$ 找到 $\dfrac{x}{y}$ 满足 $\left|v−\dfrac{x}{y}\right|≤\dfrac{1}{yn}$ 。更强地，这个 $\dfrac{x}{y}$ 一定是 $v$ 序列中最接近 $v$ 的第一个分数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;实际上，如果引入渐进分数，有另一个不等式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对实数 $x$ 与渐进分数 $\dfrac{p_k}{q_k}$ ，有
+$$
+\dfrac{1}{q_k(q_k+q_{k+1})}&amp;lt;\left|x-\frac{p_k}{q_k}\right|&amp;lt;\dfrac{1}{q_kq_{k+1}}
+$$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个不等式更紧一些，因为 $q_{k+1}$ 不会比 $n$ 更小。&lt;/p&gt;
+&lt;p&gt;我们固定 $n$，对于 $a$ 令 $v=\dfrac{a}{p}$ 并找到 $\dfrac{x}{y}$ 满足 $\left|\dfrac{a}{p}-\dfrac{x}{y}\right|\le\dfrac{1}{yn}$。即 $|ay-px|\le\left\lfloor\dfrac{p}{n}\right\rfloor$。也就是说 $ay\equiv u\pmod p$，其中 $|u|\le \left\lfloor\dfrac{p}{n}\right\rfloor$。注意到 $a^{-1}=u^{-1}y\pmod p$，我们只需预处理 $O\left(\left\lfloor\dfrac{p}{n}\right\rfloor\right)$ 个数的逆元。&lt;/p&gt;
+&lt;p&gt;注意到序列中 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 互不相同，我们开一个长 $n^2$ 的 $0/1$ 数组记录是否有 $\left\lfloor\dfrac{xn^2}{y}\right\rfloor$ 等于 $i$。将序列求前缀和即可 $O(1)$ 查大于或小于 $\dfrac{x}{y}$ 的的第一个数。&lt;/p&gt;
+
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>生成函数</title>
+            <link href="https://weilycoder.github.io/post/ogf/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/ogf/</id>
+            <published>2024-06-23T13:30:48+08:00</published>
+            <updated>2024-06-23T13:30:48+08:00</updated>
+            <content type="html">
+                &lt;p&gt;Useless Algorithms 之一。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;序列 $a$ 的普通生成函数定义为形式幂级数：&lt;/p&gt;
+&lt;p&gt;$$
+F(x)=\sum_{n}a_nx_n
+$$&lt;/p&gt;
+&lt;p&gt;$a$ 既可以是有穷序列，也可以是无穷序列。例如：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;序列 $a=\langle1,2,3\rangle$ 的生成函数是 $a+2x+3x^2$&lt;/li&gt;
+&lt;li&gt;序列 $a=\langle1,1,1,\cdots\rangle$ 的生成函数是 $\sum_{n\ge 0}x^n=1+x+x^2+x^3+\cdots$&lt;/li&gt;
+&lt;li&gt;序列 $a=\langle1,2,4,8,16,\cdots\rangle$ 的生成函数是 $\sum_{n\ge 0}2^nx^n$&lt;/li&gt;
+&lt;li&gt;序列 $a=\langle1,3,5,7,9,\cdots\rangle$ 的生成函数是 $\sum_{n\ge 0}(2n+1)x^n$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;简单来说，如果序列 $a$ 有通项公式，那么它的普通生成函数的系数就是通项公式。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;基本运算&#34;
+    &gt;
+        基本运算
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#基本运算&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 基本运算&#34; href=&#34;#%e5%9f%ba%e6%9c%ac%e8%bf%90%e7%ae%97&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;设两个序列 $a,b$ 的生成函数分别是 $F(x),G(x)$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;加减运算&#34;
+    &gt;
+        加减运算
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#加减运算&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 加减运算&#34; href=&#34;#%e5%8a%a0%e5%87%8f%e8%bf%90%e7%ae%97&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;由&lt;/p&gt;
+&lt;p&gt;$$
+F(x)\pm G(x)=\sum_{n}(a_n\pm b_n)x^n
+$$&lt;/p&gt;
+&lt;p&gt;得到 $F(x)\pm G(x)$ 是序列 $\langle a_n\pm b_n\rangle$ 的生成函数&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;乘法运算卷积&#34;
+    &gt;
+        乘法运算（卷积）
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#乘法运算卷积&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 乘法运算（卷积）&#34; href=&#34;#%e4%b9%98%e6%b3%95%e8%bf%90%e7%ae%97%e5%8d%b7%e7%a7%af&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;由&lt;/p&gt;
+&lt;p&gt;$$
+F(x)G(x)=\sum_{n}x^n\sum_{i=0}^{n}a_ib_{n-i}
+$$&lt;/p&gt;
+&lt;p&gt;我们知道 $F(x)G(x)$ 是 $\langle\sum_{i=0}^{n}a_ib_{n-i}\rangle$ 的生成函数。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;封闭形式及常见变形&#34;
+    &gt;
+        封闭形式及常见变形
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#封闭形式及常见变形&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 封闭形式及常见变形&#34; href=&#34;#%e5%b0%81%e9%97%ad%e5%bd%a2%e5%bc%8f%e5%8f%8a%e5%b8%b8%e8%a7%81%e5%8f%98%e5%bd%a2&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;运用生成函数时，我们会适时将其化为封闭形式来便于化简。&lt;/p&gt;
+&lt;p&gt;例如，$\langle 1,1,1,\cdots\rangle$ 的生成函数是&lt;/p&gt;
+&lt;p&gt;$$
+F(x)=\sum_{n\ge 0}x^n
+$$&lt;/p&gt;
+&lt;p&gt;我们发现&lt;/p&gt;
+&lt;p&gt;$$
+F(x)x+1=F(x)
+$$&lt;/p&gt;
+&lt;p&gt;解这个方程&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，&lt;/p&gt;
+&lt;p&gt;$$
+F(x)=\dfrac{1}{1-x}
+$$&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;等比数列求和&#34;
+    &gt;
+        等比数列求和
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#等比数列求和&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 等比数列求和&#34; href=&#34;#%e7%ad%89%e6%af%94%e6%95%b0%e5%88%97%e6%b1%82%e5%92%8c&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;考虑等比数列 $\langle1,p,p^2,p^3,\cdots\rangle$ 的生成函数 $F(x)=\sum_{n\ge 0}p^nx^n$，有&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+F(x)px+1&amp;amp;=F(x)\\
+F(x)&amp;amp;=\dfrac{1}{1-px}
+\end{aligned}
+$$&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;导数&#34;
+    &gt;
+        导数
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#导数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 导数&#34; href=&#34;#%e5%af%bc%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;例如，数列 $\langle1,2,3,4,\cdots\rangle$ 的生成函数 $F(x)=\sum_{n\ge 0} (n+1)x^n$，根据导数知识，&lt;/p&gt;
+&lt;p&gt;$$
+(x^n)&amp;rsquo;=nx^{n-1}
+$$
+于是有&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+F(x)&amp;amp;=\sum_{n\ge 0}(n+1)x^n\\
+&amp;amp;=\sum_{n\ge 1}nx^{n-1}\\
+&amp;amp;=\sum_{n\ge 0}(x^n)&amp;rsquo;\\
+&amp;amp;=\left(\dfrac{1}{1-x}\right)&amp;rsquo;\\
+&amp;amp;=\dfrac{1}{(1-x)^2}
+\end{aligned}
+$$&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;牛顿二项式定理&#34;
+    &gt;
+        牛顿二项式定理
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/ogf/#牛顿二项式定理&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 牛顿二项式定理&#34; href=&#34;#%e7%89%9b%e9%a1%bf%e4%ba%8c%e9%a1%b9%e5%bc%8f%e5%ae%9a%e7%90%86&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;重新定义组合数运算：&lt;/p&gt;
+&lt;p&gt;$$
+\binom{r}{k}=\frac{r^{\underline{k}}}{k!}\quad(r\in\mathbf{C},k\in\mathbf{N})
+$$&lt;/p&gt;
+&lt;p&gt;注意 $r$ 的范围是复数域，$r^{\underline{k}}$ 是 $r$ 的下降阶乘幂&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;。这时，对 $\alpha\in\mathbf{C}$，有&lt;/p&gt;
+&lt;p&gt;$$
+(1+x)^{\alpha}=\sum_{n\ge 0}\binom{\alpha}{n}x^n
+$$&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;当然，你知道当且仅当级数收敛时才能这样变形，但是对于生成函数，我们往往默认 $x$ 取能让式子收敛的值&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;定义为 $r^{\underline{k}}=r\cdot(r-1)\cdots(r-k+1)$，也写作 $(r)_k$&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>辗转相除法和裴蜀定理</title>
+            <link href="https://weilycoder.github.io/post/bezouts/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/bezouts/</id>
+            <published>2024-06-05T09:04:35+08:00</published>
+            <updated>2024-06-05T09:04:35+08:00</updated>
+            <content type="html">
+                &lt;p&gt;数论基础第二弹！&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;辗转相除法&#34;
+    &gt;
+        辗转相除法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#辗转相除法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 辗转相除法&#34; href=&#34;#%e8%be%97%e8%bd%ac%e7%9b%b8%e9%99%a4%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;又称欧几里得算法，算法关键在于&lt;/p&gt;
+&lt;p&gt;$$
+\gcd(a,b)=\gcd(b,a\bmod b).
+$$&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证：不妨设 $a&amp;gt;b,a=qb+r$，则 $r=a\bmod b$，设 $d\mid a,d\mid b$，则 $\dfrac{r}{d}=\dfrac{a}{d}-\dfrac{bk}{d}$。&lt;/p&gt;
+&lt;p&gt;由上式，$\dfrac{r}{d}$ 为整数，即 $d\mid r$，所以对 $a,b$ 的公约数，也是 $b,r$ 的公约数。&lt;/p&gt;
+&lt;p&gt;反过来，设 $d\mid b,d\mid r$，则 $\dfrac{a}{d}=\dfrac{r}{d}+\dfrac{bk}{d}$。&lt;/p&gt;
+&lt;p&gt;显然 $\dfrac{a}{d}$ 是整数，即 $d\mid d$，故 $b,r$ 的公约数也是 $a,b$ 的公约数。&lt;/p&gt;
+&lt;p&gt;既然公约数相同，那么最大公约数也相同。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;容易写出递归版：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;gcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;时间复杂度&#34;
+    &gt;
+        时间复杂度
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#时间复杂度&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 时间复杂度&#34; href=&#34;#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;欧几里得算法的最坏时间复杂度为 $O(n)$，这里 $n$ 是输入数据在二进制下的长度。换句话说，复杂度是 $O(\log a)$（默认 $a,b$ 同阶）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$a\lt b$ 时，下一次迭代到 $\gcd(b,a);$&lt;/li&gt;
+&lt;li&gt;$a\ge b$ 时，下一次迭代到 $\gcd(b,a\bmod b)$，而 $a\bmod b$ 至少让 $a$ 折半，即该过程最多发生 $O(\log a)=O(n)$ 次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;情况一发生后一定会发生情况二，故前者发生次数不多于后者发生次数。&lt;/p&gt;
+&lt;p&gt;因此最多递归 $O(n)$ 次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;欧几里得算法达到最坏时间复杂度仅当输入数据是斐波那契数列&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;的相邻两项。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;更相减损术&#34;
+    &gt;
+        更相减损术
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#更相减损术&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 更相减损术&#34; href=&#34;#%e6%9b%b4%e7%9b%b8%e5%87%8f%e6%8d%9f%e6%9c%af&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;由于取模的时间常数高（尤其在高精运算中不可忽视），我们可以利用加减法代替乘除。&lt;/p&gt;
+&lt;p&gt;更相减损术的核心是：
+$$\gcd(a,b)=\gcd(b,a-b).$$&lt;/p&gt;
+&lt;p&gt;注意到若 $a\gg b$，时间开销将不可接受，若能进行高效除以 $2$ 的操作（如位运算），可以进行优化。&lt;/p&gt;
+&lt;p&gt;若 $2\mid a,2\mid b$，则 $\gcd(a,b)=2\gcd\left(\dfrac{a}{2},\dfrac{b}{2}\right);$&lt;/p&gt;
+&lt;p&gt;不然，若 $2\mid a$（$2\mid b$ 同理），$\gcd(a,b)=\gcd\left(\dfrac{a}{2},b\right).$&lt;/p&gt;
+&lt;p&gt;由于两次操作内 $a,b$ 之一必将减半，时间复杂度为 $O(\log a).$&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;裴蜀定理和扩展欧几里得算法&#34;
+    &gt;
+        裴蜀定理和扩展欧几里得算法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#裴蜀定理和扩展欧几里得算法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 裴蜀定理和扩展欧几里得算法&#34; href=&#34;#%e8%a3%b4%e8%9c%80%e5%ae%9a%e7%90%86%e5%92%8c%e6%89%a9%e5%b1%95%e6%ac%a7%e5%87%a0%e9%87%8c%e5%be%97%e7%ae%97%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设 $a,b$ 是不全为零的整数，对任意整数 $x,y$，满足 $\gcd(a,b)\mid ax+by$，且存在整数 $x,y$，使得 $ax+by=\gcd(a,b).$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;前者显然，后者构造即可，下面进行构造。&lt;/p&gt;
+&lt;p&gt;不妨设 $a\ge b,\gcd(a,b)=1$，使用归纳法，若 $b=0$，此时 $a=1$，显然有一组解 $x=1,y=0;$&lt;/p&gt;
+&lt;p&gt;不然，假设我们已知 $(a\bmod b,b)$ 为系数时的一组解 $(x_0,y_0)$，尝试推出 $(a,b)$ 为系数的一组解：&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+(a\bmod b)x_0+by_0&amp;amp;=1;\\
+(a-\left\lfloor\dfrac{a}{b}\right\rfloor b)x_0+by_0&amp;amp;=1;\\
+ax_0+b(y_0-\left\lfloor\dfrac{a}{b}\right\rfloor x_0)&amp;amp;=1.
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;故解为 $(x_0,y_0-\left\lfloor\dfrac{a}{b}\right\rfloor x_0)$，由数学归纳法，对任意 $\gcd(a,b)=1$，均能构造 $(x,y)$ 使 $ax+by=1$，进而原命题得证。&lt;/p&gt;
+&lt;p&gt;裴蜀定理的逆定理也成立。&lt;/p&gt;
+&lt;p&gt;容易写出代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;exgcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exgcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;由于函数在求最大公因数的过程中计算可行解，这种算法被称作扩展欧几里得算法。&lt;/p&gt;
+&lt;p&gt;有时我们担心，扩展欧几里得算法给出的可行解过大，使得变量发生溢出；幸运的是，可以证明，上述算法给出的解满足 $|x|&amp;lt;b,|y|&amp;lt;a.$&lt;/p&gt;
+&lt;p&gt;归纳法易证。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;裴蜀定理扩展&#34;
+    &gt;
+        裴蜀定理扩展
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#裴蜀定理扩展&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 裴蜀定理扩展&#34; href=&#34;#%e8%a3%b4%e8%9c%80%e5%ae%9a%e7%90%86%e6%89%a9%e5%b1%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;扩展一n-元一次不定方程&#34;
+    &gt;
+        扩展一：$n$ 元一次不定方程
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#扩展一n-元一次不定方程&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 扩展一：$n$ 元一次不定方程&#34; href=&#34;#%e6%89%a9%e5%b1%95%e4%b8%80n-%e5%85%83%e4%b8%80%e6%ac%a1%e4%b8%8d%e5%ae%9a%e6%96%b9%e7%a8%8b&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;裴蜀定理可以扩展到 $n$ 元，以三元为例，考虑三元一次不定方程 $ax+by+cz=d.$&lt;/p&gt;
+&lt;p&gt;令 $ax+by=(a,b)w$，由二元裴蜀定理，对于所有的 $w\in\mathbb{Z}$，都存在 $a,b\in\mathbb{Z}$ 使等式成立。&lt;/p&gt;
+&lt;p&gt;原方程变为 $(a,b)w+cz=d$，由二元裴蜀定理，方程有解当且仅当 $((a,b),c)\mid d$，即 $(a,b,c)\mid d$。&lt;/p&gt;
+&lt;p&gt;运用一次扩展欧几里得算法可以构造出一组 $(w,z)$，进而构造一组 $(x,y,z)$。&lt;/p&gt;
+&lt;p&gt;类似地，$n$ 元一次不定方程只需运用 $n-1$ 次扩展欧几里得算法即可得到一组解。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;扩展二不定方程的整数解&#34;
+    &gt;
+        扩展二：不定方程的整数解
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/bezouts/#扩展二不定方程的整数解&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 扩展二：不定方程的整数解&#34; href=&#34;#%e6%89%a9%e5%b1%95%e4%ba%8c%e4%b8%8d%e5%ae%9a%e6%96%b9%e7%a8%8b%e7%9a%84%e6%95%b4%e6%95%b0%e8%a7%a3&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;对于自然数 $a,b$ 和整数 $n$，$a,b$ 互质，考察不定方程&lt;/p&gt;
+&lt;p&gt;$$
+ax+by=n,
+$$&lt;/p&gt;
+&lt;p&gt;其中 $x,y$ 为自然数。若方程有解，简称为 $n$ 可以被 $a,b$ 表示。&lt;/p&gt;
+&lt;p&gt;记 $C=ab-a-b$，则对任意整数 $n$，$n$ 和 $C-n$ 中，有且仅有一个可以被 $a,b$ 表示；$0$ 可被表示，$C$ 不可被表示；负数不可被表示，大于 $C$ 的数均可被表示。&lt;/p&gt;
+&lt;p&gt;考虑证明。&lt;/p&gt;
+&lt;p&gt;设方程的一组解为 $(x,y)$，其中 $0\le y\le a-1$，易知这样的 $y$ 是唯一的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;证明大于 $C$ 的数均能被表示：当 $n&amp;gt;C$，
+$$
+ax=n-by\gt ab-a-b-by\ge ab-a-b-b(a-1)=-a,
+$$&lt;/p&gt;
+&lt;p&gt;即 $x&amp;gt;-1$，此时 $x$ 非负。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;证明 $C$ 不可被表示：反证法，设存在自然数 $x,y$ 使 $ax+by=ab-a-b$，则
+$$
+ab=a(x+1)+b(y+1)
+$$&lt;/p&gt;
+&lt;p&gt;由 $a,b$ 互质，$x+1$ 被 $b$ 整除，$y+1$ 被 $a$ 整除；故 $a$ 不大于 $y+1$，$b$ 不大于 $x+1$，故
+$$
+ab=a(x+1)+b(y+1)\ge 2ab,
+$$&lt;/p&gt;
+&lt;p&gt;矛盾！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;证明若 $n$ 不可被表示，$C-n$ 可被表示：由于已限定 $0\le y\le a-1$，$x&amp;lt;0$，有
+$$
+C-n=ab-a-b-ax-by=a(-x-1)+b(a-1-y),
+$$&lt;/p&gt;
+&lt;p&gt;显然此时 $-x-1,a-1-y$ 均不小于零。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;斐波那契数列，又称兔子数列，定义如下：$f_0=0,f_1=1,f_n=f_{n-1}+f_{n-2}(n&amp;gt;1).$&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>数论基础笔记</title>
+            <link href="https://weilycoder.github.io/post/number_theory/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/number_theory/</id>
+            <published>2024-06-03T21:14:39+08:00</published>
+            <updated>2024-06-03T21:14:39+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;内容基本来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;整除&#34;
+    &gt;
+        整除
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#整除&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 整除&#34; href=&#34;#%e6%95%b4%e9%99%a4&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设 $a,b\in\mathbb{Z},a\ne 0.$ 若 $\exists q\in\mathbb{Z}$，使 $b=aq$，那么说 $b$ 可被 $a$ 整除，记作 $a\mid b$；$b$ 不被 $a$ 整除记作 $a\nmid b.$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;整除的若干性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$a\mid b\Leftrightarrow -a\mid b\Leftrightarrow a\mid -b\Leftrightarrow |a|\mid |b|$&lt;/li&gt;
+&lt;li&gt;$a\mid b\wedge b\mid c\Rightarrow a\mid c$&lt;/li&gt;
+&lt;li&gt;$a\mid b\wedge a\mid c\Leftrightarrow \forall x,y\in\mathbb{Z},a\mid (xb+yc)$&lt;/li&gt;
+&lt;li&gt;$a\mid b\wedge b\mid a\Leftrightarrow b=\pm a$&lt;/li&gt;
+&lt;li&gt;设 $m=0$，那么 $a\mid b\Leftrightarrow ma\mid mb$&lt;/li&gt;
+&lt;li&gt;设 $b\ne 0$，那么 $a\mid b\Rightarrow |a|\le |b|$&lt;/li&gt;
+&lt;li&gt;设 $a\ne 0,b=qa+c$，那么 $a\mid b\Leftrightarrow a|c$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;约数&#34;
+    &gt;
+        约数
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#约数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 约数&#34; href=&#34;#%e7%ba%a6%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;若 $a\mid b$，则称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;$0$ 是所有非 $0$ 整数的倍数。对于整数 $b\ne 0$，$b$ 的约数只有有限个。&lt;/p&gt;
+&lt;p&gt;平凡约数：对于整数 $b\ne 0$，$\pm 1,\pm b$ 是 $b$ 的平凡约数。当 $b=\pm 1$ 时，$b$ 只有两个平凡约数。&lt;/p&gt;
+&lt;p&gt;对于整数 $b\ne 0$，$b$ 的其他约数称为真约数。&lt;/p&gt;
+&lt;p&gt;约数的性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设整数 $b\ne 0$，当 $d$ 遍历 $b$ 的全体约数时，$\dfrac{b}{d}$ 也遍历 $b$ 的全体约数。&lt;/li&gt;
+&lt;li&gt;设整数 $b\gt 0$，当 $d$ 遍历 $b$ 的全体正约数时，$\dfrac{b}{d}$ 也遍历 $b$ 的全体正约数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;具体问题中，一般约数指正约数。&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;带余除法&#34;
+    &gt;
+        带余除法
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#带余除法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 带余除法&#34; href=&#34;#%e5%b8%a6%e4%bd%99%e9%99%a4%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设 $a,b\in \mathbb{Z},a\ne 0.$ 设 $d$ 为给定整数，那么，一定存在唯一整数对 $(q,r)$，满足 $b=qa+r,d\le r\lt |a|+d.$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;无论 $d$ 取何值，$r$ 统称为余数，$a\mid b$ 等价于 $a\mid r$。&lt;/p&gt;
+&lt;p&gt;一般情况，$d$ 取零，此时 $b=qa+r,0\le r\lt |a|$ 称为带余除法。这里的余数 $r$ 称为最小非负余数。&lt;/p&gt;
+&lt;p&gt;余数还有几种常见取法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;绝对最小余数，$d=-\dfrac{|a|}{2}$。&lt;/li&gt;
+&lt;li&gt;最小正余数，$d=1$。&lt;/li&gt;
+&lt;li&gt;一般只见于编程语言，不定义 $d$，而是令 $q=\left[\dfrac{b}{a}\right]$，这里 $[x]$ 表示 $x$ 向零取整。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;如果没有特殊说明，余数总指最小非负余数。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;任一整数被正整数 $a$ 除后，余数一定是且仅是 $0$ 到 $(a-1)$ 这 $a$ 个数中的一个；&lt;/li&gt;
+&lt;li&gt;相邻 $a$ 个整数被正整数 $a$ 除后，恰好取到上述 $a$ 个余数，特别地，一定有且仅有一个数被 $a$ 整除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;最大公约数和最小公倍数&#34;
+    &gt;
+        最大公约数和最小公倍数
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#最大公约数和最小公倍数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 最大公约数和最小公倍数&#34; href=&#34;#%e6%9c%80%e5%a4%a7%e5%85%ac%e7%ba%a6%e6%95%b0%e5%92%8c%e6%9c%80%e5%b0%8f%e5%85%ac%e5%80%8d%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一组整数的公约数，是指同时是这组数中每一个数的约数的数。$\pm 1$ 是任意一组整数的公约数。&lt;/p&gt;
+&lt;p&gt;一组整数的最大公约数，是指所有公约数里面最大的一个。&lt;/p&gt;
+&lt;p&gt;对不全为 $0$ 的整数 $a,b$，将其最大公约数记为 $\gcd(a,b)$，不引起歧义时可简写为 $(a,b)$。&lt;/p&gt;
+&lt;p&gt;对不全为 $0$ 的整数 $a_1,\dots,a_n$，将其最大公约数记为 $\gcd(a_1,\dots,a_n)$，不引起歧义时可简写为 $(a_1,\dots,a_n)$。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一般认为 $0$ 与 $0$ 的最大公约数不存在，但考虑函数实现，也可以定义为 $0$。C++ STL 的实现采用后者。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一组整数的公倍数，是指同时是这组数中每一个数的倍数的数。$0$ 是任意一组整数的公倍数。&lt;/p&gt;
+&lt;p&gt;一组整数的最小公倍数，是指所有正的公倍数里面，最小的一个数。&lt;/p&gt;
+&lt;p&gt;对整数 $a,b$，将其最小公倍数记为 $\operatorname{lcm}(a,b)$，不引起歧义时可简写为 $[a,b]$。&lt;/p&gt;
+&lt;p&gt;对整数 $a_1,\dots,a_n$，将其最小公倍数记为 $\operatorname{lcm}(a_1,\dots,a_n)$，不引起歧义时可简写为 $[a_1,\dots,a_n]$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最大公约数和最小公倍数有如下性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$(a_1,\dots,a_n)=(|a_1|,\dots,|a_n|)$；&lt;/li&gt;
+&lt;li&gt;$(a,b)=(b,a)$；&lt;/li&gt;
+&lt;li&gt;若 $a\ne 0$，则 $(a,0)=(a,a)=|a|$；&lt;/li&gt;
+&lt;li&gt;$(bq+r,b)=(r,b)$；&lt;/li&gt;
+&lt;li&gt;$(a_1,\dots,a_n)=((a_1,a_2),a_3,\dots,a_n)$；进而 $\forall 1\lt k\lt n-1,~(a_1,\dots,a_n)=((a_1,\dots,a_k),(a_{k+1},\dots,a_n))$；&lt;/li&gt;
+&lt;li&gt;对不全为 $0$ 的整数 $a_1,\dots,a_n$ 和非零整数 $m$，$(ma_1,\dots,ma_n)=|m|(a_1,\dots,a_n)$；&lt;/li&gt;
+&lt;li&gt;对不全为 $0$ 的整数 $a_1,\dots,a_n$，若 $(a_1,\dots,a_n)=d$，则 $(a_1/d,\dots,a_n/d)=1$；&lt;/li&gt;
+&lt;li&gt;$(a^n,b^n)=(a,b)^n$；&lt;/li&gt;
+&lt;li&gt;若 $b|ac,(a,b)=1$，则 $b\mid c$；&lt;/li&gt;
+&lt;li&gt;若 $b|c,a|c,(a,b)=1$，则 $ab\mid c$；&lt;/li&gt;
+&lt;li&gt;若 $(a,b)=1$，则 $(a,bc)=(a,c)$；&lt;/li&gt;
+&lt;li&gt;若 $(a_i,b_j)=1,~\forall 1\leq i\leq n,1\leq j\leq m$，则 $\left(\prod_{i} a_i,\prod_{j} b_j\right)=1$；特别地，若 $(a,b)=1$，则 $(a^n,b^m)=1$；&lt;/li&gt;
+&lt;li&gt;对整数 $a_1,\dots,a_n$，若 $\exists v\in \mathbb{Z},\prod_i a_i=v^m$，且 $(a_i,a_j)=1,\forall i\ne j$，则 $\forall 1\leq i\leq m,~\sqrt[m]{a_i}\in\mathbb{Z}$；&lt;/li&gt;
+&lt;li&gt;$[a_1,\dots,a_n]=[|a_1|,\dots,|a_n|]$；&lt;/li&gt;
+&lt;li&gt;$[a,b]=[b,a]$；&lt;/li&gt;
+&lt;li&gt;若 $a\ne 0$，则 $[a,1]=[a,a]=|a|$；&lt;/li&gt;
+&lt;li&gt;若 $a\mid b$，则 $[a,b]=|b|$；&lt;/li&gt;
+&lt;li&gt;$[a_1,\dots,a_n]=[[a_1,a_2],a_3,\dots,a_n]$。进而 $\forall 1\lt k\lt n-1,~[a_1,\dots,a_n]=[[a_1,\dots,a_k],[a_{k+1},\dots,a_n]]$；&lt;/li&gt;
+&lt;li&gt;若 $a_i\mid m,~\forall 1\leq i\leq n$，则 $[a_1,\dots,a_n]\mid m$；&lt;/li&gt;
+&lt;li&gt;$[ma_1,\dots,ma_n]=|m|[a_1,\dots,a_n]$；&lt;/li&gt;
+&lt;li&gt;$[a,b,c][ab,ba,ca]=[a,b][b,c][c,a]$；&lt;/li&gt;
+&lt;li&gt;$[a^n,b^n]=[a,b]^n$；&lt;/li&gt;
+&lt;li&gt;$(a,b)[a,b]=|ab|$；&lt;/li&gt;
+&lt;li&gt;$(ab,bc,ca)[a,b,c]=|abc|$；&lt;/li&gt;
+&lt;li&gt;$\dfrac{(a,b,c)^2}{(a,b)(b,c)(a,c)}=\dfrac{[a,b,c]^2}{[a,b][b,c][a,c]}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;质数&#34;
+    &gt;
+        质数
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#质数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 质数&#34; href=&#34;#%e8%b4%a8%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设整数 $p\ne 0,\pm 1$，如果 $p$ 除了平凡约数外没有其他约数，称 $p$ 为质数；&lt;/p&gt;
+&lt;p&gt;若整数 $a\ne 0,\pm 1$，如果 $a$ 不是质数，称 $a$ 为合数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;$p$ 与 $-p$ 同为质数或同为合数。&lt;strong&gt;如果没有特殊说明，质数一般限定在正数。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;质数的其他性质可以参考我之前写的 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;/post/miller_rabin/&#34;
+&gt;质数及素性判断&lt;/a&gt;，这里不再列出。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;算术基本定理&#34;
+    &gt;
+        算术基本定理
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#算术基本定理&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 算术基本定理&#34; href=&#34;#%e7%ae%97%e6%9c%af%e5%9f%ba%e6%9c%ac%e5%ae%9a%e7%90%86&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;算术基本引理&#34;
+    &gt;
+        算术基本引理
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#算术基本引理&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 算术基本引理&#34; href=&#34;#%e7%ae%97%e6%9c%af%e5%9f%ba%e6%9c%ac%e5%bc%95%e7%90%86&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设 $p$ 为质数，$p\mid a_1a_2$，则 $p\mid a_1$ 和 $p\mid a_2$ 至少有一个成立。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;算术基本定理-1&#34;
+    &gt;
+        算术基本定理
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#算术基本定理-1&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 算术基本定理&#34; href=&#34;#%e7%ae%97%e6%9c%af%e5%9f%ba%e6%9c%ac%e5%ae%9a%e7%90%86-1&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;又称唯一分解定理。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设正整数 $a$，必有
+$$a=p_1p_2\dots p_s$$&lt;/p&gt;
+&lt;p&gt;其中 $p_j(1\le j\le s)$ 是质数。在不计次序意义下，该表示唯一。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;标准素因数分解式&#34;
+    &gt;
+        标准素因数分解式
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#标准素因数分解式&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 标准素因数分解式&#34; href=&#34;#%e6%a0%87%e5%87%86%e7%b4%a0%e5%9b%a0%e6%95%b0%e5%88%86%e8%a7%a3%e5%bc%8f&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;在上述表示中，将相同的质数合并，
+$$a=p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}(p_1\lt p_2\lt\dots\lt p_s),$$&lt;/p&gt;
+&lt;p&gt;叫做正整数 $a$ 的标准质因数分解式。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;同余&#34;
+    &gt;
+        同余
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#同余&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 同余&#34; href=&#34;#%e5%90%8c%e4%bd%99&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设整数 $m\ne0$。若 $m\mid(a-b)$，称 m 为 模数（模），$a$ 同余于 $b$ 模 $m$，$b$ 是 $a$ 对模 $m$ 的 剩余。记作 $a\equiv b\pmod m$。&lt;/p&gt;
+&lt;p&gt;否则，$a$ 不同余于 $b$ 模 m，$b$ 不是 $a$ 对模 $m$ 的剩余。记作 $a\not\equiv b\pmod m$。&lt;/p&gt;
+&lt;p&gt;这样的等式，称为模 $m$ 的同余式，简称同余式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;同余是等价关系，换句话说，同余满足自反性&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;、对称性&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;、传递性&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;数论函数和积性函数&#34;
+    &gt;
+        数论函数和积性函数
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/number_theory/#数论函数和积性函数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 数论函数和积性函数&#34; href=&#34;#%e6%95%b0%e8%ae%ba%e5%87%bd%e6%95%b0%e5%92%8c%e7%a7%af%e6%80%a7%e5%87%bd%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;数论函数指定义域是正整数的函数，因此也可以视为一个数列。&lt;/p&gt;
+&lt;p&gt;积性函数是数论函数的一种，具有特殊的性质。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;若数论函数 $f(n)$ 满足 $f(1)=1$ 且 $\forall a,b\in\mathbb{N},(a,b)=1$ 都有 $f(ab)=f(a)f(b)$，称 $f(n)$ 为&lt;em&gt;积性函数&lt;/em&gt;；&lt;/p&gt;
+&lt;p&gt;若数论函数 $f(n)$ 满足 $f(1)=1$ 且 $\forall a,b\in\mathbb{N}$ 都有 $f(ab)=f(a)f(b)$，称 $f(n)$ 为&lt;em&gt;完全积性函数&lt;/em&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若 $f(n)$ 和 $g(n)$ 均为积性函数，则下列函数也是积性函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$h(n)=f(n^p);$&lt;/li&gt;
+&lt;li&gt;$h(n)=f^p(n);$&lt;/li&gt;
+&lt;li&gt;$h(n)=f(n)g(n);$&lt;/li&gt;
+&lt;li&gt;$h(n)=\sum_{d\mid n}f(d)g\left(\dfrac{n}{d}\right).$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中最后一个形式也记作 $h=f\ast g$，称 $h$ 是 $f$ 和 $g$ 的卷积。&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;自反性，即 $a\equiv a\pmod{m}.$&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;对称性，即，若 $a\equiv b\pmod{m}$，则 $b\equiv a\pmod{m}.$&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;传递性，即，若 $a\equiv b\pmod{m},b\equiv c\pmod{m}$，则 $a\equiv c\pmod{m}.$&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+        <entry>
+            <title>质数及素性判断</title>
+            <link href="https://weilycoder.github.io/post/miller_rabin/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://weilycoder.github.io/post/miller_rabin/</id>
+            <published>2024-06-01T21:56:39+08:00</published>
+            <updated>2024-06-01T21:56:39+08:00</updated>
+            <content type="html">
+                &lt;blockquote&gt;
+&lt;p&gt;$61$ 是个质数来着；&lt;/p&gt;
+&lt;p&gt;$601$ 也是；&lt;/p&gt;
+&lt;p&gt;$202406011$ 也是。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;记于 2024 年 6 月 1 日，儿童节&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;部分内容来自 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oi-wiki.org&#34;
+&gt;OI-Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;质数的定义和若干性质&#34;
+    &gt;
+        质数的定义和若干性质
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#质数的定义和若干性质&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 质数的定义和若干性质&#34; href=&#34;#%e8%b4%a8%e6%95%b0%e7%9a%84%e5%ae%9a%e4%b9%89%e5%92%8c%e8%8b%a5%e5%b9%b2%e6%80%a7%e8%b4%a8&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;通常，我们在正整数上定义质数与合数：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;若正整数 $p\lt 2$ 除了 $1$ 和 $p$ 没有其他正约数，那么称 $p$ 为质数（或素数、不可约数）。&lt;/p&gt;
+&lt;p&gt;若正整数 $a\gt 2$ 且 $a$ 不是质数，则称 $a$ 是合数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;质数有几个值得一提的性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于合数 $a$，存在质数 $p\le\sqrt{a}$ 使 $p\mid a;$&lt;/li&gt;
+&lt;li&gt;所有大于 $3$ 的质数都可表示为 $6n\pm 1;$&lt;/li&gt;
+&lt;li&gt;质数有无穷多个。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外，在 OI 领域，我们常将答案对质数取模；有时也用大质数作哈希模数。&lt;/p&gt;
+&lt;p&gt;我必须在此抱怨一句，不少人在取模数时简单的取自己的手机号或身份证号，我不是说这样不好，实际上我认为随机模数很好，只是这些数大都不是质数，哈希的冲突概率偏大，即使是随机数据也可能出现冲突，甚至多模数也难以补救。&lt;/p&gt;
+&lt;p&gt;现在技术已可以快速生成一组固定多模哈希冲突的数据&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，不必大惊小怪，连 MD5 都已被破解，甚至可以制作可读的 MD5 冲突的 PDF。&lt;/p&gt;
+&lt;p&gt;这里公布一些常见质数，OI 赛制中请尽量避免使用它们作为哈希：&lt;/p&gt;
+&lt;p&gt;$10^5+3$, $2^{22}\times 5^2+1$, $2^{25}\times 5+1$, $2^{26}\times 7+1$, $2^{23}\times 7\times 17+1$, $10^9+7$, $10^9+9$, $2^{21}\times 479 + 1$, $2^{31}-1$, $2^{61}-1$, $10^{18}+3$.&lt;/p&gt;
+&lt;p&gt;而在 CF 这类赛制中，大多情况必须避免固定模数哈希&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;，必要时最好预先随机生成几百个大质数，每次用真随机数初始化梅森旋转，运行时随机选取五到六个质数。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;质数个数&#34;
+    &gt;
+        质数个数
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#质数个数&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 质数个数&#34; href=&#34;#%e8%b4%a8%e6%95%b0%e4%b8%aa%e6%95%b0&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;设 $\pi(x)$ 表示小于或等于 $x$ 的质数的数量，随着 $x$ 的增大，有 $\pi(x)\sim\dfrac{x}{\ln x}$。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;素性判定&#34;
+    &gt;
+        素性判定
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#素性判定&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 素性判定&#34; href=&#34;#%e7%b4%a0%e6%80%a7%e5%88%a4%e5%ae%9a&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;暴力判断&#34;
+    &gt;
+        暴力判断
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#暴力判断&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 暴力判断&#34; href=&#34;#%e6%9a%b4%e5%8a%9b%e5%88%a4%e6%96%ad&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;枚举 $(1,\sqrt{n}]$ 内的整数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;is_prime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;进一步地，为了优化常数，如果 $2\nmid n$，则无需尝试偶数；&lt;/p&gt;
+&lt;p&gt;更进一步地，由于大于 $3$ 的质数只能被表为 $6n\pm 1$，在试除 $2,3$ 后，只试除形如 $6n\pm 1$ 的数即可。&lt;/p&gt;
+&lt;p&gt;这种方法是 $O(\sqrt{n})$ 的。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;筛法&#34;
+    &gt;
+        筛法
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#筛法&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 筛法&#34; href=&#34;#%e7%ad%9b%e6%b3%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;如果 $n$ 的范围不大（如 $\le 2\times 10^8$），我们当然可以用筛法标记范围内所有质数，以便快速查询。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;vis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;这种方法是 $O(n)\sim O(1)$&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; 的。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;素性测试&#34;
+    &gt;
+        素性测试
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#素性测试&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor 素性测试&#34; href=&#34;#%e7%b4%a0%e6%80%a7%e6%b5%8b%e8%af%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;那么，如果 $n$ 高达 $10^{18}$ 呢？高达 $10^{1000}$ 呢？&lt;/p&gt;
+&lt;p&gt;我们常用的算法是&lt;strong&gt;素性测试：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定性测试：绝对确定一个数是否为素数。常见示例包括 Lucas–Lehmer 测试和椭圆曲线素性证明。&lt;/li&gt;
+&lt;li&gt;概率性测试：通常比确定性测试快很多，但有可能（尽管概率很小）错误地将合数识别为质数（反之不会）。而通过测试但实际上是合数的数字则被称为&lt;strong&gt;伪素数&lt;/strong&gt;。有许多特定类型的伪素数，最常见的是费马伪素数，它们是满足费马小定理的合数。概率性测试的常见示例包括 Miller–Rabin 测试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在 OI 领域，概率性测试更为普遍。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;fermat-测试&#34;
+    &gt;
+        Fermat 测试
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#fermat-测试&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Fermat 测试&#34; href=&#34;#fermat-%e6%b5%8b%e8%af%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Fermat 测试基于著名的费马小定理，因此得名。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于质数 $p$，若 $(a,p)=1$，
+$$a^{p-1}\equiv 1\pmod{p}.$$&lt;/p&gt;
+&lt;p&gt;证：只需证对任意 $a$ 和质数 $p$，$a^p\equiv a$ 成立。考虑归纳法：&lt;/p&gt;
+&lt;p&gt;显然 $1^{p}\equiv 1\pmod{p}$ 成立，假设对 $a\ge1$ 有 $a^p\equiv a$ 成立，则：
+$$\begin{aligned}(a+1)^p&amp;amp;\equiv a^p+\binom{p}{1}a^{p-1}+\binom{p}{2}a^{p-2}+\cdots +\binom{p}{p-1}a+1\\&amp;amp;\equiv a+1\pmod{p}\\&amp;amp;&amp;amp;\blacksquare\end{aligned}$$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;不难想到，对于给定的 $n$，我们不断随机选取 $1\lt a\lt n$，检验是否 $a^{n-1}\equiv 1\pmod{n}$，若有一个不满足，则 $n$ 不是质数，否则，$n$ 大概率是一个质数。&lt;/p&gt;
+&lt;p&gt;做 $k$ 轮的时间复杂度为 $O(k\log n)$。&lt;/p&gt;
+&lt;p&gt;遗憾地是，这种判别方式正确率不高，事实上，存在一类合数 $n$，对所有 $(a,n)=1$，都有 $a^{n-1}=1$ 成立，这种数叫做 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://oeis.org/A002997&#34;
+&gt;Carmichael 数&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;容易证明，Carmichael 数有无穷个，$561=3\times 11\times 17$ 是最小的 Carmichael 数。&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;millerrabin-测试&#34;
+    &gt;
+        Miller–Rabin 测试
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Miller–Rabin 测试&#34; href=&#34;#millerrabin-%e6%b5%8b%e8%af%95&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Miller–Rabin 素性测试是 Fermat 测试的改进，利用二次探测定理提高判定正确概率。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于奇质数 $p$，$x^2\equiv 1\pmod{p}$ 的解只有 $x\equiv 1\pmod{p}$ 和 $x\equiv -1\pmod{p}.$&lt;/p&gt;
+&lt;p&gt;只需将方程移项，得 $(x-1)(x+1)=np$，由 $p$ 为奇质数，命题得证。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们设 $n-1=u\times 2^t$，先计算 $a^u$，若其与 $1$ 同余，则通过本轮测试；否则，将其平方直到与 $a^{n-1}$，若结果不为 $1$ 或过程中未出现 $-1$，本轮测试不通过。&lt;/p&gt;
+&lt;p&gt;如此，我们得到一个较正确的素性测试：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Cpp&#34; data-lang=&#34;Cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;millerRabin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// test_time 为测试次数，建议设为不小于 8
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;test_time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 无需检查 0, 1, -1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;quickPow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;continue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;进行 $k$ 轮测试的时间复杂度为 $O(k\log n)$。&lt;/p&gt;
+&lt;p&gt;值得一提，若广义 Riemann 猜想（generalized Riemann hypothesis, GRH）成立，只需取 $[2,\min\{n-2,\lfloor2\ln^2 n\rfloor\}]$ 内所有整数测试即可&lt;strong&gt;确定&lt;/strong&gt; $n$ 的素性。那么，Miller–Rabin 测试可以看做一个多项式时间&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;内的素性判断算法。&lt;/p&gt;
+&lt;p&gt;在 OI 领域，我们通常对 $[1,2^{64})$ 内的数进行测试。对于 $[1,2^{32})$ 内的数，测试 $\{2,7,61\}$ 即可；对于 $[1,2^{64})$ 内的数，测试 $\{2, 325, 9375, 28178, 450775, 9780504, 1795265022\}$ 即可。&lt;/p&gt;
+&lt;p&gt;后者不好记，也可以改为 $\{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37\}$（前 $12$ 个质数）。&lt;/p&gt;
+&lt;p&gt;注意测试时要全取一遍，不能只选小于 $n$ 的。&lt;/p&gt;
+&lt;p&gt;另外，假设随机取 $k$ 个数作为基，那么错误的概率是 $4^{-k}$。&lt;/p&gt;
+&lt;div style=&#34;padding: 25px;&#34; id=&#34;MillerRabinPrimeTest&#34;&gt;
+  &lt;p&gt;这里有一个 js 实现的高精度素性测试，使用至少 10 个随机数作为基底：&lt;/p&gt;
+  &lt;script src=&#34;/prime_test.js&#34;&gt;&lt;/script&gt;
+  Number: &lt;input id=&#34;p&#34; type=&#34;text&#34; onkeyup=&#34;check()&#34; value=&#34;73&#34;&gt; &lt;input type=&#34;button&#34; value=&#34;check&#34; onclick=&#34;check(true)&#34;&gt;
+  &lt;p id=&#34;ans&#34;&gt;Answer: is a Prime Number.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h3 id=&#34;millerrabin-测试的基数选取&#34;
+    &gt;
+        Miller–Rabin 测试的基数选取
+    &lt;/h3&gt;
+    &lt;a data-clipboard-text=&#34;https://weilycoder.github.io/post/miller_rabin/#millerrabin-测试的基数选取&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Miller–Rabin 测试的基数选取&#34; href=&#34;#millerrabin-%e6%b5%8b%e8%af%95%e7%9a%84%e5%9f%ba%e6%95%b0%e9%80%89%e5%8f%96&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;上文所述的取固定数作为基，可以看作 Miller-Rabin 测试的确定性变体，可以在 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://miller-rabin.appspot.com/#&#34;
+&gt;Deterministic variant of the Miller-Rabin primality test&lt;/a&gt; 了解更多信息。&lt;/p&gt;
+&lt;p&gt;如果认为多轮测试的常数太大，可以选择随机选取基数，不要选取已知基数的前几项，因为一旦已知或被猜到，容易选择强伪素数进行攻击。例如，假如选择前 $8$ 个质数（而不是前 $12$ 个），那么以下合数都能通过测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$341550071728321 = 10670053 \times 32010157$&lt;/li&gt;
+&lt;li&gt;$84983557412237221 = 206135341 \times 412270681$&lt;/li&gt;
+&lt;li&gt;$230245660726188031 = 214831 \times 787711 \times 1360591$&lt;/li&gt;
+&lt;li&gt;$1134931906634489281 = 753303361 \times 1506606721$&lt;/li&gt;
+&lt;li&gt;$1144336081150073701 = 756417901 \times 1512835801$&lt;/li&gt;
+&lt;li&gt;$1167748053436849501 = 764116501 \times 1528233001$&lt;/li&gt;
+&lt;li&gt;$1646697619851137101 = 907385701 \times 1814771401$&lt;/li&gt;
+&lt;li&gt;$3825123056546413051 = 149491 \times 747451 \times 34233211$&lt;/li&gt;
+&lt;li&gt;$4265186605968234451 = 1032616411 \times 4130465641$&lt;/li&gt;
+&lt;li&gt;$5474093792130026911 = 21319 \times 2238391 \times 114712159$&lt;/li&gt;
+&lt;li&gt;$7033671664103127781 = 1875322861 \times 3750645721$&lt;/li&gt;
+&lt;li&gt;$7361235187296010651 = 412339 \times 2061691 \times 8659099$&lt;/li&gt;
+&lt;li&gt;$8276442534101054431 = 209431 \times 3560311 \times 11099791$&lt;/li&gt;
+&lt;li&gt;$14688059738864848381 = 2709987061 \times 5419974121$&lt;/li&gt;
+&lt;li&gt;$16043083915816662841 = 2832232681 \times 5664465361$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，$3825123056546413051$ 必须经过 $12$ 轮检验（即前 $12$ 个质数中只有 $37$ 认为它是合数）。&lt;/p&gt;
+&lt;p&gt;本文中记录的基数选择经过验证，可以确保正确，不要轻易选择其他固定的基数组合。&lt;/p&gt;
+&lt;p&gt;以上伪素数筛选自&lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://www.cecm.sfu.ca/Pseudoprimes/&#34;
+&gt;伪素数表&lt;/a&gt;，其中约有 $1.1\times 10^8$ 个质数。&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;参阅 &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://heltion.github.io/anti-hash/&#34;
+&gt;https://heltion.github.io/anti-hash/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;CF 类赛制允许选手提交代码通过部分测试后锁定自己代码（不再编辑），在这之后选手可以查看他人代码并提交 Hack 数据，Hack 成功有奖励；神通广大的选手们可以快速破解如 &lt;code&gt;unordered&lt;/code&gt; 系列的哈希表、多模哈希，他们甚至通过估计评测时间破解使用时间作随机种子的代码。&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;实际上，这段代码的时间复杂度为 $O(n\log\log n)$，不过也确实存在 $O(n)$ 筛出 $n$ 以内质数的算法。&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;一般认为数据的规模为输入数字的位数；如果使用数据本身，这里时间复杂度为 $O(\log^3 n)$。&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+            </content>   
+                                <category scheme="https://weilycoder.github.io/tags/math" term="math" label="math" />
+        </entry>
+</feed>

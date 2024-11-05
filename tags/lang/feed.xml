@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://gohugo.io/" version="0.130.0">Hugo</generator>
+    <title>Lang on Weily&#39;s blog</title>
+        <subtitle>I write, therefore I am.</subtitle>
+            <link href="http://localhost:1313/tags/lang/" rel="alternate" type="text/html" title="html" />
+            <link href="http://localhost:1313/tags/lang/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2024-10-29T12:05:44+08:00</updated>
+        <author>
+            <name>weily</name>
+                <email>weily2009@outlook.com</email>
+        </author>
+    <id>http://localhost:1313/tags/lang/</id>
+        <entry>
+            <title>Lua 学习</title>
+            <link href="http://localhost:1313/post/lua/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>http://localhost:1313/post/lua/</id>
+                    <author>
+                        <name>weily</name>
+                    </author>
+            <published>2024-10-29T11:59:00+08:00</published>
+            <updated>2024-10-29T11:59:00+08:00</updated>
+            <content type="html">
+                &lt;p&gt;Lua 是一种简单的脚本语言，使用标准 C 语言编写。其设计目的是嵌入应用程序，提供灵活的扩展功能。&lt;/p&gt;
+
+            </content>  
+                                <category scheme="http://localhost:1313/authors/weily" term="weily" label="weily" />  
+                                <category scheme="http://localhost:1313/tags/lang" term="lang" label="lang" />
+        </entry>
+</feed>
