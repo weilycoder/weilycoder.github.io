@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>FFT Test</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    canvas {
+      border: 1px solid #000000;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+</head>
+
+<body>
+  <canvas id="fftCanvas" width="800" height="500"></canvas>
+  <script>
+    function fft_fit(y) {
+      let k = Math.ceil(Math.log2(y.length));
+      let len = Math.pow(2, k);
+      let v = y[y.length - 1];
+      while (y.length < len)
+        y.push(v);
+    }
+
+    function fft_change(y) {
+      let len = y.length;
+      let rev = Array(len);
+      rev[0] = 0;
+      for (let i = 1; i < len; ++i) {
+        rev[i] = rev[i >> 1] >> 1;
+        if (i & 1)
+          rev[i] |= len >> 1;
+      }
+      for (let i = 0; i < len; ++i) {
+        if (i < rev[i])
+          [y[i], y[rev[i]]] = [y[rev[i]], y[i]];
+      }
+    }
+
+    function ifft(y) {
+      fft_change(y);
+      let len = y.length;
+      for (let h = 2; h <= len; h <<= 1) {
+        let wn = math.complex(math.cos(2 * math.pi / h), math.sin(-2 * math.pi / h));
+        for (let j = 0; j < len; j += h) {
+          let w = math.complex(1, 0);
+          for (let k = j; k < j + (h >> 1); ++k) {
+            let u = math.complex(y[k]);
+            let t = math.multiply(w, math.complex(y[k + (h >> 1)]));
+            y[k] = math.add(u, t);
+            y[k + (h >> 1)] = math.subtract(u, t);
+            w = math.multiply(w, wn);
+          }
+        }
+      }
+      for (let i = 0; i < len; ++i)
+        y[i] = math.divide(y[i], len)
+    }
+
+    const canvas = document.getElementById('fftCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 1;
+
+    let stat = 'none'
+    let vectors = [];
+
+    canvas.addEventListener('mousedown', (event) => { stat = 'play'; vectors.length = 0; updateMousePosition(event); });
+    document.addEventListener('mouseup', () => { run_fft(); });
+    document.addEventListener('mousemove', (event) => { if (stat === 'play') { updateMousePosition(event); } });
+
+    function updateMousePosition(event) {
+      const rect = canvas.getBoundingClientRect();
+      let x = event.clientX - rect.left;
+      let y = event.clientY - rect.top;
+      if (vectors.length > 0) {
+        let a = vectors[vectors.length - 1].re;
+        let b = vectors[vectors.length - 1].im;
+        ctx.beginPath();
+        ctx.moveTo(a, b);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      vectors.push(math.complex(x, y));
+    }
+
+    function run_fft() {
+      if (vectors.length < 2) {
+        stat = 'none';
+        return;
+      }
+      stat = 'draw';
+      fft_fit(vectors);
+      ifft(vectors);
+      let n = vectors.length;
+      const pr = Array.from({ length: vectors.length }, (_, i) => i).sort((j, i) => (Math.hypot(vectors[i].re, vectors[i].im) - Math.hypot(vectors[j].re, vectors[j].im)));
+      console.log(pr);
+      let frame = 0;
+      const historyPathRef = { val: new Path2D() };
+      playFrame();
+      function playFrame() {
+        requestAnimationFrame(() => {
+          if (stat !== 'draw') return;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let pos = math.complex();
+          ctx.beginPath();
+          ctx.moveTo(pos.re, pos.im);
+          for (let i = 0; i < n; ++i) {
+            pos = math.add(pos, vectors[pr[i]]);
+            ctx.lineTo(pos.re, pos.im);
+          }
+          const defaultStockStyle = ctx.strokeStyle;
+          ctx.strokeStyle = 'red';
+          ctx.stroke();
+          ctx.strokeStyle = defaultStockStyle;
+          if (frame === 0) historyPathRef.val.moveTo(pos.re, pos.im);
+          else historyPathRef.val.lineTo(pos.re, pos.im);
+          ctx.stroke(historyPathRef.val);
+          for (let i = 0; i < n; ++i)
+            vectors[i] = math.multiply(vectors[i], math.complex(math.cos(math.pi * 2 * i / n), math.sin(math.pi * 2 * i / n)));
+          if (++frame === n) frame = 0, historyPathRef.val = new Path2D();
+          playFrame();
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

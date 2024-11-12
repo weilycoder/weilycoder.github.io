@@ -73,7 +73,7 @@
       "url" : "https://weilycoder.github.io/post/interactive/",
       "headline": "道高一尺 or 魔高一丈：浅谈交互库编写",
       "description": "有些时候，为了实现特殊的需求，我们可能需要编写交互库，要求选手链接。\n常见的情景有：\n强制在线：一些题目不强制在线可能会被“乱搞”通过。例如可持久化数据结构有众所周知的离线做法。 加速输入输出：一些题目为了要求严格线性可能需要 $10^8$ 以上的输入量，如此大的数据必须在内存生成并交换。 限制操作：一些思维题不允许选手直接读取数据，而是要求选手做特定询问获取详细内容；或者可能限制操作次数。 人机对抗：另一些思维题要求选手找到最优策略，那么可以要求选手通过接口与交互库对抗。 既然交互库要链接选手的程序，就必须做好防范措施，避免选手使用不当操作 $\\textcolor{green}{\\text{AC}}$。",
-      "wordCount" : "219",
+      "wordCount" : "231",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -642,11 +642,21 @@
 </div>
 <p>注意快速退出时不一定刷新缓冲区，需要手动刷新。</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="0x05"
+    <h3 id="0x06"
     >
-        0x05
+        0x06
     </h3>
-    <a data-clipboard-text="https://weilycoder.github.io/post/interactive/#0x05" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 0x05" href="#0x05">
+    <a data-clipboard-text="https://weilycoder.github.io/post/interactive/#0x06" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 0x06" href="#0x06">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>我的朋友提醒了我 <code>close</code> 函数的使用，一般地，我们可以使用 <code>close</code> 函数干掉文件描述符 <code>1</code>，使得交互库无法正常输出。更进一步，我们可以使用 <code>dup2</code> 将 <code>dev/nul</code> 绑定到描述符 <code>1</code>。</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h3 id="0xff"
+    >
+        0xff
+    </h3>
+    <a data-clipboard-text="https://weilycoder.github.io/post/interactive/#0xff" class="gblog-post__anchor clip flex align-center" aria-label="Anchor 0xff" href="#0xff">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
