@@ -372,7 +372,7 @@ class Check_Popular:
                 self.len_cnt[len(word)] += 1
         self.table.build()
 
-    def check_popular(self, passwd: str, *, limit: int = 5, leet_cost: float = 1.5):
+    def check_popular(self, passwd: str, *, limit: int = 3, leet_cost: float = 1.5):
         ret: list[tuple[None, int, int, float]] = []
         leet_pwd = decode_leet(passwd.lower())
         for pos, length in self.table.query(leet_pwd, limit=limit):
@@ -541,7 +541,7 @@ class Checker:
             ret[data[2]].append(data)
 
         for r in ret:
-            r.sort(key=lambda x: x[-1], reverse=True)
+            r.sort(key=lambda x: x[-1] / x[-2])
 
         ecPattern = EntropyEncoder(PatternID.ALL, 0.0, 1.0, 0)
         mcData = EntropyEncoderTable()
@@ -576,6 +576,16 @@ class Checker:
 
         return cost, best_path
 
+    def check_2way(
+        self, passwd: str, timeout: float | None = None, *, base: float | None = 2
+    ):
+        one_way = self.check(passwd, timeout, base=base)
+        two_way = self.check(passwd[::2] + passwd[1::2], timeout, base=base)
+        if one_way[0] <= two_way[0]:
+            return one_way[0], 1, one_way[1]
+        else:
+            return two_way[0] + math.log(2, base), 2, two_way[1]
+
 
 def get_description(quality: float):
     if quality < 64:
@@ -587,6 +597,21 @@ def get_description(quality: float):
     if quality < 128:
         return "Strong"
     return "Very Strong"
+
+
+def to_csv_line(data: tuple[str, int | None, int, int, float]):
+    tp, ex, pos, length, cost = data
+    if ex is None:
+        ex = ""
+    if math.isnan(cost):
+        cost = ""
+    else:
+        cost = f"{cost:.4f}"
+    return f"{tp},{ex},{pos},{length},{cost}"
+
+
+def to_csv(data: list[tuple[str, int | None, int, int, float]]):
+    return "\n".join(map(to_csv_line, data))
 
 
 def main():
