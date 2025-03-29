@@ -1,10 +1,12 @@
 ---
 abbrlink: fastio
-categories: []
+categories:
+- - OI
 date: '2025-03-29T18:11:34.916702+08:00'
-tags: []
+tags:
+- temp
 title: 快读快写模板 (Linux)
-updated: '2025-03-29T18:11:34.767+08:00'
+updated: '2025-03-29T18:20:36.832+08:00'
 ---
 ```cpp
 #include <cstdint>
@@ -60,4 +62,3 @@ int main() {
   return 0;
 }
 ```
-
