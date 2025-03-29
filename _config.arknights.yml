@@ -28,7 +28,7 @@ menu:
 # 侧边栏
 aside:
   in_left: false # 侧边栏在左 true / false
-  logo: https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png #图片链接，建议 1:1 比例
+  logo: /img/faction/4.png #图片链接，建议 1:1 比例
   logo_margin: 0 # 为 Logo 图片设置 CSS margin 属性值，参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin
   logo_border_radius: 0 # 为 Logo 图片设置 CSS border-radius 属性值，参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-radius
   dr: / # 侧边栏 Dr. 链接
@@ -45,7 +45,7 @@ aside:
 # FontAwesome 格式可用图标参考：https://fontawesome.com/icons
 social:
   GitHub: https://github.com/weilycoder || fab fa-github
-  # E-Mail: mailto:yourname@gmail.com || fa fa-envelope
+  E-Mail: mailto:weily2009@outlook.com || fa fa-envelope
   # BiliBili: https://space.bilibili.com/0000000 || fa-brands fa-bilibili
   # Weibo: https://weibo.com/yourname || fab fa-weibo
   # Zhihu: https://www.zhihu.com/people/yourname || fab fa-zhihu
@@ -60,13 +60,13 @@ post:
     # 支付宝 | Alipay: img/Alipay.png
     # 微信 | Wechat: img/WeChat.png
   # 以下两项依赖 hexo-wordcount，请参阅 README 开启
-  count: false # 是否显示字数统计
-  time: false # 是否显示预计阅读时长
+  count: true # 是否显示字数统计
+  time: true # 是否显示预计阅读时长
   code_fold: 15 # 当代码小于等此行数时默认展开，设为 -1 则全部展开
 
 # 文章内目录
 toc:
-  list_number: true # true / false ；是否显示编号
+  list_number: false # true / false ；是否显示编号
   max_depth: 6 # 最大目录深度
   min_depth: 1 # 最小目录深度
 
