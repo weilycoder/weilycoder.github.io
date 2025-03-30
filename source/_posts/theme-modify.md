@@ -6,7 +6,7 @@ date: '2025-03-30T09:14:27.577173+08:00'
 tags:
 - theme
 title: Arknights Theme 修改日志
-updated: '2025-03-30T09:14:27.486+08:00'
+updated: '2025-03-30T12:00:51.771+08:00'
 ---
 ## 声明
 
@@ -15,22 +15,42 @@ updated: '2025-03-30T09:14:27.486+08:00'
 
 ## 修改内容
 
-### 404 页面
+### [`f9cea56`](https://github.com/weilycoder/weilycoder.github.io/commit/f9cea56da7e80c84404375826cb0855dd1807b93) 404 页面
 
 + `themes\arknights\source\404.html`
 
 修改标题为 `404 NOT FOUND`。
 
-### 评论系统
+### [`d2128cb`](https://github.com/weilycoder/weilycoder.github.io/commit/d2128cb160ac2a985966c31ed20e2280a04aaf0a) 评论系统
 
 + `themes\arknights\layout\post.pug`
 
 加入引用 `giscus` 的相关代码。
 
-### 署名
+### [`7290ec1`](https://github.com/weilycoder/weilycoder.github.io/commit/7290ec1ace22fb3f0b2aa0f4fc6a24595b12c5ff) 署名
 
 + `themes\arknights\layout\includes\aside.pug`
 + `themes\arknights\languages\en-us.yml`
 + `themes\arknights\languages\zh-cn.yml`
 
 增加 `modified by`。
+
+### [`d62b651`](https://github.com/weilycoder/weilycoder.github.io/commit/d62b651494e9baecdde5e9ed27fa09b28386f9bb): 颜色模式（ 适配 `giscus`）
+
++ `themes\arknights\source\js\_src\include\ColorMode.ts`
+
+按照 [giscus 的教程](https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md)，增加了函数：
+
+```typescript
+function sendMessage<T>(message: T) {
+  const iframe = document.getElementsByClassName("giscus-frame");
+  if (iframe.length !== 1) return;
+  const target = iframe[0];
+  if (target instanceof HTMLIFrameElement) {
+    target.contentWindow?.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+}
+```
+
+使用 `sendMessage({ setConfig: { theme: 'light_high_contrast' } });` 切换 giscus 到指定主题（示例中是 `light_high_contrast`）。
+
