@@ -6,7 +6,7 @@ date: '2025-03-30T09:14:27.577173+08:00'
 tags:
 - theme
 title: Arknights Theme 修改日志
-updated: '2025-03-30T12:00:51.771+08:00'
+updated: '2025-03-30T13:21:51.771+08:00'
 ---
 ## 声明
 
@@ -35,7 +35,7 @@ updated: '2025-03-30T12:00:51.771+08:00'
 
 增加 `modified by`。
 
-### [`d62b651`](https://github.com/weilycoder/weilycoder.github.io/commit/d62b651494e9baecdde5e9ed27fa09b28386f9bb): 颜色模式（ 适配 `giscus`）
+### [`d62b651`](https://github.com/weilycoder/weilycoder.github.io/commit/d62b651494e9baecdde5e9ed27fa09b28386f9bb) 颜色模式（ 适配 `giscus`）
 
 + `themes\arknights\source\js\_src\include\ColorMode.ts`
 
@@ -54,3 +54,8 @@ function sendMessage<T>(message: T) {
 
 使用 `sendMessage({ setConfig: { theme: 'light_high_contrast' } });` 切换 giscus 到指定主题（示例中是 `light_high_contrast`）。
 
+### [`250b190`](https://github.com/weilycoder/weilycoder.github.io/commit/250b1904229e23d86c266a1d223b5d3a4b589a17) 更改 giscus 的嵌入方式
+
++ `themes\arknights\layout\post.pug`
+
+在启动时根据 `theme-mod` 的值自动选择合适的主题。
