@@ -110,7 +110,27 @@ block content
           #waline
         if theme.artalk.enable === true
           #artalk 
-    <script src="https://giscus.app/client.js" data-repo="weilycoder/blog_giscus" data-repo-id="R_kgDOOQzAwg" data-category="Announcements" data-category-id="DIC_kwDOOQzAws4ColJL" data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="1" data-input-position="top" data-theme="dark_high_contrast" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async> </script>
+    script.
+      const themeMode = document.documentElement.getAttribute('theme-mode');
+      const scriptElement = document.createElement('script');
+      const post_bg = document.getElementById("post-bg");
+
+      scriptElement.src = "https://giscus.app/client.js";
+      scriptElement.setAttribute('data-repo', 'weilycoder/blog_giscus');
+      scriptElement.setAttribute('data-repo-id', 'R_kgDOOQzAwg');
+      scriptElement.setAttribute('data-category', 'Announcements');
+      scriptElement.setAttribute('data-category-id', 'DIC_kwDOOQzAws4ColJL');
+      scriptElement.setAttribute('data-mapping', 'pathname');
+      scriptElement.setAttribute('data-strict', '1');
+      scriptElement.setAttribute('data-reactions-enabled', '1');
+      scriptElement.setAttribute('data-emit-metadata', '1');
+      scriptElement.setAttribute('data-input-position', 'top');
+      scriptElement.setAttribute('data-theme', themeMode === 'light' ? 'light_high_contrast' : 'dark_high_contrast');
+      scriptElement.setAttribute('data-lang', 'zh-CN');
+      scriptElement.setAttribute('crossorigin', 'anonymous');
+      scriptElement.async = true;
+
+      post_bg.appendChild(scriptElement);
 
 block aside-block
   - 
