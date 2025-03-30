@@ -5,7 +5,7 @@ date: '2025-03-30T09:14:27.577173+08:00'
 tags:
 - theme
 title: Arknights Theme 修改日志
-updated: '2025-03-30T13:21:51.771+08:00'
+updated: '2025-03-30T22:11:51.771+08:00'
 ---
 ## 声明
 
@@ -58,3 +58,9 @@ function sendMessage<T>(message: T) {
 + `themes\arknights\layout\post.pug`
 
 在启动时根据 `theme-mod` 的值自动选择合适的主题。
+
+### [`9a788a3`](https://github.com/weilycoder/weilycoder.github.io/commit/9a788a38375cfef1f5f21431ce83a4f11b1bc895) 删除鼠标动画
+
++ `themes\arknights\source\js\_src\include\Cursors.ts`
+
+注意改完后要用 `tsc` 重新编译。
