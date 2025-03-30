@@ -1,12 +1,12 @@
 ---
 abbrlink: fastio
 categories:
-- - template
+- - io
 date: '2025-03-29T18:11:34.916702+08:00'
 tags:
-- io
+- template
 title: 快读快写模板 (Linux)
-updated: '2025-03-29T22:20:42.822+08:00'
+updated: '2025-03-30T09:16:32.912+08:00'
 ---
 ```cpp
 #include <cstdint>
