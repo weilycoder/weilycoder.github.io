@@ -34,4 +34,3 @@ updated: '2025-03-30T09:14:27.486+08:00'
 + `themes\arknights\languages\zh-cn.yml`
 
 增加 `modified by`。
-

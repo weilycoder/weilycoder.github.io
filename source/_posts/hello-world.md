@@ -22,10 +22,9 @@ updated: '2025-03-29T18:33:19.139+08:00'
 + Cf 账号：[weily](https://codeforces.com/profile/weily)
 + AtC 账号：[weily](https://atcoder.jp/users/weily)
 + xxxhub 账号：[weilycoder](https://github.com/weilycoder)
-+ Page Views Count 是本人的所有个人介绍页面共享的
++ {% hide Page Views Count 是本人的所有个人介绍页面共享的 %}
 
 ## 公告
 
 + 本博客所有文章均采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans) 许可协议
   换言之，使用过程中您可以自由地共享、演绎，但是必须署名、以相同方式共享、分享时没有附加限制。
-
