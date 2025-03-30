@@ -3,6 +3,15 @@
 
 'use strict'
 
+function sendMessage<T>(message: T) {
+  const iframe = document.getElementsByClassName("giscus-frame");
+  if (iframe.length !== 1) return;
+  const target = iframe[0];
+  if (target instanceof HTMLIFrameElement) {
+    target.contentWindow?.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+}
+
 class ColorMode {
   private html: HTMLElement = document.documentElement
   private dark: boolean = this.html.getAttribute('theme-mode') === 'dark'
@@ -27,10 +36,12 @@ class ColorMode {
       if (canvasDusts) canvasDusts.stop()
       if (this.dark) {
         this.html.setAttribute('theme-mode', 'light')
+        sendMessage({ setConfig: { theme: 'light_high_contrast' } });
         this.dark = false
         window.localStorage['theme-mode'] = 'light'
       } else {
         this.html.setAttribute('theme-mode', 'dark')
+        sendMessage({ setConfig: { theme: 'dark_high_contrast' } });
         this.dark = true
         window.localStorage['theme-mode'] = 'dark'
       }
@@ -62,4 +73,4 @@ class ColorMode {
 
 try {
   var colorMode = new ColorMode()
-} catch (e) {}
+} catch (e) { }

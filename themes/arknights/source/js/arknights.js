@@ -283,6 +283,15 @@ try {
     var canvasDusts = new canvasDust('#canvas-dust');
 }
 catch (e) { }
+function sendMessage(message) {
+    const iframe = document.getElementsByClassName("giscus-frame");
+    if (iframe.length !== 1)
+        return;
+    const target = iframe[0];
+    if (target instanceof HTMLIFrameElement) {
+        target.contentWindow?.postMessage({ giscus: message }, 'https://giscus.app');
+    }
+}
 class ColorMode {
     html = document.documentElement;
     dark = this.html.getAttribute('theme-mode') === 'dark';
@@ -307,11 +316,13 @@ class ColorMode {
                 canvasDusts.stop();
             if (this.dark) {
                 this.html.setAttribute('theme-mode', 'light');
+                sendMessage({ setConfig: { theme: 'light_high_contrast' } });
                 this.dark = false;
                 window.localStorage['theme-mode'] = 'light';
             }
             else {
                 this.html.setAttribute('theme-mode', 'dark');
+                sendMessage({ setConfig: { theme: 'dark_high_contrast' } });
                 this.dark = true;
                 window.localStorage['theme-mode'] = 'dark';
             }
