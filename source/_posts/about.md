@@ -1,11 +1,11 @@
 ---
 abbrlink: about
-sticky: 1
 categories: []
 date: '2025-03-29T18:01:15.793+08:00'
+sticky: 1
 tags: []
 title: Who am I
-updated: '2025-03-29T18:33:19.139+08:00'
+updated: '2025-04-01T17:17:25.840+08:00'
 ---
 ## 自我介绍
 
@@ -24,6 +24,7 @@ updated: '2025-03-29T18:33:19.139+08:00'
 + AtC 账号：[weily](https://atcoder.jp/users/weily)
 + xxxhub 账号：[weilycoder](https://github.com/weilycoder)
 + {% hide Page Views Count 是本人的所有个人介绍页面共享的 %}
++ 头像来自：[Tweetable Mathematical Art](https://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art/35626#35626)
 
 ## 公告
 
