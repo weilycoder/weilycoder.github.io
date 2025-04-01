@@ -311,12 +311,7 @@ cProfile.run("test_insert(data2)")
 幸运的是，如果已经意识到了漏洞，防范其被人利用总是容易的。最简单的方式莫过于将 `int` 强制转换为 `str` 类型。如果有同时存储 `int` 和 `str` 的需求，自行编写一个可以“加盐”的 `int` 类也并不复杂。这里不再给出详细实现。
 
 [^1]: CPython 的版本为 3.13.2，pypy 的版本为 3.11-v7.3.19；下同
-
 [^2]: 测试用机器处理器参数为 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz，内存 16 GB
-
 [^3]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289
-
 [^4]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034
-
-[^5]: https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.\_\_hash\_\_
-
+[^5]: https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.__hash__
