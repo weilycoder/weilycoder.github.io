@@ -64,3 +64,10 @@ function sendMessage<T>(message: T) {
 + `themes\arknights\source\js\_src\include\Cursors.ts`
 
 注意改完后要用 `tsc` 重新编译。
+
+### [`a677431`](https://github.com/weilycoder/weilycoder.github.io/commit/a67743110c0194ef14bc7972c5520194eec6be67) 实现 giscus 自动刷新
+
++ `themes\arknights\layout\post.pug`
++ `themes\arknights\source\js\_src\include\InitializeGiscus.ts`
+
+网站的站内跳转使用 pjax 实现，默认不会执行更新后的页面中的 js 语句，因此考虑检测 pjax 的更新事件。
