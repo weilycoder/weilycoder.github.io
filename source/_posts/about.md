@@ -5,11 +5,11 @@ date: '2025-03-29T18:01:15.793+08:00'
 sticky: 1
 tags: []
 title: Who am I
-updated: '2025-04-01T17:17:25.840+08:00'
+updated: '2025-04-01T23:18:22.251+08:00'
 ---
 ## 自我介绍
 
-[![Page Views Count](https://badges.toozhao.com/badges/01HYYXADZH998DH2N5QTGZSZG1/green.svg)](https://badges.toozhao.com/stats/01HYYXADZH998DH2N5QTGZSZG1)[![Codeforces Rating of @weily](https://cfrating.baoshuo.dev/rating?username=weily&style=flat)](https://codeforces.com/profile/weily)[![AtCoder Rating of @weily](https://atrating.baoshuo.dev/rating?username=weily&style=flat)](https://atcoder.jp/users/weily)[![github](https://img.shields.io/badge/github-weilycoder-blue?logo=github)](https://github.com/weilycoder)[![hugo](https://img.shields.io/badge/Blog-weily09-FF4088?logo=Hugo)](https://weilycoder.github.io/)
+[![Page Views Count](https://badges.toozhao.com/badges/01HYYXADZH998DH2N5QTGZSZG1/green.svg)](https://badges.toozhao.com/stats/01HYYXADZH998DH2N5QTGZSZG1)[![Codeforces Rating of @weily](https://cfrating.baoshuo.dev/rating?username=weily&style=flat)](https://codeforces.com/profile/weily)[![AtCoder Rating of @weily](https://atrating.baoshuo.dev/rating?username=weily&style=flat)](https://atcoder.jp/users/weily)[![github](https://img.shields.io/badge/github-weilycoder-blue?logo=github)](https://github.com/weilycoder)[![blog](https://img.shields.io/badge/Blog-weily09-0E83CD?logo=hexo)](https://weilycoder.github.io/)
 ![Project Euler](https://cdn.jsdelivr.net/gh/weilycoder/image_hosting@master/weily09-68583a6b833dabf5.png)
 
 <div>
