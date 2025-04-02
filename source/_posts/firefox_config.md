@@ -1,10 +1,12 @@
 ---
 abbrlink: firefox
-categories: []
+categories:
+- - Misc
 date: '2025-04-02T22:53:04.717225+08:00'
-tags: []
+tags:
+- Firefox
 title: Firefox 高级设置
-updated: '2025-04-02T22:53:05.467+08:00'
+updated: '2025-04-02T23:02:56.874+08:00'
 ---
 随用随记；欢迎补充。
 
@@ -29,4 +31,3 @@ data:application/json,{"location":{"lng": _,"lat": _},"accuracy":27000.0}
 ```
 
 `lng` 表示经度，`lat` 表示纬度。
-
