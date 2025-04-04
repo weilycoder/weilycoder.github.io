@@ -285,11 +285,17 @@ try {
 catch (e) { }
 function sendMessage(message) {
     const iframe = document.getElementsByClassName("giscus-frame");
-    if (iframe.length !== 1)
-        return;
-    const target = iframe[0];
-    if (target instanceof HTMLIFrameElement) {
-        target.contentWindow?.postMessage({ giscus: message }, 'https://giscus.app');
+    if (iframe.length > 1) {
+        console.warn("There are multiple giscus frames.");
+    }
+    for (let i = 0; i < iframe.length; i++) {
+        const target = iframe[i];
+        if (target instanceof HTMLIFrameElement) {
+            target.contentWindow?.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        else {
+            console.warn("Target is not an iframe element.");
+        }
     }
 }
 class ColorMode {

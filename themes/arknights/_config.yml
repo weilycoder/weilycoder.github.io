@@ -15,7 +15,7 @@ color: dark
 
 # <body> 背景图片链接
 background_image:
-  dark: https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg # 暗色模式
+  dark: /img/bg.jpg # 暗色模式
   light: /img/bk.jpg # 亮色模式
 
 # 导航栏
@@ -153,7 +153,9 @@ mathjax:
   version: "2.6.1"
 
 # 在 `<head>` 标签内引入 CSS 样式表
+# 支持直接引入短片段，用 "{ }" 包裹（包括引号），例： - "{a {color: #2bf}}"
 stylesheets:
 
 # 在 `<body>` 尾部引入 JavaScript 脚本
+# 支持直接引入短片段，用 "{ }" 包裹（包括引号），例： - "{var test='test'}"
 scripts:
