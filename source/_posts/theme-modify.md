@@ -5,7 +5,7 @@ date: '2025-03-30T09:14:27.577173+08:00'
 tags:
 - theme
 title: Arknights Theme 修改日志
-updated: '2025-03-30T22:11:51.771+08:00'
+updated: '2025-04-04T18:49:51.771+08:00'
 ---
 ## 声明
 
@@ -71,3 +71,9 @@ function sendMessage<T>(message: T) {
 + `themes\arknights\source\js\_src\include\InitializeGiscus.ts`
 
 网站的站内跳转使用 pjax 实现，默认不会执行更新后的页面中的 js 语句，因此考虑检测 pjax 的更新事件。
+
+## Final
+
+今后将修改同时上传 [hexo-theme-arknights (fork)](https://github.com/weilycoder/hexo-theme-arknights/)。
+
+修改日志将在项目的自述文件中维护，不再同步。
