@@ -1,5 +1,4 @@
 ---
-abbrlink: fastlog2
 categories:
 - OI
 date: '2025-04-04T13:40:25.840+08:00'

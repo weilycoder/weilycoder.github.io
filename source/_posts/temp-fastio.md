@@ -1,5 +1,4 @@
 ---
-abbrlink: fastio
 categories:
 - - OI
 date: '2025-03-29T18:11:34.916702+08:00'

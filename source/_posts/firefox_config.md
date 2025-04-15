@@ -1,5 +1,4 @@
 ---
-abbrlink: firefox
 categories:
 - - Misc
 date: '2025-04-02T22:53:04.717225+08:00'
