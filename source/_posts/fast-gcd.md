@@ -34,7 +34,9 @@ tags:
 
 设 `$x=abc$`，则：
 
-$$(x,y)=(a,y)\times(b,\dfrac{y}{(a,y)})\times(c,\dfrac{y}{(ab,y)})$$
+$$
+(x,y)=(a,y)\times\left(b,\dfrac{y}{(a,y)}\right)\times\left(c,\dfrac{y}{(ab,y)}\right)
+$$
 
 若 `$a\in\mathbf{P}$`，只需判断 `$a$` 是否整除 `$y$`，否则 `$(a,y)=(y\bmod a,a)$`，因为 `$a\le\sqrt{n}$`，可以查表。
 
