@@ -17,10 +17,11 @@ def modify_file(file_path: str) -> None:
     with open(file_path, "r", encoding="utf-8") as file:
         content = file.read()
 
-    modified_content = re.sub(r"(?<!`)(\$(.+?)\$)", r"`\1`", content)
+    content = re.sub(r"(?<!\\)(\\[{}])", r"\\\1", content)
+    content = re.sub(r"(?<=\s)\\\\(?=\s)", r"\\\\\\\\", content)
 
     with open(file_path, "w", encoding="utf-8") as file:
-        file.write(modified_content)
+        file.write(content)
 
 
 if __name__ == "__main__":
