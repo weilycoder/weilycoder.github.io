@@ -21,7 +21,7 @@ background_image:
 # 导航栏
 menu:
   Home: ""
-  # About: about/
+  About: about/
   # Contact: contact/
   Archives: archives/
 
