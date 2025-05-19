@@ -110,3 +110,10 @@ mathjax:
   normal_width: 0.6 # 相对正常（等宽）宽度
   append_css: true # 将 CSS 添加到每个页面
   every_page: false # 如果为 true，那么无论每篇文章的前题中的 `mathjax` 设置如何，每页都将由 mathjax 呈现
+
+encrypt: # hexo-blog-encrypt
+  abstract: Password required
+  message: Password
+  theme: default # default / up
+  wrong_pass_message: 口令识别失败，请重试。
+  wrong_hash_message: 口令校验失败，当前使用临时权限查看。
