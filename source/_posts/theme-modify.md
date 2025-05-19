@@ -5,7 +5,7 @@ date: '2025-03-30T09:14:27.577173+08:00'
 tags:
 - theme
 title: Arknights Theme 修改日志
-updated: '2025-04-04T18:49:51.771+08:00'
+updated: '2025-05-19T22:56:11.771+08:00'
 ---
 ## 声明
 
@@ -77,3 +77,9 @@ function sendMessage<T>(message: T) {
 今后将修改同时上传 [hexo-theme-arknights (fork)](https://github.com/weilycoder/hexo-theme-arknights/)。
 
 修改日志将在项目的自述文件中维护，不再同步。
+
+## Details
+
+懒得开新 post 了，在这里记录一些部署时遇到的问题，未来可能迁移。
+
++ 若使用 Cloudflare 缓存，且开启了文章加密功能，**不要开启 Rocket Loader™** 来缩短包含 JavaScript 的页面的绘制时间。
