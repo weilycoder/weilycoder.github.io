@@ -131,7 +131,7 @@ $$
 因此
 
 $$
-F_m(x)=\prod_{k=0}^{m}\frac{1}{1-x^k}
+F_m(x)=\prod_{k=1}^{m}\frac{1}{1-x^k}
 $$
 
 考虑求其多项式 $\ln$，将乘法转化为加法，然后再 $\exp$ 回去。
@@ -157,7 +157,7 @@ $$
 因此
 
 $$
-F_m(x)=\exp\left(\sum_{k=0}^{m}\sum_{i=1}^{\infty}\frac{x^{ik}}{i}\right)
+F_m(x)=\exp\left(\sum_{k=1}^{m}\sum_{i=1}^{\infty}\frac{x^{ik}}{i}\right)
 $$
 
 ## XI
