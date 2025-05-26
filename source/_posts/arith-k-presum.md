@@ -5,7 +5,10 @@ title: 等差数列的 k 阶前缀和
 date: 2025-04-30 20:06:47
 mathjax: true
 tags:
-- math
+  - math
+  - prefix-sum
+  - finite-difference
+  - OGF
 ---
 
 本文下标从 $1$ 开始。
