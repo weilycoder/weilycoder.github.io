@@ -3,8 +3,9 @@ categories:
   - OI
 title: 多项式全家桶
 mathjax: true
+code_fold: -1
 date: "2025-05-23T22:53:19.042+0800"
-updated: "2025-05-24T19:12:24.466+0800"
+updated: "2025-05-28T00:25:20.904+0800"
 tags:
   - poly
   - template
@@ -16,15 +17,15 @@ tags:
 
 $$
 \begin{aligned}
-f\left(x\right)=a_0+a_1x+a_2x^2+\cdots+a_nx^n \\\\
-g\left(x\right)=b_0+b_1x+b_2x^2+\cdots+b_mx^m
+f\left(x\right)=a\_0+a\_1x+a\_2x^2+\cdots+a\_nx^n \\\\
+g\left(x\right)=b\_0+b\_1x+b\_2x^2+\cdots+b\_mx^m
 \end{aligned}
 $$
 
 定义它们的乘积 $Q\left(x\right)=f\left(x\right)\cdot g\left(x\right)$ 为：
 
 $$
-Q\left(x\right)=\sum_{i=0}^{n}\sum_{j=0}^{m}a_ib_jx^{i+j}=c_0+c_1x+c_2x^2+\cdots+c_{n+m}x^{n+m}
+Q\left(x\right)=\sum\_{i=0}^{n}\sum\_{j=0}^{m}a\_ib\_jx^{i+j}=c\_0+c\_1x+c\_2x^2+\cdots+c\_{n+m}x^{n+m}
 $$
 
 ### Algo 1 $\quad O\left(n^2\right)$
@@ -39,7 +40,7 @@ for (int i = 0; i <= n; ++i)
 
 时间复杂度 $O\left(n^2\right)$（假定 $m=O\left(n\right)$）。
 
-### Algo 2 $\quad O\left(n^{\log_2 3}\right)$
+### Algo 2 $\quad O\left(n^{\log\_2 3}\right)$
 
 在模数难以 NTT 并不想打 MTT 等毒瘤算法时使用。
 
@@ -49,21 +50,21 @@ for (int i = 0; i <= n; ++i)
 
 $$
 \begin{aligned}
-f\left(x\right)=A&=A_1\cdot x^m+A_0 \\\\
-g\left(x\right)=B&=B_1\cdot x^m+B_0 \\\\
-f\left(x\right)\cdot g\left(x\right)=C&=C_2\cdot x^{2m}+C_1\cdot x^m+C_0
+f\left(x\right)=A&=A\_1\cdot x^m+A\_0 \\\\
+g\left(x\right)=B&=B\_1\cdot x^m+B\_0 \\\\
+f\left(x\right)\cdot g\left(x\right)=C&=C\_2\cdot x^{2m}+C\_1\cdot x^m+C\_0
 \end{aligned}
 $$
 
-这里，$A_0,B_0$ 为次数小于 $m$ 的多项式。
+这里，$A\_0,B\_0$ 为次数小于 $m$ 的多项式。
 
 容易得到：
 
 $$
 \begin{aligned}
-C_2&=A_1\cdot B_1 \\\\
-C_1&=A_1\cdot B_0+A_0\cdot B_1 \\\\
-C_0&=A_0\cdot B_0
+C\_2&=A\_1\cdot B\_1 \\\\
+C\_1&=A\_1\cdot B\_0+A\_0\cdot B\_1 \\\\
+C\_0&=A\_0\cdot B\_0
 \end{aligned}
 $$
 
@@ -72,7 +73,7 @@ $$
 注意到：
 
 $$
-C_1=\left(A_1+A_0\right)\cdot \left(B_1+B_0\right)-C_2-C_0
+C\_1=\left(A\_1+A\_0\right)\cdot \left(B\_1+B\_0\right)-C\_2-C\_0
 $$
 
 因此，我们可以将原问题化为 $3$ 个规模更小的子问题。
@@ -83,7 +84,7 @@ $$
 T\left(n\right)=3\left(\dfrac{n}{2}\right)+O\left(n\right)
 $$
 
-由主定理，$T\left(n\right)=O\left(n^{\log_2 3}\right)$。
+由主定理，$T\left(n\right)=O\left(n^{\log\_2 3}\right)$。
 
 ```cpp
 template <typename Int> Int *karatsuba_polymul(Int *a, Int *b, size_t n) {
@@ -131,15 +132,15 @@ template <typename Int> Int *karatsuba_polymul(Int *a, Int *b, size_t n) {
 先将给定多项式补齐到 $2^k$ 项，例如：
 
 $$
-f\left(x\right)=\sum_{i=0}^{2^k-1}a_ix^i
+f\left(x\right)=\sum\_{i=0}^{2^k-1}a\_ix^i
 $$
 
 考虑分治，将奇数项和偶数项分开。
 
 $$
 \begin{aligned}
-f\left(x\right)&=\sum_{i=0}^{2^{k-1}-1}a_{2i}x^{2i}+\sum_{i=0}^{2^{k-1}-1}a_{2i+1}x^{2i+1} \\\\
-&=\sum_{i=0}^{2^{k-1}-1}a_{2i}x^{2i}+x\sum_{i=0}^{2^{k-1}-1}a_{2i+1}x^{2i}
+f\left(x\right)&=\sum\_{i=0}^{2^{k-1}-1}a\_{2i}x^{2i}+\sum\_{i=0}^{2^{k-1}-1}a\_{2i+1}x^{2i+1} \\\\
+&=\sum\_{i=0}^{2^{k-1}-1}a\_{2i}x^{2i}+x\sum\_{i=0}^{2^{k-1}-1}a\_{2i+1}x^{2i}
 \end{aligned}
 $$
 
@@ -147,8 +148,8 @@ $$
 
 $$
 \begin{aligned}
-g\left(x\right)&=\sum_{i=0}^{2^{k-1}-1}a_{2i}x^{i} \\\\
-h\left(x\right)&=\sum_{i=0}^{2^{k-1}-1}a_{2i+1}x^{i}
+g\left(x\right)&=\sum\_{i=0}^{2^{k-1}-1}a\_{2i}x^{i} \\\\
+h\left(x\right)&=\sum\_{i=0}^{2^{k-1}-1}a\_{2i+1}x^{i}
 \end{aligned}
 $$
 
@@ -158,13 +159,13 @@ $$
 f\left(x\right)=g\left(x^2\right)+xh\left(x^2\right)
 $$
 
-考虑 $f\left(x\right)$ 在 $\omega_{2^k}^{t}$ 处的点值：
+考虑 $f\left(x\right)$ 在 $\omega\_{2^k}^{t}$ 处的点值：
 
 $$
 \begin{aligned}
-f\left(\omega_{2^k}^{t}\right)&=g\left(\left(\omega_{2^k}^{t}\right)^2\right)+\omega_{2^k}^{t}h\left(\left(\omega_{2^k}^{t}\right)^2\right) \\\\
-&=g\left(\omega_{2^k}^{2t}\right)+\omega_{2^k}^{t}h\left(\omega_{2^k}^{2t}\right) \\\\
-&=g\left(\omega_{2^{k-1}}^{t}\right)+\omega_{2^k}^{t}h\left(\omega_{2^{k-1}}^{t}\right)
+f\left(\omega\_{2^k}^{t}\right)&=g\left(\left(\omega\_{2^k}^{t}\right)^2\right)+\omega\_{2^k}^{t}h\left(\left(\omega\_{2^k}^{t}\right)^2\right) \\\\
+&=g\left(\omega\_{2^k}^{2t}\right)+\omega\_{2^k}^{t}h\left(\omega\_{2^k}^{2t}\right) \\\\
+&=g\left(\omega\_{2^{k-1}}^{t}\right)+\omega\_{2^k}^{t}h\left(\omega\_{2^{k-1}}^{t}\right)
 \end{aligned}
 $$
 
@@ -172,9 +173,9 @@ $$
 
 $$
 \begin{aligned}
-f\left(\omega_{2^k}^{t+2^{k-1}}\right)&=g\left(\left(\omega_{2^k}^{t+2^{k-1}}\right)^2\right)+\omega_{2^k}^{t+2^{k-1}}h\left(\left(\omega_{2^k}^{t+2^{k-1}}\right)^2\right) \\\\
-&=g\left(\omega_{2^k}^{2t}\right)-\omega_{2^k}^{t}h\left(\omega_{2^k}^{2t}\right) \\\\
-&=g\left(\omega_{2^{k-1}}^{t}\right)-\omega_{2^k}^{t}h\left(\omega_{2^{k-1}}^{t}\right)
+f\left(\omega\_{2^k}^{t+2^{k-1}}\right)&=g\left(\left(\omega\_{2^k}^{t+2^{k-1}}\right)^2\right)+\omega\_{2^k}^{t+2^{k-1}}h\left(\left(\omega\_{2^k}^{t+2^{k-1}}\right)^2\right) \\\\
+&=g\left(\omega\_{2^k}^{2t}\right)-\omega\_{2^k}^{t}h\left(\omega\_{2^k}^{2t}\right) \\\\
+&=g\left(\omega\_{2^{k-1}}^{t}\right)-\omega\_{2^k}^{t}h\left(\omega\_{2^{k-1}}^{t}\right)
 \end{aligned}
 $$
 
@@ -189,15 +190,15 @@ $$
 FFT 可以看作系数向量乘变换矩阵：
 
 $$
-\begin{bmatrix} a_0 \\\\ a_1 \\\\ a_2 \\\\ a_3 \\\\ \vdots \\\\ a_{n-1} \end{bmatrix}
+\begin{bmatrix} a\_0 \\\\ a\_1 \\\\ a\_2 \\\\ a\_3 \\\\ \vdots \\\\ a\_{n-1} \end{bmatrix}
 \=
 \begin{bmatrix}
   1 & 1 & 1 & 1 & \cdots & 1 \\\\
-  1 & \omega_n^1 & \omega_n^2 & \omega_n^3 & \cdots & \omega_n^{n-1} \\\\
-  1 & \omega_n^2 & \omega_n^4 & \omega_n^6 & \cdots & \omega_n^{2\left(n-1\right)} \\\\
-  1 & \omega_n^3 & \omega_n^6 & \omega_n^9 & \cdots & \omega_n^{3\left(n-1\right)} \\\\
+  1 & \omega\_n^1 & \omega\_n^2 & \omega\_n^3 & \cdots & \omega\_n^{n-1} \\\\
+  1 & \omega\_n^2 & \omega\_n^4 & \omega\_n^6 & \cdots & \omega\_n^{2\left(n-1\right)} \\\\
+  1 & \omega\_n^3 & \omega\_n^6 & \omega\_n^9 & \cdots & \omega\_n^{3\left(n-1\right)} \\\\
   \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\\\
-  1 & \omega_n^{n-1} & \omega_n^{2\left(n-1\right)} & \omega_n^{3\left(n-1\right)} & \cdots & \omega_n^{\left(n-1\right)^2}
+  1 & \omega\_n^{n-1} & \omega\_n^{2\left(n-1\right)} & \omega\_n^{3\left(n-1\right)} & \cdots & \omega\_n^{\left(n-1\right)^2}
 \end{bmatrix}
 $$
 
@@ -210,11 +211,11 @@ $$
 \cdot
 \begin{bmatrix}
   1 & 1 & 1 & 1 & \cdots & 1 \\\\
-  1 & \omega_n^{-1} & \omega_n^{-2} & \omega_n^{-3} & \cdots & \omega_n^{-\left(n-1\right)} \\\\
-  1 & \omega_n^{-2} & \omega_n^{-4} & \omega_n^{-6} & \cdots & \omega_n^{-2\left(n-1\right)} \\\\
-  1 & \omega_n^{-3} & \omega_n^{-6} & \omega_n^{-9} & \cdots & \omega_n^{-3\left(n-1\right)} \\\\
+  1 & \omega\_n^{-1} & \omega\_n^{-2} & \omega\_n^{-3} & \cdots & \omega\_n^{-\left(n-1\right)} \\\\
+  1 & \omega\_n^{-2} & \omega\_n^{-4} & \omega\_n^{-6} & \cdots & \omega\_n^{-2\left(n-1\right)} \\\\
+  1 & \omega\_n^{-3} & \omega\_n^{-6} & \omega\_n^{-9} & \cdots & \omega\_n^{-3\left(n-1\right)} \\\\
   \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\\\
-  1 & \omega_n^{-\left(n-1\right)} & \omega_n^{-2\left(n-1\right)} & \omega_n^{-3\left(n-1\right)} & \cdots & \omega_n^{-\left(n-1\right)^2}
+  1 & \omega\_n^{-\left(n-1\right)} & \omega\_n^{-2\left(n-1\right)} & \omega\_n^{-3\left(n-1\right)} & \cdots & \omega\_n^{-\left(n-1\right)^2}
 \end{bmatrix}
 $$
 
@@ -234,16 +235,18 @@ $$
 
 $$
 \begin{aligned}
-x_0,x_1,x_2,x_3,x_4,x_5,x_6,x_7; \\\\
-x_0,x_2,x_4,x_6,x_1,x_3,x_5,x_7; \\\\
-x_0,x_4,x_2,x_6,x_1,x_5,x_3,x_7; \\\\
-x_0,x_4,x_2,x_6,x_1,x_5,x_3,x_7;
+x\_0,x\_1,x\_2,x\_3,x\_4,x\_5,x\_6,x\_7; \\\\
+x\_0,x\_2,x\_4,x\_6,x\_1,x\_3,x\_5,x\_7; \\\\
+x\_0,x\_4,x\_2,x\_6,x\_1,x\_5,x\_3,x\_7; \\\\
+x\_0,x\_4,x\_2,x\_6,x\_1,x\_5,x\_3,x\_7;
 \end{aligned}
 $$
 
 因此，我们可以使用递推的方法 $O\left(n\right)$ 计算出每个数反转后的结果并交换：
 
 ```cpp
+using Complex = complex<double>;
+
 template <typename T> constexpr void change(vector<T> &a) {
   size_t n = a.size();
   vector<size_t> rev(n);
@@ -255,10 +258,6 @@ template <typename T> constexpr void change(vector<T> &a) {
       swap(a[i], a[rev[i]]);
   }
 }
-```
-
-```cpp
-using Complex = complex<double>;
 
 template <int32_t on = 1> constexpr void fft(vector<Complex> y) {
   static_assert(on == 1 || on == -1, "on must be 1 or -1");
@@ -325,3 +324,156 @@ constexpr void ntt(vector<uint64_t> &a) {
   }
 }
 ```
+
+## 多项式初等函数
+
+如无说明，以下内容中的多项式很可能是在模 $x^n$ 意义下讨论的（截断到 $n$ 项）。
+
+### 多项式对数函数
+
+首先，根据多项式复合的定义，若 $\ln f\left(x\right)$ 存在，则 $[x^0]f\left(x\right)=1$。
+
+考虑将 $\ln f\left(x\right)$ 求导后积分：
+
+$$
+\begin{align}
+\dfrac{\mathrm{d}}{\mathrm{d}x}\ln f\left(x\right) &= \dfrac{f'\left(x\right)}{f\left(x\right)} \\\\
+\ln f\left(x\right) &= \int \dfrac{f'\left(x\right)}{f\left(x\right)} \mathrm{d}x
+\end{align}
+$$
+
+### 多项式三角/反三角函数
+
+感觉没啥应用？
+
+三角函数直接套用欧拉公式：
+
+$$
+\begin{aligned}
+  \sin{x} &= \dfrac{\mathrm{e}^{\mathrm{i}x} - \mathrm{e}^{-\mathrm{i}x}}{2\mathrm{i}} \\\\
+  \cos{x} &= \dfrac{\mathrm{e}^{\mathrm{i}x} + \mathrm{e}^{-\mathrm{i}x}}{2}
+\end{aligned}
+$$
+
+反三角函数仍然求导后积分：
+
+$$
+\begin{aligned}
+  \frac{\mathrm{d}}{\mathrm{d} x} \arcsin{x} &= \frac{1}{\sqrt{1 - x^{2}}} \\\\
+  \arcsin{x} &= \int \frac{1}{\sqrt{1 - x^{2}}} \mathrm{d} x \\\\
+  \frac{\mathrm{d}}{\mathrm{d} x} \arccos{x} &= - \frac{1}{\sqrt{1 - x^{2}}} \\\\
+  \arccos{x} &= - \int \frac{1}{\sqrt{1 - x^{2}}} \mathrm{d} x \\\\
+  \frac{\mathrm{d}}{\mathrm{d} x} \arctan{x} &= \frac{1}{1 + x^{2}} \\\\
+  \arctan{x} &= \int \frac{1}{1 + x^{2}} \mathrm{d} x
+\end{aligned}
+$$
+
+将式中的 $x$ 替换为 $f\left(x\right)$ 即可。
+
+### 多项式牛顿迭代法
+
+给定二元函数 $G\left(x,y\right)$，已知多项式 $f\left(x\right)$ 满足
+
+$$
+G\left(x, f\left(x\right)\right)\equiv 0\pmod{x^n}
+$$
+
+并且存在 $f\_1$ 满足：
+
++ $G\left(x, f\_1\right)=0$；
++ $\dfrac{\partial G}{\partial y}\left(0, f\_1\right) \neq 0$。
+
+求 $f\left(x\right)$ 在模 $x^n$ 意义下的结果。
+
+考虑倍增构造：
+
+首先，$n=1$ 时，单独求出 $[x^0]G\left(x,f\left(x\right)\right)=0$ 的解，假设中的 $f\_1$ 为一个解。
+
+如果已经得到了模 $x^n$ 意义下的解 $f\_n\left(x\right)$，尝试构造模 $x^{2n}$ 意义下的解。
+
+将 $G\left(x,f\left(x\right)\right)$ 在 $f\_n\left(x\right)$ 处泰勒展开，由题意：
+
+$$
+\sum\_{i=0}^{+\infty}\dfrac{\frac{\partial^iG}{\partial y^i}\left(x,f\_n\left(x\right)\right)}{i!}\left(f\left(x\right)-f\_n\left(x\right)\right)^i\equiv 0\pmod{x^{2n}}
+$$
+
+由于 $f\left(x\right)-f\_n\left(x\right)$ 的最低非零项次数为 $n$，因此：
+
+$$
+\forall i\ge 2:\left(f\left(x\right)-f\_n\left(x\right)\right)^i\equiv 0\pmod{x^{2n}}
+$$
+
+代入泰勒展开式：
+
+$$
+\begin{aligned}
+  \sum\_{i=0}^{+\infty}\dfrac{\frac{\partial^iG}{\partial y^i}\left(x,f\_n\left(x\right)\right)}{i!}\left(f\left(x\right)-f\_n\left(x\right)\right)^i
+  & \equiv G\left(x,f\_n\left(x\right)\right)+\dfrac{\partial G}{\partial y}\left(x,f\_n\left(x\right)\right)\left(f\left(x\right)-f\_n\left(x\right)\right) \\\\
+  & \equiv 0 \pmod {x^{2n}}
+\end{aligned}
+$$
+
+因此
+
+$$
+f\_{2n}\left(x\right)\equiv f\_n\left(x\right)-\dfrac{G\left(x,f\_n\left(x\right)\right)}{\frac{\partial G}{\partial y}\left(x,f\_n\left(x\right)\right)} \pmod {x^{2n}}
+$$
+
+### 多项式求逆
+
+设给定函数为 $h\left(x\right)$。
+
+利用牛顿迭代法，令
+
+$$
+G\left(x,y\right)=\dfrac{1}{y}-h\left(x\right)\equiv 0
+$$
+
+则
+
+$$
+\begin{aligned}
+  f\_{2n}
+  & \equiv f\_n\left(x\right)-\dfrac{\frac{1}{f\_n\left(x\right)}-h\left(x\right)}{-\frac{1}{f\_n^2\left(x\right)}} \\\\
+  & \equiv 2f\_n\left(x\right)-f\_n^2\left(x\right)h\left(x\right)
+  \pmod {x^{2n}}
+\end{aligned}
+$$
+
+### 多项式开方
+
+设给定函数为 $h\left(x\right)$，有
+
+$$
+G\left(x,y\right)=y^2-h\left(x\right)\equiv 0
+$$
+
+则
+
+$$
+\begin{aligned}
+  f\_{2n}\left(x\right)
+  & \equiv f\_n\left(x\right)-\dfrac{f\_n^2\left(x\right)-h\left(x\right)}{2f\_n\left(x\right)} \\\\
+  & \equiv \dfrac{f\_n^2\left(x\right)+h\left(x\right)}{2f\_n\left(x\right)}
+  \pmod {x^{2n}}
+\end{aligned}
+$$
+
+### 多项式指数函数
+
+设给定函数为 $h\left(x\right)$，有
+
+$$
+G\left(x,y\right)=\ln y-h\left(x\right)\equiv 0
+$$
+
+则
+
+$$
+\begin{aligned}
+  f\_{2n}\left(x\right)
+  & \equiv f\_n\left(x\right)-\dfrac{\ln f\_n\left(x\right)-h\left(x\right)}{\frac{1}{f\_n\left(x\right)}} \\\\
+  & \equiv f\_n\left(x\right)\left(1-\ln f\_n\left(x\right)+h\left(x\right)\right)
+  \pmod {x^{2n}}
+\end{aligned}
+$$
