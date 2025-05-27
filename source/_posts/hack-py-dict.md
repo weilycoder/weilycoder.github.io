@@ -1,12 +1,13 @@
 ---
 categories:
-- - OI
-date: '2025-04-01T17:26:43.045073+08:00'
+  - OI
 tags:
-- hack
+  - hack
 title: 浅谈主流 Python 解释器的哈希表实现漏洞
+date: '2025-04-01T17:26:43.045073+08:00'
 updated: '2025-04-01T17:26:43.541+08:00'
 mathjax: true
+code_fold: -1
 ---
 
 ## 前言
@@ -120,7 +121,7 @@ cProfile.run("set(i * m for i in range(n))")
 
 在 Python 3.13.2 下，输出为[^2]
 
-```latex
+```plaintext
 20004 function calls in 0.006 seconds
 
    Ordered by: standard name
@@ -145,7 +146,7 @@ cProfile.run("set(i * m for i in range(n))")
 
 在 pypy 3.11-v7.3.19 下，输出：
 
-```latex
+```plaintext
 20004 function calls in 0.006 seconds
 
    Ordered by: standard name
@@ -266,7 +267,7 @@ cProfile.run("test_insert(data2)")
 
 输出：
 
-```latex
+```plaintext
 5 function calls in 4.445 seconds
 
    Ordered by: standard name
@@ -303,7 +304,7 @@ cProfile.run("test_insert(data2)")
 
 > 在默认情况下，str 和 bytes 对象的 `__hash__()` 值会使用一个不可预知的随机值“加盐”。 虽然它们在一个单独 Python 进程中会保持不变，但它们的值在重复运行的 Python 间是不可预测的。
 >
-> 这是为了防止通过精心选择输入来利用字典插入操作在最坏情况下的执行效率即 $O(n^2)$ 复杂度制度的拒绝服务攻击。 请参阅 http://ocert.org/advisories/ocert-2011-003.html 了解详情。
+> 这是为了防止通过精心选择输入来利用字典插入操作在最坏情况下的执行效率即 $O(n^2)$ 复杂度制度的拒绝服务攻击。 请参阅 [http://ocert.org/advisories/ocert-2011-003.html](https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289) 了解详情。
 >
 > 改变哈希值会影响集合的迭代次序。Python 也从不保证这个次序不会被改变（通常它在 32 位和 64 位构建上是不一致的）。
 
@@ -313,6 +314,6 @@ cProfile.run("test_insert(data2)")
 
 [^1]: CPython 的版本为 3.13.2，pypy 的版本为 3.11-v7.3.19；下同
 [^2]: 测试用机器处理器参数为 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz，内存 16 GB
-[^3]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289
-[^4]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034
-[^5]: https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.__hash__
+[^3]: [https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289](https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289)
+[^4]: [https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034](https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034)
+[^5]: [https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.\_\_hash\_\_](https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.__hash__)

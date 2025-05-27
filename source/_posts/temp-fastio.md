@@ -1,11 +1,12 @@
 ---
 categories:
-- - OI
-date: '2025-03-29T18:11:34.916702+08:00'
+  - OI
 tags:
-- template
-- io
+  - template
+  - io
 title: 快读快写模板 (Linux)
+code_fold: -1
+date: '2025-03-29T18:11:34.916702+08:00'
 updated: '2025-03-30T10:23:02.158+08:00'
 ---
 ```cpp
