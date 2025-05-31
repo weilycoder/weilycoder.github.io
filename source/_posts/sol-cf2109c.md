@@ -30,13 +30,13 @@ tags:
 >
 > | **Command** |        **Constraint**        | **Result**                         | **Case**                                    | **Update**                  | **response** |
 > | :---------: | :--------------------------: | :--------------------------------- | ------------------------------------------- | --------------------------- | :----------: |
-> |   `add y`   | $-10^{18} \le y \le 10^{18}$ | $\mathrm{res} = x + y$             | $\text{if } 1 \le \mathrm{res} \le 10^{18}$ | $x \leftarrow \mathrm{res}$ |     `1`      |
+> |   `add y`   | $-10^{18} \le y \le 10^{18}$ | $\mathrm{res} = x + y$             | $\mathrm{if } 1 \le \mathrm{res} \le 10^{18}$ | $x \leftarrow \mathrm{res}$ |     `1`      |
 > |             |                              |                                    | $\mathrm{else}$                             | $x \leftarrow x$            |     `0`      |
-> |   `mul y`   |    $1 \le y \le 10^{18}$     | $\mathrm{res} = x \cdot y$         | $\text{if } 1 \le \mathrm{res} \le 10^{18}$ | $x \leftarrow \mathrm{res}$ |     `1`      |
+> |   `mul y`   |    $1 \le y \le 10^{18}$     | $\mathrm{res} = x \cdot y$         | $\mathrm{if } 1 \le \mathrm{res} \le 10^{18}$ | $x \leftarrow \mathrm{res}$ |     `1`      |
 > |             |                              |                                    | $\mathrm{else}$                             | $x \leftarrow x$            |     `0`      |
-> |   `div y`   |    $1 \le y \le 10^{18}$     | $\mathrm{res} = x/y$               | $\text{if } y$ divides $x$                  | $x \leftarrow \mathrm{res}$ |     `1`      |
+> |   `div y`   |    $1 \le y \le 10^{18}$     | $\mathrm{res} = x/y$               | $\mathrm{if } y$ divides $x$                  | $x \leftarrow \mathrm{res}$ |     `1`      |
 > |             |                              |                                    | $\mathrm{else}$                             | $x \leftarrow x$            |     `0`      |
-> |   `digit`   |              —               | $\mathrm{res} = S(x)$$^{\text{∗}}$ | —                                           | $x \leftarrow \mathrm{res}$ |     `1`      |
+> |   `digit`   |              —               | $\mathrm{res} = S(x)$$^{\mathrm{∗}}$ | —                                           | $x \leftarrow \mathrm{res}$ |     `1`      |
 >
 > $*$：这里 $S(x)$ 表示求 $x$ 的 $10$ 进制下的各位数字和，例如 $f(123)=1+2+3=6$。
 >

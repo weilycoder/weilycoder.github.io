@@ -26,13 +26,13 @@ inline size_t log2_algo1(uint64_t x) {
 
 ## Algo 2
 
-很多搞 OI 的朋友都知道预处理 `logn` 数组的方法；具体来讲，令 $\text{logn}_n=\left\lfloor\log_2 n\right\rfloor$，显然有：
+很多搞 OI 的朋友都知道预处理 `logn` 数组的方法；具体来讲，令 $\mathrm{logn}_n=\left\lfloor\log_2 n\right\rfloor$，显然有：
 
 $$
-\text{logn}\_{n}=\text{logn}\_{\frac{n}{2}}
+\mathrm{logn}\_{n}=\mathrm{logn}\_{\frac{n}{2}}
 $$
 
-递推起点为 $\text{logn}_1=0$。
+递推起点为 $\mathrm{logn}_1=0$。
 
 这种做法的空间复杂度为 $\Theta(n)$，预处理时间复杂度 $\Theta(n)$，单次查询时间复杂度 $\Theta(1)$。
 
@@ -110,6 +110,6 @@ $$
 
 ## Algo 6
 
-啊我当然直到二分的复杂度也是 $\Theta(\log\log n)$ 的，但是 $\text{Algo 5}$ 的价值在于它是无需分支语句的，后者可能在部分非传统题中有用。
+啊我当然直到二分的复杂度也是 $\Theta(\log\log n)$ 的，但是 $\mathrm{Algo 5}$ 的价值在于它是无需分支语句的，后者可能在部分非传统题中有用。
 
 [^1]: 参见：[A001122](https://oeis.org/A001122)

@@ -62,7 +62,7 @@ $$
 f(p_e)=\gcd(p_e,ep^{e-1})=
 \begin{cases}
 p^{e},&p\mid e \\\\
-p^{e-1},&\text{otherwise}
+p^{e-1},&\mathrm{otherwise}
 \end{cases}
 $$
 
