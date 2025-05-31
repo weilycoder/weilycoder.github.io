@@ -23,11 +23,14 @@ def process_math_blocks(content: str) -> str:
         block = re.sub(r"(?<=\s)\\\\(?=\s)", r"\\\\\\\\", block)
         block = re.sub(r"(?<!\\left)\(", r"\\left(", block)
         block = re.sub(r"(?<!\\right)\)", r"\\right)", block)
+        block = re.sub(r"(?<!\\left)\\\\{", r"\\left\\\\{", block)
+        block = re.sub(r"(?<!\\right)\\\\}", r"\\right\\\\}", block)
         return block
 
-    content = re.sub(
-        r"(\$\$.*?\$\$|\$.*?\$)", replace_in_math_block, content, flags=re.DOTALL
-    )
+    content = re.sub(r"(\$\$.*?\$\$|\$.*?\$)",
+                     replace_in_math_block,
+                     content,
+                     flags=re.DOTALL)
     return content
 
 
