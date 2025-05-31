@@ -1,11 +1,10 @@
 ---
 title: Surreal Numbers
 categories:
-  - OI
+  - Math
 date: 2025-05-16 17:14:14
 mathjax: true
 tags:
-  - math
   - surreal-numbers
   - games
 ---

@@ -1,11 +1,11 @@
 ---
 categories:
-- OI
+  - OI
 title: 快速 GCD 算法
 date: 2024-07-25 17:16:27
 mathjax: true
 tags:
-- math
+  - math
 ---
 
 > 例题：[Luogu P5435](https://www.luogu.com.cn/problem/P5435)
