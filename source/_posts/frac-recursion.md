@@ -177,6 +177,18 @@ $$
 \end{aligned}
 $$
 
+#### (i) $~a\_0\in\left\\{\alpha,\beta\right\\}$
+
+此时容易验证数列为常数列。
+
+$$
+a\_n=a\_0
+$$
+
+#### (ii) $~a\_0\notin\left\\{\alpha,\beta\right\\}$
+
+容易验证 $\forall n: a\_n\notin\left\\{\alpha,\beta\right\\}$。
+
 因此
 
 $$
@@ -231,11 +243,11 @@ $$
 整理得
 
 $$
-a_n=\dfrac{\left(-\alpha+\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n\right)a_0-\alpha\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\alpha\beta}{\left(\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n-1\right)a_0-\alpha\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\beta}
+a\_n=\dfrac{\left(-\alpha+\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n\right)a\_0-\alpha\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\alpha\beta}{\left(\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n-1\right)a\_0-\alpha\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\beta}
 $$
 
 将 $\alpha,\beta$ 代入
 
 $$
-a_n=\dfrac{a_{0} p \left(q - s + \left(\dfrac{q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}{q + s - \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}\right)^{n} \left(- q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right) + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right) + \dfrac{\left(\left(\dfrac{q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}{q + s - \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}\right)^{n} - 1\right) \left(- q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right) \left(q - s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right)}{2}}{p \left(2 a_{0} p \left(\left(\dfrac{q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}{q + s - \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}\right)^{n} - 1\right) - q + s + \left(\dfrac{q + s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}{q + s - \sqrt{4 p t + q^{2} - 2 q s + s^{2}}}\right)^{n} \left(q - s + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right) + \sqrt{4 p t + q^{2} - 2 q s + s^{2}}\right)}
+a_n=\dfrac{a_{0} p \left(q - s + \left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} \left(- q + s + \sqrt{4 p t + (q - s)^{2}}\right) + \sqrt{4 p t + (q - s)^{2}}\right) + \dfrac{\left(\left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} - 1\right) \left(- q + s + \sqrt{4 p t + (q - s)^{2}}\right) \left(q - s + \sqrt{4 p t + (q - s)^{2}}\right)}{2}}{p \left(2 a_{0} p \left(\left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} - 1\right) - q + s + \left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} \left(q - s + \sqrt{4 p t + (q - s)^{2}}\right) + \sqrt{4 p t + (q - s)^{2}}\right)}
 $$
