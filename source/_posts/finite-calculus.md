@@ -201,6 +201,64 @@ $$
 \operatorname{\Delta}x^{\underline n}=\left(x+1\right)^{\underline n}-x^{\underline n}=nx^{\underline{n-1}}
 $$
 
+#### 下降幂与普通幂的互化
+
+{% note 前置知识-斯特林数 fold %}
+（无符号）第一类斯特林数（斯特林轮换数），$\begin{bmatrix}n \\\\ k\end{bmatrix}$，也可记做 $s(n,k)$，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空轮换的方案数。
+
+第二类斯特林数（斯特林子集数）$\begin{Bmatrix}n \\\\ k\end{Bmatrix}$ ，也可记做 $S(n,k)$ ，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空子集的方案数。
+
+根据组合意义，有递推公式：
+
+$$
+\begin{aligned}
+  \begin{bmatrix}n \\\\ m\end{bmatrix} &=
+  \begin{cases}
+    [n=0], & m=0 \\\\
+    \begin{bmatrix}n-1 \\\\ m-1\end{bmatrix}+(n-1)\begin{bmatrix}n-1 \\\\ m\end{bmatrix}, & m \ne 0
+  \end{cases} \\\\
+  \begin{Bmatrix}n \\\\ m\end{Bmatrix} &=
+  \begin{cases}
+    [n=0], & m=0 \\\\
+    \begin{Bmatrix}n-1 \\\\ m-1\end{Bmatrix}+m\begin{Bmatrix}n-1 \\\\ m\end{Bmatrix}, & m \ne 0
+  \end{cases}
+\end{aligned}
+$$
+
+其中第二类斯特林数可以利用二项式反演得到通项公式：
+
+$$
+\begin{aligned}
+  m^n &= \sum_{k=0}^{m}\binom{m}{k}\begin{Bmatrix}n \\\\ k\end{Bmatrix}k! \\\\
+  m!\begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \sum_{k=0}^{m}(-1)^{m-k}\binom{m}{k}k^n \\\\
+  \begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \frac{1}{m!}\sum_{k=0}^{m}(-1)^{m-k}\binom{m}{k}k^n \\\\
+  &= \sum_{k=0}^{m}\frac{(-1)^{m-k}}{(m-k)!}\cdot \frac{k^n}{k!}
+\end{aligned}
+$$
+
+阅读 [OI-wiki](https://oi-wiki.org/math/combinatorics/stirling/) 或 [维基百科](https://en.wikipedia.org/wiki/Stirling_number) 的页面获取更多信息。
+{% endnote %}
+
+利用第二类斯特林数，可以将普通幂转化为下降幂：
+
+$$
+x^n=\sum_{k} \begin{Bmatrix}n \\\\ k\end{Bmatrix} x^{\underline{k}}
+$$
+
+利用第一类斯特林数，可以将下降幂转化为普通幂：
+
+$$
+x^{\underline{n}}=\sum_{k} (-1)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix} x^k
+$$
+
+这里 $(-1)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix}$ 被称为有符号第一类斯特林数，记作 $s(n, k)$。
+
+并且
+
+$$
+s(n,k)=s(n-1,k-1)-(n-1)s(n-1,k)
+$$
+
 ### 组合数
 
 $$
