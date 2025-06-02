@@ -189,7 +189,7 @@ $$
 $$
 x^{\underline{n}}=
 \begin{cases}
-1, & n=1 \\\\
+1, & n=0 \\\\
 \begin{aligned}\prod\_{i=1}^n\left(x-i+1\right)\end{aligned}, & n\in\mathbf{Z\_+} \\\\
 \begin{aligned}\prod\_{i=1}^{-n}\dfrac{1}{x+i}=\dfrac{1}{\left(x+1\right)^{\underline{n}}}\end{aligned}, & n\in\mathbf{Z\_-} \\\\
 \end{cases}
