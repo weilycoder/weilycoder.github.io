@@ -108,7 +108,7 @@ $$
 $$
 \begin{aligned}
 \dfrac{1}{a\_{n}} &= \left(\dfrac{1}{a\_0}+\dfrac{p}{q-s}\right)\cdot\left(\dfrac{q}{s}\right)^n-\dfrac{p}{q-s} \\\\
-a\_n &= \dfrac{\left(q-s\right)a\_{0}}{\left(pa\_{0}+q-s\right)\cdot\left(\dfrac{q}{s}\right)^{n}-pa\_{0}}
+a\_n &= \dfrac{\left(q-s\right)a\_0}{\left(pa\_0+q-s\right)\cdot\left(\dfrac{q}{s}\right)^n-pa\_0}
 \end{aligned}
 $$
 
@@ -243,11 +243,11 @@ $$
 整理得
 
 $$
-a\_n=\dfrac{\left(-\alpha+\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n\right)a\_0-\alpha\beta\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\alpha\beta}{\left(\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n-1\right)a\_0-\alpha\left(\dfrac{\alpha p}{\beta p-s}-\dfrac{s}{\beta p-s}\right)^n+\beta}
+a_n=\dfrac{a_0\left(-q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+q+s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2t}{a_0\left(2p\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2p\right)+q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-q-s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
 $$
 
-将 $\alpha,\beta$ 代入
+令 $\lambda=\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}$，
 
 $$
-a_n=\dfrac{a_{0} p \left(q - s + \left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} \left(- q + s + \sqrt{4 p t + (q - s)^{2}}\right) + \sqrt{4 p t + (q - s)^{2}}\right) + \dfrac{\left(\left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} - 1\right) \left(- q + s + \sqrt{4 p t + (q - s)^{2}}\right) \left(q - s + \sqrt{4 p t + (q - s)^{2}}\right)}{2}}{p \left(2 a_{0} p \left(\left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} - 1\right) - q + s + \left(\dfrac{q + s + \sqrt{4 p t + (q - s)^{2}}}{q + s - \sqrt{4 p t + (q - s)^{2}}}\right)^{n} \left(q - s + \sqrt{4 p t + (q - s)^{2}}\right) + \sqrt{4 p t + (q - s)^{2}}\right)}
+a_n=\dfrac{a_0\left(-q\lambda^n+q+s\lambda^n-s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\lambda^n-2t}{a_0\left(2p\lambda^n-2p\right)+q\lambda^n-q-s\lambda^n+s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
 $$
