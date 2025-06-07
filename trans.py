@@ -20,6 +20,7 @@ def process_math_blocks(content: str) -> str:
         block = re.sub(r"(?<!\\)(\\[{}])", r"\\\1", block)
         block = re.sub(r"(?<!\\)(\_)", r"\\\1", block)
         block = re.sub(r"(?<!\\)(\*)", r"\\\1", block)
+        block = re.sub(r"(?<!\\)(\\\#)", r"\\\1", block)
         block = re.sub(r"(?<=\s)\\\\(?=\s)", r"\\\\\\\\", block)
         block = re.sub(r"(?<!\\left)\(", r"\\left(", block)
         block = re.sub(r"(?<!\\right)\)", r"\\right)", block)

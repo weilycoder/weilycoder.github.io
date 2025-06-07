@@ -3,6 +3,7 @@ title: Surreal Numbers
 categories:
   - Math
 date: 2025-05-16 17:14:14
+update: "2025-06-07T18:34:16.677+0800"
 mathjax: true
 tags:
   - surreal-numbers
@@ -13,12 +14,12 @@ tags:
 
 ## 构造
 
-若 $L,R$ 为任意两个 Surreal Number（超现实数，以下简称“数”）构成的集合，则 $\left\\{L\mid R\right\\}$ 为一个数。
+若 $L,R$ 为任意满足条件的两个 Surreal Number（超现实数，以下简称“数”）构成的集合，则 $\left\\{L\mid R\right\\}$ 为一个数。
 
 规定：
 
 $$
-\tag{0} \forall x\_L \in L,x\_R \in R\left(x\_L \not \ge x\_R\right).
+\tag{0} \forall x\_L \in L,x\_R \in R\left(x\_L\in\mathbf{No}\land x\_R\in\mathbf{No}\land x\_L \not \geqslant x\_R\right).
 $$
 
 ## 约定
@@ -29,13 +30,13 @@ $$
 
 ## 定义
 
-+ $x\ge y$ 和 $x\le y$ 的定义
++ $x\geqslant y$ 和 $x\leqslant y$ 的定义
 
   $$
   \tag{1}
   \begin{aligned}
-  \left(x\ge y\right) &\Leftrightarrow \left(\left(\not\exists x\_R\le y\right)\land\left(\not\exists y\_L\ge x\right)\right); \\\\
-  \left(x\le y\right) &\Leftrightarrow \left(y\ge x\right)
+  \left(x\geqslant y\right) &\Leftrightarrow \left(\left(\not\exists x\_R\leqslant y\right)\land\left(\not\exists y\_L\geqslant x\right)\right); \\\\
+  \left(x\leqslant y\right) &\Leftrightarrow \left(y\geqslant x\right)
   \end{aligned}
   $$
 
@@ -43,8 +44,8 @@ $$
 
   $$
   \begin{aligned}
-  \left(x=y\right) &\Leftrightarrow \left(\left(x\ge y\right)\land\left(y\ge x\right)\right) \\\\
-  \left(x\gt y\right) &\Leftrightarrow \left(\left(x\ge y\right)\land\left(y\not\ge x\right)\right) \\\\
+  \left(x=y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\geqslant x\right)\right) \\\\
+  \left(x\gt y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\not\geqslant x\right)\right) \\\\
   \left(x\lt y\right) &\Leftrightarrow \left(y\gt x\right)
   \end{aligned}
   $$
@@ -52,24 +53,24 @@ $$
 + $x+y$ 的定义
 
   $$
-  \tag{2} x+y=\left\\{x\_L+y,x+y\_L\mid x\_R+y,x+y\_R\right\\}
+  \tag{2} x+y:=\left\\{x\_L+y,x+y\_L\mid x\_R+y,x+y\_R\right\\}
   $$
 
 + $-x$ 的定义
 
   $$
-  \tag{3} -x=\left\\{-x\_R\mid -x\_L\right\\}
+  \tag{3} -x:=\left\\{-x\_R\mid -x\_L\right\\}
   $$
 
 + $xy$ 的定义
 
   $$
-  \tag{4} xy=\left\\{x\_Ly+xy\_L-x\_Ly\_L,x\_Ry+xy\_R-x\_Ry\_R\mid x\_Ly+xy\_R-x\_Ly\_R,x\_Ry+xy\_L-x\_Ry\_L\right\\}
+  \tag{4} xy:=\left\\{x\_Ly+xy\_L-x\_Ly\_L,x\_Ry+xy\_R-x\_Ry\_R\mid x\_Ly+xy\_R-x\_Ly\_R,x\_Ry+xy\_L-x\_Ry\_L\right\\}
   $$
 
-由于等号 $=$ 的特殊性，需要指出，这里的等号意义比“相等”要弱一些，具体表现在，我们可以构造一种运算 $f$，使得 $x=y$ 于 $f\left(x\right)=f\left(y\right)$ 不等价。
+由于等号 $=$ 的特殊性，需要指出，这里的等号意义比“相等”要弱一些，具体表现在，我们可以构造一种运算 $f$，使得 $x=y$ 与 $f\left(x\right)=f\left(y\right)$ 不等价。
 
-因此，后文中定义变量的时候，使用 $:=$ 表示赋值；使用 $\equiv$ 表示两个数的 $L$ 和 $R$ 分别相等（这时若 $x\equiv y$，则显然可以将式子中的一切 $y$ 替换为 $x$）。
+因此，我们规定，定义变量的时候，使用 $:=$ 表示赋值/定义；使用 $\equiv$ 表示两个数的 $L$ 和 $R$ 分别相等（递归定义，这时若 $x\equiv y$，则显然可以将式子中的一切 $y$ 替换为 $x$）。
 
 ## 超限归纳
 
@@ -125,8 +126,8 @@ $$
 
 这里给出一个可以简化比较的引理：
 
-+ 若 $y\not\ge x$，则 $\left\\{y,x\_L\mid x\_R\right\\}=x$；
-+ 若 $y\not\le x$，则 $\left\\{x\_L\mid y,x\_R\right\\}=x$。
++ 若 $y\not\geqslant x$，则 $\left\\{y,x\_L\mid x\_R\right\\}=x$；
++ 若 $y\not\leqslant x$，则 $\left\\{x\_L\mid y,x\_R\right\\}=x$。
 
 ## 基础定理
 
@@ -138,33 +139,31 @@ $$
 
 $$
 \tag{T0}
-\begin{aligned}
-\mathrm{\left(i\right)} \quad & x \not\ge x\_R \\\\
-\mathrm{\left(ii\right)} \quad & x\_L \not\ge x \\\\
-\mathrm{\left(iii\right)} \quad & x \ge x \\\\
-\mathrm{\left(iv\right)} \quad & x = x
-\end{aligned}
+\begin{align\*}
+\tag{i} x \not\geqslant x\_R \\\\
+\tag{ii} x\_L \not\geqslant x \\\\
+\tag{iii} x \geqslant x \\\\
+\tag{iv} x = x
+\end{align\*}
 $$
 
-> **证明：**
->
-> 首先，回想“大于”的定义：$x\ge y$ 当且仅当 $\not\exists x\_R\le y$ 且 $\not\exists y\_L\ge x$。
->
-> 1. 将定义中的 $y$ 使用 $x\_R$ 替换，发现一定有 $x\_R\le x\_R'$，因此 $x\ge x\_R$ 不成立。
-> 2. 同理可证。
-> 3. 令 $y:=x$，我们已经证明不存在 $x\_R\le y$ 且不存在 $y\_L\ge x$，因此 $x\ge y$。
-> 4. 由等号的定义得。
+{% note Proof fold %}
+1. 将定义中的 $y$ 使用 $x\_R$ 替换，发现一定有 $x\_R\leqslant x\_R'$，因此 $x\geqslant x\_R$ 不成立。
+2. 同理可证。
+3. 令 $y:=x$，我们已经证明不存在 $x\_R\leqslant y$ 且不存在 $y\_L\geqslant x$，因此 $x\geqslant y$。
+4. 由等号的定义得。
+{% endnote %}
 
 #### 不等号的传递性
 
 $$
 \tag{T1}
-\left(\left(x\ge y\right)\land \left(y\ge z\right)\right) \Rightarrow x\ge z
+\left(\left(x\geqslant y\right)\land \left(y\geqslant z\right)\right) \Rightarrow x\geqslant z
 $$
 
-> **证明：**
->
-> 因为 $x\ge y$，因此不存在 $x\_R\le y$，由归纳假设，不存在 $x\_R\le z$，同理得不存在 $z\_L\ge x$，因此 $T\_1\left(x,y,z\right)$ 成立。
+{% note Proof fold %}
+因为 $x\geqslant y$，因此不存在 $x\_R\leqslant y$，由归纳假设，不存在 $x\_R\leqslant z$，同理得不存在 $z\_L\geqslant x$，因此命题成立。
+{% endnote %}
 
 请注意这条定理的推论之一是，若 $x=y$，则 $x\gt x$ 等价于 $y\gt z$。
 
@@ -176,13 +175,153 @@ $$
 \tag{T2}
 \begin{aligned}
 \forall &\left(x\in\mathbf{No}\right)\left(\forall x\_L,x\_R \left(x\_L\lt x\lt x\_R\right)\right) \\\\
-\forall &\left(x,y\in\mathbf{No}\right)\left(x\le y\lor y\le x\right)
+\forall &\left(x,y\in\mathbf{No}\right)\left(x\leqslant y\lor y\leqslant x\right)
 \end{aligned}
 $$
 
-> **证明：**
->
-> 1. 已经证明，$x\not\ge x\_R$ 故只需证明 $x\_R\ge x$。根据定义，它成立当且仅当 $x\_{RR}\le x$ 或 $x\_R\le x\_L$。若前者成立，根据归纳假设，有 $x\_R\lt x\_{RR}\le x$。而后者根据 $\mathrm{\left(0\right)}$ 不成立。
-> 2. 若 $x\not\ge y$，则 $x\_R\le y$ 或 $x\le y\_L$，即 $x\lt x\_R\le y$ 或 $x\le y\_L\lt y$。
+{% note Proof fold %}
+1. 已经证明 $x\not\geqslant x\_R$，故只需证明 $x\_R\geqslant x$。根据定义，它成立当且仅当 $x\_{RR}\leqslant x$ 或 $x\_R\leqslant x\_L$。若前者成立，根据归纳假设，有 $x\_R\lt x\_{RR}\leqslant x$。而后者根据 $\mathrm{\left(0\right)}$ 不成立。
+2. 若 $x\not\geqslant y$，则 $x\_R\leqslant y$ 或 $x\leqslant y\_L$，即 $x\lt x\_R\leqslant y$ 或 $x\leqslant y\_L\lt y$。
+{% endnote %}
 
 因此，全体数字是全序的。
+
+### 加法运算律
+
+$$
+\tag{T3}
+\begin{align\*}
+  x+0 &\equiv x \\\\
+  x+y &\equiv y+x \\\\
+  \left(x+y\right)+z &\equiv x+\left(y+z\right)
+\end{align\*}
+$$
+
+{% note Proof fold %}
+$$
+\begin{aligned}
+  x+0
+  &\equiv \left\\{x\_L+0\mid x\_R+0\right\\} \\\\
+  &\equiv \left\\{x\_L\mid x\_R\right\\} \\\\
+  &\equiv x \\\\
+  x+y
+  &\equiv \left\\{x\_L+y,x+y\_L\mid x\_R+y,x+y\_R\right\\} \\\\
+  &\equiv \left\\{y+x\_L,y\_L+x\mid y+x\_R,y\_R+x\right\\} \\\\
+  &\equiv \left\\{y\_L+x,y+x\_L\mid y\_R+x,y+x\_R\right\\} \\\\
+  &\equiv y+x \\\\
+  \left(x+y\right)+z
+  &\equiv \left\\{\left(x+y\right)\_L+z,\left(x+y\right)+z\_L\mid \cdots\right\\} \\\\
+  &\equiv \left\\{\left(x\_L+y\right)+z,\left(x+y\_L\right)+z,\left(x+y\right)+z\_L\mid\cdots\right\\} \\\\
+  &\equiv \left\\{x\_L+\left(y+z\right),x+\left(y\_L+z\right),x+\left(y+z\_L\right)\mid\cdots\right\\} \\\\
+  &\equiv \cdots \\\\
+  &\equiv x+\left(y+z\right)
+\end{aligned}
+$$
+{% endnote %}
+
+$x+0\equiv x$ 意味着 $0$ 是加法单位元，这也是我们将 $\left\\{\mid\right\\}$ 称为 $0$ 的原因。
+
+### 减法（相反数）运算律
+
+$$
+\tag{T4}
+\begin{align\*}
+\tag{i} -\left(x+y\right) &\equiv \left(-x\right)+\left(-y\right) \\\\
+\tag{ii} -\left(-x\right) &\equiv x \\\\
+\tag{iii} x+\left(-x\right) &= 0
+\end{align\*}
+$$
+
+{% note Proof fold %}
+$\mathrm{\left(i\right)}$ 和 $\mathrm{\left(ii\right)}$ 是显然的：
+
+$$
+\begin{aligned}
+  -\left(x+y\right)
+  &\equiv -\left\\{x\_L+y,x+y\_L\mid x\_R+y,x+y\_R\right\\} \\\\
+  &\equiv \left\\{-\left(x\_R+y\right),-\left(x+y\_R\right)\mid -\left(x\_L+y\right),-\left(x+y\_L\right)\right\\} \\\\
+  &\equiv \left\\{-x\_R-y,-x-y\_R\mid -x\_L-y,-x-y\_L\right\\} \\\\
+  &\equiv \left(-x\right)+\left(-y\right) \\\\
+  -\left(-x\right)
+  &\equiv -\left\\{-x\_R\mid -x\_L\right\\} \\\\
+  &\equiv \left\\{x\_L\mid x\_R\right\\} \\\\
+  &\equiv x \\\\
+\end{aligned}
+$$
+
+---
+
+注意 $\mathrm{\left(iii\right)}$ 中的符号不是 $\equiv$。
+
+若 $x+\left(-x\right)\not\geqslant 0$，则存在 $\left(x+\left(-x\right)\right)\_R\leqslant 0$，即 $x+\left(-x\_L\right)\leqslant 0$ 或 $x\_R+\left(-x\right)\leqslant 0$，但是后者不成立，因为根据归纳假设，有 $x\_L+\left(-x\_L\right)\geqslant 0$ 和 $x\_R+\left(-x\_R\right)\geqslant 0$。同理 $x+\left(-x\right)\not\leqslant 0$ 不成立。故 $x+\left(-x\right)=0$。
+{% endnote %}
+
+顺便，后文中将 $x+\left(-y\right)$ 记为 $x-y$。
+
+### 加法消去律
+
+$$
+\tag{T5}
+y\geqslant z \Leftrightarrow x+y\geqslant x+z
+$$
+
+{% note Proof fold %}
+若 $x+y\geqslant x+z$，则不会有
+
+$$
+x+y\_R\leqslant x+z\lor x+y\leqslant x+z\_L
+$$
+
+根据归纳假设，等价于不会有 $y\_R\leqslant z\lor y\leqslant z\_L$，因此 $y\geqslant z$。
+
+---
+
+若 $x+y\not\geqslant x+z$，则有
+
+$$
+x\_R+y\leqslant x+y\lor x+y\_R\leqslant x+z\lor x+y\leqslant x\_L+z\lor x+y\leqslant x+z\_L
+$$
+
+此时如果 $y\geqslant z$ 成立，则
+
+$$
+x\_R+y\leqslant x+y\lor x+y\_R\leqslant x+y\lor x+z\leqslant x\_L+z\lor x+z\leqslant x+z\_L
+$$
+
+以上的每个式子都将导出矛盾。
+
+综上所述，$y\geqslant z\Leftrightarrow x+y\geqslant x+z$。
+{% endnote %}
+
+### 加法的封闭性
+
+$$
+\tag{T6}
+\begin{align\*}
+  \tag{i} 0\in\mathbf{No} \\\\
+  \tag{ii} x\in\mathbf{No}\Rightarrow -x\in\mathbf{No} \\\\
+  \tag{iii} x,y\in\mathbf{No}\Rightarrow x+y\in\mathbf{No}
+\end{align\*}
+$$
+
+{% note Proof fold %}
+由于不存在 $0\_L$ 和 $0\_R$，因此不存在 $0\_L\geqslant 0\_R$，故 $0\in\mathbf{No}$。
+
+---
+
+由于 $x\_L\lt x\lt x\_R$ 且 $x\_L,x\_R\in\mathbf{No}$，因此 $-x\_R\lt -x\lt -x\_L$ 且 $-x\_R,-x\_L\in\mathbf{No}$。
+
+---
+
+容易得到
+
+$$
+x_L+y,x+y_L\lt x+y\lt x_R+y,x+y_R
+$$
+
+同时 $x_L+y,x+y_L,x_R+y,x+y_R\in\mathbf{No}$。
+{% endnote %}
+
+根据这些定理，$\mathbf{No}$ 在 $+$ 运算下构成交换群。
+
+### TODO
