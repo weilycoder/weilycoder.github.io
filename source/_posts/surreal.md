@@ -10,7 +10,7 @@ tags:
   - games
 ---
 
-本文可以视为 weilycoder 阅读 [*On Numbers and Games*](/files/ONAG.7z) 的笔记。
+本文可以视为 weilycoder 阅读 <a href="/files/ONAG.7z" target="_blank"><em>On Numbers and Games</em></a> 的笔记。
 
 ## 构造
 
