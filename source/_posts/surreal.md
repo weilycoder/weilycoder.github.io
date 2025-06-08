@@ -68,6 +68,14 @@ $$
   \tag{4} xy:=\left\\{x\_Ly+xy\_L-x\_Ly\_L,x\_Ry+xy\_R-x\_Ry\_R\mid x\_Ly+xy\_R-x\_Ly\_R,x\_Ry+xy\_L-x\_Ry\_L\right\\}
   $$
 
+  一个意义更明确的写法是：
+
+  $$
+  xy:=\left\\{xy-\left(x-x\_L\right)\left(y-y\_L\right),xy-\left(x\_R-x\right)\left(y\_R-y\right)\mid xy+\left(x-x\_L\right)\left(y\_R-y\right),xy+\left(x\_R-x\right)\left(y-y\_L\right)\right\\}
+  $$
+
+  有时也使用 $x\cdot y$ 表示两个数相乘。
+
 由于等号 $=$ 的特殊性，需要指出，这里的等号意义比“相等”要弱一些，具体表现在，我们可以构造一种运算 $f$，使得 $x=y$ 与 $f\left(x\right)=f\left(y\right)$ 不等价。
 
 因此，我们规定，定义变量的时候，使用 $:=$ 表示赋值/定义；使用 $\equiv$ 表示两个数的 $L$ 和 $R$ 分别相等（递归定义，这时若 $x\equiv y$，则显然可以将式子中的一切 $y$ 替换为 $x$）。
@@ -82,13 +90,15 @@ $$
 
 没有归纳起点 $P\left(0\right)$ 的原因留给读者思考。
 
-## 游戏（伪数）
+## 博弈
 
 我们同样允许表达式 $x=\left\\{L\mid R\right\\}$，这里 $L,R$ 不满足 $\mathrm{\left(0\right)}$。
 
-由于这种形式在博弈中被引入，我们称它为游戏（game）；为了表述方便，后文也称它为伪数（pseudo-number）。
+由于这种形式在非公平博弈中被引入，我们称它为博弈（game）。
 
-显然伪数也应该满足超限归纳法。
+{% hide （值得指出的是，公平博弈属于非公平博弈，因此 Nim 数也可以使用博弈表述）。 %}
+
+显然博弈也应该满足超限归纳法。
 
 ## 创造日
 
@@ -131,7 +141,7 @@ $$
 
 ## 基础定理
 
-若无说明，以下定理适用于全体游戏。
+若无说明，以下定理适用于全体博弈。
 
 ### 比较运算律
 
@@ -169,7 +179,7 @@ $$
 
 #### 不等号的连接性
 
-这条定理需要用到 $\mathrm{\left(0\right)}$，因此对于游戏不适用。
+这条定理需要用到 $\mathrm{\left(0\right)}$，因此对于博弈不适用。
 
 $$
 \tag{T2}
@@ -184,7 +194,7 @@ $$
 2. 若 $x\not\geqslant y$，则 $x\_R\leqslant y$ 或 $x\leqslant y\_L$，即 $x\lt x\_R\leqslant y$ 或 $x\leqslant y\_L\lt y$。
 {% endnote %}
 
-因此，全体数字是全序的。
+因此，全体数是全序的。
 
 ### 加法运算律
 
@@ -258,7 +268,7 @@ $$
 
 顺便，后文中将 $x+\left(-y\right)$ 记为 $x-y$。
 
-### 加法消去律
+### 等式/不等式的基本性质（加法消去律）
 
 $$
 \tag{T5}
@@ -316,12 +326,119 @@ $$
 容易得到
 
 $$
-x_L+y,x+y_L\lt x+y\lt x_R+y,x+y_R
+x\_L+y,x+y\_L\lt x+y\lt x\_R+y,x+y\_R
 $$
 
-同时 $x_L+y,x+y_L,x_R+y,x+y_R\in\mathbf{No}$。
+同时 $x\_L+y,x+y\_L,x\_R+y,x+y\_R\in\mathbf{No}$。
 {% endnote %}
 
 根据这些定理，$\mathbf{No}$ 在 $+$ 运算下构成交换群。
 
-### TODO
+### 乘法运算律
+
+$$
+\tag{T7}
+\begin{align\*}
+  x\cdot 0 &\equiv 0 \\\\
+  x\cdot 1 &\equiv 1 \\\\
+  xy &\equiv yx \\\\
+  \left(-x\right)y &\equiv x\left(-y\right) \\\\
+  &\equiv -xy \\\\
+  \left(x+y\right)z &= xz+yz \\\\
+  \left(xy\right)z &= x\left(yz\right)
+\end{align\*}
+$$
+
+容易证明但证明较繁，故略。
+
+值得指出的是，$=$ 连接的定律是由于 $x+\left(-x\right)=0$ 使用等号连接。
+
+### 乘法的封闭性、等式的基本性质与排序不等式
+
+$$
+\tag{T8}
+\begin{align\*}
+  \tag{i} x,y\in\mathbf{No} &\Rightarrow xy\in\mathbf{No} \\\\
+  \tag{ii} x\_1=x\_2 &\Rightarrow x\_1y=x\_2y \\\\
+  \tag{iii} x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2 \\\\
+\end{align\*}
+$$
+
+并且，若 $\mathrm{(iii)}$ 的条件均为严格小于，则结论也变为严格小于，即
+
+$$
+\tag{iii} x\_1\lt x\_2\land y\_1\lt y\_2 \Rightarrow x\_1y\_2+x\_2y\_1\lt x\_1y\_1+x\_2y\_2
+$$
+
+{% note Proof open %}
+
+**TODO**
+
+ONAG 的证明和定理的表述都感觉有点问题，先标 TODO。
+
+<!-- 首先，我们将 $\mathrm{\left(iii\right)}$ 记为 $P\left(x\_1,x\_2,y\_1,y\_2\right)$。
+
+考虑证明 $\mathrm{\left(i\right)}$，只需要
+
+$$
+x\_{L\_1}y+xy\_L-x\_{L\_1}y\_L\lt x\_{L\_2}y+xy\_R-x\_{L\_2}y\_R
+$$
+
+如果 $x\_{L\_1}\leqslant x\_{L\_2}$，有
+
+$$
+x\_{L\_1}y+xy\_L-x\_{L\_1}y\_L\leqslant x\_{L\_2}+xy\_{L}-x\_{L\_2}y\_L\lt x\_{L\_2}y+xy\_R-x\_{L\_2}y\_R
+$$
+
+上式需要 $P\left(x\_{L\_1},x\_{L\_2},y\_L,y\right)$ 和 $P\left(x\_{L\_2},x,y\_L,y\_R\right)$。
+
+若 $x\_{L\_2}\leqslant x\_{L\_1}$，则
+
+$$
+x\_{L\_1}y+xy\_L-x\_{L\_1}y\_L\lt x\_{L\_1}y+xy\_R-x\_{L\_1}y\_R\leqslant x\_{L\_2}y+xy\_R-x\_{L\_2}y\_R
+$$
+
+这需要 $P\left(x\_{L\_2},x\_{L\_1},y,y\_R\right)$ 和 $P\left(x\_{L\_1},x,y\_L,y\_R\right)$。
+
+根据归纳假设 $\mathrm{\left(iii\right)}$，以上的 $4$ 个条件应该全部成立，故 $\mathrm{\left(i\right)}$ 成立。
+
+---
+
+考虑 $\mathrm{\left(ii\right)}$，这需要
+
+$$
+\begin{aligned}
+  \left(x\_1y\right)\_L\lt x\_2y \\\\
+  \left(x\_1y\right)\_R\gt x\_2y \\\\
+  \left(x\_2y\right)\_L\lt x\_1y \\\\
+  \left(x\_2y\right)\_R\gt x\_1y \\\\
+\end{aligned}
+$$
+
+由 $\mathrm{\left(i\right)}$，都是显然的。
+
+---
+
+考虑 $\mathrm{\left(iii\right)}$，注意到 $x\_1=x\_2$ 或 $y\_1=y\_2$ 的情况都可以从 $\mathrm{\left(ii\right)}$ 得到，因此只需要考虑 $x\_1\lt x\_2$ 且 $y\_1\lt y\_2$。
+
+既然 $x\_1\lt x\_2$，则 $x\_1\lt x\_{1\_R}\leqslant x\_2$ 或 $x\_1\leqslant x\_{2\_L}\lt x\_2$。以前者为例，$P\left(x\_1,x\_2,y\_1,y\_2\right)$ 可以从 $P\left(x\_1,x\_{1\_R},y\_1,y\_2\right)$ 和 $P\left(x\_{1\_R},x\_2,y\_1,y\_2\right)$ 得到，其中后者是归纳假设。
+
+总之，我们只需要考虑
+
+$$
+\begin{aligned}
+  P\left(x\_L,x,y\_L,y\right) \\\\
+  P\left(x\_L,x,y,y\_R\right) \\\\
+  P\left(x,x\_R,y\_L,y\right) \\\\
+  P\left(x,x\_R,y\_L,y\right)
+\end{aligned}
+$$
+
+这等价于
+
+$$
+\left(xy\right)\_L\lt xy\lt \left(xy\right)\_R
+$$ -->
+{% endnote %}
+
+<!-- 这样，已经证明全部的数构成环。 -->
