@@ -40,13 +40,15 @@ $$
   \end{aligned}
   $$
 
-+ $x=y$、$x\gt y$、$x\lt y$ 的定义
++ $x=y$、$x\gt y$、$x\lt y$、$x\ne y$、$x\parallel y$ 的定义
 
   $$
   \begin{aligned}
   \left(x=y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\geqslant x\right)\right) \\\\
   \left(x\gt y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\not\geqslant x\right)\right) \\\\
-  \left(x\lt y\right) &\Leftrightarrow \left(y\gt x\right)
+  \left(x\lt y\right) &\Leftrightarrow \left(y\gt x\right) \\\\
+  \left(x\ne y\right) &\Leftrightarrow \lnot\left(x=y\right) \\\\
+  \left(x\parallel y\right) &\Leftrightarrow \left(\left(x\not\geqslant y\right)\land \left(y\not\geqslant x\right)\right)
   \end{aligned}
   $$
 
@@ -68,7 +70,7 @@ $$
   \tag{4} xy:=\left\\{x\_Ly+xy\_L-x\_Ly\_L,x\_Ry+xy\_R-x\_Ry\_R\mid x\_Ly+xy\_R-x\_Ly\_R,x\_Ry+xy\_L-x\_Ry\_L\right\\}
   $$
 
-  一个意义更明确的写法是：
+  以下是一个意义更明确的写法，但是不严谨：
 
   $$
   xy:=\left\\{xy-\left(x-x\_L\right)\left(y-y\_L\right),xy-\left(x\_R-x\right)\left(y\_R-y\right)\mid xy+\left(x-x\_L\right)\left(y\_R-y\right),xy+\left(x\_R-x\right)\left(y-y\_L\right)\right\\}
@@ -175,7 +177,41 @@ $$
 因为 $x\geqslant y$，因此不存在 $x\_R\leqslant y$，由归纳假设，不存在 $x\_R\leqslant z$，同理得不存在 $z\_L\geqslant x$，因此命题成立。
 {% endnote %}
 
-请注意这条定理的推论之一是，若 $x=y$，则 $x\gt x$ 等价于 $y\gt z$。
+$\mathrm{\left(T1\right)}$ 的推论很多，下面列出一部分：
+
+$$
+\begin{align\*}
+  \tag{i} \left(\left(x\leqslant y\right)\land \left(y\leqslant z\right)\right) &\Rightarrow x\leqslant z \\\\
+  \tag{ii} \left(\left(x=y\right)\land \left(y=z\right)\right) &\Rightarrow x=z \\\\
+  \tag{iii} \left(\left(x=y\right)\land \left(y\ne z\right)\right) &\Rightarrow x\ne z \\\\
+  \tag{iv} \left(\left(x=y\right)\land \left(y\geqslant z\right)\right) &\Rightarrow x\geqslant z \\\\
+  \tag{v} \left(\left(x\geqslant y\right)\land \left(y=z\right)\right) &\Rightarrow x\geqslant z \\\\
+  \tag{vi} \left(\left(x\geqslant y\right)\land \left(y\gt z\right)\right) &\Rightarrow x\gt z \\\\
+  \tag{vii} \left(\left(x\gt y\right)\land \left(y\geqslant z\right)\right) &\Rightarrow x\gt z \\\\
+  \tag{viii} \left(\left(x=y\right)\land \left(y\gt z\right)\right) &\Rightarrow x\gt z \\\\
+  \tag{ix} \left(\left(x\gt y\right)\land \left(y=z\right)\right) &\Rightarrow x\gt z \\\\
+  \tag{x} \left(\left(x\geqslant y\right)\land \left(y\not\leqslant z\right)\right) &\Rightarrow x\not\leqslant z \\\\
+  \tag{xi} \left(\left(x\not\leqslant y\right)\land \left(y\geqslant z\right)\right) &\Rightarrow x\not\leqslant z \\\\
+  \tag{xii} \left(\left(x=y\right)\land \left(y\parallel z\right)\right) &\Rightarrow x\parallel z
+\end{align\*}
+$$
+
+{% note Proof fold %}
++ $\mathrm{\left(i\right)}$：将 $\mathrm{T1}\left(x,y,z\right)$ 换成 $\mathrm{T1}\left(z,y,x\right)$ 即可；
++ $\mathrm{\left(ii\right)}$：由 $\mathrm{\left(T1\right)}$ 和 $\mathrm{\left(i\right)}$ 得；
++ $\mathrm{\left(iii\right)}$：反证，不成立由 $\mathrm{(ii)}$ 得矛盾；
++ $\mathrm{(iv)}$：显然是 $\mathrm{(T1)}$ 的子集；
++ $\mathrm{(v)}$：同上；
++ $\mathrm{(vi)}$：由 $\mathrm{(T1)}$ 得 $x\geqslant z$，又 $x=z$ 导出矛盾；
++ $\mathrm{(vii)}$：与 $\mathrm{vi}$ 类似；
++ $\mathrm{(viii)}$：$\mathrm{(vi)}$ 的子集；
++ $\mathrm{(ix)}$：$\mathrm{(vii)}$ 的子集；
++ $\mathrm{(x)}$：反证法；
++ $\mathrm{(xi)}$：反证法；
++ $\mathrm{(xii)}$：由 $\mathrm{(x)}$ 和 $\mathrm{(xi)}$ 得。
+{% endnote %}
+
+尽量选用了大于号形式的结果，如果将 $x,z$ 轮换，可以得到小于号形式的结果（就像 $\mathrm{(i)}$）。
 
 #### 不等号的连接性
 
@@ -364,7 +400,7 @@ $$
 \end{align\*}
 $$
 
-并且，若 $\mathrm{(iii)}$ 的条件均为严格小于，则结论也变为严格小于，即
+并且，若 $\mathrm{\left(iii\right)}$ 的条件均为严格小于，则结论也变为严格小于，即
 
 $$
 \tag{iii} x\_1\lt x\_2\land y\_1\lt y\_2 \Rightarrow x\_1y\_2+x\_2y\_1\lt x\_1y\_1+x\_2y\_2
