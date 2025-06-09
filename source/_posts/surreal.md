@@ -35,8 +35,8 @@ $$
   $$
   \tag{1}
   \begin{aligned}
-  \left(x\geqslant y\right) &\Leftrightarrow \left(\left(\not\exists x\_R\leqslant y\right)\land\left(\not\exists y\_L\geqslant x\right)\right); \\\\
-  \left(x\leqslant y\right) &\Leftrightarrow \left(y\geqslant x\right)
+    \left(x\geqslant y\right) &\Leftrightarrow \left(\left(\not\exists x\_R\leqslant y\right)\land\left(\not\exists y\_L\geqslant x\right)\right); \\\\
+    \left(x\leqslant y\right) &\Leftrightarrow \left(y\geqslant x\right)
   \end{aligned}
   $$
 
@@ -44,11 +44,11 @@ $$
 
   $$
   \begin{aligned}
-  \left(x=y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\geqslant x\right)\right) \\\\
-  \left(x\gt y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\not\geqslant x\right)\right) \\\\
-  \left(x\lt y\right) &\Leftrightarrow \left(y\gt x\right) \\\\
-  \left(x\ne y\right) &\Leftrightarrow \lnot\left(x=y\right) \\\\
-  \left(x\parallel y\right) &\Leftrightarrow \left(\left(x\not\geqslant y\right)\land \left(y\not\geqslant x\right)\right)
+    \left(x=y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\geqslant x\right)\right) \\\\
+    \left(x\gt y\right) &\Leftrightarrow \left(\left(x\geqslant y\right)\land\left(y\not\geqslant x\right)\right) \\\\
+    \left(x\lt y\right) &\Leftrightarrow \left(y\gt x\right) \\\\
+    \left(x\ne y\right) &\Leftrightarrow \lnot\left(x=y\right) \\\\
+    \left(x\parallel y\right) &\Leftrightarrow \left(\left(x\not\geqslant y\right)\land \left(y\not\geqslant x\right)\right)
   \end{aligned}
   $$
 
@@ -120,17 +120,17 @@ $$
 
 $$
 \begin{aligned}
-0&=\left\\{\mid\right\\} \\\\
-1&=\left\\{0\mid\right\\} \\\\
--1&=\left\\{\mid 0\right\\} \\\\
-2&=\left\\{1\mid\right\\}=\left\\{0,1\mid\right\\}=\cdots \\\\
--2&=\left\\{\mid -1\right\\}=\left\\{\mid -1,0\right\\}=\cdots \\\\
-\frac{1}{2}&=\left\\{0\mid 1\right\\}=\left\\{-1,0\mid 1\right\\}=\cdots \\\\
-&\cdots \\\\
-\omega&=\left\\{0,1,2,\cdots,\mid\right\\} \\\\
-\epsilon&=\left\\{0\mid 1,\frac{1}{2},\frac{1}{4},\cdots\right\\} \\\\
-\frac{1}{3}&=\left\\{\frac{1}{4},\frac{1}{4}+\frac{1}{16},\cdots\mid \frac{1}{2},\frac{1}{2}-\frac{1}{8},\cdots\right\\} \\\\
-&\cdots
+  0 &= \left\\{\mid\right\\} \\\\
+  1 &= \left\\{0\mid\right\\} \\\\
+  -1 &=\left\\{\mid 0\right\\} \\\\
+  2 &= \left\\{1\mid\right\\}=\left\\{0,1\mid\right\\}=\cdots \\\\
+  -2 &= \left\\{\mid -1\right\\}=\left\\{\mid -1,0\right\\}=\cdots \\\\
+  \frac{1}{2} &= \left\\{0\mid 1\right\\}=\left\\{-1,0\mid 1\right\\}=\cdots \\\\
+  &\cdots \\\\
+  \omega &= \left\\{0,1,2,\cdots,\mid\right\\} \\\\
+  \epsilon &= \left\\{0\mid 1,\frac{1}{2},\frac{1}{4},\cdots\right\\} \\\\
+  \frac{1}{3} &= \left\\{\frac{1}{4},\frac{1}{4}+\frac{1}{16},\cdots\mid \frac{1}{2},\frac{1}{2}-\frac{1}{8},\cdots\right\\} \\\\
+  &\cdots
 \end{aligned}
 $$
 
@@ -152,10 +152,10 @@ $$
 $$
 \tag{T0}
 \begin{align\*}
-\tag{i} x \not\geqslant x\_R \\\\
-\tag{ii} x\_L \not\geqslant x \\\\
-\tag{iii} x \geqslant x \\\\
-\tag{iv} x = x
+  \tag{i} x \not\geqslant x\_R \\\\
+  \tag{ii} x\_L \not\geqslant x \\\\
+  \tag{iii} x \geqslant x \\\\
+  \tag{iv} x = x
 \end{align\*}
 $$
 
@@ -220,8 +220,8 @@ $$
 $$
 \tag{T2}
 \begin{aligned}
-\forall &\left(x\in\mathbf{No}\right)\left(\forall x\_L,x\_R \left(x\_L\lt x\lt x\_R\right)\right) \\\\
-\forall &\left(x,y\in\mathbf{No}\right)\left(x\leqslant y\lor y\leqslant x\right)
+  \forall &\left(x\in\mathbf{No}\right)\left(\forall x\_L,x\_R \left(x\_L\lt x\lt x\_R\right)\right) \\\\
+  \forall &\left(x,y\in\mathbf{No}\right)\left(x\leqslant y\lor y\leqslant x\right)
 \end{aligned}
 $$
 
@@ -272,9 +272,9 @@ $x+0\equiv x$ 意味着 $0$ 是加法单位元，这也是我们将 $\left\\{\mi
 $$
 \tag{T4}
 \begin{align\*}
-\tag{i} -\left(x+y\right) &\equiv \left(-x\right)+\left(-y\right) \\\\
-\tag{ii} -\left(-x\right) &\equiv x \\\\
-\tag{iii} x+\left(-x\right) &= 0
+  \tag{i} -\left(x+y\right) &\equiv \left(-x\right)+\left(-y\right) \\\\
+  \tag{ii} -\left(-x\right) &\equiv x \\\\
+  \tag{iii} x+\left(-x\right) &= 0
 \end{align\*}
 $$
 
