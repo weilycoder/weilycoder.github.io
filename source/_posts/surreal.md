@@ -199,19 +199,19 @@ $$
 {% note Proof fold %}
 + $\mathrm{\left(i\right)}$：将 $\mathrm{T1}\left(x,y,z\right)$ 换成 $\mathrm{T1}\left(z,y,x\right)$ 即可；
 + $\mathrm{\left(ii\right)}$：由 $\mathrm{\left(T1\right)}$ 和 $\mathrm{\left(i\right)}$ 得；
-+ $\mathrm{\left(iii\right)}$：反证，不成立由 $\mathrm{(ii)}$ 得矛盾；
-+ $\mathrm{(iv)}$：显然是 $\mathrm{(T1)}$ 的子集；
-+ $\mathrm{(v)}$：同上；
-+ $\mathrm{(vi)}$：由 $\mathrm{(T1)}$ 得 $x\geqslant z$，又 $x=z$ 导出矛盾；
-+ $\mathrm{(vii)}$：与 $\mathrm{vi}$ 类似；
-+ $\mathrm{(viii)}$：$\mathrm{(vi)}$ 的子集；
-+ $\mathrm{(ix)}$：$\mathrm{(vii)}$ 的子集；
-+ $\mathrm{(x)}$：反证法；
-+ $\mathrm{(xi)}$：反证法；
-+ $\mathrm{(xii)}$：由 $\mathrm{(x)}$ 和 $\mathrm{(xi)}$ 得。
++ $\mathrm{\left(iii\right)}$：反证，不成立由 $\mathrm{\left(ii\right)}$ 得矛盾；
++ $\mathrm{\left(iv\right)}$：显然是 $\mathrm{\left(T1\right)}$ 的子集；
++ $\mathrm{\left(v\right)}$：同上；
++ $\mathrm{\left(vi\right)}$：由 $\mathrm{\left(T1\right)}$ 得 $x\geqslant z$，又 $x=z$ 导出矛盾；
++ $\mathrm{\left(vii\right)}$：与 $\mathrm{vi}$ 类似；
++ $\mathrm{\left(viii\right)}$：$\mathrm{\left(vi\right)}$ 的子集；
++ $\mathrm{\left(ix\right)}$：$\mathrm{\left(vii\right)}$ 的子集；
++ $\mathrm{\left(x\right)}$：反证法；
++ $\mathrm{\left(xi\right)}$：反证法；
++ $\mathrm{\left(xii\right)}$：由 $\mathrm{\left(x\right)}$ 和 $\mathrm{\left(xi\right)}$ 得。
 {% endnote %}
 
-尽量选用了大于号形式的结果，如果将 $x,z$ 轮换，可以得到小于号形式的结果（就像 $\mathrm{(i)}$）。
+尽量选用了大于号形式的结果，如果将 $x,z$ 轮换，可以得到小于号形式的结果（就像 $\mathrm{\left(i\right)}$）。
 
 #### 不等号的连接性
 
@@ -339,6 +339,20 @@ $$
 综上所述，$y\geqslant z\Leftrightarrow x+y\geqslant x+z$。
 {% endnote %}
 
+这条定理也有不少推论，简单列一下：
+
+$$
+\begin{align\*}
+  \forall a=b,c=d &: a+c=b+d \\\\
+  \forall a=b,c\leqslant d &: a+c\leqslant b+d \\\\
+  \forall a\leqslant b,c\leqslant d &: a+c\leqslant b+d \\\\
+  \forall a\lt b,c\leqslant d &: a+c\lt b+d \\\\
+  \forall a\not\leqslant b,c\geqslant d &: a+c\not\leqslant b+d
+\end{align\*}
+$$
+
+顺便，请注意 $\exists a\not\leqslant b, c\not\leqslant d:a+c\leqslant b+d$，例如 $a=c=\ast,b=d=0$，这里 $\ast=\left\\{0\mid 0\right\\}$。
+
 ### 加法的封闭性
 
 $$
@@ -397,13 +411,8 @@ $$
   \tag{i} x,y\in\mathbf{No} &\Rightarrow xy\in\mathbf{No} \\\\
   \tag{ii} x\_1=x\_2 &\Rightarrow x\_1y=x\_2y \\\\
   \tag{iii} x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2 \\\\
+  \tag{iv} x\_1\not\geqslant x\_2\land y\_1\not\geqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\not\geqslant x\_1y\_1+x\_2y\_2 \\\\
 \end{align\*}
-$$
-
-并且，若 $\mathrm{\left(iii\right)}$ 的条件均为严格小于，则结论也变为严格小于，即
-
-$$
-\tag{iii} x\_1\lt x\_2\land y\_1\lt y\_2 \Rightarrow x\_1y\_2+x\_2y\_1\lt x\_1y\_1+x\_2y\_2
 $$
 
 {% note Proof open %}
