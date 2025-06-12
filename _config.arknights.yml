@@ -148,11 +148,6 @@ mermaid:
 pjax:
   enable: true
 
-# 公式前端渲染
-mathjax:
-  enable: true
-  version: "2.6.1"
-
 # 在 `<head>` 标签内引入 CSS 样式表
 stylesheets:
 
