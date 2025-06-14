@@ -117,10 +117,13 @@ class SurrealNumber:
     ) -> SurrealNumber:
         """Create a new surreal number or return an existing one."""
         key = (frozenset(left), frozenset(right))
+        if not all(isinstance(x, SurrealNumber) for x in key[0]):
+            raise TypeError("Left set must contain only surreal numbers.")
+        if not all(isinstance(x, SurrealNumber) for x in key[1]):
+            raise TypeError("Right set must contain only surreal numbers.")
         if key not in cls.No:
             instance = super().__new__(cls)
-            instance.L = frozenset(left)
-            instance.R = frozenset(right)
+            instance.L, instance.R = key
             cls.No[key] = instance
         if name != "":
             cls.No[key].set_alias(name)
