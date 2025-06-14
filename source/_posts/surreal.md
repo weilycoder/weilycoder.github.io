@@ -92,55 +92,59 @@ $$
 方便验证一些数的大小关系。
 
 ```python
-# pylint: disable=invalid-name
+# pylint: disable=line-too-long,invalid-name
 
 """Surreal Numbers"""
 
 from __future__ import annotations
 
 from functools import lru_cache
+from typing import Iterable
 
 
 class SurrealNumber:
     """A surreal number represented by two sets of surreal numbers."""
 
-    No: dict[str, SurrealNumber] = {}
+    aliases: dict[SurrealNumber, str] = {}
+    No: dict[tuple[frozenset[SurrealNumber], frozenset[SurrealNumber]], SurrealNumber] = {}
+
     L: frozenset[SurrealNumber]
     R: frozenset[SurrealNumber]
 
-    @staticmethod
-    @lru_cache(maxsize=1 << 24)
-    def to_string(
-        left: frozenset[SurrealNumber],
-        right: frozenset[SurrealNumber],
-    ) -> str:
-        """Convert the surreal number to a string representation."""
-        left_str = ", ".join(sorted(repr(x) for x in left))
-        right_str = ", ".join(sorted(repr(x) for x in right))
-        return f"{{{left_str} | {right_str}}}"
-
     def __new__(
         cls,
-        left: frozenset[SurrealNumber] = frozenset(),
-        right: frozenset[SurrealNumber] = frozenset(),
+        left: Iterable[SurrealNumber] = (),
+        right: Iterable[SurrealNumber] = (),
+        name: str = "",
     ) -> SurrealNumber:
         """Create a new surreal number or return an existing one."""
-        key = cls.to_string(frozenset(left), frozenset(right))
+        key = (frozenset(left), frozenset(right))
         if key not in cls.No:
             instance = super().__new__(cls)
             instance.L = frozenset(left)
             instance.R = frozenset(right)
             cls.No[key] = instance
+        if name != "":
+            cls.No[key].set_alias(name)
         return cls.No[key]
 
+    def set_alias(self, name: str) -> None:
+        """Set an alias for the surreal number."""
+        if self in self.aliases:
+            raise ValueError(f"Alias already exists for {self}")
+        self.aliases[self] = name
+
+    @lru_cache(maxsize=1 << 24)
     def __ge__(self, other: SurrealNumber) -> bool:
         """Check if this surreal number is greater than or equal to another."""
         return not any(right <= other for right in self.R) and not any(left >= self for left in other.L)
 
+    @lru_cache(maxsize=1 << 24)
     def __le__(self, other: SurrealNumber) -> bool:
         """Check if this surreal number is less than or equal to another."""
         return other >= self
 
+    @lru_cache(maxsize=1 << 24)
     def __add__(self, other: SurrealNumber) -> SurrealNumber:
         """Add two surreal numbers."""
         return SurrealNumber(
@@ -148,14 +152,17 @@ class SurrealNumber:
             {xR + other for xR in self.R} | {self + yR for yR in other.R},
         )
 
+    @lru_cache(maxsize=1 << 24)
     def __neg__(self) -> SurrealNumber:
         """Negate the surreal number."""
         return SurrealNumber({-x for x in self.R}, {-x for x in self.L})
 
+    @lru_cache(maxsize=1 << 24)
     def __sub__(self, other: SurrealNumber) -> SurrealNumber:
         """Subtract two surreal numbers."""
         return self + (-other)
 
+    @lru_cache(maxsize=1 << 24)
     def __mul__(self, other: SurrealNumber) -> SurrealNumber:
         """Multiply two surreal numbers."""
         L1 = {xL * other + self * yL - xL * yL for xL in self.L for yL in other.L}
@@ -164,13 +171,22 @@ class SurrealNumber:
         R2 = {xR * other + self * yL - xR * yL for xR in self.R for yL in other.L}
         return SurrealNumber(L1 | L2, R1 | R2)
 
+    @lru_cache(maxsize=1 << 24)
+    def to_string(self, alias: bool = True) -> str:
+        """Return a string representation of the surreal number."""
+        if alias and self in self.aliases:
+            return self.aliases[self]
+        left_str = ", ".join(sorted(x.to_string(alias) for x in self.L))
+        right_str = ", ".join(sorted(x.to_string(alias) for x in self.R))
+        return f"{{{left_str} | {right_str}}}"
+
     def __repr__(self) -> str:
         """Return a string representation of the surreal number."""
-        return self.to_string(self.L, self.R)
+        return self.to_string()
 
     def __str__(self) -> str:
         """Return a string representation of the surreal number."""
-        return self.__repr__()
+        return self.to_string()
 ```
 {% endnote %}
 
@@ -500,19 +516,21 @@ $$
 $$
 \tag{T8}
 \begin{align\*}
-  \tag{i} x,y\in\mathbf{No} &\Rightarrow xy\in\mathbf{No} \\\\
-  \tag{ii} x\_1=x\_2 &\Rightarrow x\_1y=x\_2y \\\\
-  \tag{iii} x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2
+  \tag{i} \forall x,y\in\mathbf{No} &\Rightarrow xy\in\mathbf{No} \\\\
+  \tag{ii} \forall x\_1,x\_2,y\in\mathbf{No}\land x\_1=x\_2 &\Rightarrow x\_1y=x\_2y \\\\
+  \tag{iii} \forall x\_1,x\_2,y\_1,y\_2\in\mathbf{No}\land x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2
 \end{align\*}
 $$
 
-{% note Proof open %}
+$\mathrm{(iii)}$ 中不等式严格当且仅当条件中两个不等式均严格。
 
-**TODO**
+原文没有为 $\mathrm{\left(ii\right)},\mathrm{\left(iii\right)}$ 标注 $\cdot\in\mathbf{No}$，但根据证明可以推断，且不满足时可以举出反例。
 
-ONAG 的证明和定理的表述都感觉有点问题，先标 TODO。
+另外，其实 $\mathrm{(ii)},\mathrm{(iii)}$ 不需要均满足 $\cdot\in\mathbf{No}$，但是我懒得讨论了，毕竟乘法对于博弈的用途不大。
 
-<!-- 首先，我们将 $\mathrm{\left(iii\right)}$ 记为 $P\left(x\_1,x\_2,y\_1,y\_2\right)$。
+{% note Proof fold %}
+
+首先，我们将 $\mathrm{\left(iii\right)}$ 记为 $P\left(x\_1,x\_2,y\_1,y\_2\right)$。
 
 考虑证明 $\mathrm{\left(i\right)}$，只需要
 
@@ -551,7 +569,37 @@ $$
 \end{aligned}
 $$
 
-由 $\mathrm{\left(i\right)}$，都是显然的。
+根据乘法定义
+
+$$
+\begin{aligned}
+x\_{1\_L}y+x\_1y\_L-x\_{1\_L}y\_L &\lt x\_2y \\\\
+x\_{1\_R}y+x\_1y\_R-x\_{1\_L}y\_R &\lt x\_2y \\\\
+x\_{1\_L}y+x\_1y\_R-x\_{1\_L}y\_R &\gt x\_2y \\\\
+x\_{1\_R}y+x\_1y\_L-x\_{1\_R}y\_L &\gt x\_2y \\\\
+x\_{2\_L}y+x\_2y\_L-x\_{2\_L}y\_L &\lt x\_1y \\\\
+x\_{2\_R}y+x\_2y\_R-x\_{2\_L}y\_R &\lt x\_1y \\\\
+x\_{2\_L}y+x\_2y\_R-x\_{2\_L}y\_R &\gt x\_1y \\\\
+x\_{2\_R}y+x\_2y\_L-x\_{2\_R}y\_L &\gt x\_1y \\\\
+\end{aligned}
+$$
+
+利用归纳假设 $\mathrm{\left(iii\right)}$ 并移项：
+
+$$
+\begin{aligned}
+x\_2y\_L+x\_{1\_L}y &\lt x\_2y+x\_{1\_L}y\_L \\\\
+x\_2y\_R+x\_{1\_R}y &\lt x\_2y+x\_{1\_L}y\_R \\\\
+x\_2y\_R+x\_{1\_L}y &\gt x\_2y+x\_{1\_L}y\_R \\\\
+x\_2y\_L+x\_{1\_R}y &\gt x\_2y+x\_{1\_R}y\_L \\\\
+x\_1y\_L+x\_{2\_L}y &\lt x\_1y+x\_{2\_L}y\_L \\\\
+x\_1y\_R+x\_{2\_R}y &\lt x\_1y+x\_{2\_L}y\_R \\\\
+x\_1y\_R+x\_{2\_L}y &\gt x\_1y+x\_{2\_L}y\_R \\\\
+x\_1y\_L+x\_{2\_R}y &\gt x\_1y+x\_{2\_R}y\_L \\\\
+\end{aligned}
+$$
+
+以 $x\_2y\_L+x\_{1\_L}y\lt x\_2y+x\_{1\_L}y\_L$ 为例，其等价于 $P\left(x\_{1\_L},x\_2,y\_L,y\right)$，即 $P\left(x\_{2\_L},x\_2,y\_L,y\right)$，根据归纳假设 $\mathrm{(iii)}$，后者成立。
 
 ---
 
@@ -574,7 +622,7 @@ $$
 
 $$
 \left(xy\right)\_L\lt xy\lt \left(xy\right)\_R
-$$ -->
+$$
 {% endnote %}
 
-<!-- 这样，已经证明全部的数构成环。 -->
+这样，已经证明全部的数构成环。
