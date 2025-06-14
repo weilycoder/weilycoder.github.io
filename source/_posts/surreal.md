@@ -339,7 +339,7 @@ $$
 2. 若 $x\not\geqslant y$，则 $x\_R\leqslant y$ 或 $x\leqslant y\_L$，即 $x\lt x\_R\leqslant y$ 或 $x\leqslant y\_L\lt y$。
 {% endnote %}
 
-因此，全体数是全序的。
+因此，$\mathbf{No}$ 是**全序**的
 
 ### 加法运算律
 
@@ -491,7 +491,7 @@ $$
 同时 $x\_L+y,x+y\_L,x\_R+y,x+y\_R\in\mathbf{No}$。
 {% endnote %}
 
-根据这些定理，$\mathbf{No}$ 在 $+$ 运算下构成交换群。
+根据这些定理，$\mathbf{No}$ 在 $+$ 运算下构成**全序交换群**。
 
 ### 乘法运算律
 
@@ -626,7 +626,7 @@ $$
 $$
 {% endnote %}
 
-这样，已经证明全部的数构成环。
+这样，已经证明全部的数构成**全序环**。
 
 #### 推论
 
@@ -699,3 +699,7 @@ $xy$ 的项的形式为 $x^{\prime}y+xy^{\prime}-x^{\prime}y^{\prime}$，后者�
 由 $\mathrm{\left(iii\right)}$ 易得。
 
 {% endnote %}
+
+至此，已经证明 $\mathbf{No}$ 是一个**全序域**。
+
+*另外需要指出的是，通常语境下，**群**（**group**）、**环**（**ring**）、**域**（**field**）均用于描述 **集合**（**set**）而不是 **类**（**class**）。原文将前三个术语进行了首字母大写，来和通常语义区分，这里统一注明。*
