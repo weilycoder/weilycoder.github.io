@@ -80,7 +80,99 @@ $$
 
 由于等号 $=$ 的特殊性，需要指出，这里的等号意义比“相等”要弱一些，具体表现在，我们可以构造一种运算 $f$，使得 $x=y$ 与 $f\left(x\right)=f\left(y\right)$ 不等价。
 
-因此，我们规定，定义变量的时候，使用 $:=$ 表示赋值/定义；使用 $\equiv$ 表示两个数的 $L$ 和 $R$ 分别相等（递归定义，这时若 $x\equiv y$，则显然可以将式子中的一切 $y$ 替换为 $x$）。
+因此，我们规定，定义变量的时候，使用 $:=$ 表示赋值/定义；使用 $\equiv$ 表示两个数的 $L$ 和 $R$ 分别相等（称为全等/恒等，递归定义，这时若 $x\equiv y$，则显然可以将式子中的一切 $y$ 替换为 $x$）。
+
+{% note code open %}
+这里使用 Python(3.13) 编写了一个简单的 Surreal Number 的类，对象不可变，支持了 $\geqslant,\leqslant,+,-,\times$（`__ge__`, `__le__`, `__add__`, `__neg__`, `__sub__`, `__mul__`）；可以使用 `is` 运算判断两个数全等。
+
+由于 Python hashable 对象的相关 feature，定义 `__eq__` 为 $=$ 会导致一些冲突，而定义 `__eq__` 为 $\equiv$（`is`）会导致歧义；故不定义 `__eq__` 方法。
+
+由于定义数的名称的困难，打印时的基本单元为 `{ | }`。
+
+方便验证一些数的大小关系。
+
+```python
+# pylint: disable=invalid-name
+
+"""Surreal Numbers"""
+
+from __future__ import annotations
+
+from functools import lru_cache
+
+
+class SurrealNumber:
+    """A surreal number represented by two sets of surreal numbers."""
+
+    No: dict[str, SurrealNumber] = {}
+    L: frozenset[SurrealNumber]
+    R: frozenset[SurrealNumber]
+
+    @staticmethod
+    @lru_cache(maxsize=1 << 24)
+    def to_string(
+        left: frozenset[SurrealNumber],
+        right: frozenset[SurrealNumber],
+    ) -> str:
+        """Convert the surreal number to a string representation."""
+        left_str = ", ".join(sorted(repr(x) for x in left))
+        right_str = ", ".join(sorted(repr(x) for x in right))
+        return f"{{{left_str} | {right_str}}}"
+
+    def __new__(
+        cls,
+        left: frozenset[SurrealNumber] = frozenset(),
+        right: frozenset[SurrealNumber] = frozenset(),
+    ) -> SurrealNumber:
+        """Create a new surreal number or return an existing one."""
+        key = cls.to_string(frozenset(left), frozenset(right))
+        if key not in cls.No:
+            instance = super().__new__(cls)
+            instance.L = frozenset(left)
+            instance.R = frozenset(right)
+            cls.No[key] = instance
+        return cls.No[key]
+
+    def __ge__(self, other: SurrealNumber) -> bool:
+        """Check if this surreal number is greater than or equal to another."""
+        return not any(right <= other for right in self.R) and not any(left >= self for left in other.L)
+
+    def __le__(self, other: SurrealNumber) -> bool:
+        """Check if this surreal number is less than or equal to another."""
+        return other >= self
+
+    def __add__(self, other: SurrealNumber) -> SurrealNumber:
+        """Add two surreal numbers."""
+        return SurrealNumber(
+            {xL + other for xL in self.L} | {self + yL for yL in other.L},
+            {xR + other for xR in self.R} | {self + yR for yR in other.R},
+        )
+
+    def __neg__(self) -> SurrealNumber:
+        """Negate the surreal number."""
+        return SurrealNumber({-x for x in self.R}, {-x for x in self.L})
+
+    def __sub__(self, other: SurrealNumber) -> SurrealNumber:
+        """Subtract two surreal numbers."""
+        return self + (-other)
+
+    def __mul__(self, other: SurrealNumber) -> SurrealNumber:
+        """Multiply two surreal numbers."""
+        L1 = {xL * other + self * yL - xL * yL for xL in self.L for yL in other.L}
+        L2 = {xR * other + self * yR - xR * yR for xR in self.R for yR in other.R}
+        R1 = {xL * other + self * yR - xL * yR for xL in self.L for yR in other.R}
+        R2 = {xR * other + self * yL - xR * yL for xR in self.R for yL in other.L}
+        return SurrealNumber(L1 | L2, R1 | R2)
+
+    def __repr__(self) -> str:
+        """Return a string representation of the surreal number."""
+        return self.to_string(self.L, self.R)
+
+    def __str__(self) -> str:
+        """Return a string representation of the surreal number."""
+        return self.__repr__()
+```
+{% endnote %}
 
 ## 超限归纳
 
@@ -410,8 +502,7 @@ $$
 \begin{align\*}
   \tag{i} x,y\in\mathbf{No} &\Rightarrow xy\in\mathbf{No} \\\\
   \tag{ii} x\_1=x\_2 &\Rightarrow x\_1y=x\_2y \\\\
-  \tag{iii} x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2 \\\\
-  \tag{iv} x\_1\not\geqslant x\_2\land y\_1\not\geqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\not\geqslant x\_1y\_1+x\_2y\_2 \\\\
+  \tag{iii} x\_1\leqslant x\_2\land y\_1\leqslant y\_2 &\Rightarrow x\_1y\_2+x\_2y\_1\leqslant x\_1y\_1+x\_2y\_2
 \end{align\*}
 $$
 
