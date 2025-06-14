@@ -250,7 +250,7 @@ $$
 + 若 $y\not\geqslant x$，则 $\left\\{y,x\_L\mid x\_R\right\\}=x$；
 + 若 $y\not\leqslant x$，则 $\left\\{x\_L\mid y,x\_R\right\\}=x$。
 
-## 基础定理
+## 诸运算性质和全序域
 
 若无说明，以下定理适用于全体博弈。
 
@@ -703,3 +703,17 @@ $xy$ 的项的形式为 $x^{\prime}y+xy^{\prime}-x^{\prime}y^{\prime}$，后者�
 至此，已经证明 $\mathbf{No}$ 是一个**全序域**。
 
 *另外需要指出的是，通常语境下，**群**（**group**）、**环**（**ring**）、**域**（**field**）均用于描述 **集合**（**set**）而不是 **类**（**class**）。原文将前三个术语进行了首字母大写，来和通常语义区分，这里统一注明。*
+
+---
+
+更进一步地，*Clive Bach* 发现了平方根的定义，对于非负数 $x$ 及其正项，有
+
+$$
+\sqrt{x}=y=\left\\{\sqrt{x\_L},\dfrac{x+y\_Ly\_R}{y\_L+y\_R}\mid \sqrt{x\_R},\dfrac{x+y\_Ly\_{L\ast}}{y\_L+y\_{L\ast}},\dfrac{x+y\_Ry\_{R\ast}}{y\_R+y\_{R\ast}}\right\\}
+$$
+
+另外，*Martin Kruskal* 指出，$\dfrac{1}{x}$ 的项也可以写成
+
+$$
+\dfrac{1-\prod\left(1-\dfrac{x}{x\_i}\right)}{x}
+$$
