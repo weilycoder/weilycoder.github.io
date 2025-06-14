@@ -87,8 +87,6 @@ $$
 
 由于 Python hashable 对象的相关 feature，定义 `__eq__` 为 $=$ 会导致一些冲突，而定义 `__eq__` 为 $\equiv$（`is`）会导致歧义；故不定义 `__eq__` 方法。
 
-由于定义数的名称的困难，打印时的基本单元为 `{ | }`。
-
 方便验证一些数的大小关系。
 
 ```python
@@ -626,3 +624,13 @@ $$
 {% endnote %}
 
 这样，已经证明全部的数构成环。
+
+#### 推论
+
+$$
+\tag{T9} x,y\in\mathbf{No}\land x\geqslant 0\land y\geqslant 0\Rightarrow xy\geqslant 0
+$$
+
+{% note Proof fold %}
+应用 $P(0,x,0,y)$ 即可。
+{% endnote %}
