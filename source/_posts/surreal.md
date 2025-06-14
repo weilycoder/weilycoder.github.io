@@ -523,11 +523,11 @@ $$
 \end{align\*}
 $$
 
-$\mathrm{(iii)}$ 中不等式严格当且仅当条件中两个不等式均严格。
+$\mathrm{\left(iii\right)}$ 中不等式严格当且仅当条件中两个不等式均严格。
 
 原文没有为 $\mathrm{\left(ii\right)},\mathrm{\left(iii\right)}$ 标注 $\cdot\in\mathbf{No}$，但根据证明可以推断，且不满足时可以举出反例。
 
-另外，其实 $\mathrm{(ii)},\mathrm{(iii)}$ 不需要均满足 $\cdot\in\mathbf{No}$，但是我懒得讨论了，毕竟乘法对于博弈的用途不大。
+另外，其实 $\mathrm{\left(ii\right)},\mathrm{\left(iii\right)}$ 不需要均满足 $\cdot\in\mathbf{No}$，但是我懒得讨论了，毕竟乘法对于博弈的用途不大。
 
 {% note Proof fold %}
 
@@ -600,7 +600,7 @@ x\_1y\_L+x\_{2\_R}y &\gt x\_1y+x\_{2\_R}y\_L \\\\
 \end{aligned}
 $$
 
-以 $x\_2y\_L+x\_{1\_L}y\lt x\_2y+x\_{1\_L}y\_L$ 为例，其等价于 $P\left(x\_{1\_L},x\_2,y\_L,y\right)$，即 $P\left(x\_{2\_L},x\_2,y\_L,y\right)$，根据归纳假设 $\mathrm{(iii)}$，后者成立。
+以 $x\_2y\_L+x\_{1\_L}y\lt x\_2y+x\_{1\_L}y\_L$ 为例，其等价于 $P\left(x\_{1\_L},x\_2,y\_L,y\right)$，即 $P\left(x\_{2\_L},x\_2,y\_L,y\right)$，根据归纳假设 $\mathrm{\left(iii\right)}$，后者成立。
 
 ---
 
@@ -635,5 +635,67 @@ $$
 $$
 
 {% note Proof fold %}
-应用 $P(0,x,0,y)$ 即可。
+应用 $P\left(0,x,0,y\right)$ 即可。
+{% endnote %}
+
+### 乘法逆元
+
+对于 $x\gt 0$，定义
+
+$$
+\tag{5}
+x^{-1}=\left\\{0,\dfrac{1+\left(x\_R-x\right)\left(x^{-1}\right)\_L}{x\_R},\dfrac{1+\left(x\_L-x\right)\left(x^{-1}\right)\_R}{x\_L}\mid \dfrac{1+\left(x\_L-x\right)\left(x^{-1}\right)\_L}{x\_L},\dfrac{1+\left(x\_R-x\right)\left(x^{-1}\right)\_R}{x\_R}\right\\}
+$$
+
+式中的 $x\_L,x\_R$ 同样只取正数。
+
+请注意 $x^{-1}$ 是递归定义的，甚至在定义中使用了 $x^{-1}$ 的左右项，这可以理解为 $x^{-1}$ 的左右项是由旧的项递推生成的。我们保证了 $\exists x^{-1}\_L\equiv0$，这可以看作是递归定义的起点。
+
+另外，$\dfrac{\alpha}{\beta}$ 定义为 $\alpha\cdot\beta^{-1}$（按照习惯）。
+
+---
+
+$$
+\tag{T10}
+\begin{align\*}
+  \tag{i} x\left(x^{-1}\right)\_L &\lt 1\lt x\left(x^{-1}\right)\_R \\\\
+  \tag{ii} x^{-1}&\in\mathbf{No} \\\\
+  \tag{iii} \left(x\cdot x^{-1}\right)\_L&\lt 1\lt \left(x\cdot x^{-1}\right)\_R \\\\
+  \tag{iv} x\cdot x^{-1}&=1
+\end{align\*}
+$$
+
+以上 $x\gt 0$。
+
+{% note Proof fold %}
+简便起见，令 $y=x^{-1}$。
+
+观察到 $y$ 的项的定义满足：
+
+$$
+y^{\prime\prime}=\dfrac{1+\left(x^{\prime}-x\right)y^{\prime}}{x^{\prime}}
+$$
+
+这里 $y^{\prime}$ 是比 $y^{\prime\prime}$ “更早”定义的项；$x^{\prime}$ 是 $x$ 的非 $0$ 项。
+
+上式可以写成
+
+$$
+1-xy^{\prime\prime}=\left(1-xy^{\prime}\right)\dfrac{x^{\prime}-x}{x^{\prime}}
+$$
+
+这表明，若 $y^{\prime}$ 满足 $\mathrm{\left(i\right)}$，则 $y^{\prime\prime}$ 也满足，而起点 $0$ 满足 $\mathrm{\left(i\right)}$。
+
+---
+
+显然没有 $y\_L\geqslant y\_R$。
+
+---
+
+$xy$ 的项的形式为 $x^{\prime}y+xy^{\prime}-x^{\prime}y^{\prime}$，后者可以写为 $1+x^{\prime}\left(y-y^{\prime\prime}\right)$。
+
+---
+
+由 $\mathrm{\left(iii\right)}$ 易得。
+
 {% endnote %}
