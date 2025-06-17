@@ -1,10 +1,11 @@
 ---
 categories:
-- OI
+  - OI
 title: 期望线性的平面最近点对算法
 date: 2024-09-28 23:19:00
 tags:
-- geometry
+  - distance
+  - geometry
 mathjax: true
 ---
 
