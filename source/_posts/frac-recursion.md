@@ -243,11 +243,15 @@ $$
 整理得
 
 $$
-a_n=\dfrac{a_0\left(-q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+q+s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2t}{a_0\left(2p\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2p\right)+q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-q-s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
+a\_n=\dfrac{a\_0\left(-q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+q+s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2t}{a\_0\left(2p\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-2p\right)+q\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n-q-s\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n+s+\left(\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}\right)^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
 $$
 
 令 $\lambda=\dfrac{q+s+\sqrt{4pt+q^2-2qs+s^2}}{q+s-\sqrt{4pt+q^2-2qs+s^2}}$，
 
 $$
-a_n=\dfrac{a_0\left(-q\lambda^n+q+s\lambda^n-s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\lambda^n-2t}{a_0\left(2p\lambda^n-2p\right)+q\lambda^n-q-s\lambda^n+s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
+a\_n=\dfrac{a\_0\left(-q\lambda^n+q+s\lambda^n-s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}\right)+2t\lambda^n-2t}{a\_0\left(2p\lambda^n-2p\right)+q\lambda^n-q-s\lambda^n+s+\lambda^n\sqrt{4pt+q^2-2qs+s^2}+\sqrt{4pt+q^2-2qs+s^2}}
 $$
+
+---
+
+Tag `fixed-point` 的含义是，以上的大部分构造均由求解不动点得到。
