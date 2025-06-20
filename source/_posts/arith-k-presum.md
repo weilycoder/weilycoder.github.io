@@ -7,6 +7,7 @@ mathjax: true
 tags:
   - sequence
   - prefix-sum
+  - general-term
   - finite-difference
   - OGF
 ---

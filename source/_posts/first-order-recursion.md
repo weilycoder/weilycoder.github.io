@@ -6,6 +6,7 @@ categories:
   - Math
 tags:
   - sequence
+  - general-term
 ---
 
 本文讨论形如下式的递推数列通项，这里限定 $p\ne 0\land p\ne 1$。

@@ -6,6 +6,7 @@ date: 2025-06-20 14:48:06
 mathjax: true
 tags:
   - sequence
+  - general-term
 ---
 
 在数列通项的求解中，一类题目给定方程 $F\left(a, S\right)=0$（可能附加其他条件），求数列的通项。

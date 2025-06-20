@@ -7,6 +7,7 @@ mathjax: true
 tags:
   - sequence
   - fixed-point
+  - general-term
 ---
 
 考虑数列 $\left\\{a\_n\right\\}$，首项为 $a\_0$，且对于 $n\ge 0$，满足

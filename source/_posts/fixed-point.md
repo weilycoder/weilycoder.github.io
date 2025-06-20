@@ -5,7 +5,9 @@ categories:
 date: "2025-06-19T23:14:48.647+0800"
 mathjax: true
 tags:
+  - sequence
   - fixed-point
+  - general-term
 ---
 
 ## 方法简述
