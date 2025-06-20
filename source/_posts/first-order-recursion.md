@@ -8,7 +8,7 @@ tags:
   - sequence
 ---
 
-本文讨论形如下式的递推数列通项，这里限定 $p\ne 0$。
+本文讨论形如下式的递推数列通项，这里限定 $p\ne 0\land p\ne 1$。
 
 $$
 a\_{n+1}=pa\_{n}+f\left(n\right)
@@ -64,29 +64,45 @@ $$
 
 #### 方法 2
 
-考虑递推式
+此时数列递推式为
 
 $$
 a\_{n+1}=pa\_{n}+qn
 $$
 
-待定系数
+考虑待定系数
 
 $$
 \begin{aligned}
-  a\_{n+1}-A\left(n+1\right) &= B\left(a\_{n}-An\right)+C \\\\
-  a\_{n+1} &= Ba\_{n}+\left(A-AB\right)n+C+A \\\\
+a\_{n+1}-A\left(n+1\right)-B = C\left(a\_{n}-An-B\right) \\\\
+a\_{n+1} = Ca\_{n}+\left(A-AC\right)n+\left(A+B-BC\right)
 \end{aligned}
 $$
 
-因此
+对比系数得
 
 $$
 \begin{cases}
-  B &= p \\\\
-  A-AB &= q \\\\
-  A+C &= 0
+  C &= p \\\\
+  A-AC &= q \\\\
+  A+B-BC &= 0
 \end{cases}
 $$
 
-现在 $\{a\_{n}-An\}$ 为常系数线性递推数列，求解方法在上文中提到过。
+则 $\left\\{a\_{n}-An-B\right\\}$ 为等比数列，公比为 $C=p$。
+
+### f(n) = sn^2+tn
+
+#### 方法 1
+
+转化为 $\dfrac{f\left(n\right)}{p^{n}}$ 的求和。利用 [有限微积分](/2025/05/26/finite-calculus/#等差数列乘等比数列) 求解。
+
+#### 方法 2
+
+继续待定系数法，假设原递推式可以化为
+
+$$
+a\_{n+1}-A\left(n+1\right)^2-B\left(n+1\right)-C=D\left(a\_{n}-An^2-Bn-C\right)
+$$
+
+对比系数解出 $A,B,C,D$，$\left\\{a\_{n}-An^2-Bn-C\right\\}$ 为等比数列。
