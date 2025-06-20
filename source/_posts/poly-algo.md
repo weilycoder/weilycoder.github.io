@@ -8,7 +8,7 @@ date: "2025-05-23T22:53:19.042+0800"
 updated: "2025-05-28T00:25:20.904+0800"
 tags:
   - poly
-  - template
+  - template-code
 ---
 
 ## 多项式乘法

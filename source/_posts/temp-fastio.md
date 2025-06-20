@@ -2,7 +2,7 @@
 categories:
   - OI
 tags:
-  - template
+  - template-code
   - io
 title: 快读快写模板 (Linux)
 code_fold: -1

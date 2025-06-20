@@ -5,6 +5,7 @@ title: 快速 GCD 算法
 date: 2024-07-25 17:16:27
 mathjax: true
 tags:
+  - template-code
   - math
 ---
 
