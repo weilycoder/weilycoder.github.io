@@ -1,8 +1,8 @@
 ---
-categories:
-- sympy
 title: Sympy 向量计算
 date: 2025-05-15 22:49:31
+categories:
+   - sympy
 ---
 
 ## 三维坐标系

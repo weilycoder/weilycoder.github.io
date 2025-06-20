@@ -1,9 +1,9 @@
 ---
 title: ZFC 集合论公理体系
+mathjax: true
+date: "2025-06-16T22:27:33.927+0800"
 categories:
   - Math
-date: "2025-06-16T22:27:33.927+0800"
-mathjax: true
 tags:
   - axiom
   - set-theory

@@ -1,12 +1,12 @@
 ---
-categories:
-- OI
-tags:
-- ds
 title: 快速区间查询
+mathjax: true
 date: '2025-01-31T17:00:25.000+08:00'
 update: '2025-01-31T17:00:25.000+08:00'
-mathjax: true
+categories:
+  - OI
+tags:
+  - ds
 ---
 
 水群时看到了，记一下。

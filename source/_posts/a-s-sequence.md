@@ -1,9 +1,9 @@
 ---
+title: F(a, S) = 0 类数列通项
+mathjax: true
+date: 2025-06-20 14:48:06
 categories:
   - Math
-title: F(a, S) = 0 类数列通项
-date: 2025-06-20 14:48:06
-mathjax: true
 tags:
   - sequence
   - general-term

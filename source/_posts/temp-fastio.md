@@ -1,14 +1,15 @@
 ---
+title: 快读快写模板 (Linux)
+code_fold: -1
+date: '2025-03-29T18:11:34.916702+08:00'
+updated: '2025-03-30T10:23:02.158+08:00'
 categories:
   - OI
 tags:
   - template-code
   - io
-title: 快读快写模板 (Linux)
-code_fold: -1
-date: '2025-03-29T18:11:34.916702+08:00'
-updated: '2025-03-30T10:23:02.158+08:00'
 ---
+
 ```cpp
 #include <cstdint>
 #include <cstdio>

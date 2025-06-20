@@ -1,10 +1,10 @@
 ---
-categories:
-  - OI
 title: PE484 Arithmetic Derivative
-date: 2025-05-19 22:05:17
 mathjax: true
 password: "8907904768686152599"
+date: 2025-05-19 22:05:17
+categories:
+  - OI
 tags:
   - solution
   - number-theory

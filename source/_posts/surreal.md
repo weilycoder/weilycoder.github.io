@@ -1,10 +1,10 @@
 ---
 title: Surreal Numbers
-categories:
-  - Math
+mathjax: true
 date: 2025-05-16 17:14:14
 update: "2025-06-07T18:34:16.677+0800"
-mathjax: true
+categories:
+  - Math
 tags:
   - surreal-numbers
   - games

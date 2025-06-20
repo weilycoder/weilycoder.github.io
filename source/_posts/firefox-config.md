@@ -1,11 +1,11 @@
 ---
-categories:
-- - Misc
-date: '2025-04-02T22:53:04.717225+08:00'
-tags:
-- Firefox
 title: Firefox 高级设置
+date: '2025-04-02T22:53:04.717225+08:00'
 updated: '2025-04-02T23:02:56.874+08:00'
+categories:
+  - Misc
+tags:
+  - Firefox
 ---
 
 随用随记；欢迎补充。

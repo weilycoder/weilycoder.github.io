@@ -1,9 +1,9 @@
 ---
+title: 快速 GCD 算法
+mathjax: true
+date: 2024-07-25 17:16:27
 categories:
   - OI
-title: 快速 GCD 算法
-date: 2024-07-25 17:16:27
-mathjax: true
 tags:
   - template-code
   - math

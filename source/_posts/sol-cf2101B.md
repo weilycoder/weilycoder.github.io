@@ -1,9 +1,9 @@
 ---
+title: CF2101B (Div. 1) Quartet Swapping
+mathjax: true
+date: 2025-05-19 16:23:32
 categories:
   - OI
-title: CF2101B (Div. 1) Quartet Swapping
-date: 2025-05-19 16:23:32
-mathjax: true
 tags:
   - solution
   - sort

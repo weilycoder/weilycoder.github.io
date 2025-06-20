@@ -1,9 +1,9 @@
 ---
 title: 不动点法求解数列通项
+mathjax: true
+date: "2025-06-19T23:14:48.647+0800"
 categories:
   - Math
-date: "2025-06-19T23:14:48.647+0800"
-mathjax: true
 tags:
   - sequence
   - fixed-point

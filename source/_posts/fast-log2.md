@@ -1,12 +1,12 @@
 ---
-categories:
-- OI
-date: '2025-04-04T13:40:25.840+08:00'
-tags:
-- bits
 title: 快速求解 log2
-updated: '2025-04-07T22:36:53.432+08:00'
 mathjax: true
+date: '2025-04-04T13:40:25.840+08:00'
+updated: '2025-04-07T22:36:53.432+08:00'
+categories:
+  - OI
+tags:
+  - bits
 ---
 
 ## Algo 1

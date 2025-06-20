@@ -1,10 +1,10 @@
 ---
-categories:
-  - OI
 title: 十二重计数法
+mathjax: true
 date: "2025-05-21T17:46:16.843+0800"
 updated: "2025-05-22T00:37:03.624+0800"
-mathjax: true
+categories:
+  - OI
 tags:
   - solution
   - math

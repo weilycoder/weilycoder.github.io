@@ -1,13 +1,13 @@
 ---
+title: 期望线性的平面最近点对算法
+mathjax: true
+date: 2024-09-28 23:19:00
 categories:
   - OI
-title: 期望线性的平面最近点对算法
-date: 2024-09-28 23:19:00
 tags:
   - template-code
   - distance
   - geometry
-mathjax: true
 ---
 
 讲述一种**期望**线性复杂度的平面最近点对算法。
