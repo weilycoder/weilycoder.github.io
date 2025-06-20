@@ -13,11 +13,11 @@ tags:
 
 ## 引入：裂项求和
 
-对于数列 $\\{a\_n\\}$，我们希望求它的前 $n$ 项和数列 $\\{s\_n\\}$。
+对于数列 $\left\\{a\_n\right\\}$，我们希望求它的前 $n$ 项和数列 $\left\\{s\_n\right\\}$。
 
-其中一个方法是将 $\\{a\_n\\}$ 的生成函数乘上 $\dfrac{1}{1-x}$，但是这个方法有时较为笨重。
+其中一个方法是将 $\left\\{a\_n\right\\}$ 的生成函数乘上 $\dfrac{1}{1-x}$，但是这个方法有时较为笨重。
 
-考虑一个小学奥数做法，假如我们可以求出数列 $\\{b\_n\\}$ 使得 $b\_{n+1}-b\_{n}=a\_i$，那么我们的求和变为：
+考虑一个小学奥数做法，假如我们可以求出数列 $\left\\{b\_n\right\\}$ 使得 $b\_{n+1}-b\_{n}=a\_i$，那么我们的求和变为：
 
 $$
 \begin{aligned}
@@ -27,9 +27,10 @@ $$
 &=b\_{n+1}-b\_1
 \end{aligned}
 $$
+
 这种做法被称为裂项求和（裂项相消法）。
 
-换句话说，我们其实是直接“注意”到了 $\\{a\_n\\}$ 的前缀和数列 $\\{b\_n\\}$。
+换句话说，我们其实是直接“注意”到了 $\left\\{a\_n\right\\}$ 的前缀和数列 $\left\\{b\_n\right\\}$。
 
 例如，对 $\dfrac{1}{i\left(i+1\right)}$ 求和，我们将其转化为 $\dfrac{1}{i}-\dfrac{1}{i+1}$，立即得到和为 $\dfrac{n}{n+1}$。
 
@@ -156,6 +157,18 @@ $$
 \end{align\*}
 $$
 
+## 分部求和
+
+对乘法法则变形：
+
+$$
+\begin{aligned}
+  \operatorname{\Delta}\left(uv\right) &= u\operatorname{\Delta}v+\operatorname{E}v\operatorname{\Delta}u \\\\
+  u\operatorname{\Delta}v &= \operatorname{\Delta}\left(uv\right)-\operatorname{E}v\operatorname{\Delta}u \\\\
+  \operatorname{\sum}u\operatorname{\Delta}v &= uv-\operatorname{\sum}\operatorname{E}v\operatorname{\Delta}u
+\end{aligned}
+$$
+
 ## 常见数列的差分
 
 ### 常数列
@@ -204,9 +217,9 @@ $$
 #### 下降幂与普通幂的互化
 
 {% note 前置知识-斯特林数 fold %}
-（无符号）第一类斯特林数（斯特林轮换数），$\begin{bmatrix}n \\\\ k\end{bmatrix}$，也可记做 $s(n,k)$，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空轮换的方案数。
+（无符号）第一类斯特林数（斯特林轮换数），$\begin{bmatrix}n \\\\ k\end{bmatrix}$，也可记作 $s\left(n,k\right)$，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空轮换的方案数。
 
-第二类斯特林数（斯特林子集数）$\begin{Bmatrix}n \\\\ k\end{Bmatrix}$ ，也可记做 $S(n,k)$ ，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空子集的方案数。
+第二类斯特林数（斯特林子集数）$\begin{Bmatrix}n \\\\ k\end{Bmatrix}$ ，也可记作 $S\left(n,k\right)$ ，表示将 $n$ 个两两不同的元素，划分为 $k$ 个互不区分的非空子集的方案数。
 
 根据组合意义，有递推公式：
 
@@ -215,7 +228,7 @@ $$
   \begin{bmatrix}n \\\\ m\end{bmatrix} &=
   \begin{cases}
     [n=0], & m=0 \\\\
-    \begin{bmatrix}n-1 \\\\ m-1\end{bmatrix}+(n-1)\begin{bmatrix}n-1 \\\\ m\end{bmatrix}, & m \ne 0
+    \begin{bmatrix}n-1 \\\\ m-1\end{bmatrix}+\left(n-1\right)\begin{bmatrix}n-1 \\\\ m\end{bmatrix}, & m \ne 0
   \end{cases} \\\\
   \begin{Bmatrix}n \\\\ m\end{Bmatrix} &=
   \begin{cases}
@@ -229,10 +242,10 @@ $$
 
 $$
 \begin{aligned}
-  m^n &= \sum_{k=0}^{m}\binom{m}{k}\begin{Bmatrix}n \\\\ k\end{Bmatrix}k! \\\\
-  m!\begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \sum_{k=0}^{m}(-1)^{m-k}\binom{m}{k}k^n \\\\
-  \begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \frac{1}{m!}\sum_{k=0}^{m}(-1)^{m-k}\binom{m}{k}k^n \\\\
-  &= \sum_{k=0}^{m}\frac{(-1)^{m-k}}{(m-k)!}\cdot \frac{k^n}{k!}
+  m^n &= \sum\_{k=0}^{m}\binom{m}{k}\begin{Bmatrix}n \\\\ k\end{Bmatrix}k! \\\\
+  m!\begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \sum\_{k=0}^{m}\left(-1\right)^{m-k}\binom{m}{k}k^n \\\\
+  \begin{Bmatrix}n \\\\ m\end{Bmatrix} &= \frac{1}{m!}\sum\_{k=0}^{m}\left(-1\right)^{m-k}\binom{m}{k}k^n \\\\
+  &= \sum\_{k=0}^{m}\frac{\left(-1\right)^{m-k}}{\left(m-k\right)!}\cdot \frac{k^n}{k!}
 \end{aligned}
 $$
 
@@ -242,21 +255,21 @@ $$
 利用第二类斯特林数，可以将普通幂转化为下降幂：
 
 $$
-x^n=\sum_{k} \begin{Bmatrix}n \\\\ k\end{Bmatrix} x^{\underline{k}}
+x^n=\sum\_{k} \begin{Bmatrix}n \\\\ k\end{Bmatrix} x^{\underline{k}}
 $$
 
 利用第一类斯特林数，可以将下降幂转化为普通幂：
 
 $$
-x^{\underline{n}}=\sum_{k} (-1)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix} x^k
+x^{\underline{n}}=\sum\_{k} \left(-1\right)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix} x^k
 $$
 
-这里 $(-1)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix}$ 被称为有符号第一类斯特林数，记作 $s(n, k)$。
+这里 $\left(-1\right)^{n-k} \begin{bmatrix}n \\\\ k\end{bmatrix}$ 被称为有符号第一类斯特林数，记作 $s\left(n, k\right)$。
 
 并且
 
 $$
-s(n,k)=s(n-1,k-1)-(n-1)s(n-1,k)
+s\left(n,k\right)=s\left(n-1,k-1\right)-\left(n-1\right)s\left(n-1,k\right)
 $$
 
 ### 组合数
@@ -269,7 +282,7 @@ $$
 
 ### 等比数列
 
-求 $\begin{align}\sum\_{k=0}^{n-1}a^k\end{align}\left(k\ne 1\right)$。
+求 $\begin{align}\sum\_{k=0}^{n-1}a^k\end{align}\left(a\ne 1\right)$。
 
 首先考虑指数函数的差分
 
@@ -311,4 +324,26 @@ $$
 \end{aligned}
 $$
 
-### TODO
+### 等差数列乘等比数列
+
+求 $\begin{aligned}\sum\_{k=0}^{n-1}k\cdot p^{k}\end{aligned}\left(p\ne 1\right)$。
+
+$$
+\begin{aligned}
+  \operatorname{\sum}xp^{x}\operatorname{\delta}x
+  &= \dfrac{xp^{x}}{p-1}-\operatorname{\sum}\dfrac{p^{x+1}}{p-1}\operatorname{\delta}x \\\\
+  &= \dfrac{xp^{x}}{p-1}-\dfrac{p}{p-1}\operatorname{\sum}p^{x}\operatorname{\delta}x \\\\
+  &= \dfrac{xp^{x}}{p-1}-\dfrac{p}{p-1}\cdot\dfrac{p^{x}}{p-1} \\\\
+  &= \dfrac{xp^{x}}{p-1}-\dfrac{p^{x+1}}{(p-1)^2}
+\end{aligned}
+$$
+
+{% note note open %}
+更一般地，有：
+
+$$
+\operatorname{\sum} x^{\underline{k}}p^x\operatorname{\delta}x=\dfrac{p^x}{p-1}\sum_{i=0}^k{\left(\dfrac{-p}{p-1}\right)}^ik^{\underline{i}}x^{\underline{k-i}}
+$$
+{% endnote %}
+
+这里略去了常数 $C$。
