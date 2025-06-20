@@ -16,7 +16,7 @@ ZF 公理体系中，元素有且只有一种类型，即集合（set）。
 ## Extensionality 外延公理
 
 $$
-\forall x\forall y[\forall z\left(z\in x\leftrightarrow z\in y\right)\rightarrow x=y]
+\forall x\forall y\left\[\forall z\left(z\in x\leftrightarrow z\in y\right)\rightarrow x=y\right\]
 $$
 
 这条公理规定了等号的含义。
@@ -40,7 +40,7 @@ $$
 ## Power Set 幂集公理
 
 $$
-\forall x\exists y\forall z[z\in y\leftrightarrow \forall w\left(w\in z\rightarrow w\in x\right)]
+\forall x\exists y\forall z\left\[z\in y\leftrightarrow \forall w\left(w\in z\rightarrow w\in x\right)\right\]
 $$
 
 幂集公理规定对于任意集合 $x$ 存在集合 $y$ 包含且只包含 $x$ 的子集。由于可以证明这种集合唯一，我们使用 $\mathscr{P}\left(x\right)$ 表示这个集合，称它为 $x$ 的幂集。
@@ -54,7 +54,7 @@ $$
 ## Unions 并集公理
 
 $$
-\forall x\exists y\forall z[z\in y\leftrightarrow \exists w\left(w\in x\land z\in w\right)]
+\forall x\exists y\forall z\left\[z\in y\leftrightarrow \exists w\left(w\in x\land z\in w\right)\right\]
 $$
 
 并集公理规定，对于任何集合 $x$，存在一个集合 $y$，使得它包含所有 $x$ 的成员的成员。
@@ -64,13 +64,13 @@ $$
 ## Infinity 无穷公理
 
 $$
-\exists x[\varnothing\in x\land \forall y\left(y\in x\rightarrow \bigcup\left\\{y,\left\\{y\right\\}\right\\}\in x\right)]
+\exists x\left\[\varnothing\in x\land \forall y\left(y\in x\rightarrow \bigcup\left\\{y,\left\\{y\right\\}\right\\}\in x\right)\right\]
 $$
 
 若我们将 $\bigcup\left\\{x,y\right\\}$ 记作 $x\cup y$，则另一种写法为：
 
 $$
-\exists x[\varnothing\in x\land \forall y\left(y\in x\rightarrow y\cup \left\\{y\right\\}\in x\right)]
+\exists x\left\[\varnothing\in x\land \forall y\left(y\in x\rightarrow y\cup \left\\{y\right\\}\in x\right)\right\]
 $$
 
 无穷公理保证了以下形式的集合：
@@ -84,7 +84,7 @@ $$
 ## Separation 分离公理模式
 
 $$
-\forall u\_1\ldots\forall u\_k[\forall w\exists v\forall r\left(r\in v\leftrightarrow r\in w\land \psi\left(r,u\_1,\ldots,u\_k\right)\right)]
+\forall u\_1\ldots\forall u\_k\left\[\forall w\exists v\forall r\left(r\in v\leftrightarrow r\in w\land \psi\left(r,u\_1,\ldots,u\_k\right)\right)\right\]
 $$
 
 分离公理模式使用元变量 $\psi$ 表示一系列满足这个形式的公理。
@@ -98,13 +98,13 @@ $$
 ## Replacement 替代公理模式
 
 $$
-\forall u\_1\ldots\forall u\_k[\forall x\exists!y\phi\left(x,y,u\_1,\ldots,u\_k\right)\rightarrow\forall w\exists v\forall r\left(r\in v\leftrightarrow \exists s\left(s\in w\land \phi\left(s,r,u\_1,\ldots,u\_k\right)\right)\right)]
+\forall u\_1\ldots\forall u\_k\left\[\forall x\exists!y\phi\left(x,y,u\_1,\ldots,u\_k\right)\rightarrow\forall w\exists v\forall r\left(r\in v\leftrightarrow \exists s\left(s\in w\land \phi\left(s,r,u\_1,\ldots,u\_k\right)\right)\right)\right\]
 $$
 
 其中 $\exists!y$ 表示存在唯一的 $y$，这也可以写作
 
 $$
-\forall x\forall y\forall z[\phi\left(x,y\right)\land \phi\left(x,z\right)\rightarrow y=z]
+\forall x\forall y\forall z\left\[\phi\left(x,y\right)\land \phi\left(x,z\right)\rightarrow y=z\right\]
 $$
 
 因此是合法的，但是前者更简洁。
@@ -116,13 +116,13 @@ $$
 用更简洁的写法就是：
 
 $$
-v=f[w]=\left\\{f\left(s\right):s\in w\right\\}
+v=f\left\[w\right\]=\left\\{f\left(s\right):s\in w\right\\}
 $$
 
 ## Regularity 良基公理
 
 $$
-\forall x[x\ne\varnothing\rightarrow\exists y\left(y\in x\land \forall z\left(z\in x\rightarrow \lnot\left(z\in y\right)\right)\right)]
+\forall x\left\[x\ne\varnothing\rightarrow\exists y\left(y\in x\land \forall z\left(z\in x\rightarrow \lnot\left(z\in y\right)\right)\right)\right\]
 $$
 
 这句话否认了诸如 $x\in y\land y\in z\land z\in x$ 一类的集合。
@@ -132,7 +132,7 @@ $$
 即 ZFC 中的 C，缩写为 AC。
 
 $$
-\forall X[\varnothing\notin X\Rightarrow \exists f:X\to \bigcup X \forall A\in X\left(f\left(A\right)\in A\right)]
+\forall X\left\[\varnothing\notin X\Rightarrow \exists f:X\to \bigcup X \forall A\in X\left(f\left(A\right)\in A\right)\right\]
 $$
 
 简单来说，给定一些非空集合，存在一个函数，可以从每个集合中选择出一个元素。
