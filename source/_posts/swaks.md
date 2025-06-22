@@ -407,9 +407,20 @@ swaks --to pewlkm93170@chacuo.net \
 
 一个满足上述要求的正则表达式如下：
 
-```re
-<[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*>
-```
+<figure class="highlight regex">
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre><code class="hljs regex"><span class="hljs-string">&lt;</span><span class="hljs-literal">&#91;</span><span class="hljs-number">a-zA-Z0-9</span><span class="hljs-string">!#$%&amp;'*+/=?^_`{|}~-</span><span class="hljs-literal">&#93;</span><span class="hljs-comment">+</span><span class="hljs-type">&#40;?:</span><span class="hljs-string">\.</span><span class="hljs-literal">&#91;</span><span class="hljs-number">a-zA-Z0-9</span><span class="hljs-string">!#$%&amp;'*+/=?^_`{|}~-</span><span class="hljs-literal">&#93;</span><span class="hljs-comment">+</span><span class="hljs-type">&#41;</span><span class="hljs-comment">*</span><span class="hljs-string">@</span><span class="hljs-literal">&#91;</span><span class="hljs-number">a-zA-Z0-9</span><span class="hljs-string">!#$%&amp;'*+/=?^_`{|}~-</span><span class="hljs-literal">&#93;</span><span class="hljs-comment">+</span><span class="hljs-type">&#40;?:</span><span class="hljs-string">\.</span><span class="hljs-literal">&#91;</span><span class="hljs-number">a-zA-Z0-9</span><span class="hljs-string">!#$%&amp;'*+/=?^_`{|}~-</span><span class="hljs-literal">&#93;</span><span class="hljs-comment">+</span><span class="hljs-type">&#41;</span><span class="hljs-comment">*</span><span class="hljs-string">&gt;</span></code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
 另外，`@` 的右侧通常为发件人的邮箱域名，例如：
 
