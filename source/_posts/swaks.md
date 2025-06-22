@@ -513,3 +513,54 @@ swaks --to pewlkm93170@chacuo.net \
 ```
 
 如果不打算伪装抄送者名称，也可以只写邮件地址，例如 `--h-cc "*********@qq.com"`。
+
+## `--body`
+
+使用 `--body` 指定邮件内容。
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1 \
+      --h-Message-Id "<20250622161504.weilycoder@test.com>" \
+      --h-cc "weilycoder <*********@qq.com>" \
+      --body "Test email"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 16:21:55 +0800
+?                                ^ ^^
++  -> Date: Sun, 22 Jun 2025 16:26:26 +0800
+?                                ^ ^^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+   -> Subject: foo
+   -> Message-Id: <20250622161504.weilycoder@test.com>
+   -> X-Mailer: QQMail 2.x
+   -> X-Priority: 1
+   -> cc: weilycoder <*********@qq.com>
+   ->
+-  -> This is a test mailing
++  -> Test email
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
