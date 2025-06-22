@@ -353,6 +353,51 @@ swaks --to pewlkm93170@chacuo.net \
 - `X-Priority: 4`（或 `Low`）：低优先级邮件。
 - `X-Priority: 5`（或 `Bulk`）：批量邮件或垃圾邮件，可能会被邮件客户端视为不太重要的邮件。
 
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 15:39:20 +0800
+?                             ^ ^^ ^
++  -> Date: Sun, 22 Jun 2025 16:10:40 +0800
+?                             ^ ^^ ^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+   -> Subject: foo
+-  -> Message-Id: <20250622153920.008982@LAPTOP-Q0JIQNAL.localdomain>
+?                           ^^^^       -
++  -> Message-Id: <20250622161040.010898@LAPTOP-Q0JIQNAL.localdomain>
+?                           ^^^^   +
+   -> X-Mailer: QQMail 2.x
++  -> X-Priority: 1
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
 ### Message-Id
 
 用来给出一个唯一的邮件标识符。
@@ -374,6 +419,97 @@ swaks --to pewlkm93170@chacuo.net \
 + `<d52ce63e-a0d5-4f95-b6a9-e1256a44f5fb@example.net>`
 + `<5ef31701.1c631ghz1.13943.bu15@example.net>`
 
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1 \
+      --h-Message-Id "<20250622161504.weilycoder@test.com>"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 16:10:40 +0800
+?                                ^ ^^
++  -> Date: Sun, 22 Jun 2025 16:15:23 +0800
+?                                ^ ^^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+   -> Subject: foo
+-  -> Message-Id: <20250622161040.010898@LAPTOP-Q0JIQNAL.localdomain>
++  -> Message-Id: <20250622161504.weilycoder@test.com>
+   -> X-Mailer: QQMail 2.x
+   -> X-Priority: 1
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
 ### cc
 
 `cc` 标记抄送人，但是只是让收信者看到你指定的抄送人，不会实际发送。
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1 \
+      --h-Message-Id "<20250622161504.weilycoder@test.com>" \
+      --h-cc "weilycoder <*********@qq.com>"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 16:15:23 +0800
+?                                 ^^^
++  -> Date: Sun, 22 Jun 2025 16:21:55 +0800
+?                               + + ^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+   -> Subject: foo
+   -> Message-Id: <20250622161504.weilycoder@test.com>
+   -> X-Mailer: QQMail 2.x
+   -> X-Priority: 1
++  -> cc: weilycoder <*********@qq.com>
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
+如果不打算伪装抄送者名称，也可以只写邮件地址，例如 `--h-cc "*********@qq.com"`。
