@@ -184,7 +184,7 @@ swaks --to *********@qq.com --from admin@qq.com --ehlo qq.com
 
 ## `--ehlo`
 
-使用 `--ehlo` 指定发送网址。
+使用 `--ehlo` 指定发送网址，用来进一步伪装。
 
 例如
 
@@ -232,3 +232,148 @@ swaks --to pewlkm93170@chacuo.net --from test@test.com --ehlo test.com
   <-  221 Bye
   === Connection closed with remote host.
 ```
+
+## `--head`
+
+使用 `--head` 设置邮件头。
+
+### Subject
+
+例如，以下命令指定邮件标题为 `foo`：
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --head "Subject: foo"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 13:43:01 +0800
+?                              ^^^^^^
++  -> Date: Sun, 22 Jun 2025 15:28:37 +0800
+?                             +++++ ^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+-  -> Subject: test Sun, 22 Jun 2025 13:43:01 +0800
++  -> Subject: foo
+-  -> Message-Id: <20250622134301.004353@LAPTOP-Q0JIQNAL.localdomain>
+?                            ^^^^    ^^^
++  -> Message-Id: <20250622152837.008464@LAPTOP-Q0JIQNAL.localdomain>
+?                           +++ ^   + ^^
+   -> X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
+也可以使用 `--h-Subject` 直接指定文件头部分的 `Subject` 项。
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo"
+```
+
+其他比较有用、swaks 未给出其他参数指定、且不会被转发覆盖的文件头字段是 `X-Mailer`、`X-Priority`、`Message-Id` 和 `cc`。
+
+### X-Mailer
+
+`X-Mailer` 用来标记发出邮件的应用程序，默认情况下是 `swaks <version> <url>`。
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 15:28:37 +0800
+?                                ^^^^
++  -> Date: Sun, 22 Jun 2025 15:39:20 +0800
+?                               +++ ^
+   -> To: pewlkm93170@chacuo.net
+   -> From: test@test.com
+   -> Subject: foo
+-  -> Message-Id: <20250622152837.008464@LAPTOP-Q0JIQNAL.localdomain>
+?                             ^^^    ^^^
++  -> Message-Id: <20250622153920.008982@LAPTOP-Q0JIQNAL.localdomain>
+?                            ++ ^    ^^^
+-  -> X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
++  -> X-Mailer: QQMail 2.x
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
+### X-Priority
+
+`X-Priority` 用来标记邮件的重要性。
+
+- `X-Priority: 1`（或 `Urgent`）：最高优先级，表示紧急或非常重要的邮件。
+- `X-Priority: 2`（或 `High`）：高优先级邮件。
+- `X-Priority: 3`（或 `Normal`）：正常优先级邮件，这是默认级别。
+- `X-Priority: 4`（或 `Low`）：低优先级邮件。
+- `X-Priority: 5`（或 `Bulk`）：批量邮件或垃圾邮件，可能会被邮件客户端视为不太重要的邮件。
+
+### Message-Id
+
+用来给出一个唯一的邮件标识符。
+
+一般来说，要求：
+
++ 首尾分别为 `<` 和 `>`；
++ 中间包含字符 `@`；
++ `@` 的左右均为由 `.` 分割的、非空可打印 ASCII 串。
+
+一个满足上述要求的正则表达式如下：
+
+```re
+<[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*>
+```
+
+另外，`@` 的右侧通常为发件人的邮箱域名，例如：
+
++ `<d52ce63e-a0d5-4f95-b6a9-e1256a44f5fb@example.net>`
++ `<5ef31701.1c631ghz1.13943.bu15@example.net>`
+
+### cc
+
+`cc` 标记抄送人，但是只是让收信者看到你指定的抄送人，不会实际发送。
