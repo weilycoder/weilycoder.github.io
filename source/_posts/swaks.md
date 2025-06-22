@@ -293,8 +293,6 @@ swaks --to pewlkm93170@chacuo.net \
       --h-Subject "foo"
 ```
 
-其他比较有用、swaks 未给出其他参数指定、且不会被转发覆盖的文件头字段是 `X-Mailer`、`X-Priority`、`Message-Id` 和 `cc`。
-
 ### X-Mailer
 
 `X-Mailer` 用来标记发出邮件的应用程序，默认情况下是 `swaks <version> <url>`。
@@ -463,6 +461,63 @@ swaks --to pewlkm93170@chacuo.net \
   === Connection closed with remote host.
 ```
 
+### From
+
+`From` 标记发件人，可以用来设置发件人的别名。另外，这个字段比 `--from` 指定的字段受到检查的强度更小。但是，若 `--from` 与 `--h-From` 指定的邮箱地址不一致，邮件服务在标记发件人为后者的同时，还会标记邮件由前者代发；并且可能对此进行警告。
+
+```bash
+swaks --to pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-From "=?gb2312?B?udzA7dSx?= <test@test.com>" \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1 \
+      --h-Message-Id "<20250622161504.weilycoder@test.com>"
+```
+
+这里 `=?gb2312?B?udzA7dSx?=` 是 MIME 编码，格式为 `=?charset?encoding?encoded_string?=`：
+
++ `charset`：字符集，本例中为 `gb2312`；
++ `encoding`：编码方式，本例中为 `B`，代指 Base64 编码；
++ `encoded_string`：编码串，本例中为 `udzA7dSx`。
+
+因此这段字符翻译出来为 `管理员`。
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 16:15:23 +0800
+?                                ^^^^
++  -> Date: Sun, 22 Jun 2025 16:42:10 +0800
+?                               +++ ^
+   -> To: pewlkm93170@chacuo.net
+-  -> From: test@test.com
++  -> From: =?gb2312?B?udzA7dSx?= <test@test.com>
+   -> Subject: foo
+   -> Message-Id: <20250622161504.weilycoder@test.com>
+   -> X-Mailer: QQMail 2.x
+   -> X-Priority: 1
+   ->
+   -> This is a test mailing
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
 ### cc
 
 `cc` 标记抄送人，但是只是让收信者看到你指定的抄送人，不会实际发送。
@@ -471,6 +526,7 @@ swaks --to pewlkm93170@chacuo.net \
 swaks --to pewlkm93170@chacuo.net \
       --from test@test.com \
       --ehlo test.com \
+      --h-From "=?gb2312?B?udzA7dSx?= <test@test.com>" \
       --h-Subject "foo" \
       --h-X-Mailer "QQMail 2.x" \
       --h-X-Priority 1 \
@@ -495,7 +551,7 @@ swaks --to pewlkm93170@chacuo.net \
 +  -> Date: Sun, 22 Jun 2025 16:21:55 +0800
 ?                               + + ^
    -> To: pewlkm93170@chacuo.net
-   -> From: test@test.com
+   -> From: =?gb2312?B?udzA7dSx?= <test@test.com>
    -> Subject: foo
    -> Message-Id: <20250622161504.weilycoder@test.com>
    -> X-Mailer: QQMail 2.x
@@ -522,6 +578,7 @@ swaks --to pewlkm93170@chacuo.net \
 swaks --to pewlkm93170@chacuo.net \
       --from test@test.com \
       --ehlo test.com \
+      --h-From "=?gb2312?B?udzA7dSx?= <test@test.com>" \
       --h-Subject "foo" \
       --h-X-Mailer "QQMail 2.x" \
       --h-X-Priority 1 \
@@ -547,7 +604,7 @@ swaks --to pewlkm93170@chacuo.net \
 +  -> Date: Sun, 22 Jun 2025 16:26:26 +0800
 ?                                ^ ^^
    -> To: pewlkm93170@chacuo.net
-   -> From: test@test.com
+   -> From: =?gb2312?B?udzA7dSx?= <test@test.com>
    -> Subject: foo
    -> Message-Id: <20250622161504.weilycoder@test.com>
    -> X-Mailer: QQMail 2.x
