@@ -1,6 +1,5 @@
 ---
 title: Swaks 发送邮件
-code_fold: -1
 date: 2025-06-22 00:26:38
 categories:
   - CTF
@@ -518,6 +517,10 @@ swaks --to pewlkm93170@chacuo.net \
   === Connection closed with remote host.
 ```
 
+### To
+
+`To` 标记收件人，与 `--to` 指定的不同，这条字段不会改变实际的收信人，结合字段 `cc`，应该可以模拟出抄送或密送的效果。没有测试。
+
 ### cc
 
 `cc` 标记抄送人，但是只是让收信者看到你指定的抄送人，不会实际发送。
@@ -621,3 +624,68 @@ swaks --to pewlkm93170@chacuo.net \
   <-  221 Bye
   === Connection closed with remote host.
 ```
+
+## `--cc`/`--bcc`
+
+使用 `--cc`/`--bcc` 指定抄送/密送。
+
+与在 `To`/`cc` 字段指定不同，使用这两个参数时，邮件确实会发送到指定的邮箱。
+
+```bash
+swaks --to uzrwjq79251@chacuo.net \
+      --cc zjhlua04569@chacuo.net \
+      --bcc pewlkm93170@chacuo.net \
+      --from test@test.com \
+      --ehlo test.com \
+      --h-From "=?gb2312?B?udzA7dSx?= <test@test.com>" \
+      --h-Subject "foo" \
+      --h-X-Mailer "QQMail 2.x" \
+      --h-X-Priority 1 \
+      --h-Message-Id "<20250622161504.weilycoder@test.com>" \
+      --h-cc "weilycoder <*********@qq.com>" \
+      --body "Test email"
+```
+
+```diff
+  === Trying mx.chacuo.net:25...
+  === Connected to mx.chacuo.net.
+  <-  220 web1905 chcuo.net server 0.2
+   -> EHLO test.com
+  <-  250 web1905
+   -> MAIL FROM:<test@test.com>
+  <-  250 Ok
++  -> RCPT TO:<uzrwjq79251@chacuo.net>
++ <-  250 Ok
++  -> RCPT TO:<zjhlua04569@chacuo.net>
++ <-  250 Ok
+   -> RCPT TO:<pewlkm93170@chacuo.net>
+  <-  250 Ok
+   -> DATA
+  <-  354 End data with <CR><LF>.<CR><LF>
+-  -> Date: Sun, 22 Jun 2025 16:26:26 +0800
+?                             ^  ^  ^
++  -> Date: Sun, 22 Jun 2025 17:27:22 +0800
+?                             ^  ^  ^
+-  -> To: pewlkm93170@chacuo.net
++  -> To: uzrwjq79251@chacuo.net
++  -> Cc: zjhlua04569@chacuo.net
+   -> From: =?gb2312?B?udzA7dSx?= <test@test.com>
+   -> Subject: foo
+   -> Message-Id: <20250622161504.weilycoder@test.com>
+   -> X-Mailer: QQMail 2.x
+   -> X-Priority: 1
+   -> cc: weilycoder <*********@qq.com>
+   ->
+   -> Test email
+   ->
+   ->
+   -> .
+  <-  250 Ok
+   -> QUIT
+  <-  221 Bye
+  === Connection closed with remote host.
+```
+
+[24mail](http://24mail.chacuo.net/) 似乎不会显示以抄送/密送方法到达的邮件，但是 QQ 邮箱是可以的。
+
+如果使用 QQ 邮箱接收，则 `--cc` 和 `--h-cc` 指定的抄送人都会显示，但是实际上只有前者指定的地址真的被发送了邮件。
