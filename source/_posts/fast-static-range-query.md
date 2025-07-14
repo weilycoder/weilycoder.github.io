@@ -6,7 +6,7 @@ update: '2025-01-31T17:00:25.000+08:00'
 categories:
   - OI
 tags:
-  - ds
+  - data-structure
 ---
 
 水群时看到了，记一下。
