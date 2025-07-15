@@ -2,6 +2,7 @@
 title: 无限幂塔方程
 mathjax: true
 date: 2025-07-15T05:45:26.771+0800
+update: 2025-07-16T00:43:42.553+0800
 categories:
   - Math
 tags:
@@ -186,7 +187,7 @@ $$
 
 ---
 
-易得 $\mathrm{e}^{-\mathrm{e}}\leqslant a\lt 1$ 时 $g\left(x\right)$ 为减函数，从而 $g\left(x\right)$ 有且只有一个零点。
+记 $g\left(x\right)=f\left(f\left(x\right)\right)-x$，易得 $\mathrm{e}^{-\mathrm{e}}\leqslant a\lt 1$ 时 $g\left(x\right)$ 为减函数，从而 $g\left(x\right)$ 有且只有一个零点。
 
 {% note 函数性质证明 fold %}
 对 $g\left(x\right)=f\left(f\left(x\right)\right)-x$ 求导，得
