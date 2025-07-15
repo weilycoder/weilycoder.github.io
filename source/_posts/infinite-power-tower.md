@@ -5,6 +5,9 @@ date: 2025-07-15T05:45:26.771+0800
 categories:
   - Math
 tags:
+  - equation
+  - fixed-point
+  - sequence
 ---
 
 ## 一个解错的方程
