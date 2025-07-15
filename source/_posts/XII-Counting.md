@@ -7,7 +7,7 @@ categories:
   - OI
 tags:
   - solution
-  - math
+  - math(oi)
   - combinatorics
   - OGF
   - luogu

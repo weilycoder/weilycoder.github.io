@@ -6,7 +6,7 @@ categories:
   - OI
 tags:
   - template-code
-  - math
+  - math(oi)
 ---
 
 > 例题：[Luogu P5435](https://www.luogu.com.cn/problem/P5435)

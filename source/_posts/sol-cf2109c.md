@@ -9,7 +9,7 @@ tags:
   - interactive
   - constructive
   - number-theory
-  - math
+  - math(oi)
   - Ad-hoc
   - codeforces
 ---
