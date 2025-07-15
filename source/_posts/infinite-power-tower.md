@@ -159,7 +159,7 @@ $$
 
 这里的分析更困难一些，实际上，此时数列未必收敛——它有可能发散到两个点。即数列的奇数列和偶数列分别收敛，但这两个极限未必相等。
 
-容易证明（根据函数 $f(x)=a_0^{x}$ 的单调性）有
+容易证明（根据函数 $f\left(x\right)=a\_0^{x}$ 的单调性）有
 
 $$
 \begin{aligned}
@@ -175,6 +175,93 @@ $$
 
 > 形式上，也可以记 $a\_{-2}=0,a\_{-1}=1$。
 
-因此显然数列的奇数列和偶数列分别收敛，然而，$\alpha\lt\dfrac{1}{\mathrm{e}}$ 时两个极限不再相等（此时 $a_0\lt\mathrm{e}^{-\mathrm{e}}$），相关证明以后再补。
+因此显然数列的奇数列和偶数列分别收敛，然而，$\alpha\lt\dfrac{1}{\mathrm{e}}$ 时两个极限不再相等（此时 $a\_0\lt\mathrm{e}^{-\mathrm{e}}$）。
 
 也就是说，数列极限 $a\_{\infty}$ 的取值范围为 $\left[\dfrac{1}{\mathrm{e}},\mathrm{e}\right]$。
+
+{% note proof open %}
+这里尝试给出一个证明。
+
+方便起见，记首项 $a\_0=a$，递推公式 $f\left(x\right)=a^{x}$。
+
+---
+
+易得 $\mathrm{e}^{-\mathrm{e}}\leqslant a\lt 1$ 时 $g\left(x\right)$ 为减函数，从而 $g\left(x\right)$ 有且只有一个零点。
+
+{% note 函数性质证明 fold %}
+对 $g\left(x\right)=f\left(f\left(x\right)\right)-x$ 求导，得
+
+$$
+\begin{aligned}
+  g^{\prime}\left(x\right) &= a^{a^{x}}a^{x}\ln^{2}{a}-1 \\\\
+  g^{\prime\prime}\left(x\right) &= a^{a^{x}}a^{2x}\ln^{4}{a}+a^{a^{x}}a^{x}\ln^{3}{a} \\\\
+  g^{\prime\prime\prime}\left(x\right) &= a^{a^{x}}a^{3x}\ln^{6}{a}+3a^{a^{x}}a^{2x}\ln^{5}{a}+a^{a^{x}}a^{x}\ln^{4}{a}
+\end{aligned}
+$$
+
+只需证 $g^{\prime}\left(x\right)$ 在 $\mathrm{e}^{-\mathrm{e}}\leqslant a\lt 1$ 时恒不大于 $0$。
+
+只需证其最大值小于 $0$，因此考察 $g^{\prime\prime}\left(x\right)$ 的零点 $x\_0$：
+
+$$
+a^{a^{x\_0}}a^{2x\_0}\ln^{4}{a}+a^{a^{x\_0}}a^{x\_0}\ln^{3}{a} = 0
+$$
+
+显然 $a^{a^{x\_0}}a^{x\_0}\ln^{3}{a}\ne 0$，因此
+
+$$
+a^{x\_0}\ln{a}+1 = 0
+$$
+
+解得
+
+$$
+x\_0 = \dfrac{\ln{\left(-\dfrac{1}{\ln{a}}\right)}}{\ln{a}}
+$$
+
+将结果代入 $g^{\prime\prime\prime}\left(x\right)$，易得 $g^{\prime\prime\prime}\left(x\_0\right)=\dfrac{\ln^{3}{a}}{e}\lt 0$，故 $x\_0$ 为 $g^\prime\left(x\right)$ 的极大值点，由于极大值点唯一，这也是其最大值点。因此 $g^{\prime}\left(x\right)$ 的最大值为 $g^{\prime}\left(x\_0\right)=-\dfrac{\ln{a}}{e}-1\leqslant -\dfrac{\ln \left(\mathrm{e}^{-\mathrm{e}}\right)}{e}-1=0$。
+{% endnote %}
+
+设偶数列的极限为 $p$，奇数列的极限为 $q$，若 $p\ne q$，则显然 $p,q$ 均为 $g\left(x\right)$ 的零点，矛盾，故此时 $p=q$。
+
+---
+
+设 $x\_0$ 满足 $f\left(x\right)=x$，显然有 $x\_0$ 唯一且 $x\_0=-\dfrac{W\left(- \ln{a}\right)}{\ln{a}}$，这里 $W$ 表示 [*Lambert-W*](https://mathworld.wolfram.com/LambertW-Function.html) 函数。
+
+考虑 $f^{\prime}\left(x\_0\right)$ 的值，显然有
+
+$$
+\begin{aligned}
+  f^{\prime}\left(x\right) &= a^{x}\ln a \\\\
+  f^{\prime}\left(x\_0\right) &= -W\left(-\ln{a}\right)
+\end{aligned}
+$$
+
+在 $0\lt a\lt \mathrm{e}^{-\mathrm{e}}$ 时，有 $-\ln{a}\gt \mathrm{e}$。
+
+由于 $W\left(x\right)$ 在其定义域为增函数，则 $W\left(-\ln{a}\right)\gt W\left(\mathrm{e}\right)=1$，因此 $\left|f^{\prime}\left(x\_0\right)\right|\gt 1$。
+
+根据导数的定义
+
+$$
+\lim\_{\Delta x\to 0}\dfrac{\left|f\left(x\_0+\Delta x\right)-f\left(x\_0\right)\right|}{\left|\Delta x\right|} \gt 1
+$$
+
+由极限相关性质，存在正实数 $\delta$ 使得对于任意 $\left|\Delta x\right|\lt \delta$，有
+
+$$
+\dfrac{\left|f\left(x\_0+\Delta x\right)-f\left(x\_0\right)\right|}{\left|\Delta x\right|} \gt 1
+$$
+
+即
+
+$$
+\left|f\left(x\_0+\Delta x\right)-f\left(x\_0\right)\right|\gt \left|\Delta x\right|
+$$
+
+显然不存在 $a\_n=x\_0$，否则得到任意 $a\_n=x\_0$。
+
+此时若 $\left\\{a\_n\right\\}$ 收敛到 $x\_0$，由数列极限的定义，取 $\epsilon<\delta$，存在 $N$ 使得任意 $n\geqslant N$ 满足 $0\lt|a\_n-x\_0|\lt\epsilon\lt\delta$。
+
+则根据递推公式形式，$0\lt|a\_n-x\_0|\lt |a\_{n+1}-x\_0|\lt |a\_{n+2}-x\_0|\lt\cdots\lt\epsilon\lt\delta$，矛盾。
+{% endnote %}
