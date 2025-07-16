@@ -11,6 +11,8 @@ tags:
   - sequence
 ---
 
+![PowerTower](/image/PowerTower.gif)
+
 ## 一个解错的方程
 
 考虑方程（注意幂运算是右结合的）
