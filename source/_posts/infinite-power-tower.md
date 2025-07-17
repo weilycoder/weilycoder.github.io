@@ -182,7 +182,7 @@ $$
 
 也就是说，数列极限 $a\_{\infty}$ 的取值范围为 $\left[\dfrac{1}{\mathrm{e}},\mathrm{e}\right]$。
 
-{% note proof open %}
+{% note proof fold %}
 这里尝试给出一个证明。
 
 方便起见，记首项 $a\_0=a$，递推公式 $f\left(x\right)=a^{x}$。
