@@ -340,4 +340,6 @@ $$
 \end{cases}
 $$
 
-$q=1$ 时，即为文章开头的示例 $(2,4)$。
+$q=1$ 时，即为文章开头的示例 $\left(2,4\right)$。
+
+有趣的是，$q\to\infty$ 时，$a\to\mathrm{e}$ 且 $b\to\mathrm{e}$。
