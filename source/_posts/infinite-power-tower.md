@@ -268,3 +268,76 @@ $$
 
 则根据递推公式形式，$0\lt|a\_n-x\_0|\lt |a\_{n+1}-x\_0|\lt |a\_{n+2}-x\_0|\lt\cdots\lt\epsilon\lt\delta$，矛盾。
 {% endnote %}
+
+## 构造
+
+最后，还剩下一个小问题，对于文章开头的构造，可以构造出多少有理解？
+
+换句话说，方程 $\sqrt[a]{a}=\sqrt[b]{b}$ 有多少有理解满足 $a\ne b$？
+
+两侧同时乘方，得
+
+$$
+a^{b} = b^{a}
+$$
+
+不妨设 $b=ka,k\ne 1$，则
+
+$$
+\begin{aligned}
+  a^{ka} &= \left(ka\right)^{a} \\\\
+  \left(a^{k}\right)^{a} &= \left(ka\right)^{a} \\\\
+  a^{k} &= ka \\\\
+  a^{k-1} &= k \\\\
+\end{aligned}
+$$
+
+因此得到
+
+$$
+\begin{cases}
+  a &= k^{\frac{1}{k-1}} \\\\
+  b &= k^{\frac{k}{k-1}}
+\end{cases}
+$$
+
+假设 $k$ 可以表示为既约分数 $\dfrac{p}{q}$，则
+
+$$
+\begin{cases}
+  a &= \left(\dfrac{p}{q}\right)^{\frac{q}{p-q}} \\\\
+  b &= \left(\dfrac{p}{q}\right)^{\frac{p}{p-q}}
+\end{cases}
+$$
+
+若 $p-q=1$，则显然 $a,b$ 恒为有理数。
+
+否则，设 $p-q=\alpha\ne 1$，则 $p,q$ 均为完全 $\alpha$ 次方数，不妨 $p=u^{\alpha},q=v^{\alpha}$。
+
+则有
+
+$$
+\begin{aligned}
+  \alpha
+  &= u^{\alpha}-v^{\alpha} \\\\
+  &= \left(u-v\right)\left(\sum\_{i=0}^{\alpha-1}u^{i}v^{\alpha-i-1}\right) \\\\
+  &\geqslant \sum\_{i=0}^{\alpha-1}u^{i}v^{\alpha-i-1} \\\\
+  &\geqslant \sum\_{i=0}^{\alpha-1}1 \\\\
+  &= \alpha
+\end{aligned}
+$$
+
+同时取等当且仅当 $u-v=1$ 且 $u=v=1$，矛盾。
+
+总之，若 $a,b\in\mathbf{Q}$，则 $p-q=1$。
+
+将其代入 $a,b$ 表达式，得
+
+$$
+\begin{cases}
+  a &= \left(\dfrac{q+1}{q}\right)^{q} \\\\
+  b &= \left(\dfrac{q+1}{q}\right)^{q+1}
+\end{cases}
+$$
+
+$q=1$ 时，即为文章开头的示例 $(2,4)$。
