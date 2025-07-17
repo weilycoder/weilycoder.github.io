@@ -17,3 +17,26 @@ categories:
 
 故 $\left|q\alpha-p\right|=\left|\dfrac{1}{y}\right|\cdot\left|qx-py\right|\ge \left|\dfrac{1}{y}\right|$，证毕。
 {% endnote %}
+
+这里给出一个 $\mathrm{e}$ 为无理数的证明。
+
+根据泰勒展开式，有
+
+$$
+\mathrm{e} = \sum\_{i=0}^{\infty}\dfrac{1}{i!}
+$$
+
+则
+
+$$
+\begin{aligned}
+  \mathrm{e} - \sum\_{i=0}^{n}\dfrac{1}{i!} &= \sum\_{i=n+1}^{\infty}\dfrac{1}{i!} \\\\
+  \mathrm{e}\cdot n! - P\left(n\right) &= \sum\_{i=1}^{\infty}\dfrac{n!}{\left(n+i\right)!} \\\\
+  &\leqslant \dfrac{1}{n+1} + \sum\_{i=1}^{\infty}\dfrac{\left(n+i-1\right)!}{\left(n+i+1\right)!} \\\\
+  &= \dfrac{1}{n+1} + \sum\_{i=1}^{\infty}\dfrac{1}{\left(n+i\right)\left(n+i+1\right)} \\\\
+  &= \dfrac{1}{n+1} + \sum\_{i=1}^{\infty}\left(\dfrac{1}{n+i}-\dfrac{1}{n+i+1}\right) \\\\
+  &= \dfrac{2}{n+1}
+\end{aligned}
+$$
+
+显然有 $n!,P(n)$ 均为有理数，且 $\dfrac{2}{n+1}\to 0$，故 $\mathrm{e}$ 为无理数。
