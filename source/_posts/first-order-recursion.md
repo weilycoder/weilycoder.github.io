@@ -45,7 +45,7 @@ $$
 
 #### 方法 2
 
-参见 [一类分式递推数列的通项公式求法](/2025/05/31/frac-recursion/#A-p-0)。
+参见 {% post_link frac-recursion '一类分式递推数列的通项公式求法' %}。
 
 #### 方法 3
 
@@ -93,7 +93,7 @@ $$
 \dfrac{f\left(n\right)}{p^{n}}=\dfrac{qn}{p^{n}}
 $$
 
-这是一个“等差数列乘等比数列”的求和，可以参见 [有限微积分](/2025/05/26/finite-calculus/#等差数列乘等比数列)。
+这是一个“等差数列乘等比数列”的求和，可以参见 {% post_link finite-calculus '有限微积分' %}。
 
 #### 方法 2
 
@@ -150,7 +150,7 @@ $$
 
 #### 方法 1
 
-转化为 $\dfrac{f\left(n\right)}{p^{n}}$ 的求和。利用 [有限微积分](/2025/05/26/finite-calculus/#等差数列乘等比数列) 求解。
+转化为 $\dfrac{f\left(n\right)}{p^{n}}$ 的求和。利用 {% post_link finite-calculus '有限微积分' %} 求解。
 
 #### 方法 2
 
