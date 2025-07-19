@@ -1,7 +1,7 @@
 ---
 title: Attention is all you need
 mathjax: true
-date: 2025-07-17 21:14:03
+date: "2025-07-18T21:30:27.664+0800"
 excerpt: "利用积分证明有关 e, pi 不等式的一般构造方法"
 categories:
   - Math
@@ -94,3 +94,116 @@ $$
 $$
 
 利用 $n,m$ 控制精度，$a,b$ 控制参数。
+
+## Pi^n
+
+先对积分的几个部分分别作出证明。
+
+### Part 1
+
+$$
+\begin{aligned}
+  \int\_{0}^{1} x^{n}\left(\ln x\right)^{m}\mathrm{d}x
+  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{n}\cdot\left(-t\right)^{m}\cdot\dfrac{\mathrm{d}x}{\mathrm{d}t}\cdot\mathrm{d}t \\\\
+  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{n}\cdot\left(-t\right)^{m}\cdot\left(-\mathrm{e}^{t}\right)\cdot\mathrm{d}t \\\\
+  &= \left(-1\right)^{m}\cdot\int\_{0}^{\infty}t^{m}\mathrm{e}^{-\left(n+1\right)t}\mathrm{d}t \\\\
+  &= \left(-1\right)^{m}\cdot\int\_{0}^{\infty}\left(\dfrac{u}{n+1}\right)^{m}\cdot\mathrm{e}^{-u}\cdot\dfrac{\mathrm{d}t}{\mathrm{d}u}\cdot\mathrm{d}u \\\\
+  &= \dfrac{\left(-1\right)^{m}}{\left(n+1\right)^{m+1}}\cdot\int\_{0}^{\infty}u^{m}\cdot\mathrm{e}^{-u}\cdot\mathrm{d}u \\\\
+  &= \dfrac{\left(-1\right)^{m}}{\left(n+1\right)^{m+1}}\cdot\Gamma\left(m+1\right) \\\\
+  &= \dfrac{\left(-1\right)^{m}\cdot m!}{\left(n+1\right)^{m+1}}
+\end{aligned}
+$$
+
+有关 $\Gamma$ 函数的结论见 {% post_link gamma-function '欧拉第二积分' %}。
+
+### Part 2
+
+$$
+\begin{aligned}
+  \int\_{0}^{1}\dfrac{x\left(\ln x\right)^{n}}{1+x^2}\mathrm{d}x
+  &= \int\_{0}^{1}x\left(\ln x\right)^{n}\left(\sum\_{k=0}^{\infty}\left(-1\right)^{k}x^{2k}\right)\mathrm{d}x \\\\
+  &= \sum\_{k=0}^{\infty}\left(-1\right)^{k}\cdot\int\_{0}^{1}x^{2k+1}\left(\ln{x}\right)^{n}\mathrm{d}x \\\\
+  &= \sum\_{k=0}^{\infty}\left(-1\right)^{k}\cdot\dfrac{\left(-1\right)^{n}\cdot n!}{\left(2k+2\right)^{n+1}} \\\\
+  &= \dfrac{\left(-1\right)^{n}\cdot n!}{2^{n+1}}\cdot\sum\_{k=1}^{\infty}\dfrac{\left(-1\right)^{k-1}}{k^{n+1}} \\\\
+  &= \dfrac{\left(-1\right)^{n}\cdot n!}{2^{n+1}}\cdot\eta\left(n+1\right)
+\end{aligned}
+$$
+
+$2k$ 为正偶数时，有
+
+$$
+\zeta\left(2k\right)=-\dfrac{B\_{2k}\cdot\left(2\pi i\right)^{2k}}{2\cdot\left(2k\right)!}
+$$
+
+因此
+
+$$
+\eta\left(2k\right)=\left(1-2^{1-2k}\right)\zeta\left(2k\right)=\dfrac{\left(-1\right)^{k+1}B\_{2k}\left(2^{2k-1}-1\right)}{\left(2k\right)!}\pi^{2k}
+$$
+
+*式中 $\eta$ 表示 [Dirichlet eta 函数](https://mathworld.wolfram.com/DirichletEtaFunction.html)，$\zeta$ 表示 [Riemann zeta 函数](https://mathworld.wolfram.com/RiemannZetaFunction.html)，$B_n$ 表示 [伯努利数](https://mathworld.wolfram.com/BernoulliNumber.html)。*
+
+故积分式中 $n$ 为奇数时，积分有较好的结果，且积分结果包含 $\pi^{n+1}$。
+
+### Part 3
+
+$$
+\begin{aligned}
+  \int\_{0}^{1}\dfrac{\left(\ln x\right)^{n}}{1+x^2}\mathrm{d}x
+  &= \int\_{0}^{1}\left(\ln x\right)^{n}\left(\sum\_{k=0}^{\infty}\left(-1\right)^{k}x^{2k}\right)\mathrm{d}x \\\\
+  &= \sum\_{k=0}^{\infty}\left(-1\right)^{k}\cdot\int\_{0}^{1}x^{2k}\left(\ln x\right)^{n}\mathrm{d}x \\\\
+  &= \sum\_{k=0}^{\infty}\left(-1\right)^{k}\cdot\dfrac{\left(-1\right)^{n}\cdot n!}{\left(2k+1\right)^{n+1}} \\\\
+  &= \left(-1\right)^{n}\cdot n!\cdot\sum\_{k=0}^{\infty}\dfrac{\left(-1\right)^{k}}{\left(2k+1\right)^{n+1}} \\\\
+  &= \left(-1\right)^{n}\cdot n!\cdot\beta\left(n+1\right)
+\end{aligned}
+$$
+
+若 $n$ 为偶数，记 $n=2k$，则有
+
+$$
+\beta\left(2m+1\right)=\dfrac{\left(-1\right)^{m}E\_{2m}\pi^{2m+1}}{4^{m+1}\left(2m\right)!}
+$$
+
+*式中 $\beta$ 表示 [Dirichlet beta 函数](https://mathworld.wolfram.com/DirichletBetaFunction.html)，$E_n$ 表示 [欧拉数](https://mathworld.wolfram.com/EulerNumber.html)。*
+
+此时积分结果较简洁。
+
+### 构造
+
+综合上述 $3$ 个积分，我们考虑如下函数的积分：
+
+$$
+F(x)=\dfrac{x^{m}\left(a+bx^{2}\right)\left(\ln \dfrac{1}{x}\right)^{n-1}}{1+x^2}
+$$
+
+*式中使用 $\ln \dfrac{1}{x}$ 而非 $\ln x$ 是为了方便讨论正负号，这时只需确保 $a+bx^{2}$ 在 $[0,1]$ 恒非负。*
+
+若 $n$ 为奇数，我们令 $m$ 为偶数，则 $F(x)$ 做完大除法后形式必然为
+
+$$
+F(x)=P(x)(\ln x)^{n-1}+\dfrac{k(\ln x)^{n-1}}{1+x^2}
+$$
+
+分别应用 $\text{Part 1}$ 和 $\text{Part 3}$ 的结论即可。
+
+否则，$n$ 为偶数，则令 $m$ 为奇数，$F(x)$ 做大除法后的形式为
+
+$$
+F(x)=P(x)(\ln x)^{n-1}+\dfrac{kx(\ln x)^{n-1}}{1+x^2}
+$$
+
+可以分别应用 $\text{Part 1}$ 和 $\text{Part 2}$ 的结论。
+
+总之，对 $F(x)$ 进行定积分后，形式必然为
+
+$$
+\int_{0}^{1}F(x)\mathrm{d}x=A+B\pi^{n}
+$$
+
+{% warning sympy open %}
+可能由于这部分涉及的函数的不定积分并没有简单的封闭形式，`sympy` 不能处理这些函数的定积分，尽管后者有简洁的形式。
+
+不过 `sympy` 仍然可以辅助计算，例如，`sympy.zeta` 和 `sympy.dirichlet_eta` 可以计算 $\zeta$ 函数和 $\eta$ 函数。
+
+另外，$E_n$ 和 $B_n$ 可以使用 `sympy.euler` 和 `sympy.bernoulli` 计算。
+{% endwarning %}
