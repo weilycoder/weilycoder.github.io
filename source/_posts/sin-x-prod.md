@@ -36,7 +36,7 @@ $$
 
 因此 $[x^0]P\left(x\right)=2n+1$。
 
-同时，$x\cdot\sin\left(\left(2n+1\right)x\right)$ 的根为 $\dfrac{k\pi}{2n+1},k\in\mathbb{Z}$，因此 $\sin^2\left(\dfrac{k\pi}{2n+1}\right),k=1,2,\ldots,n$ 为 $P\left(x\right)$ 的 $n$ 个根，即
+同时，$\sin\left(\left(2n+1\right)x\right)$ 的根为 $\dfrac{k\pi}{2n+1},k\in\mathbb{Z}$，因此 $\sin^2\left(\dfrac{k\pi}{2n+1}\right),k=1,2,\ldots,n$ 为 $P\left(x\right)$ 的 $n$ 个根，即
 
 $$
 \begin{aligned}
