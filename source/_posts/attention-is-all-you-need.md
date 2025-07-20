@@ -7,6 +7,7 @@ categories:
   - Math
 tags:
   - integrate
+  - Calculus
 ---
 
 {% note 记号说明 open %}

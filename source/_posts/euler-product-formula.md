@@ -6,6 +6,7 @@ categories:
   - Math
 tags:
   - prime
+  - Calculus
 ---
 
 考虑求和式：

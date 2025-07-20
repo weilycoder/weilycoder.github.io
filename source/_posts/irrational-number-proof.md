@@ -4,6 +4,8 @@ mathjax: true
 date: "2025-07-14T17:25:54.928+0800"
 categories:
   - Math
+tag:
+  - Calculus
 ---
 
 {% note Lemma open %}

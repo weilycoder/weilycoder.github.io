@@ -9,6 +9,7 @@ tags:
   - equation
   - fixed-point
   - sequence
+  - Calculus
 ---
 
 ![PowerTower](/image/PowerTower.gif)

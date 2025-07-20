@@ -3,7 +3,9 @@ title: Sin x 的无穷乘积表达
 mathjax: true
 date: 2025-07-20 13:03:32
 categories:
+  - Math
 tags:
+  - Calculus
 ---
 
 注意到：

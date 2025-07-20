@@ -6,6 +6,7 @@ categories:
   - Math
 tags:
   - integrate
+  - Calculus
 ---
 
 其定义为
