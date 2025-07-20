@@ -115,7 +115,7 @@ $$
 \end{aligned}
 $$
 
-有关 $\Gamma$ 函数的结论见 {% post_link gamma-function '欧拉第二积分' %}。
+有关 $\Gamma$ 函数的结论见{% post_link gamma-function '欧拉第二积分' %}。
 
 ### Part 2
 
@@ -145,6 +145,8 @@ $$
 *式中 $\eta$ 表示 [Dirichlet eta 函数](https://mathworld.wolfram.com/DirichletEtaFunction.html)，$\zeta$ 表示 [Riemann zeta 函数](https://mathworld.wolfram.com/RiemannZetaFunction.html)，$B\_n$ 表示 [伯努利数](https://mathworld.wolfram.com/BernoulliNumber.html)。*
 
 故积分式中 $n$ 为奇数时，积分有较好的结果，且积分结果包含 $\pi^{n+1}$。
+
+上述结果可以参考{% post_link zeta-2k %}。
 
 ### Part 3
 
