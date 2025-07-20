@@ -1,7 +1,7 @@
 ---
 title: Attention is all you need
 mathjax: true
-date: "2025-07-18T21:30:27.664+0800"
+date: "2025-07-20T22:56:35.068+0800"
 excerpt: "利用积分证明有关 e, pi 不等式的一般构造方法"
 categories:
   - Math
@@ -13,7 +13,8 @@ tags:
 {% note 记号说明 open %}
 + 使用大写字母，如 $P,Q$ 等表示的函数，在没有特殊说明的情况下，系有理系数多项式函数；
 + 使用大写字母，如 $A,B$ 等表示的参数或变量，在没有特殊说明的情况下，系有理数；$C$ 出现在不定积分结果时除外；
-+ 使用 $m,n$ 表示的参数或变量，在没有特殊说明的情况下，系正整数。
++ 使用 $m,n$ 表示的参数或变量，在没有特殊说明的情况下，系正整数；
++ 使用 $p,q$ 表示的参数或变量，在没有特殊说明的情况下，系有理数；特别地，$\dfrac{p}{q}$ 没有特殊说明的情形为既约分数。
 {% endnote %}
 
 ## Pi
@@ -21,7 +22,7 @@ tags:
 众所周知：
 
 $$
-\dfrac{\mathrm{d}\arctan x}{\mathrm{d}x}=\dfrac{1}{1+x^2}
+\dfrac{\mathrm{d}\left(\arctan x\right)}{\mathrm{d}x}=\dfrac{1}{1+x^2}
 $$
 
 因此
@@ -65,6 +66,12 @@ $$
 
 假如解得 $a,b,c$ 满足函数 $a+bx+cx^2$ 在 $[0,1]$ 上恒非负，则积分构造成功。
 
+$$
+\boxed{
+  \int\_{0}^{1}\dfrac{x^{n}\left(1-x\right)^{m}\left(a+bx+cx^2\right)}{1+x^{2}}\mathrm{d}x = A+B\ln{2}+C\pi
+}
+$$
+
 ## E
 
 考虑积分
@@ -72,13 +79,13 @@ $$
 $$
 \begin{aligned}
   \int x^{n}\mathrm{e}^{x}\mathrm{d}x
-  &= \int x^{n}\mathrm{d}\mathrm{e}^{x} \\\\
-  &= x^{n}\mathrm{e}^{x} - \int \mathrm{e}^{x}\mathrm{d}x^{n} \\\\
+  &= \int x^{n}\mathrm{d}\left(\mathrm{e}^{x}\right) \\\\
+  &= x^{n}\mathrm{e}^{x} - \int \mathrm{e}^{x}\mathrm{d}\left(x^{n}\right) \\\\
   &= x^{n}\mathrm{e}^{x} - \int \mathrm{e}^{x}\cdot n\cdot x^{n-1}\mathrm{d}x \\\\
   &= x^{n}\mathrm{e}^{x} - n \cdot \int \mathrm{e}^{x}\cdot x^{n-1}\mathrm{d}x \\\\
   &= \cdots \\\\
   &= \mathrm{e}^{x}\sum\_{k=0}^{n}\left(-1\right)^{n-k}\dfrac{n!}{k!}x^{k}+C \\\\
-  &= \mathrm{e}^{x}I\_{n}\left(x\right)+C
+  &= \mathrm{e}^{x}Q\_{n}\left(x\right)+C
 \end{aligned}
 $$
 
@@ -91,7 +98,9 @@ $$
 不难得到
 
 $$
-\int\_{0}^{1}x^{n}\left(1-x\right)^{m}\left(a+bx\right)\mathrm{e}^{x}\mathrm{d}x=A+B\mathrm{e}
+\boxed{
+  \int\_{0}^{1}x^{n}\left(1-x\right)^{m}\left(a+bx\right)\mathrm{e}^{x}\mathrm{d}x=A+B\mathrm{e}
+}
 $$
 
 利用 $n,m$ 控制精度，$a,b$ 控制参数。
@@ -197,10 +206,15 @@ $$
 
 可以分别应用 $\text{Part 1}$ 和 $\text{Part 2}$ 的结论。
 
-总之，对 $F\left(x\right)$ 进行定积分后，形式必然为
+总之，我们有
 
 $$
-\int\_{0}^{1}F\left(x\right)\mathrm{d}x=A+B\pi^{n}
+\boxed{
+  \begin{aligned}
+    \int\_{0}^{1}\dfrac{x^{m}\left(a+bx^{2}\right)\left(\ln x^{-1}\right)^{n-1}}{1+x^2}\mathrm{d}x=A+B\pi^{n} \\\\
+    \left(2\not\mid m+n\right)
+  \end{aligned}
+}
 $$
 
 {% warning sympy open %}
@@ -210,3 +224,39 @@ $$
 
 另外，$E\_n$ 和 $B\_n$ 可以使用 `sympy.euler` 和 `sympy.bernoulli` 计算。
 {% endwarning %}
+
+## E^q
+
+考虑积分
+
+$$
+\begin{aligned}
+  \int x^{n}\mathrm{e}^{qx}\mathrm{d}x
+  &= \int x^{n}\mathrm{d}\left(\dfrac{\mathrm{e}^{qx}}{q}\right) \\\\
+  &= \dfrac{x^{n}\mathrm{e}^{qx}}{q}-\int\dfrac{\mathrm{e}^{qx}}{q}\mathrm{d}\left(x^{n}\right) \\\\
+  &= \dfrac{x^{n}\mathrm{e}^{qx}}{q}-\dfrac{n}{q}\cdot\int x^{n-1}\mathrm{e}^{qx}\mathrm{d}x \\\\
+  &= \cdots \\\\
+  &= \dfrac{\mathrm{e}^{qx}}{q^{n+1}}\sum\_{k=0}^{n}\left(-1\right)^{n-k}\dfrac{n!}{k!}\left(qx\right)^{k} + C \\\\
+  &= \mathrm{e}^{qx} Q\_{q,n}\left(x\right) + C
+\end{aligned}
+$$
+
+因此有
+
+$$
+\boxed{
+  \int\_{0}^{1}x^{n}\left(1-x\right)^{m}\left(a+bx\right)\mathrm{e}^{qx}\mathrm{d}x = A + B\mathrm{e}^{q}
+}
+$$
+
+## E^Pi
+
+由于需要使函数的非负性显然，我们考虑 $[0,\pi]$ 上的积分。
+
+因此有
+
+$$
+\boxed{
+  \int\_{0}^{\pi}\sin^{n}\left(x\right)\left(1-\sin\left(x\right)\right)^{m}\left(a+b\sin\left(x\right)\right)\mathrm{e}^{x}\mathrm{d}x = A+B\mathrm{e}^{\pi}
+}
+$$
