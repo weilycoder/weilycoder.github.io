@@ -141,7 +141,7 @@ $$
 \eta\left(2k\right)=\left(1-2^{1-2k}\right)\zeta\left(2k\right)=\dfrac{\left(-1\right)^{k+1}B\_{2k}\left(2^{2k-1}-1\right)}{\left(2k\right)!}\pi^{2k}
 $$
 
-*式中 $\eta$ 表示 [Dirichlet eta 函数](https://mathworld.wolfram.com/DirichletEtaFunction.html)，$\zeta$ 表示 [Riemann zeta 函数](https://mathworld.wolfram.com/RiemannZetaFunction.html)，$B_n$ 表示 [伯努利数](https://mathworld.wolfram.com/BernoulliNumber.html)。*
+*式中 $\eta$ 表示 [Dirichlet eta 函数](https://mathworld.wolfram.com/DirichletEtaFunction.html)，$\zeta$ 表示 [Riemann zeta 函数](https://mathworld.wolfram.com/RiemannZetaFunction.html)，$B\_n$ 表示 [伯努利数](https://mathworld.wolfram.com/BernoulliNumber.html)。*
 
 故积分式中 $n$ 为奇数时，积分有较好的结果，且积分结果包含 $\pi^{n+1}$。
 
@@ -164,7 +164,7 @@ $$
 \beta\left(2m+1\right)=\dfrac{\left(-1\right)^{m}E\_{2m}\pi^{2m+1}}{4^{m+1}\left(2m\right)!}
 $$
 
-*式中 $\beta$ 表示 [Dirichlet beta 函数](https://mathworld.wolfram.com/DirichletBetaFunction.html)，$E_n$ 表示 [欧拉数](https://mathworld.wolfram.com/EulerNumber.html)。*
+*式中 $\beta$ 表示 [Dirichlet beta 函数](https://mathworld.wolfram.com/DirichletBetaFunction.html)，$E\_n$ 表示 [欧拉数](https://mathworld.wolfram.com/EulerNumber.html)。*
 
 此时积分结果较简洁。
 
@@ -173,31 +173,31 @@ $$
 综合上述 $3$ 个积分，我们考虑如下函数的积分：
 
 $$
-F(x)=\dfrac{x^{m}\left(a+bx^{2}\right)\left(\ln \dfrac{1}{x}\right)^{n-1}}{1+x^2}
+F\left(x\right)=\dfrac{x^{m}\left(a+bx^{2}\right)\left(\ln \dfrac{1}{x}\right)^{n-1}}{1+x^2}
 $$
 
 *式中使用 $\ln \dfrac{1}{x}$ 而非 $\ln x$ 是为了方便讨论正负号，这时只需确保 $a+bx^{2}$ 在 $[0,1]$ 恒非负。*
 
-若 $n$ 为奇数，我们令 $m$ 为偶数，则 $F(x)$ 做完大除法后形式必然为
+若 $n$ 为奇数，我们令 $m$ 为偶数，则 $F\left(x\right)$ 做完大除法后形式必然为
 
 $$
-F(x)=P(x)(\ln x)^{n-1}+\dfrac{k(\ln x)^{n-1}}{1+x^2}
+F\left(x\right)=P\left(x\right)\left(\ln x\right)^{n-1}+\dfrac{k\left(\ln x\right)^{n-1}}{1+x^2}
 $$
 
 分别应用 $\text{Part 1}$ 和 $\text{Part 3}$ 的结论即可。
 
-否则，$n$ 为偶数，则令 $m$ 为奇数，$F(x)$ 做大除法后的形式为
+否则，$n$ 为偶数，则令 $m$ 为奇数，$F\left(x\right)$ 做大除法后的形式为
 
 $$
-F(x)=P(x)(\ln x)^{n-1}+\dfrac{kx(\ln x)^{n-1}}{1+x^2}
+F\left(x\right)=P\left(x\right)\left(\ln x\right)^{n-1}+\dfrac{kx\left(\ln x\right)^{n-1}}{1+x^2}
 $$
 
 可以分别应用 $\text{Part 1}$ 和 $\text{Part 2}$ 的结论。
 
-总之，对 $F(x)$ 进行定积分后，形式必然为
+总之，对 $F\left(x\right)$ 进行定积分后，形式必然为
 
 $$
-\int_{0}^{1}F(x)\mathrm{d}x=A+B\pi^{n}
+\int\_{0}^{1}F\left(x\right)\mathrm{d}x=A+B\pi^{n}
 $$
 
 {% warning sympy open %}
@@ -205,5 +205,5 @@ $$
 
 不过 `sympy` 仍然可以辅助计算，例如，`sympy.zeta` 和 `sympy.dirichlet_eta` 可以计算 $\zeta$ 函数和 $\eta$ 函数。
 
-另外，$E_n$ 和 $B_n$ 可以使用 `sympy.euler` 和 `sympy.bernoulli` 计算。
+另外，$E\_n$ 和 $B\_n$ 可以使用 `sympy.euler` 和 `sympy.bernoulli` 计算。
 {% endwarning %}
