@@ -260,3 +260,13 @@ $$
   \int\_{0}^{\pi}\sin^{n}\left(x\right)\left(1-\sin\left(x\right)\right)^{m}\left(a+b\sin\left(x\right)\right)\mathrm{e}^{x}\mathrm{d}x = A+B\mathrm{e}^{\pi}
 }
 $$
+
+## E^(q*Pi)
+
+类似地
+
+$$
+\boxed{
+  \int\_{0}^{\pi}\sin^{n}\left(x\right)\left(1-\sin\left(x\right)\right)^{m}\left(a+b\sin\left(x\right)\right)\mathrm{e}^{qx}\mathrm{d}x = A+B\mathrm{e}^{q\pi}
+}
+$$
