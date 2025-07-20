@@ -1,7 +1,7 @@
 ---
 title: 巴塞尔问题和 zeta(2k)
 mathjax: true
-date: "2025-07-20T17:13:50.979+0800"
+date: "2025-07-20T20:43:39.684+0800"
 categories:
 tags:
   - Calculus
