@@ -5,7 +5,7 @@ date: "2025-06-16T22:27:33.927+0800"
 categories:
   - Math
 tags:
-  - axiom
+  - Axiom
   - set-theory
 ---
 
