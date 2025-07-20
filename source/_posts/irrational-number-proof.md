@@ -6,6 +6,7 @@ categories:
   - Math
 tag:
   - Calculus
+  - Theorem
 ---
 
 {% note Lemma open %}

@@ -6,6 +6,7 @@ categories:
   - Math
 tags:
   - Calculus
+  - Theorem
 ---
 
 注意到：

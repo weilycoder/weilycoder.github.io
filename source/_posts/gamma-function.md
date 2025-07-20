@@ -7,6 +7,7 @@ categories:
 tags:
   - integrate
   - Calculus
+  - Theorem
 ---
 
 其定义为

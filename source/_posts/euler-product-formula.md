@@ -7,6 +7,7 @@ categories:
 tags:
   - prime
   - Calculus
+  - Theorem
 ---
 
 考虑求和式：
