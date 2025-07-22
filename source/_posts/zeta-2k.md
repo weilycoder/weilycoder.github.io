@@ -69,7 +69,7 @@ $$
 
 $$
 \boxed{
-  \dfrac{\zeta\left(2k\right)}{\pi^{2n}}=\dfrac{\left(-1\right)^{k+1}\cdot n}{\left(2n+1\right)!}+\sum\_{i=1}^{k-1}\dfrac{\left(-1\right)^{i+1}}{\left(2i+1\right)!}\cdot\dfrac{\zeta\left(2\left(n-i\right)\right)}{\pi^{2\left(n-i\right)}}
+  \dfrac{\zeta\left(2k\right)}{\pi^{2k}}=\dfrac{\left(-1\right)^{k+1}\cdot k}{\left(2k+1\right)!}+\sum\_{i=1}^{k-1}\dfrac{\left(-1\right)^{i+1}}{\left(2i+1\right)!}\cdot\dfrac{\zeta\left(2\left(k-i\right)\right)}{\pi^{2\left(k-i\right)}}
 }
 $$
 
@@ -77,7 +77,7 @@ $$
 
 $$
 \boxed{
-  \zeta(2k)=-\dfrac{B_{2k}\cdot(2\pi i)^{2n}}{2\cdot(2n)!}
+  \zeta(2k)=-\dfrac{B_{2k}\cdot(2\pi i)^{2k}}{2\cdot(2k)!}
 }
 $$
 
