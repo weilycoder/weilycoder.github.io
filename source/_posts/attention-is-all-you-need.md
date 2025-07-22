@@ -173,7 +173,7 @@ $$
 若 $n$ 为偶数，记 $n=2k$，则有
 
 $$
-\beta\left(2m+1\right)=\dfrac{\left(-1\right)^{m}E\_{2m}\pi^{2m+1}}{4^{m+1}\left(2m\right)!}
+\beta\left(2k+1\right)=\dfrac{\left(-1\right)^{k}E\_{2k}\pi^{2k+1}}{4^{k+1}\left(2k\right)!}
 $$
 
 *式中 $\beta$ 表示 [Dirichlet beta 函数](https://mathworld.wolfram.com/DirichletBetaFunction.html)，$E\_n$ 表示 [欧拉数](https://mathworld.wolfram.com/EulerNumber.html)。*
