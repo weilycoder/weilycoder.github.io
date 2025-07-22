@@ -113,14 +113,14 @@ $$
 
 $$
 \begin{aligned}
-  \int\_{0}^{1} x^{n}\left(\ln x\right)^{m}\mathrm{d}x
-  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{n}\cdot\left(-t\right)^{m}\cdot\dfrac{\mathrm{d}x}{\mathrm{d}t}\cdot\mathrm{d}t \\\\
-  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{n}\cdot\left(-t\right)^{m}\cdot\left(-\mathrm{e}^{t}\right)\cdot\mathrm{d}t \\\\
-  &= \left(-1\right)^{m}\cdot\int\_{0}^{\infty}t^{m}\mathrm{e}^{-\left(n+1\right)t}\mathrm{d}t \\\\
-  &= \left(-1\right)^{m}\cdot\int\_{0}^{\infty}\left(\dfrac{u}{n+1}\right)^{m}\cdot\mathrm{e}^{-u}\cdot\dfrac{\mathrm{d}t}{\mathrm{d}u}\cdot\mathrm{d}u \\\\
-  &= \dfrac{\left(-1\right)^{m}}{\left(n+1\right)^{m+1}}\cdot\int\_{0}^{\infty}u^{m}\cdot\mathrm{e}^{-u}\cdot\mathrm{d}u \\\\
-  &= \dfrac{\left(-1\right)^{m}}{\left(n+1\right)^{m+1}}\cdot\Gamma\left(m+1\right) \\\\
-  &= \dfrac{\left(-1\right)^{m}\cdot m!}{\left(n+1\right)^{m+1}}
+  \int\_{0}^{1} x^{m}\left(\ln x\right)^{n}\mathrm{d}x
+  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{m}\cdot\left(-t\right)^{n}\cdot\dfrac{\mathrm{d}x}{\mathrm{d}t}\cdot\mathrm{d}t \\\\
+  &= \int\_{\infty}^{0}\left(\mathrm{e}^{-t}\right)^{m}\cdot\left(-t\right)^{n}\cdot\left(-\mathrm{e}^{t}\right)\cdot\mathrm{d}t \\\\
+  &= \left(-1\right)^{n}\cdot\int\_{0}^{\infty}t^{n}\mathrm{e}^{-\left(m+1\right)t}\mathrm{d}t \\\\
+  &= \left(-1\right)^{n}\cdot\int\_{0}^{\infty}\left(\dfrac{u}{m+1}\right)^{n}\cdot\mathrm{e}^{-u}\cdot\dfrac{\mathrm{d}t}{\mathrm{d}u}\cdot\mathrm{d}u \\\\
+  &= \dfrac{\left(-1\right)^{n}}{\left(m+1\right)^{n+1}}\cdot\int\_{0}^{\infty}u^{n}\cdot\mathrm{e}^{-u}\cdot\mathrm{d}u \\\\
+  &= \dfrac{\left(-1\right)^{n}}{\left(m+1\right)^{n+1}}\cdot\Gamma\left(n+1\right) \\\\
+  &= \dfrac{\left(-1\right)^{n}\cdot n!}{\left(m+1\right)^{n+1}}
 \end{aligned}
 $$
 
@@ -213,6 +213,18 @@ $$
   \begin{aligned}
     \int\_{0}^{1}\dfrac{x^{m}\left(a+bx^{2}\right)\left(\ln x^{-1}\right)^{n-1}}{1+x^2}\mathrm{d}x=A+B\pi^{n} \\\\
     \left(2\not\mid m+n\right)
+  \end{aligned}
+}
+$$
+
+其中
+
+$$
+\boxed{
+  \begin{aligned}
+    \int\_{0}^{1} x^{m}\left(\ln x^{-1}\right)^{n-1}\mathrm{d}x &= \dfrac{\left(n-1\right)!}{\left(m+1\right)^{n}} \\\\
+    \int\_{0}^{1} \dfrac{x\cdot\left(\ln x^{-1}\right)^{n-1}}{1+x^{2}}\mathrm{d}x &= \dfrac{\left(2^{n-1}-1\right)\left(n-1\right)!}{2^{2n-1}}\cdot\zeta\left(n\right) \\\\
+    \int\_{0}^{1} \dfrac{\left(\ln x\right)^{n-1}}{1+x^{2}}\mathrm{d}x &= \left(n-1\right)!\cdot\beta\left(n\right)
   \end{aligned}
 }
 $$
