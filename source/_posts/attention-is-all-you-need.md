@@ -294,6 +294,18 @@ $$
 }
 $$
 
+这里
+
+$$
+\boxed{
+  \begin{aligned}
+    \int\_{0}^{1}x^{n}\mathrm{e}^{qx}\mathrm{d}x &= \dfrac{n!}{\left(-q\right)^{n+1}} + B\left(n\right)\cdot\mathrm{e}^{q} \\\\
+    B\left(0\right) &= \dfrac{1}{q} \\\\
+    B\left(n\right) &= \dfrac{1 - n\cdot B\left(n-1\right)}{q} \\\\
+  \end{aligned}
+}
+$$
+
 ## E^Pi
 
 由于需要使函数的非负性显然，我们考虑 $[0,\pi]$ 上的积分。
