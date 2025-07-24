@@ -310,6 +310,79 @@ $$
 
 由于需要使函数的非负性显然，我们考虑 $[0,\pi]$ 上的积分。
 
+令
+
+$$
+I\_{n}=\int\sin^{n}\left(x\right)\mathrm{e}^{x}\mathrm{d}x
+$$
+
+则
+
+$$
+\begin{aligned}
+  I\_n &= \int\sin^{n}\left(x\right)\mathrm{e}^{x}\mathrm{d}x \\\\
+  &= \int\sin^{n}\left(x\right)\mathrm{d}\left(\mathrm{e}^{x}\right) \\\\
+  &= \sin^{n}\left(x\right)\mathrm{e}^{x}-\int\mathrm{e}^{x}\mathrm{d}\left(\sin^{n}\left(x\right)\right) \\\\
+  &= \sin^{n}\left(x\right)\mathrm{e}^{x}-n\int\mathrm{e}^{x}\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{d}x \\\\
+\end{aligned}
+$$
+
+其中
+
+$$
+\begin{aligned}
+  \int \mathrm{e}^{x}\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{d}x
+  &= \int\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{d}\left(\mathrm{e}^{x}\right) \\\\
+  &= \sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}-\int\mathrm{e}^{x}\mathrm{d}\left(\sin^{n-1}\left(x\right)\cos\left(x\right)\right) \\\\
+  &= \sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}-\int\left(-n\sin^{n}\left(x\right)+\left(n-1\right)\sin^{n-2}\left(x\right)\right)\mathrm{e}^{x}\mathrm{d}x \\\\
+  &= \sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}+n\int\sin^{n}\left(x\right)\mathrm{e}^{x}\mathrm{d}x-\left(n-1\right)\int\sin^{n-2}\left(x\right)\mathrm{e}^{x}\mathrm{d}x \\\\
+  &= \sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}+nI\_{n}-\left(n-1\right)I\_{n-2}
+\end{aligned}
+$$
+
+故
+
+$$
+\begin{aligned}
+  I\_n &= \int \sin^{n}\left(x\right)\mathrm{e}^{x}\mathrm{d}x \\\\
+  &= \sin^{n}\left(x\right)\mathrm{e}^{x}-n\int\mathrm{e}^{x}\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{d}x \\\\
+  &= \sin^{n}\left(x\right)\mathrm{e}^{x}-n\left(\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}+nI\_{n}-\left(n-1\right)I\_{n-2}\right) \\\\
+  &= \sin^{n}\left(x\right)\mathrm{e}^{x}-n\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{x}-n^{2}I\_{n}+n\left(n-1\right)I\_{n-2} \\\\
+\end{aligned}
+$$
+
+移项得
+
+$$
+\boxed{
+  I\_{n} = \dfrac{\mathrm{e}^{x}\left(\sin^{n}\left(x\right)-n\sin^{n-1}\left(x\right)\cos\left(x\right)\right)+n\left(n-1\right)I\_{n-2}}{n^{2}+1}
+}
+$$
+
+现在考察递推起点 $I\_0$ 和 $I\_1$：
+
+$$
+\boxed{
+  \begin{aligned}
+    I\_0 &= \int\mathrm{e}^{x}\mathrm{d}x = \mathrm{e}^{x} + C \\\\
+    I\_1 &= \int\sin\left(x\right)\mathrm{e}^{x}\mathrm{d}x = \dfrac{\mathrm{e}^{x}}{2}\left(\sin\left(x\right)-\cos\left(x\right)\right)+C
+  \end{aligned}
+}
+$$
+
+若令以上积分的下界为 $0$，上界为 $\pi$，则
+
+$$
+\boxed{
+  \begin{aligned}
+    I\_{0} &= -1+\mathrm{e}^{\pi} \\\\
+    I\_{1} &= \dfrac{1}{2}+\dfrac{\mathrm{e}^{\pi}}{2} \\\\
+    I\_{n} &= \dfrac{n\left(n-1\right)}{n^{2}+1}\cdot I\_{n-2} \\\\
+  \end{aligned} \quad
+  \left(I\_{n} := \int\_{0}^{\pi}\sin^{n}\left(x\right)\mathrm{e}^{x}\mathrm{d}x\right)
+}
+$$
+
 因此有
 
 $$
