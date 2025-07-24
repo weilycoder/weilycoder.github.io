@@ -72,6 +72,18 @@ $$
 }
 $$
 
+其中
+
+$$
+\boxed{
+  \begin{aligned}
+    \int\_{0}^{1}x^{n}\mathrm{d}x &= \dfrac{1}{n+1} \\\\
+    \int\_{0}^{1}\dfrac{x}{1+x^{2}}\mathrm{d}x &= \dfrac{\ln\left(2\right)}{2} \\\\
+    \int\_{0}^{1}\dfrac{1}{1+x^{2}}\mathrm{d}x &= \dfrac{\pi}{4}
+  \end{aligned}
+}
+$$
+
 ## E
 
 考虑积分
