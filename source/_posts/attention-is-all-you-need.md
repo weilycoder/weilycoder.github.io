@@ -115,7 +115,28 @@ $$
 }
 $$
 
-利用 $n,m$ 控制精度，$a,b$ 控制参数。
+*利用 $n,m$ 控制精度，$a,b$ 控制参数。*
+
+其中
+
+$$
+\boxed{
+  \begin{aligned}
+    \int\_{0}^{1}x^{n}\mathrm{e}^{x}\mathrm{d}x &= \left(-1\right)^{n+1}\cdot n! + \mathrm{A182386}\left(n\right)\cdot\mathrm{e} \\\\
+  \end{aligned}
+}
+$$
+
+这里 [$\mathrm{A182386}\left(n\right)$](https://oeis.org/A182386) 满足递推：
+
+$$
+\boxed{
+  \begin{aligned}
+    \mathrm{A182386}\left(0\right) &= 1 \\\\
+    \mathrm{A182386}\left(n\right) &= 1 - n\cdot \mathrm{A182386}\left(n - 1\right)
+  \end{aligned}
+}
+$$
 
 ## Pi^n
 
