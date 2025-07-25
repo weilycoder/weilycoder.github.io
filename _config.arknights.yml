@@ -101,9 +101,9 @@ bgm:
   loop: false
   src: /audio/bgm.mp3
 
-# 不蒜子
-# 详见 http://busuanzi.ibruce.info/
-busuanzi:
+# Vercount
+# 详见 https://vercount.one/
+vercount:
   enable: true
   sitePV: true # 站点总访问量
   siteUV: true # 站点访客数
