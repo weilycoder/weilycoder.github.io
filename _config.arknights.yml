@@ -13,6 +13,8 @@ canvas_dust: true
 # auto 跟随系统
 color: dark
 
+build_time: true # 是否开启构建时间过滤器，开启后会在生成的站点配置中添加 build_time 字段，值为 UTC 时间字符串
+
 footnote:
   enable: true # 是否开启脚注解析
   markdown: false # 是否使用 markdown 解析脚注内容
