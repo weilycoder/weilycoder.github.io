@@ -314,6 +314,6 @@ cProfile.run("test_insert(data2)")
 
 [^1]: CPython 的版本为 3.13.2，pypy 的版本为 3.11-v7.3.19；下同
 [^2]: 测试用机器处理器参数为 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz，内存 16 GB
-[^3]: [https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289](https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289)
-[^4]: [https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034](https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034)
-[^5]: [https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.\_\_hash\_\_](https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.__hash__)
+[^3]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L289
+[^4]: https://github.com/python/cpython/blob/3.13/Objects/dictobject.c#L1034
+[^5]: https://docs.python.org/zh-cn/3.13/reference/datamodel.html#object.__hash__

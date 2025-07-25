@@ -13,6 +13,10 @@ canvas_dust: true
 # auto 跟随系统
 color: dark
 
+footnote:
+  enable: true # 是否开启脚注解析
+  markdown: false # 是否使用 markdown 解析脚注内容
+
 # <body> 背景图片链接
 background_image:
   dark: /img/bg.jpg # 暗色模式
