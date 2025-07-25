@@ -393,7 +393,67 @@ $$
 
 ## E^(q*Pi)
 
-类似地
+类似地，令
+
+$$
+I\_{q,n} = \int\sin^{n}\left(x\right)\mathrm{e}^{qx}\mathrm{d}x
+$$
+
+则
+
+$$
+\begin{aligned}
+  I\_{q,n} 
+  &= \int\sin^{n}\left(x\right)\mathrm{e}^{qx}\mathrm{d}x \\\\
+  &= \dfrac{\sin^{n}\left(x\right)\mathrm{e}^{qx}}{q}-\dfrac{n}{q}\int\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{qx}\mathrm{d}x \\\\
+\end{aligned}
+$$
+
+其中
+
+$$
+\begin{aligned}
+  \int\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{qx}\mathrm{d}x
+  &= \dfrac{1}{q}\int\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{d}\left(\mathrm{e}^{qx}\right) \\\\
+  &= \dfrac{\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{qx}}{q}-\dfrac{1}{q}\int\mathrm{e}^{qx}\mathrm{d}\left(\sin^{n-1}\left(x\right)\cos\left(x\right)\right) \\\\
+  &= \dfrac{\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{qx}}{q}-\dfrac{1}{q}\int\left(-n\sin^{n}\left(x\right)+\left(n-1\right)\sin^{n-2}\left(x\right)\right)\mathrm{e}^{qx}\mathrm{d}x \\\\
+  &= \dfrac{\sin^{n-1}\left(x\right)\cos\left(x\right)\mathrm{e}^{qx}}{q}+\dfrac{n}{q}I\_{q,n}-\dfrac{n-1}{q}I\_{q,n-2}
+\end{aligned}
+$$
+
+代入并移项
+
+$$
+\boxed{
+  I\_{q,n} = \dfrac{\mathrm{e}^{qx}\left(q\sin^{n}\left(x\right)-n\sin^{n-1}\left(x\right)\cos\left(x\right)\right)+n\left(n-1\right)I\_{q,n-2}}{q^{2}+n^{2}}
+}
+$$
+
+对于递推起点 $I\_{q,0},I\_{q,1}$，有
+
+$$
+\boxed{
+  \begin{aligned}
+    I\_{q,0} &= \int\mathrm{e}^{qx}\mathrm{d}x = \dfrac{\mathrm{e}^{qx}}{q} + C \\\\
+    I\_{q,1} &= \int\sin\left(x\right)\mathrm{e}^{qx}\mathrm{d}x = \dfrac{\mathrm{e}^{qx}}{q^{2}+1}\left(q\sin{\left(x\right)}-\cos{\left(x\right)}\right) + C
+  \end{aligned}
+}
+$$
+
+令积分下界为 $0$，上界为 $\pi$
+
+$$
+\boxed{
+  \begin{aligned}
+    I\_{q,0} &= -\dfrac{1}{q}+\dfrac{\mathrm{e}^{q\pi}}{q} \\\\
+    I\_{q,1} &= \dfrac{1}{1+q^{2}}+\dfrac{\mathrm{e}^{q\pi}}{1+q^{2}} \\\\
+    I\_{q,n} &= \dfrac{n\left(n-1\right)}{q^{2}+n^{2}}\cdot I\_{q,n-2}
+  \end{aligned} \quad
+  \left(I\_{n} := \int\_{0}^{\pi}\sin^{n}\left(x\right)\mathrm{e}^{qx}\mathrm{d}x\right)
+}
+$$
+
+因此
 
 $$
 \boxed{
