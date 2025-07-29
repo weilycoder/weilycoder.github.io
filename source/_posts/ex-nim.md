@@ -55,7 +55,9 @@ TODO
 
 ### 变种 8：每次取石子的数量上限为 3
 
-TODO
+考虑每堆石子的 SG 函数值，显然为 $a\_i\bmod 3$。
+
+因此整局游戏的 SG 函数值为 $\begin{aligned}S=\bigoplus\_{i=1}^{n} \left(a\_i\bmod 3\right)\end{aligned}$。
 
 ### 变种 9：无法行动的玩家胜利
 
