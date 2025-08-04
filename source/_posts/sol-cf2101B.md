@@ -4,8 +4,8 @@ mathjax: true
 date: 2025-05-19 16:23:32
 categories:
   - OI
-tags:
   - solution
+tags:
   - sort
   - codeforces
 ---

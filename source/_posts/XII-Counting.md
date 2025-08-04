@@ -5,8 +5,8 @@ date: "2025-05-21T17:46:16.843+0800"
 updated: "2025-05-22T00:37:03.624+0800"
 categories:
   - OI
-tags:
   - solution
+tags:
   - math(oi)
   - combinatorics
   - OGF

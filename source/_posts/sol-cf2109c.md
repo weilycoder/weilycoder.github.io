@@ -4,8 +4,8 @@ mathjax: true
 date: 2025-05-20 15:27:23
 categories:
   - OI
-tags:
   - solution
+tags:
   - interactive
   - constructive
   - number-theory
