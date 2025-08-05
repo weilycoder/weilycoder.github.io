@@ -1,11 +1,9 @@
 ---
-categories: []
-date: '2025-03-29T18:01:15.793+08:00'
-sticky: 1
-tags: []
 title: Who am I
-updated: '2025-04-01T23:18:22.251+08:00'
+date: 2025-03-29T18:01:15.793+0800
+updated: 2025-08-05T18:09:25.136+0800
 ---
+
 ## 自我介绍
 
 [![Codeforces Rating of @weily](https://cfrating.baoshuo.dev/rating?username=weily&style=flat)](https://codeforces.com/profile/weily)[![AtCoder Rating of @weily](https://atrating.baoshuo.dev/rating?username=weily&style=flat)](https://atcoder.jp/users/weily)[![github](https://img.shields.io/badge/github-weilycoder-blue?logo=github)](https://github.com/weilycoder)[![blog](https://img.shields.io/badge/Blog-weily09-0E83CD?logo=hexo)](https://weilycoder.github.io/)
