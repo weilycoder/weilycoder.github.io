@@ -22,7 +22,6 @@ updated: '2025-04-01T23:18:22.251+08:00'
 + Cf 账号：[weily](https://codeforces.com/profile/weily)
 + AtC 账号：[weily](https://atcoder.jp/users/weily)
 + xxxhub 账号：[weilycoder](https://github.com/weilycoder)
-+ {% hide Page Views Count 是本人的所有个人介绍页面共享的 %}
 + 头像来自：[Tweetable Mathematical Art](https://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art/35626#35626)
 
 ## 公告
