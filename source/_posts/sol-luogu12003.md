@@ -15,14 +15,12 @@ tags:
 
 [题目链接](https://www.luogu.com.cn/problem/P12003)
 
-{% note 题意 open %}
-给定一棵 $n$ 个节点的树，点有点权，分别为 $a\_1,a\_2,\ldots a\_n$。
-
-$q$ 次询问，不强制在线，求树上路径点权的不同质因子个数。
-
-+ $1\leqslant n,q\leqslant 3\times 10^5$
-+ $1\leqslant a\_i\leqslant 10^{8}$
-{% endnote %}
+> 给定一棵 $n$ 个节点的树，点有点权，分别为 $a\_1,a\_2,\ldots a\_n$。
+>
+> $q$ 次询问，不强制在线，求树上路径点权的不同质因子个数。
+>
+> + $1\leqslant n,q\leqslant 3\times 10^5$
+> + $1\leqslant a\_i\leqslant 10^{8}$
 
 因为是质因子，所以考虑按值域的根号分开讨论，记 $V=\max a\_i$。
 
