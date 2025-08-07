@@ -161,7 +161,7 @@ giscus:
   repo_id: R_kgDOOQzAwg # 仓库 ID，可在 giscus 页面获取
   category: Announcements # discussion 分类名称
   category_id: DIC_kwDOOQzAws4ColJL # 分类 ID，可在 giscus 页面获取
-  mapping: title # 页面 ↔️ discussion 映射关系，可选值: pathname | url | title | og:title | specific | number
+  mapping: pathname # 页面 ↔️ discussion 映射关系，可选值: pathname | url | title | og:title | specific | number
   term: # 当 mapping 为 specific 时使用，指定的字符串
   discussion_number: # 当 mapping 为 number 时使用，指定的 discussion 号码
   strict: 1 # 是否启用严格标题匹配 0 | 1
