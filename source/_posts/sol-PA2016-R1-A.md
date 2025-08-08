@@ -4,6 +4,7 @@ mathjax: true
 date: 2025-08-07 18:00:25
 categories:
   - OI
+  - solution
 tags:
   - games
   - Ad-hoc
