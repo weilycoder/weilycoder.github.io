@@ -116,7 +116,7 @@ int main() {
   string s;
   cin >> s;
   auto nums = read_bigint(s);
-  uint64_t L = 0, R = (s.length() + 1) * 9;
+  uint64_t L = 0, R = s.length();
   while (L < R) {
     uint64_t k = L + ((R - L) >> 1);
     S(mul(add(nums, k), 9)) <= 9 * k ? R = k : L = k + 1;
