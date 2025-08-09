@@ -4,8 +4,8 @@ mathjax: true
 date: 2024-07-25 17:16:27
 categories:
   - OI
+  - template
 tags:
-  - template-code
   - math(oi)
 ---
 

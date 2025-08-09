@@ -4,8 +4,8 @@ mathjax: true
 date: 2024-09-28 23:19:00
 categories:
   - OI
+  - template
 tags:
-  - template-code
   - distance
   - geometry
 ---

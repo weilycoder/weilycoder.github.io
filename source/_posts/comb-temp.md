@@ -4,8 +4,8 @@ code_fold: -1
 date: 2025-08-08 10:28:52
 categories:
   - OI
+  - template
 tags:
-  - template-code
   - math(oi)
 ---
 
