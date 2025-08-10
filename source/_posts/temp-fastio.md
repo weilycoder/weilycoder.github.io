@@ -10,6 +10,10 @@ tags:
   - io
 ---
 
+这段模板是我刚接触 `mmap` 函数的时候写的，兼容性不高且不建议使用。
+
+建议参考 {% post_link temp-fastio2 %}。
+
 ```cpp
 #include <cstdint>
 #include <cstdio>
