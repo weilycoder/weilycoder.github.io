@@ -7,6 +7,7 @@ categories:
   - template
 tags:
   - math(oi)
+  - number-theory
 ---
 
 > 例题：[Luogu P5435](https://www.luogu.com.cn/problem/P5435)
