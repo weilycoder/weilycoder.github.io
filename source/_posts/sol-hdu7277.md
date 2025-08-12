@@ -49,7 +49,7 @@ $$
 \begin{aligned}
   F\_{i,j,k,l} &\gets \max\_{h=i}^{j-1}\left\\{F\_{i,h,k,l}+G\_{h+1,j},G\_{i,h}+F\_{h+1,j,k,l}\right\\} \\\\
   F\_{i,j,k,l} &\gets \max\_{h=i}^{j-1}\left\\{F\_{i,h,k,l-1}+F\_{i,h+1,k,l-1}\right\\} \\\\
-  G\_{i,j} &\gets F\_{i,j,k,l}
+  G\_{i,j} &\gets F\_{i,j,k,l} + V_{k}\cdot P^{l-1}
 \end{aligned}
 $$
 
@@ -60,3 +60,74 @@ $$
 实际上，DP 代码可能比大多数人想象的常数都来的小，并且本题转移 DP 时 $n^{3}$ 的计算量来自枚举 $i,h,j$，后者实际上还有一个 $\dfrac{1}{6}$ 的常数。
 
 这样乘上多测的计算量估计大约为 $2.33\times 10^{8}$，原题有 $3\mathrm{s}$，通过本题绰绰有余了。
+
+```cpp
+#include <cstdint>
+#include <iostream>
+#include <limits>
+#include <vector>
+using namespace std;
+
+static constexpr int64_t i64min = numeric_limits<int64_t>::min() >> 2;
+
+void solve() {
+  size_t n, m, r;
+  int64_t p;
+  cin >> n >> m >> r >> p;
+  r = min(r, (size_t)8);
+
+  vector<vector<int64_t>> G(n, vector<int64_t>(n, 0));
+  vector<vector<vector<vector<int64_t>>>> F(n, vector<vector<vector<int64_t>>>(n, vector<vector<int64_t>>(m, vector<int64_t>(r, i64min))));
+
+  vector<int64_t> powp(r);
+  powp[0] = 1;
+  for (size_t i = 1; i < r; ++i)
+    powp[i] = powp[i - 1] * p;
+
+  vector<size_t> a(n);
+  for (size_t i = 0; i < n; ++i)
+    cin >> a[i], --a[i];
+
+  vector<int64_t> v(m);
+  for (size_t i = 0; i < m; ++i)
+    cin >> v[i];
+
+  for (size_t i = 0; i < n; ++i)
+    for (size_t j = 0; j < n; ++j) {
+      for (size_t k = 0; k < m; ++k)
+        for (size_t l = 0; l < r; ++l)
+          F[i][j][k][l] = i64min;
+      G[i][j] = 0;
+    }
+
+  for (size_t i = 0; i < n; ++i)
+    F[i][i][a[i]][0] = 0, G[i][i] = v[a[i]];
+
+  for (size_t len = 1; len <= n; ++len) {
+    for (size_t i = 0, j = len; j < n; ++i, ++j) {
+      for (size_t h = i; h < j; ++h)
+        G[i][j] = max(G[i][j], G[i][h] + G[h + 1][j]);
+      for (size_t k = 0; k < m; ++k) {
+        for (size_t l = 0; l < r; ++l) {
+          for (size_t h = i; h < j; ++h)
+            F[i][j][k][l] = max(F[i][j][k][l], max(F[i][h][k][l] + G[h + 1][j], G[i][h] + F[h + 1][j][k][l]));
+          if (l != 0)
+            for (size_t h = i; h < j; ++h)
+              F[i][j][k][l] = max(F[i][j][k][l], F[i][h][k][l - 1] + F[h + 1][j][k][l - 1]);
+          G[i][j] = max(G[i][j], F[i][j][k][l] + v[k] * powp[l]);
+        }
+      }
+    }
+  }
+  cout << G[0][n - 1] << '\n';
+}
+
+int main() {
+  cin.tie(nullptr)->sync_with_stdio(false);
+  size_t T;
+  cin >> T;
+  while (T--)
+    solve();
+  return 0;
+}
+```
