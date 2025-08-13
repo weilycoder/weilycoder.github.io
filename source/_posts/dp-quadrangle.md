@@ -127,3 +127,56 @@ $$
 有时可以直接计算决策的“反超点”，从而做到震撼人心的 $\mathcal O\left(n\right)$ 求解。
 
 + 例题：[Lightning Conductor (POI 2011)](https://www.luogu.com.cn/problem/P3515)
+
+{% note SOLUTION fold %}
+看到限制是全局的，不妨将其拆成两部分，先只考虑 $j < i$ 的部分，再反过来求一遍，最后取最大值。
+
+因此显然有
+
+$$
+\begin{aligned}
+  F\_{i} 
+  &= \max\_{j\lt i}\left\\{a\_{j}-a\_{i}+\sqrt{i-j}\right\\} \\\\
+  &= \max\_{j\lt i}\left\\{a\_{j}+\sqrt{i-j}\right\\}-a\_{i} \\\\
+\end{aligned}
+$$
+
+这个东西做法很多，利用 $\sqrt{i-j}$ 的值最多会有 $\mathcal O\left(\sqrt{n}\right)$，可以做到 $\mathcal O\left(n\sqrt{n}\right)$ 的复杂度。
+
+每个点的转移是完全独立的，因此也可以使用分治法做，复杂度是 $\mathcal O\left(n\log n\right)$ 的。
+
+但是，如果我们使用队列二分的方法，可以将复杂度优化到线性。
+
+假设当前要把决策点 $i$ 插入单调队列，此时队尾的决策点为 $p$，我们希望计算得到一个最小的 $m$，使得 $m$ 点为最小的 $i$ 优于 $p$ 的转移点。
+
+即解不等式
+
+$$
+a\_{p}+\sqrt{m-p}\lt a\_{i}+\sqrt{m-i}
+$$
+
+移项得
+
+$$
+\sqrt{m-p}-\sqrt{m-i} \lt a\_{i}-a\_{p}
+$$
+
+由于 $p\lt i$，因此不等式左侧为正数，设 $d=a\_{i}-a\_{p}$，显然 $d\leqslant 0$ 时无解。
+
+若 $d\gt 0$，有
+
+$$
+\begin{aligned}
+  \sqrt{m-p}-\sqrt{m-i} &\lt d \\\\
+  \sqrt{m-p} &\lt d + \sqrt{m-i} \\\\
+  m-p &\lt d^{2}+m-i+2d\sqrt{m-i} \\\\
+  i-p-d^{2} &\lt 2d\sqrt{m-i} \\\\
+  \sqrt{m-i} &\gt \dfrac{i-p-d^{2}}{2d} \\\\
+  m &\gt i+\dfrac{\left(i-p-d^{2}\right)^{2}}{4d^{2}} \\\\
+\end{aligned}
+$$
+
+因此 $m=i+\left\lfloor\dfrac{\left(i-p-d^{2}\right)^{2}}{4d^{2}}\right\rfloor+1$
+
+至此，我们可以 $\mathcal O(1)$ 计算决策点插入的位置，因此总的时间复杂度为 $\mathcal O(n)$ 的。
+{% endnote %}
