@@ -7,6 +7,7 @@ categories:
   - OI
 tags:
   - bits
+  - bitset
   - data-structure
   - Bugs
 ---
