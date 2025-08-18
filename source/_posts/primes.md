@@ -140,7 +140,7 @@ for (size_t i = 2; i <= N; ++i) {
 
 这个方法的时间复杂度是 $\mathcal O\left(\log x\right)$。
 
-然而，存在一类“伪质数” $C_{n}$[^1]，满足对于任意 base $a$，满足 $a^{C_n}\equiv a\pmod{C_{n}}$。
+然而，存在一类“伪质数” $C\_{n}$[^1]，满足对于任意 base $a$，满足 $a^{C\_n}\equiv a\pmod{C\_{n}}$。
 
 这样，这类“伪质数”只有我们随机选择时恰好选到与 $c$ 不互质的 base 才能判断，判断次数期望可能到达 $O\left(\sqrt[4]{x}\right)$ 左右。
 
@@ -180,9 +180,9 @@ bool millerRabin(int n) {
 
 根据 OI-wiki 上的注释，若 GRH 成立，则只需要使用 $\left[2, \min\left\\{n-2, \left\lfloor 2\ln^2 n \right\rfloor\right\\}\right]$ 内的所有整数作为 base 即可**确定** $x$ 的素性。
 
-仍然是 OI-wiki 的注释，对于 $2^{32}$ 以内的判断，只需要使用 $\\{2,7,61\\}$ 或前 $8$ 个质数作为 base；
+仍然是 OI-wiki 的注释，对于 $2^{32}$ 以内的判断，只需要使用 $\left\\{2,7,61\right\\}$ 或前 $8$ 个质数作为 base；
 
-对于 $2^{64}$ 内的判断。只需要使用 $\\{2, 325, 9375, 28178, 450775, 9780504, 1795265022\\}$ 即可，或者使用前 $12$ 个质数。
+对于 $2^{64}$ 内的判断。只需要使用 $\left\\{2, 325, 9375, 28178, 450775, 9780504, 1795265022\right\\}$ 即可，或者使用前 $12$ 个质数。
 
 这里有一些我曾见过的强伪素数：
 + 46856248255981
@@ -208,3 +208,48 @@ bool millerRabin(int n) {
 
 [^1]: oeis-A002997，Carmichael 数
 [^2]: 在 Windows 下，rand 函数的值域很小，只有 $30000$ 左右
+
+## 快速质因数分解
+
+### SPF 表
+
+若时空允许，可以考虑 $\mathcal O\left(n\right)$ 或 $\mathcal O\left(n\log\log n\right)$ 将每个数的最小质因子（spf）预处理出来（筛法）。
+
+这样可以做到对每个数在质因数个数的复杂度内完成分解，最差情形，复杂度是 $\mathcal O\left(\log n\right)$ 的（质因子全为 $2$）。
+
+### Pollard Rho 算法
+
+~~当代 OI 好像没啥应用空间，但是万一需要卡常呢。~~
+
+简单来讲，对于非质数 $x$（使用素性判断确认），其最小质因子 $p$ 不超过 $\mathcal O\left(\sqrt{n}\right)$。利用生日悖论的结论，可以在 $\mathcal O\left( \sqrt{p}\right)$ 的复杂度极大概率试出 $x$ 的一个非平凡因子。
+
+具体来讲，生日悖论，即下述反直觉的 **事实:** 假定一年有 $365$ 天，则只需要 $23$ 个人，其中存在两人生日相同的概率就超过 $50\\%$；这个结论指出，从 $[1,n]$ 的整数中随机选数，期望选择 $\mathcal O\left(\sqrt{n}\right)$ 次后，会出现两个相同的数。
+
+```cpp
+int64_t Pollard_Rho(int64_t x) {
+  int64_t s = 0, t = 0;
+  int64_t c = (int64_t)rand() % (x - 1) + 1;
+  int step = 0, goal = 1;
+  int64_t val = 1;
+  for (goal = 1;; goal <<= 1, s = t, val = 1) {
+    for (step = 1; step <= goal; ++step) {
+      t = ((__int128)t * t + c) % x;
+      val = (__int128)val * abs(t - s) % x;
+      if ((step % 127) == 0) {
+        int64_t d = gcd(val, x);
+        if (d > 1) return d;
+      }
+    }
+    int64_t d = gcd(val, x);
+    if (d > 1) return d;
+  }
+}
+```
+
+请继续假定 `rand() % (x - 1)` 生成的数是均匀的，不过应该没人对着这个卡。
+
+对于那种两个相同量级的大质数相乘得到的数，Pollard Pho 的复杂度期望为 $\mathcal O\left(\sqrt[4]{n}\right)$。
+
+毕竟是期望，可以看作有个大常数。
+
+对于 Pollard Rho 非正解的题目，需要做好被卡的准备。
