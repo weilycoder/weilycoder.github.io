@@ -7,6 +7,7 @@ categories:
   - solution
 tags:
   - tree
+  - graph
   - tree-centroid
   - Dynamic-Programming
 ---

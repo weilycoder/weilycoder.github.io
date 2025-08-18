@@ -6,6 +6,7 @@ categories:
   - OI
   - solution
 tags:
+  - graph
   - bitset
   - brute-force
 ---
