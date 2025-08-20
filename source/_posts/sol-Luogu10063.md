@@ -60,13 +60,32 @@ $$
 > 若不存在 $j=k$，则 $S$ 中所有数可以两两配对，即 $\left(p-1\right)!\equiv a^{\frac{p-1}{2}}=1$，与 Wilson 定理矛盾。
 
 至于二次剩余存在 $\dfrac{p-1}{2}$ 个，可以从 $x^{2}\equiv y^{2}\Leftrightarrow x\equiv\pm y$ 解释。
+
+---
+
+我不太想引入 Legendre 符号等内容，但发现后文不太好描述，因此这里给出定义，对于奇质数 $p$，有：
+
+$$
+\left(\dfrac{a}{p}\right)=\begin{cases}
+    0,  & p\mid a, \\\\
+    1,  & \left(p\nmid a\right) \land \left(\left(\exists x\in\mathbf{Z}\right),~~a\equiv x^2\pmod p\right), \\\\
+    -1, & \text{otherwise}. \\\\
+\end{cases}
+$$
+
+显然
+
+$$
+\left(\dfrac{a}{p}\right) \equiv a^{\frac{p-1}{2}}\pmod {p}
+$$
+
 {% endnote %}
 
-*我不太想引入 Legendre 符号等内容。*
+仅仅从这个判定方式来看，明显 $\left(\dfrac{a}{p}\right)$ 对于 $a$ 是完全积性的，因此显然两个二次剩余或两个非二次剩余相乘是二次剩余；一个二次剩余和一个非二次剩余相乘是非二次剩余（只考虑 $(a,p)=1$）。
 
-仅仅从这个判定方式来看，明显 $a^{\frac{p-1}{2}}$ 是完全积性的，因此不妨维护每个数模 $p$ 意义下 $a^{\frac{p-1}{2}}$ 的值。
+不妨维护每个数模 $p$ 意义下 $\left(\dfrac{a}{p}\right)$ 的值，压成一个二进制数，为 $-1$ 则记 $1$，为 $1$ 则记 $0$，为 $0$ 时该位无效，也记为 $0$。
 
-由于这个数是 $\pm 1$，做乘法时有和异或同样的性质，可以取若干个质数并将结果压为二进制数。
+这样若一段区间的异或和为 $0$，则这一段区间的乘积被选择的所有质数均判定为完全平方数，可以认为找到了一个解。
 
 这样的做法是 $\mathcal O\left(nT\log P\right)$ 的，这里 $T$ 为质数数量，根据前文分析，可以取 $T=\mathcal O\left(\log n\right)$。
 
