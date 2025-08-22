@@ -27,6 +27,10 @@ tags:
 > + $1\leqslant l,r\leqslant 10^{9}$；
 > + $1\leqslant a\_i\leqslant 10^{9}$；
 
+<!-- more -->
+
+---
+
 首先应该都知道多重集的全排列公式
 
 $$

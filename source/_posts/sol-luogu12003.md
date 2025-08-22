@@ -22,6 +22,8 @@ tags:
 > + $1\leqslant n,q\leqslant 3\times 10^5$
 > + $1\leqslant a\_i\leqslant 10^{8}$
 
+<!-- more -->
+
 因为是质因子，所以考虑按值域的根号分开讨论，记 $V=\max a\_i$。
 
 ### <=sqrt(V)

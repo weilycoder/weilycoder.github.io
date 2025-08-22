@@ -24,6 +24,10 @@ tags:
 > + $1\leqslant q\leqslant 3\times 10^{5}$；
 > + $1\leqslant x\_j,y\_j\leqslant 10^{7}~\left(1\leqslant j\leqslant q\right)$。
 
+<!-- more -->
+
+---
+
 注意到 $p,m$ 均较小，考虑将函数的映射表打出来。
 
 使用一个倍增将 $F\_{2^{k}}\left(x\right)$ 的映射表也打出来。

@@ -20,6 +20,10 @@ tags:
 > + $1\leqslant n\leqslant 3\times 10^{5}$；
 > + $1\leqslant a\_i\leqslant 10^{36}$。
 
+<!-- more -->
+
+---
+
 首先可以想到对每个数暴力质因数分解，使用 Pollard-Pho 算法，总复杂度 $\mathcal O\left(n\sqrt[4]{A}\right)$。
 
 如果能做的话，可以给每个质数随机赋权，统计一下异或和为 $0$ 的区间。

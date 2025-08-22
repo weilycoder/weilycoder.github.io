@@ -38,6 +38,10 @@ tags:
 >
 > + $1\leqslant|S|\leqslant 2\times 10^{5}$。
 
+<!-- more -->
+
+---
+
 ## Algo 1
 
 分类讨论。

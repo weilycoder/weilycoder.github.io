@@ -24,6 +24,10 @@ tags:
 >
 > *形式化地，给定简单无向图 $G\left(V,E\right)$，求子图 $G^{\prime}\left(V^{\prime},E^{\prime}\right)\left(V^{\prime}\subset V,E^{\prime}\subset E\right)$ 的数量，其中 $G^{\prime}$ 满足 $V^{\prime}=\left\\{v\_1,v\_2,v\_3,v\_4,v\_5,v\_6,v\_7,v\_8\right\\}s,E^{\prime}=\left\\{\left(v\_1,v\_3\right),\left(v\_2,v\_3\right),\left(v\_3,v\_4\right),\left(v\_3,v\_5\right),\left(v\_3,v\_6\right),\left(v\_3,v\_7\right),\left(v\_4,v\_8\right),\left(v\_5,v\_8\right),\left(v\_6,v\_8\right),\left(v\_7,v\_8\right)\right\\}$*
 
+<!-- more -->
+
+---
+
 注意到 $v\_3$ 和 $v\_8$ 的位置比较关键。
 
 考虑枚举 $v\_3$ 和 $v\_8$，求它们直接连接的点集的交，任取 $4$ 个 构成 $\left\\{v\_4,v\_5,v\_6,v\_7\right\\}$。
