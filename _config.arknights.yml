@@ -135,8 +135,8 @@ gitalk:
 # Waline
 # 详情: https://waline.js.org/
 waline:
-  enable: false
-  server_url: #Server_Url
+  enable: true
+  server_url: https://waline-test-steel.vercel.app/
 
 #Artalk
 #详见：https://artalk.js.org/
