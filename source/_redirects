@@ -1,1 +1,3 @@
 /page/1/ / 301
+/waline https://waline-test-steel.vercel.app/
+/waline/* https://waline-test-steel.vercel.app/:splat
