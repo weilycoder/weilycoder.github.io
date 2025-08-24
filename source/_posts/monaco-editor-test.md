@@ -8,7 +8,7 @@ tags:
   - theme
 ---
 
-{% editor javascript %}
+{% editor javascript hc-black %}
 /* global hexo */
 
 'use strict';
