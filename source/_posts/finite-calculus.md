@@ -5,6 +5,7 @@ date: "2025-05-26T23:39:30.671+0800"
 categories:
   - Math
 tags:
+  - sequence
   - prefix-sum
   - finite-difference
 ---
@@ -79,7 +80,7 @@ $$
 有限微积分的定求和是左闭右开的：
 
 $$
-\operatorname{\sum}\_a^b=\sum\_{x=a}^{b}
+\operatorname{\sum}\_a^b=\sum\_{x=a}^{b-1}
 $$
 
 这是为了满足
@@ -204,7 +205,7 @@ x^{\underline{n}}=
 \begin{cases}
 1, & n=0 \\\\
 \begin{aligned}\prod\_{i=1}^n\left(x-i+1\right)\end{aligned}, & n\in\mathbf{Z\_+} \\\\
-\begin{aligned}\prod\_{i=1}^{-n}\dfrac{1}{x+i}=\dfrac{1}{\left(x+1\right)^{\underline{n}}}\end{aligned}, & n\in\mathbf{Z\_-} \\\\
+\begin{aligned}\prod\_{i=1}^{-n}\dfrac{1}{x+i}=\dfrac{1}{\left(x-n+1\right)^{\underline{-n}}}\end{aligned}, & n\in\mathbf{Z\_-} \\\\
 \end{cases}
 $$
 
