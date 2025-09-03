@@ -9,6 +9,7 @@ categories:
   - template
 tags:
   - poly
+  - Convolution
 ---
 
 ## 多项式乘法
