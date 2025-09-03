@@ -2,7 +2,7 @@
 title: 快速区间查询
 mathjax: true
 date: '2025-01-31T17:00:25.000+08:00'
-update: '2025-01-31T17:00:25.000+08:00'
+updated: '2025-01-31T17:00:25.000+08:00'
 categories:
   - OI
 tags:

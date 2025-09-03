@@ -2,6 +2,7 @@
 title: 合金 (JSOI 2007)
 mathjax: true
 date: 2025-08-20 12:47:59
+updated: 2025-08-20 12:47:59
 categories:
   - OI
   - solution

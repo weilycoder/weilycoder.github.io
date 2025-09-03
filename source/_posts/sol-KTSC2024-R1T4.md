@@ -2,6 +2,7 @@
 title: 铁路 2 (KTSC 2024 R1)
 mathjax: true
 date: 2025-08-13 16:20:17
+updated: 2025-08-13 16:20:17
 categories:
   - OI
   - solution

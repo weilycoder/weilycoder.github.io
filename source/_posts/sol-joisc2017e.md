@@ -2,6 +2,7 @@
 title: Broken Device (JOISC 2017)
 mathjax: true
 date: 2025-08-09 01:26:52
+updated: 2025-08-09 01:26:52
 categories:
   - OI
   - solution

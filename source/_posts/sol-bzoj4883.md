@@ -2,6 +2,7 @@
 title: 棋盘上的守卫 (bzoj 4883)
 mathjax: true
 date: 2025-08-26 08:41:58
+updated: 2025-08-26 08:41:58
 categories:
   - OI
   - solution

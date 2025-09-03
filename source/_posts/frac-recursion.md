@@ -2,6 +2,7 @@
 title: 一类分式递推数列的通项公式求法
 mathjax: true
 date: "2025-05-31T12:28:18.002+0800"
+updated: "2025-05-31T12:28:18.002+0800"
 categories:
   - Math
 tags:

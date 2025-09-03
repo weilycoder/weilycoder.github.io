@@ -2,6 +2,7 @@
 title: Trokuti (COTS 2023)
 mathjax: true
 date: 2025-08-23 20:23:17
+updated: 2025-08-23 20:23:17
 categories:
   - OI
   - solution

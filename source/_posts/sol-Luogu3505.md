@@ -2,6 +2,7 @@
 title: TEL-Teleportation (POI 2010)
 mathjax: true
 date: 2025-08-25 09:02:14
+updated: 2025-08-25 09:02:14
 categories:
   - OI
   - solution

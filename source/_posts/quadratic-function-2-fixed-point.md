@@ -2,6 +2,7 @@
 title: 二次函数的二阶不动点
 mathjax: true
 date: 2025-07-15T00:45:26.771+0800
+updated: 2025-07-15T00:45:26.771+0800
 categories:
   - Math
 tags:

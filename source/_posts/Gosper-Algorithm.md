@@ -2,6 +2,7 @@
 title: Gosper-Algorithm
 mathjax: true
 date: 2025-09-02 22:53:47
+updated: 2025-09-02 22:53:47
 categories:
   - Math
 tags:

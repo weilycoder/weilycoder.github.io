@@ -2,6 +2,7 @@
 title: Codeforces Round 1046 (Div 2)
 mathjax: true
 date: 2025-08-29 20:17:05
+updated: 2025-08-29 20:17:05
 categories:
   - OI
   - solution

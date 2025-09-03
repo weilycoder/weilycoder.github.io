@@ -2,6 +2,7 @@
 title: 质数判定和快速质因数分解
 mathjax: true
 date: "2025-08-12T00:57:26.007+0800"
+updated: "2025-08-12T00:57:26.007+0800"
 categories:
   - OI
   - template

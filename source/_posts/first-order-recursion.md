@@ -2,6 +2,7 @@
 title: 一类一阶递推数列的通项公式求法
 mathjax: true
 date: 2025-06-20 15:28:04
+updated: 2025-06-20 15:28:04
 categories:
   - Math
 tags:

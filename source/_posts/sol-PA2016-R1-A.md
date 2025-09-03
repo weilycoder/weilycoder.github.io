@@ -2,6 +2,7 @@
 title: (PA2016 R1 A) Gra w karty
 mathjax: true
 date: 2025-08-07 18:00:25
+updated: 2025-08-07 18:00:25
 categories:
   - OI
   - solution

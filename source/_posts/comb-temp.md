@@ -2,6 +2,7 @@
 title: 组合数计算模板
 code_fold: -1
 date: 2025-08-08 10:28:52
+updated: 2025-08-08 10:28:52
 categories:
   - OI
   - template

@@ -2,6 +2,7 @@
 title: sqrt(n²+n+X) (ABC 420)
 mathjax: true
 date: 2025-08-24 21:56:54
+updated: 2025-08-24 21:56:54
 categories:
   - OI
   - solution

@@ -2,6 +2,7 @@
 title: CF2109C (Div. 2) Hacking Numbers
 mathjax: true
 date: 2025-05-20 15:27:23
+updated: 2025-05-20 15:27:23
 categories:
   - OI
   - solution

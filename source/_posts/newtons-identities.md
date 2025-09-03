@@ -2,6 +2,7 @@
 title: 牛顿恒等式
 mathjax: true
 date: "2025-07-20T16:35:36.431+0800"
+updated: "2025-07-20T16:35:36.431+0800"
 categories:
   - Math
 tags:

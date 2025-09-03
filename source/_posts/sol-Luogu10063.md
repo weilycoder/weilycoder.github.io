@@ -2,6 +2,7 @@
 title: 平方数 (SNOI 2024)
 mathjax: true
 date: 2025-08-19 22:01:17
+updated: 2025-08-19 22:01:17
 categories:
   - OI
   - solution

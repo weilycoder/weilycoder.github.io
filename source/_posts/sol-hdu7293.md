@@ -2,6 +2,7 @@
 title: foreverlasting and fried-chicken (HDU 2023(2))
 mathjax: true
 date: 2025-08-18T15:42:28.177+0800
+updated: 2025-08-18T15:42:28.177+0800
 categories:
   - OI
   - solution

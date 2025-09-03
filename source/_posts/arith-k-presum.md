@@ -2,6 +2,7 @@
 title: 等差数列的 k 阶前缀和
 mathjax: true
 date: 2025-04-30 20:06:47
+updated: 2025-04-30 20:06:47
 categories:
   - Math
 tags:

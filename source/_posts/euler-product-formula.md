@@ -2,6 +2,7 @@
 title: 欧拉乘积公式
 mathjax: true
 date: 2024-10-09 22:47:34
+updated: 2024-10-09 22:47:34
 categories:
   - Math
 tags:

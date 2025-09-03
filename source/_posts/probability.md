@@ -2,6 +2,7 @@
 title: 概率论
 mathjax: true
 date: "2025-06-06T13:11:18.313+0800"
+updated: "2025-06-06T13:11:18.313+0800"
 categories:
   - Math
 tags:

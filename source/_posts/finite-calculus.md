@@ -2,6 +2,7 @@
 title: 有限微积分
 mathjax: true
 date: "2025-05-26T23:39:30.671+0800"
+updated: "2025-05-26T23:39:30.671+0800"
 categories:
   - Math
 tags:

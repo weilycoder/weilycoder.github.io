@@ -2,6 +2,7 @@
 title: Attention is all you need
 mathjax: true
 date: "2025-07-20T22:56:35.068+0800"
+updated: "2025-07-20T22:56:35.068+0800"
 excerpt: "利用积分证明有关 e, pi 不等式的一般构造方法"
 categories:
   - Math

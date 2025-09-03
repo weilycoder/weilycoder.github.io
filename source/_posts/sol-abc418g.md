@@ -2,6 +2,7 @@
 title: Binary Operation (ABC 418 G)
 mathjax: true
 date: 2025-08-09 21:31:00
+updated: 2025-08-09 21:31:00
 categories:
   - OI
   - solution

@@ -2,7 +2,7 @@
 title: Surreal Numbers
 mathjax: true
 date: 2025-05-16 17:14:14
-update: "2025-06-07T18:34:16.677+0800"
+updated: "2025-06-07T18:34:16.677+0800"
 categories:
   - Math
 tags:

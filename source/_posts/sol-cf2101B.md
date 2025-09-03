@@ -2,6 +2,7 @@
 title: CF2101B (Div. 1) Quartet Swapping
 mathjax: true
 date: 2025-05-19 16:23:32
+updated: 2025-05-19 16:23:32
 categories:
   - OI
   - solution

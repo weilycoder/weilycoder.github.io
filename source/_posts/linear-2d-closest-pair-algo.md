@@ -2,6 +2,7 @@
 title: 期望线性的平面最近点对算法
 mathjax: true
 date: 2024-09-28 23:19:00
+updated: 2024-09-28 23:19:00
 categories:
   - OI
   - template

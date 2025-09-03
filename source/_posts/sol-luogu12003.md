@@ -2,6 +2,7 @@
 title: Luogu 12003
 mathjax: true
 date: 2025-08-04T19:43:24.641+0800
+updated: 2025-08-04T19:43:24.641+0800
 categories:
   - OI
   - solution

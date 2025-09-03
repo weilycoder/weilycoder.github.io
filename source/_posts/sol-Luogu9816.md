@@ -2,6 +2,7 @@
 title: Luogu 9816
 mathjax: true
 date: 2025-08-09 18:26:21
+updated: 2025-08-09 18:26:21
 categories:
   - OI
   - solution

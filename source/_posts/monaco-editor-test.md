@@ -2,6 +2,7 @@
 title: monaco-editor-test
 mathjax: true
 date: 2025-08-24 14:00:08
+updated: 2025-08-24 14:00:08
 categories:
   - project
 tags:

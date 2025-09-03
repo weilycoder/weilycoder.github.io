@@ -2,6 +2,7 @@
 title: 快读快写模板 2
 code_fold: -1
 date: 2025-08-10 19:35:28
+updated: 2025-08-10 19:35:28
 categories:
   - OI
   - template

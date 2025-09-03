@@ -2,6 +2,7 @@
 title: 神秘构造题 1
 mathjax: true
 date: 2025-08-22 14:59:53
+updated: 2025-08-22 14:59:53
 categories:
   - OI
   - solution

@@ -2,6 +2,7 @@
 title: 树上数子树颜色
 mathjax: true
 date: 2025-08-05 18:11:01
+updated: 2025-08-05 18:11:01
 categories:
   - OI
 tags:

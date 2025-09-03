@@ -2,6 +2,7 @@
 title: Nim 游戏及部分变种
 mathjax: true
 date: 2025-07-28T22:32:47.987+0800
+updated: 2025-07-28T22:32:47.987+0800
 categories:
   - Math
 tags:

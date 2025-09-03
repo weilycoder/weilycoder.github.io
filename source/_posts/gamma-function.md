@@ -2,6 +2,7 @@
 title: 第二类欧拉积分
 mathjax: true
 date: "2025-07-18T21:08:15.127+0800"
+updated: "2025-07-18T21:08:15.127+0800"
 categories:
   - Math
 tags:

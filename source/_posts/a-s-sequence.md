@@ -2,6 +2,7 @@
 title: F(a, S) = 0 类数列通项
 mathjax: true
 date: 2025-06-20 14:48:06
+updated: 2025-06-20 14:48:06
 categories:
   - Math
 tags:

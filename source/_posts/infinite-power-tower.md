@@ -2,7 +2,7 @@
 title: 无限幂塔方程
 mathjax: true
 date: 2025-07-15T05:45:26.771+0800
-update: 2025-07-16T00:43:42.553+0800
+updated: 2025-07-16T00:43:42.553+0800
 categories:
   - Math
 tags:

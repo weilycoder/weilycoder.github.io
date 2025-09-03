@@ -2,6 +2,7 @@
 title: Mr. Liang play Card Game (HDU 2023(1))
 mathjax: true
 date: 2025-08-12 23:23:53
+updated: 2025-08-12 23:23:53
 categories:
   - OI
   - solution

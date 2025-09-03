@@ -2,6 +2,7 @@
 title: 排序问题 (JXOI 2018)
 mathjax: true
 date: 2025-08-20T15:46:53.360+0800
+updated: 2025-08-20T15:46:53.360+0800
 categories:
   - OI
   - solution

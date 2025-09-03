@@ -2,6 +2,7 @@
 title: 曼哈顿与切比雪夫距离互化
 mathjax: true
 date: 2025-02-16 22:10:00
+updated: 2025-02-16 22:10:00
 categories:
   - Math
 tags:

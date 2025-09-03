@@ -1,7 +1,7 @@
 ---
 title: Linux 命令
 date: 2025-05-17 14:01:12
-update: "2025-06-01T22:53:48.139+0800"
+updated: "2025-06-01T22:53:48.139+0800"
 categories:
   - CTF
 tag:

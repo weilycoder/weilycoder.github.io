@@ -2,6 +2,7 @@
 title: Bracket Pairing
 mathjax: true
 date: 2025-08-18 23:25:06
+updated: 2025-08-18 23:25:06
 categories:
   - OI
   - solution

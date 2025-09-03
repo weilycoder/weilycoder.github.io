@@ -2,6 +2,7 @@
 title: Gastronomic Event (SWERC 2021)
 mathjax: true
 date: 2025-08-13 18:05:50
+updated: 2025-08-13 18:05:50
 categories:
   - OI
   - solution
