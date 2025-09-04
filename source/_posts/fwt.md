@@ -159,7 +159,7 @@ $$
 ---
 
 ```cpp
-template <uint64_t mod> uint64_t inv(uint64_t x) {
+template <uint64_t mod> constexpr uint64_t inverse(uint64_t x) {
   uint64_t res = 1, b = mod - 2;
   for (x %= mod; b; b >>= 1, x = x * x % mod)
     if (b & 1)
@@ -181,7 +181,7 @@ template <bool inv = false, uint64_t mod = 0> void FWT_xor(vector<uint64_t> &arr
           if constexpr (mod == 0)
             arr[i + j] >>= 1, arr[i + j + k] >>= 1;
           else {
-            static constexpr uint64_t inv2 = inv<mod>(2);
+            static constexpr uint64_t inv2 = inverse<mod>(2);
             arr[i + j] = arr[i + j] * inv2 % mod;
             arr[i + j + k] = arr[i + j + k] * inv2 % mod;
           }
