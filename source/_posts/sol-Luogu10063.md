@@ -7,7 +7,7 @@ categories:
   - OI
   - solution
 tags:
-  - math
+  - math(oi)
   - hash
   - number-theory
 ---
