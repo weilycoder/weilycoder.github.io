@@ -10,7 +10,6 @@ tags:
   - math(oi)
   - combinatorics
   - OGF
-  - luogu
 ---
 
 [题目链接](https://www.luogu.com.cn/problem/P5824)

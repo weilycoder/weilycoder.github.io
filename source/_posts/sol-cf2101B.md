@@ -8,7 +8,6 @@ categories:
   - solution
 tags:
   - sort
-  - codeforces
 ---
 
 ## 题意

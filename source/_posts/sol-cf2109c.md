@@ -12,7 +12,6 @@ tags:
   - number-theory
   - math(oi)
   - Ad-hoc
-  - codeforces
 ---
 
 ## 题意
