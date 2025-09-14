@@ -21,6 +21,8 @@ tags:
 > + $1\leqslant N\leqslant 4\times 10^{5}$；
 > + $0\leqslant A\_i\lt 2^{20}$。
 
+<!-- more -->
+
 下文使用 $V$ 表示值域。
 
 ## Algo 1
