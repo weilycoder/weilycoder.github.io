@@ -226,3 +226,88 @@ $$
 因此 $\sum\limits\_{i=2}^{n}\dfrac{n}{i\log i}=\Theta\left(n\log\log n\right)$；同理 $\sum\limits\_{i=2}^{\sqrt{n}}\dfrac{n}{i\log i}=\Theta\left(n\log\log n\right)$。
 
 故 $\sum\limits\_{i=1}^{n}\omega\left(i\right)=\Theta\left(n\log\log n\right)$。
+
+### (D) 对数求和 (1)
+
+考虑
+
+$$
+\sum\_{i=1}^{n}\log\dfrac{n}{i}
+$$
+
+下界显然，容易将其放缩到 $\Omega\left(n\right)$：
+
+$$
+\begin{aligned}
+  \sum\_{i=1}^{n}\log\dfrac{n}{i}
+  &\geqslant \sum\_{i=1}^{n/2}\log\dfrac{n}{n/2} \\\\
+  &= \sum\_{i=1}^{n/2}\log 2 \\\\
+  &=\dfrac{\log 2}{2}\cdot n
+\end{aligned}
+$$
+
+---
+
+考虑上界，我们将要证明：
+
+$$
+\dfrac{n^{n}}{n!}\leqslant 3^{n}
+$$
+
+应用数学归纳法，对于 $n=0$，有 $\mathtt{LHS}=\mathtt{RHS}=1$。
+
+若对于任意 $n\leqslant N$ 成立，考虑证明其对 $n=N+1$ 也成立。
+
+令 $a\_{n}=\dfrac{n^{n}}{n!}$，有
+
+$$
+\begin{aligned}
+  \dfrac{a\_{N+1}}{a\_{N}}
+  &= \dfrac{\left(N+1\right)^{N+1}}{\left(N+1\right)!}\cdot\dfrac{N!}{N^{N}} \\\\
+  &= \left(1+\dfrac{1}{N}\right)^{N}
+\end{aligned}
+$$
+
+因此，
+
+$$
+a\_{N+1}=a\_{N}\cdot\left(1+\dfrac{1}{N}\right)^{N}\leqslant 3^{n}\cdot\left(1+\dfrac{1}{N}\right)^{N}
+$$
+
+故只需要
+
+$$
+\left(1+\dfrac{1}{N}\right)^{N}\leqslant 3
+$$
+
+进行二项式展开：
+
+$$
+\begin{aligned}
+  \left(1+\dfrac{1}{N}\right)^{N}
+  &= 1+1+\sum\_{i=2}^{N}\dbinom{N}{i}\dfrac{1}{N^{i}} \\\\
+  &= 1+1+\sum\_{i=2}^{N}\dfrac{N!}{\left(N-i\right)!\cdot i!}\cdot\dfrac{1}{N^{i}} \\\\
+  &= 1+1+\sum\_{i=2}^{N}\dfrac{N!}{\left(N-i\right)!\cdot N^{i}}\cdot\dfrac{1}{i!} \\\\
+  &\lt 1+1+\sum\_{i=2}^{N}\dfrac{1}{i!} \\\\
+  &\leqslant 1+1+\sum\_{i=1}^{N-1}\dfrac{1}{2^{i}} \\\\
+  &\lt 3
+\end{aligned}
+$$
+
+---
+
+综上所述，有
+
+$$
+\sum\_{i=1}^{n}\log\dfrac{n}{i}\leqslant n\log 3
+$$
+
+总之，$\sum\limits\_{i=1}^{n}\log\dfrac{n}{i}=\Theta\left(n\right)$。
+
+---
+
+事实上，上文中的 $\left(1+\dfrac{1}{N}\right)^{N}$ 在 $N$ 取极限时趋近于 $\mathrm{e}$，应用这一结论即得到斯特林公式的一个较弱形式：
+
+$$
+\dfrac{n^{n}}{n!}=\mathcal O\left(\mathrm{e}^{n}\right)
+$$
